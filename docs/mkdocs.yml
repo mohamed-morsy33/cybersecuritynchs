@@ -5,6 +5,7 @@ nav:
   - About: about.md
 theme:
   name: simple-blog
+  custom_dir: docs/overrides
   favicon: img/logo.png
   logo: img/logo.png
   analytics:
