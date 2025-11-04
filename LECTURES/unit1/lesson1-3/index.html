@@ -1,0 +1,269 @@
+<!doctype html>
+<html data-bs-theme="">
+    <head>
+
+                <title>Lesson 1.3 - NCHS Cybersecurity</title>
+
+            <meta charset="utf-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+            
+            
+            
+
+            
+                <link  rel="icon" type="image/x-icon" href="../../../img/logo.png">
+            
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+                <link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@11.4.0/styles/base16/grayscale-dark.min.css">
+                <script>hljs.highlightAll();</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DRPQMPQQS6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DRPQMPQQS6');
+</script>
+
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Mono:400,700">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+            <link rel="stylesheet" href="../../../assets/css/bootstrap.min.css">
+            <link rel="stylesheet" href="../../../assets/css/root.min.css">
+            <link rel="stylesheet" href="../../../assets/css/main.min.css">
+            <link rel="stylesheet" href="../../../assets/css/media.min.css">
+            <link rel="stylesheet" href="../../../assets/css/mkdocstrings.min.css">
+                <link href="https://cdn.jsdelivr.net/npm/xterm@5.3.0/css/xterm.css" rel="stylesheet">
+                <link href="../../../css/custom-terminal.css" rel="stylesheet">
+                <script src="https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.min.js"></script>
+                <script src="../../../js/terminal-init.js"></script>
+                <script src="../../../search/main.js"></script>
+
+            
+                
+            
+    </head>
+
+    <body>
+        <div class="container py-3">
+            <header>
+                    <!-- block header -->
+<nav class="navbar navbar-expand-xl border-bottom">
+    <div class="container-fluid">
+        
+            <img class="logo" src="../../../img/logo.png">
+        
+
+        
+            <span class=" fs-4 title-color site-name" id="component-site-name" style="text-transform: uppercase;">NCHS Cybersecurity</span>
+        
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsMenu"
+            aria-controls="navbarsMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse flex-column ml-auto" id="navbarsMenu">
+            <ul class="navbar-nav">
+
+                <!-- block menu -->
+                <li class="nav-item">
+                    <!-- block menu -->
+    
+        <li class="nav-item" id="component-menu">
+            <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="
+                            nav-link text-gray text-decoration-none" href="../../..">[Home]</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class=" active 
+                            nav-link dropdown-toggle text-decoration-none" href="#" data-bs-toggle="dropdown">[Unit 1]</a>
+                            <ul class="dropdown-menu">
+                                    <!-- block dropdown-menu -->
+    <li>
+        <a href="../../../unit1/" class="dropdown-item text-decoration-none ">Overview</a>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
+        <a href="../lesson1-1/" class="dropdown-item text-decoration-none ">Lesson 1.1</a>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
+        <a href="../lesson1-2/" class="dropdown-item text-decoration-none ">Lesson 1.2</a>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
+        <a href="./" class="dropdown-item text-decoration-none  active ">Lesson 1.3</a>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
+        <a href="../installation-process/" class="dropdown-item text-decoration-none ">Linux Installation Process</a>
+    </li>
+<!-- endblock -->
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="
+                            nav-link text-gray text-decoration-none" href="../../../unit2/">[Unit 2]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="
+                            nav-link text-gray text-decoration-none" href="../../../unit3/">[Unit 3]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="
+                            nav-link text-gray text-decoration-none" href="../../../test/">[Terminal]</a>
+                        </li>
+            </ul>
+        </li>
+<!-- endblock -->
+                </li>
+                <!-- endblock -->
+
+                <!-- block search -->
+                <li class="nav-item">
+                    <a class="collapsed" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <div class="md-search-icon">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </div>
+                    </a>
+                </li>
+                <!--  endblock -->
+
+                <!-- block source -->
+                <li class="nav-item">
+                    
+                </li>
+                <!--  endblock -->
+            </ul>
+        </div>
+    </div>
+</nav>
+<!--  endblock -->
+            </header>
+
+            <main><!-- block search -->
+<div class="collapse" id="collapseExample">
+    <div role="search" class="search-box">
+        <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+            <input type="text" name="q" class="search-query"
+            placeholder="Search docs" title="Type search term here" />
+        </form>
+    </div>
+</div>
+<!-- endblock -->
+
+                
+                        <!-- block content -->
+<section class="container post" id="component-content">
+    <article>
+        <header>
+            
+                <h1 class=" title" id="component-title">Lesson 1.3</h1>
+            
+        </header>
+        <p><h1 id="intro-to-linux-commands">Intro to Linux &amp; Commands</h1>
+<p>What is Linux? What are commands? How do I do said commands?
+Fear not, that's what this lesson is all about!</p>
+<p>To begin, let's define a seemingly unrelated term: Operating Systems. An operating system is the software
+that supports the functions of your computer, like executing apps, controlling peripherals like a mouse or keyboard,
+and scheduling tasks like updates.</p>
+<p>Examples of this would be Windows 11/10, Linux, MacOS, BSD, Android, ChromeOS, UNIX, etc.</p>
+<p>We are focusing in on Linux, as Linux gives us the most freedom whilst also being relatively easier to learn
+that alternatives. By freedom, we mean that with Linux, we can get down to that kernel level access mentioned previously.
+But what <strong>flavor</strong> of Linux shall we use? For those who aren't familiar, there are different distributions, or <strong>distros</strong> of Linux.
+They're basically different versions of Linux that look and operate differently, but are fundamentally the same overall. The one we'll be using
+moving forwards is <strong>Kali Linux</strong>, which is specially designed for penetration testing (future topic) and is Debian-based (means it comes from the Debian version of Linux).</p>
+<h1 id="commands">Commands</h1>
+<p>So...what exactly is a command? Well, if your parents tell you what to do, like chores, that's a command. Similarly, when we type 
+commands into a <strong>terminal emulator</strong>, we command the computer to follow through with a sort of chore. But what's a terminal emulator?
+A terminal emulator is a big scary text box where we type commands in. That's it.</p>
+<pre><code class="language-bash">ls -&gt; lists files in current directory
+cat &lt;file&gt; -&gt; spits out whats in the file in plain text
+mv &lt;source&gt; &lt;destination&gt; -&gt; moves a file to a destination directory
+touch &lt;file&gt; -&gt; makes the file
+grep &lt;pattern&gt; &lt;file&gt; -&gt; searches for that pattern in the file. Like if a word appears in it
+man &lt;command&gt; -&gt; linux manual for this command. How to do this command?
+help -&gt; Gives you the list of available commands and other useful info
+sudo &lt;command&gt; -&gt; Gives you super user do permissions. Do this as the admin. 
+cp &lt;source&gt; &lt;destination&gt; -&gt; copy a file to a destination directory
+cd &lt;directory&gt; -&gt; change to this directory
+ls -a -&gt; list ALL files, even the hidden ones
+rm &lt;file&gt; -&gt; removes a file
+mkdir &lt;directory&gt; -&gt; makes a new directory inside the current working one
+rm -rf &lt;directory&gt; -&gt; removes all files recursively in a directory (so the directory and everything in it, including subdirectories)
+rmdir &lt;directory&gt; -&gt; same thing as above command, but a different way of doing it
+cd -&gt; if you just type &quot;cd&quot; it brings you to the home, or ~ directory. This is your starting point
+</code></pre>
+<p>We'll be practicing these commands using a <strong>Virtual Machine</strong>, which is a pretend computer that uses a Virtual Disk.
+We do this so that we don't have to install on <em>bare metal</em>, which is just your actual computer. Assuming you have your schoolwork,
+games, and messaging apps and other important files on your main computer, we don't want to erase that. So, we use a Virtual Machine.
+Unless you want to dual-boot, which is a more advanced technique involving installing multiple operating systems on one computer, but that's
+a more advanced topic.</p>
+<p>For practice with commands, you can either run them in a VM, or do so here: <a href="../../../test/">Terminal Practice</a></p>
+<p>If you want to learn how to install Kali Linux, follow the installation process here: <a href="../../LECTURES/unit1/installation-process/">Linux Installation Process</a></p></p>
+    </article>
+</section>
+<!-- endblock -->
+                
+                
+            </main>
+
+            
+                    <!-- block preview -->
+    <div class="preview row row-cols-md-3 text-center pt-md-3" id="component-preview">
+        <div class="col themed-grid-col">
+            <a rel="prev" href="../lesson1-2/" class="nav-link">
+                <i class="fa fa-arrow-left"></i> Previous
+            </a>
+        </div>
+        <div class="col themed-grid-col"></div>
+        <div class="col themed-grid-col">
+            <a rel="next" href="../installation-process/" class="nav-link">
+                Next <i class="fa fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+<!-- endblock -->
+            
+
+            
+                    <!-- block footer -->
+<footer class="pt-4 my-md-5 pt-md-5 border-top" id="component-footer">
+    <div class="row">
+        <div class="col-12 col-md">
+                <!-- block copyright -->
+
+    <small class="d-block mb-3">
+        Made with
+        <a href="https://github.com/FernandoCelmer/mkdocs-simple-blog" target="_blank" rel="noopener">
+            Simple Blog for MkDocs
+        </a>
+    </small>
+
+<!-- endblock -->
+        </div>
+    </div>
+</footer>
+<!-- endblock -->
+            
+        </div>
+
+            <script>var base_url = '../../..';</script>
+            <script src="../../../assets/js/jquery-3.3.1.slim.min.js""></script>
+            <script src="../../../assets/js/bootstrap.bundle.min.js""></script>
+            <script src="../../../assets/js/main.min.js""></script>
+                <script src="https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.min.js" defer></script>
+                <script src="../../../js/terminal-init.js" defer></script>
+                <script src="../../../search/main.js" defer></script>
+
+    </body>
+
+</html>
