@@ -1,27 +1,33 @@
 # Welcome to the NCHS Cybersecurity Club Github Repo!
 
+[![GitHub license](https://img.shields.io/github/license/nchs-cybersec/nchs-cybersec?style=flat-square)](https://github.com/nchs-cybersec/nchs-cybersec/blob/main/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/nchs-cybersec/nchs-cybersec?style=flat-square)](https://github.com/nchs-cybersec/nchs-cybersec/issues)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/nchs-cybersec/nchs-cybersec?style=flat-square)](https://github.com/nchs-cybersec/nchs-cybersec/pulls)
+[![GitHub last commit](https://img.shields.io/github/last-commit/nchs-cybersec/nchs-cybersec?style=flat-square)](https://github.com/nchs-cybersec/nchs-cybersec/commits/main)
 
-Overview of what we're going to be covering:
+Club/course material will be stored here, as well as a link to the website via GitHub Pages: (Club Site)[https://mohamed-morsy33.github.io/cybersecuritynchs/]
 
 
-So far we've covered:
+## Topics To Cover
+
+*So far we've covered:*
 
 **1. Introduction to Linux and the Field of Cybersecurity**
 **2. What is...the Internet?** (currently in progress...)
 
-We have yet to cover:
+*We have yet to cover:*
 
-**3. Computer Networks: A Deep Dive**
-**4. Real Life Applications and Methods of Network Security**
-**5. Cyber Security Principles**
-**6. Network Traffic Analysis with Wireshark**
-**7. Cryptography and Access Control**
-**8. The Ethical Side...**
-**9. Cyber Threats & Attack Techniques/Exploits**
-**10. How Do We Protect Against This? (Protection & Prevention)**
-**11. Encryption Systems**
+3. **Computer Networks: A Deep Dive**
+4. **Real Life Applications and Methods of Network Security**
+5. **Cyber Security Principles**
+6. **Network Traffic Analysis with Wireshark**
+7. **Cryptography and Access Control**
+8. **The Ethical Side...**
+9. **Cyber Threats & Attack Techniques/Exploits**
+10. **How Do We Protect Against This? (Protection & Prevention)**
+11. **Encryption Systems**
 
-And maybe more...? Time will tell.
+*And maybe more...? Time will tell.*
 
 
 Credits to the following people:
