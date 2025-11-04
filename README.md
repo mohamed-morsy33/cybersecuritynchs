@@ -1,9 +1,9 @@
 # Welcome to the NCHS Cybersecurity Club Github Repo!
 
 [![GitHub License](https://img.shields.io/github/license/mohamed-morsy33/cybersecuritynchs)](https://github.com/mohamed-morsy33/cybersecuritynchs/blob/master/LICENSE)
-[![GitHub Issues](https://img.shields.io/github/issues/mohamed-morsy33/cybersecuritynchs?style=flat-square)](https://github.com/mohamed-morsy33/cybersecuritynchs/issues)
-[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/mohamed-morsy33/cybersecuritynchs?style=flat-square)](https://github.com/mohamed-morsy33/cybersecuritynchs/pulls)
-[![GitHub Last Commit](https://img.shields.io/github/last-commit/mohamed-morsy33/cybersecuritynchs?style=flat-square)](https://github.com/mohamed-morsy33/cybersecuritynchs/commits/main)
+[![GitHub Issues](https://img.shields.io/github/issues/mohamed-morsy33/cybersecuritynchs)](https://github.com/mohamed-morsy33/cybersecuritynchs/issues)
+[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/mohamed-morsy33/cybersecuritynchs)](https://github.com/mohamed-morsy33/cybersecuritynchs/pulls)
+[![GitHub Last Commit](https://img.shields.io/github/last-commit/mohamed-morsy33/cybersecuritynchs)](https://github.com/mohamed-morsy33/cybersecuritynchs/commits/main)
 
 Club/course material will be stored here, as well as a link to the website via GitHub Pages: (Club Site)[https://mohamed-morsy33.github.io/cybersecuritynchs/]
 
