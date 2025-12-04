@@ -1,5 +1,3 @@
-# How to Install Kali Linux
-
 ## _What_ is it?
 
 Kali is an operating system that was made __*specially*__ for cybersecurity work (and hacking as well). It has a large toolkit of useful programs that we're going to learn about, including Hydra, Nmap, Wireshark, Tcpdump, MacChanger, Chisel, Aircrack-ng, etc.
@@ -25,7 +23,7 @@ Now, let's get into the nitty-gritty:
 2. `20-30 GB` of free hard drive space
 3. A decently fast CPU (you probably have this)
 
-___*But, how do I know if I meet them? Well, you can press __`Ctrl+Shift+Esc`__ on Windows and click on __"Performance"__ inside of Task Manager, and it'll give you a spec (specifications) sheet. On mac, you can click on __"About"__ in the top menu bar of your computer. On Linux, you can type __`uname -a`__, or use a custom program like `fastfetch`___
+*But, how do I know if I meet them? Well, you can press _`Ctrl+Shift+Esc`_ on Windows and click on __"Performance"__ inside of Task Manager, and it'll give you a spec (specifications) sheet. On mac, you can click on __"About"__ in the top menu bar of your computer. On Linux, you can type __`uname -a`__, or use a custom program like `fastfetch`
 
 ## BIG DISCLAIMER FOR WINDOWS USERS:
 
@@ -48,14 +46,14 @@ Now, go to [virtualbox.org](https://virtualbox.org)
 
 Click on the download for your OS, and install the program by following the instruction wizard.
 
-[](img/virtual_box.png)
+![Virtual Box](../../../img/virtual_box.png)
 
 - Now, go to the [Kali Linux website](https://kali.org/get-kali).
 - Download the "Installer" ISO file (`~ 4 GB` in size)
 - Then choose the 64-bit version for modern computers.
 - If your computer is old, it could be 32-bit. If so, you may need to check your system specifications as explained above. However, it probably isn't.
 
-[](img/kali_img.png]
+![Kali Installation](../../../img/kali_img.png)
 
 > Remember, Apple Silicon machines will install the ARM64 version of Kali Linux instead!
 
