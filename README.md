@@ -45,3 +45,6 @@ The curriculum will closely follow the following two courses:
 
 Some content will be outside of the scope of the two above courses however.
 
+**IMPORTANT NOTE FOR CONTRIBUTORS: visit [Contributions Page](CONTRIBUTING.md)
+
+
