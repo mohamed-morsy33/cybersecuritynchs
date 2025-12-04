@@ -169,7 +169,123 @@
                 <h1 class=" title" id="component-title">Linux Installation Process</h1>
             
         </header>
-        <p><p>Test text for how 2 install...</p></p>
+        <p><h1 id="how-to-install-kali-linux">How to Install Kali Linux</h1>
+<h2 id="what-is-it"><em>What</em> is it?</h2>
+<p>Kali is an operating system that was made <strong><em>specially</em></strong> for cybersecurity work (and hacking as well). It has a large toolkit of useful programs that we're going to learn about, including Hydra, Nmap, Wireshark, Tcpdump, MacChanger, Chisel, Aircrack-ng, etc.</p>
+<h2 id="some-vocab">Some Vocab:</h2>
+<p>As much as we know vocabulary might not be that interesting, it's important to know for the future, since there's a LOT of acronyms and words in cybersecurity that you're going to be hearing and using, so it's best to get used to it.</p>
+<ul>
+<li><strong>Operating System (OS)</strong>: The main software that runs your computer, like Windows, macOS, iOS, GNU/Linux, etc.</li>
+<li><strong>Virtual Machine (VM)</strong>: It's basically a computer <em>inside</em> another computer. You can run your regular OS, like Windows, and still have Kali Linux inside of it</li>
+<li><strong>ISO File (International Organization for Standardization File)</strong>: Sounds fancy, but really it's just a full copy of an OS within one tiny file</li>
+<li><strong>Hypervisor</strong>: Software that creates and manages VMs. Examples are VirtualBox and VMWare Workstation. There's also QEMU, but mostly Linux users use that, and you're likely running on Windows or mac</li>
+<li><strong>Bootable USB</strong>: Just a USB drive (which you hopefully already know about) that can start up a computer and install an OS (we don't need this yet)</li>
+<li><strong>Partitioning</strong>: A more advanced topic, but it's dividing up your drive into sections called <em>partitions</em>, which are like walls for a room. We don't need this yet, but it is good to know</li>
+</ul>
+<p>Now, let's get into the nitty-gritty:</p>
+<h2 id="method-1-easy-way">Method 1: Easy way :)</h2>
+<h3 id="minimum-requirements">Minimum Requirements*:</h3>
+<ol>
+<li><code>8 GB</code> of RAM</li>
+<li><code>20-30 GB</code> of free hard drive space</li>
+<li>A decently fast CPU (you probably have this)</li>
+</ol>
+<p><strong><em>*But, how do I know if I meet them? Well, you can press </em>_<code>Ctrl+Shift+Esc</code></strong> on Windows and click on <strong>"Performance"</strong> inside of Task Manager, and it'll give you a spec (specifications) sheet. On mac, you can click on <strong>"About"</strong> in the top menu bar of your computer. On Linux, you can type <strong><code>uname -a</code></strong>, or use a custom program like <code>fastfetch</code>___</p>
+<h2 id="big-disclaimer-for-windows-users">BIG DISCLAIMER FOR WINDOWS USERS:</h2>
+<ul>
+<li>You NEED to DISABLE something called Hyper-V. If you don't know what that is, for Windows users, Hyper-V will conflict with Virtualbox, making it run poorly and crash often</li>
+<li>To check if you hve Hyper-V, press <code>Win+R</code>, and type <code>optionalfeatures</code>, then press <code>Enter</code></li>
+<li>Look for a "Hyper-V" in the list of shown items. If it's checked, then it's enabled. Uncheck it.<ul>
+<li>Alternative method: go to cmd (Command Prompt), and right click and "Run as Administrator". Then use the following command: <code>bcdedit /set hypervisorlaunchtype off</code></li>
+</ul>
+</li>
+<li>Finally, restart your computer</li>
+</ul>
+<h2 id="big-disclaimer-for-macos-users">BIG DISCLAIMER FOR MACOS USERS:</h2>
+<ul>
+<li>You need to check if you're using an Intel-based Mac or Apple Silicon machine. If your device is M1, M2, M*, then it's <strong>Apple Silicon</strong></li>
+<li>If this is the case, you will need to use a different software for virtualization. You have some options, like <a href="https://getutm.app">UTM</a> or <a href="https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion">VMware Fusion</a>. </li>
+<li>Also, you will have to install Kali Linux using the 
+<em><strong>ARM64 version! Not x86-64!</strong></em></li>
+</ul>
+<hr />
+<p>Now, go to <a href="https://virtualbox.org">virtualbox.org</a></p>
+<p>Click on the download for your OS, and install the program by following the instruction wizard.</p>
+<p><a href="img/virtual_box.png"></a></p>
+<ul>
+<li>Now, go to the <a href="https://kali.org/get-kali">Kali Linux website</a>.</li>
+<li>Download the "Installer" ISO file (<code>~ 4 GB</code> in size)</li>
+<li>Then choose the 64-bit version for modern computers.</li>
+<li>If your computer is old, it could be 32-bit. If so, you may need to check your system specifications as explained above. However, it probably isn't.</li>
+</ul>
+<p>[](img/kali_img.png]</p>
+<blockquote>
+<p>Remember, Apple Silicon machines will install the ARM64 version of Kali Linux instead!</p>
+</blockquote>
+<ul>
+<li>Finally, make your Virtual Machine. Open up VirtualBox and click "New"</li>
+<li>Name it whatever, I'd call it "Kali Linux", or "Kali Machine".</li>
+<li>Type: Linux, Version: Debian (64-bit)</li>
+<li>Allocate at least <code>4 GB</code> of RAM, AKA <code>4096 MB</code>, by dragging the slider or typing in the number in the RAM text box</li>
+<li>Create a Virtual Hrd Disk (allocate <code>25-30 GB</code> minimum)<ul>
+<li>Choose VDI (VirtualBox Disk Image)</li>
+<li>Also select "dynamically allocated" to save space, and allows the VM to grow dynamically in storage size as you begin to add more things</li>
+</ul>
+</li>
+<li>After clicking done, tell it to create, but do NOT tell it to also start yet</li>
+<li>Click on your virtual machine, and then go to settings</li>
+<li>Then go to Storage, and click the empty disk icon</li>
+<li>This is where we "choose a disk file", and select the downloaded Kali ISO</li>
+<li>Then under System, enable PAE/NX if available to you. PAE is Physical Address Extension, and NX is No Execute. These allow for &gt; <code>4 GB</code> of RAM access and prevents non-executable code from being executed in memory segments. If you don't know what that means, just ignore this</li>
+<li>Under Display, increase video memory to <code>128 MB</code></li>
+<li>Finally, save and exit Settings, and click on Start to boot your VM</li>
+<li>Select "Graphical Install" (press Enter, navigate using arrow keys)</li>
+<li>Choose your language, location, keyboard (these can later be changed, doesn't really matter)</li>
+<li>You can set a hostname, or keep the default (kali)</li>
+</ul>
+<h3 id="important-username-is-kali-and-password-is-kali-by-default"><strong>IMPORTANT</strong>: username is <em>kali</em> and password is <em>kali</em> by default!</h3>
+<ul>
+<li>Choose "Guided - use entire disk" for your partitioning</li>
+<li>Then select "All files in one partition"</li>
+<li>Confirm and wait a while. Take a walk outside, take a short nap, whatever you want. Just wait 10-20 minutes and it'll be done</li>
+<li>Restart when prompted</li>
+<li>On first login, enter the username and password</li>
+<li>Then, click the <code>SUPER</code> key (<code>Win</code> key or <code>Cmd</code> key on mac) and type "terminal" or "console" into the search, and open the app</li>
+<li>In the terminal, you can type <code>sudo apt update &amp;&amp; sudo apt upgrade -y</code><ul>
+<li>This command just updates your system</li>
+<li>When prompted with a password, type in your password</li>
+</ul>
+</li>
+<li>Happy Linux!</li>
+</ul>
+<h2 id="method-2-hard-way-bare-metal-installation">Method 2: Hard way (bare metal installation)</h2>
+<p>Alright. You're ready for the real deal. No problem. </p>
+<p><code>WARNING! ⚠️⚠️</code>: This version of installation WILL take space on your disk! This means it will be physically installed, and it will NOT be installed as a VM! Just like Windows or macOS, it will be physically on your device. If you do this incorrectly, it may <strong>wipe your device completely</strong>. I'm not liable for if you mistakenly wipe your drive, it's up to you. Also, I personally do <strong>not recommend you install Kali Linux on a physical drive</strong>. If you want to use Linux for extra practice, install a distribution like <a href="https://www.debian.org/">Debian</a> or <a href="https://linuxmint.com/">Linux Mint</a>. You are risking data loss if done incorrectly, so proceed at your own risk.</p>
+<p>Important things to note are:</p>
+<ul>
+<li>If you install on bare metal, AKA on your physical device, your device may have incompatibility issues. I would recommend doing your own research before doing so</li>
+<li>You may want to install Linux on a secondary drive, since if you use your main one, you will have to create a special partition for Linux to use exclusively, which is more difficult</li>
+<li>You'll need a USB drive with preferably <code>8 GB</code> or more of storage</li>
+<li>You may need to adjust your BIOS (manufacturer specific, meaning it depends on what company made your computer and maybe even where you bought it from) to allow for other bootable devices, which can include removing Secure Boot</li>
+<li>There's some specifics for ARM64 machines like Apple Silicon that will be different!</li>
+<li>Overall, you are likely going to have to do your OWN research to make sure you don't mess anything up.</li>
+</ul>
+<p>Without further ado, these are some general instructions (not perfect):</p>
+<ol>
+<li>Create a bootable USB drive using an app like Balena Etcher or Rufus</li>
+<li>Make space on your hard drive by creating a disk partition of ~<code>30 GB</code> or more, or install on a secondary hard drive</li>
+<li>Boot from the USB drive from BIOS after restarting your computer and smashing the BIOS key as it boots up (typically <code>Esc</code>, <code>F11</code>, <code>F12</code>, or <code>Del</code> depending on the manufacturer)</li>
+<li>Follow the installation process, but make sure you select the right drive and if it's on the same disk as Windows or Mac, you install "alongside" it, not replace </li>
+<li>After going through the setup, you may re-enter the BIOS to change the boot order. What this means is move Linux above Windows so that on first boot you boot into Linux (optional)</li>
+</ol>
+<p>Some important extras:</p>
+<ul>
+<li>Make sure you regularly update your system at least weekly</li>
+<li>Make decent credentials or use a <a href="https://www.yubico.com/">physical key</a></li>
+<li>Never just copy/paste a command without understanding it, look it up at least (even from me!)</li>
+<li>Install packages wisely and preferably from trusted sources</li>
+</ul>
+<p>Happy Linux! :)</p></p>
     </article>
 </section>
 <!-- endblock -->
