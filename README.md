@@ -15,7 +15,7 @@ Club/course material will be stored here, as well as a link to the website via G
 1. **Introduction to Linux and the Field of Cybersecurity**
 2. **What is...the Internet?**
 
-_Currently Covering:_ 3. **Computer Networks: A Deep Dive** 
+_Currently Covering:_ 3. **Computer Networks: A Deep Dive** (lesson plan currently being written)
 
 *We have yet to cover:*
 
@@ -46,5 +46,6 @@ The curriculum will closely follow the following two courses:
 Some content will be outside of the scope of the two above courses however.
 
 **IMPORTANT NOTE FOR CONTRIBUTORS: visit [Contributions Page](CONTRIBUTING.md)
+
 
 
