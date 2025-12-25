@@ -1,1 +1,3 @@
-Welcome to the website!
+---
+template: index.html
+---

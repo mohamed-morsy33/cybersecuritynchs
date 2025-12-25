@@ -7,24 +7,27 @@ plugins:
   
 nav:
   - Home: index.md
-  - Unit 1:
-    - Overview: unit1.md
-    - Lesson 1.1: LECTURES/unit1/lesson1-1.md
-    - Lesson 1.2: LECTURES/unit1/lesson1-2.md
-    - Lesson 1.3: LECTURES/unit1/lesson1-3.md
-    - Linux Installation Process: LECTURES/unit1/installation-process.md
-  - Unit 2: unit2.md
-  - Unit 3: unit3.md
+  - Curriculum:
+    - Unit 1:
+      - Overview: unit1.md
+      - Lesson 1.1: LECTURES/unit1/lesson1-1.md
+      - Lesson 1.2: LECTURES/unit1/lesson1-2.md
+      - Lesson 1.3: LECTURES/unit1/lesson1-3.md
+      - Linux Installation Process: LECTURES/unit1/installation-process.md
+    - Unit 2: unit2.md
+    - Unit 3: unit3.md
   - Terminal: test.md
 extra_css:
   - https://cdn.jsdelivr.net/npm/xterm@5.3.0/css/xterm.css
   - css/custom-terminal.css
+  - stylesheets/custom.css
 extra_javascript:
   - https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.min.js
   - js/terminal-init.js
+  - https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Orbitron:wght@700;900&display=swap
 theme:
-  name: simple-blog
-  custom_dir: overrides
+  name: null 
+  custom_dir: custom_theme 
   favicon: img/logo.png
   logo: img/logo.png
   analytics:
@@ -39,3 +42,4 @@ theme:
   color_mode: dark
   user_color_mode_toggle: true
 
+copyright: Copyright &copy; 2025 Mohamed Morsy 
