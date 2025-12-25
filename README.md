@@ -20,7 +20,7 @@ _Currently Covering:_ 3. **Computer Networks: A Deep Dive** (lesson plan current
 *We have yet to cover:*
 
 4. **Real Life Applications and Methods of Network Security**
-5. **Cyber Security Principles**
+5. **Basic Scripting & Malware**
 6. **Network Traffic Analysis with Wireshark**
 7. **Cryptography and Access Control**
 8. **The Ethical Side...**
@@ -46,6 +46,7 @@ The curriculum will closely follow the following two courses:
 Some content will be outside of the scope of the two above courses however.
 
 **IMPORTANT NOTE FOR CONTRIBUTORS: visit [Contributions Page](CONTRIBUTING.md)
+
 
 
 
