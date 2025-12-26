@@ -423,6 +423,83 @@
         .search-box::placeholder {
             color: var(--text-muted);
         }
+
+        /* Lesson Navigation */
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 60px 0 40px 0;
+            padding: 30px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .lesson-nav-button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            background: var(--bg-primary);
+            border: 2px solid var(--text-primary);
+            border-radius: 8px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .lesson-nav-button:hover {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 255, 65, 0.3);
+        }
+
+        .lesson-nav-button.disabled {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .lesson-nav-button .arrow {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .lesson-nav-info {
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        .lesson-nav-info .current-lesson {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+
+        .lesson-nav-info .lesson-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 768px) {
+            .lesson-nav {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .lesson-nav-button {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .lesson-nav-info {
+                order: -1;
+            }
+        }
     </style>
 </head>
 <body>
@@ -476,6 +553,40 @@
         {% block content %}
         {{ page.content }}
         {% endblock %}
+
+        <!-- Lesson Navigation (only show on non-homepage pages) -->
+        {% if page and page.file.src_path != 'index.md' %}
+        <div class="lesson-nav">
+            {% if page.previous_page %}
+            <a href="{{ page.previous_page.url | url }}" class="lesson-nav-button">
+                <span class="arrow">←</span>
+                <span>Previous: {{ page.previous_page.title }}</span>
+            </a>
+            {% else %}
+            <div class="lesson-nav-button disabled">
+                <span class="arrow">←</span>
+                <span>Previous</span>
+            </div>
+            {% endif %}
+
+            <div class="lesson-nav-info">
+                <div class="current-lesson">Current Lesson</div>
+                <div class="lesson-title">{{ page.title }}</div>
+            </div>
+
+            {% if page.next_page %}
+            <a href="{{ page.next_page.url | url }}" class="lesson-nav-button">
+                <span>Next: {{ page.next_page.title }}</span>
+                <span class="arrow">→</span>
+            </a>
+            {% else %}
+            <div class="lesson-nav-button disabled">
+                <span>Next</span>
+                <span class="arrow">→</span>
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
     </div>
 
     <footer>
