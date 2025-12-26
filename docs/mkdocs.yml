@@ -2,9 +2,6 @@ site_name: NCHS Cybersecurity
 site_url: https://mohamed-morsy33.github.io/cybersecuritynchs/
 use_directory_urls: true
 
-plugins:
-  - search
-  
 nav:
   - Home: index.md
   - Curriculum:
@@ -22,6 +19,7 @@ extra_css:
   - css/custom-terminal.css
   - stylesheets/custom.css
 extra_javascript:
+  - search_data.js 
   - https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.min.js
   - js/terminal-init.js
   - https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Orbitron:wght@700;900&display=swap
