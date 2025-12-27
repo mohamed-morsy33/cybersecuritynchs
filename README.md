@@ -43,9 +43,10 @@ The curriculum will closely follow the following two courses:
 1. Computer Networks: [GeeksforGeeks Course](https://www.geeksforgeeks.org/computer-networks/computer-network-tutorials/)
 2. Cyber Security Introduction: [GeeksforGeeks Course 2](https://www.geeksforgeeks.org/ethical-hacking/cyber-security-tutorial/)
 
-Some content will be outside of the scope of the two above courses however.
+However, some of the content will go outside of the scope of the two courses above.
 
 **IMPORTANT NOTE FOR CONTRIBUTORS: visit [Contributions Page](CONTRIBUTING.md)
+
 
 
 
