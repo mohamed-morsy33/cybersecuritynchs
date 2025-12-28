@@ -36,6 +36,7 @@ Credits to the following people:
 - Mohamed Morsy (Creator of Website and Cybersecurity Club VP)
 - Dhanuh Bogam (President of Cybersecurity Club)
 - Eyad Morsy (Contributor)
+- Abhinav Bonagiri (Contributor)
 
 
 The curriculum will closely follow the following two courses:
@@ -46,6 +47,7 @@ The curriculum will closely follow the following two courses:
 However, some of the content will go outside of the scope of the two courses above.
 
 **IMPORTANT NOTE FOR CONTRIBUTORS: visit [Contributions Page](CONTRIBUTING.md)
+
 
 
 
