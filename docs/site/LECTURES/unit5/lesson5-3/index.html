@@ -1,0 +1,1962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 5.3 - NCHS Cybersecurity</title>
+    
+    
+    <link rel="icon" href="../../../img/logo.png">
+    
+    
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DRPQMPQQS6"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-DRPQMPQQS6');
+    </script>
+    
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0e27;
+            --bg-secondary: #141b3a;
+            --text-primary: #00ff41;
+            --text-secondary: #7affa7;
+            --text-muted: #4a9960;
+            --accent: #ff0844;
+            --accent-secondary: #00d4ff;
+            --border: #1a3a2a;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--bg-primary);
+            color: var(--text-secondary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--bg-secondary);
+            border-bottom: 2px solid var(--text-primary);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 255, 65, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-logo a {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: 0.1em;
+            text-shadow: 0 0 10px var(--text-primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links > li {
+            position: relative;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 4px;
+            display: block;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--text-primary);
+            background: rgba(0, 255, 65, 0.1);
+            text-shadow: 0 0 10px var(--text-primary);
+        }
+
+        /* Dropdown menu */
+        .nav-links .dropdown {
+            position: relative;
+        }
+
+        .nav-links .dropdown > a::after {
+            content: ' ▼';
+            font-size: 0.7em;
+            margin-left: 5px;
+        }
+
+        .nav-links .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--bg-secondary);
+            border: 2px solid var(--text-primary);
+            border-radius: 4px;
+            min-width: 250px;
+            box-shadow: 0 8px 30px rgba(0, 255, 65, 0.3);
+            z-index: 1000;
+            padding: 10px 0;
+            margin-top: 5px;
+        }
+
+        .nav-links .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .nav-links .dropdown-content li {
+            list-style: none;
+        }
+
+        .nav-links .dropdown-content a {
+            padding: 10px 20px;
+            border-radius: 0;
+        }
+
+        .nav-links .dropdown-content .nested {
+            padding-left: 0;
+        }
+
+        .nav-links .dropdown-content .nested > strong {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .nav-links .dropdown-content .nested > strong:hover {
+            background: rgba(0, 255, 65, 0.1);
+        }
+
+        .nav-links .dropdown-content .nested > strong::after {
+            content: '▼';
+            font-size: 0.8em;
+            transition: transform 0.3s ease;
+            color: var(--text-primary);
+        }
+
+        .nav-links .dropdown-content .nested.collapsed > strong::after {
+            transform: rotate(-90deg);
+        }
+
+        .nav-links .dropdown-content .nested .unit-lessons {
+            max-height: 500px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .nav-links .dropdown-content .nested.collapsed .unit-lessons {
+            max-height: 0;
+        }
+
+        .nav-links .dropdown-content .nested .unit-lessons li {
+            padding-left: 20px;
+        }
+
+        .nav-links .dropdown-content .nested a {
+            padding: 8px 20px;
+            font-size: 0.9em;
+            color: var(--text-muted);
+        }
+
+        .nav-links .dropdown-content .nested a:hover {
+            color: var(--text-primary);
+            background: rgba(0, 255, 65, 0.05);
+        }
+
+        /* Mobile menu toggle */
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: 2px solid var(--text-primary);
+            color: var(--text-primary);
+            padding: 8px 15px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        /* Search */
+        .search-container {
+            position: relative;
+            margin-left: 20px;
+        }
+
+        .search-input {
+            padding: 8px 35px 8px 15px;
+            background: var(--bg-primary);
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            width: 250px;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--text-primary);
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+        }
+
+        .search-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
+        .search-results {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            right: 0;
+            background: var(--bg-secondary);
+            border: 2px solid var(--text-primary);
+            border-radius: 8px;
+            max-height: 400px;
+            overflow-y: auto;
+            display: none;
+            z-index: 2000;
+            box-shadow: 0 8px 30px rgba(0, 255, 65, 0.3);
+        }
+
+        .search-results.active {
+            display: block;
+        }
+
+        .search-result-item {
+            padding: 15px;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-result-item:hover {
+            background: rgba(0, 255, 65, 0.05);
+        }
+
+        .search-result-title {
+            color: var(--text-primary);
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .search-result-path {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-bottom: 8px;
+        }
+
+        .search-result-excerpt {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .search-highlight {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            padding: 2px 4px;
+            border-radius: 2px;
+            font-weight: 700;
+        }
+
+        .search-no-results {
+            padding: 20px;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        .search-results::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .search-results::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+
+        .search-results::-webkit-scrollbar-thumb {
+            background: var(--text-primary);
+            border-radius: 4px;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 30px;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--text-primary);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-shadow: 0 0 20px var(--text-primary);
+            letter-spacing: 0.05em;
+            border-bottom: 2px solid var(--text-primary);
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            border-left: 4px solid var(--text-primary);
+            padding-left: 15px;
+        }
+
+        h3 { font-size: 1.5rem; }
+        h4 { font-size: 1.25rem; }
+
+        p {
+            margin-bottom: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        a {
+            color: var(--accent-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--text-primary);
+            text-shadow: 0 0 10px var(--text-primary);
+        }
+
+        /* Code Blocks */
+        code {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            padding: 2px 8px;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        pre {
+            background: var(--bg-secondary);
+            border: 2px solid var(--text-primary);
+            border-radius: 8px;
+            padding: 20px;
+            overflow-x: auto;
+            margin: 20px 0;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
+        }
+
+        pre code {
+            background: transparent;
+            border: none;
+            padding: 0;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 1.2rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        li::marker {
+            color: var(--text-primary);
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+        }
+
+        th {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            padding: 12px;
+            text-align: left;
+            border: 1px solid var(--text-primary);
+            font-weight: 700;
+        }
+
+        td {
+            padding: 12px;
+            border: 1px solid var(--border);
+        }
+
+        tr:hover {
+            background: rgba(0, 255, 65, 0.05);
+        }
+
+        /* Blockquotes */
+        blockquote {
+            border-left: 4px solid var(--text-primary);
+            background: var(--bg-secondary);
+            padding: 15px 20px;
+            margin: 20px 0;
+            font-style: italic;
+        }
+
+        /* Images */
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        /* Horizontal Rule */
+        hr {
+            border: none;
+            border-top: 2px solid var(--text-primary);
+            margin: 30px 0;
+            opacity: 0.3;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 2px solid var(--text-primary);
+            padding: 30px;
+            margin-top: 60px;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        /* Scanline Effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                transparent 50%,
+                rgba(0, 255, 65, 0.02) 51%
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 9999;
+            animation: scan 8s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100%); }
+        }
+
+        /* Selection */
+        ::selection {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+            background: var(--bg-primary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--text-primary);
+            border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--bg-secondary);
+                flex-direction: column;
+                padding: 20px;
+                border-bottom: 2px solid var(--text-primary);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 20px 15px;
+            }
+
+            .search-container {
+                margin-left: 10px;
+            }
+
+            .search-input {
+                width: 200px;
+            }
+        }
+
+        /* Search Box */
+        .search-box {
+            padding: 10px;
+            background: var(--bg-primary);
+            border: 1px solid var(--text-primary);
+            border-radius: 4px;
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .search-box::placeholder {
+            color: var(--text-muted);
+        }
+
+        /* Lesson Navigation */
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 60px 0 40px 0;
+            padding: 30px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .lesson-nav-button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            background: var(--bg-primary);
+            border: 2px solid var(--text-primary);
+            border-radius: 8px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .lesson-nav-button:hover {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 255, 65, 0.3);
+        }
+
+        .lesson-nav-button.disabled {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .lesson-nav-button .arrow {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .lesson-nav-info {
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        .lesson-nav-info .current-lesson {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+
+        .lesson-nav-info .lesson-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 768px) {
+            .lesson-nav {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .lesson-nav-button {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .lesson-nav-info {
+                order: -1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo">
+                
+                <img src="../../../img/logo.png" alt="Logo">
+                
+                <a href="https://mohamed-morsy33.github.io/cybersecuritynchs/">NCHS Cybersecurity</a>
+            </div>
+            
+            <button class="nav-toggle" onclick="toggleMenu()">MENU</button>
+            
+            <ul class="nav-links" id="navLinks">
+                
+                <li >
+                    
+                        <a href="../../.." 
+                           >
+                            Home
+                        </a>
+                    
+                </li>
+                
+                <li class="dropdown">
+                    
+                        <a href="#">Curriculum</a>
+                        <ul class="dropdown-content">
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 1</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit1/lesson1-1/">Lesson 1.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit1/lesson1-2/">Lesson 1.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit1/lesson1-3/">Lesson 1.3</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit1/lesson1-4/">Lesson 1.4</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit1/lesson1-5/">Lesson 1.5</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit1/lesson1-6/">Lesson 1.6</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit1/installation-process/">Linux Installation Process</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 2</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit2/lesson2-1/">Lesson 2.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit2/lesson2-2/">Lesson 2.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit2/lesson2-3/">Lesson 2.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 3</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit3/lesson3-1/">Lesson 3.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit3/lesson3-2/">Lesson 3.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit3/lesson3-3/">Lesson 3.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 4</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit4/lesson4-1/">Lesson 4.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit4/lesson4-2/">Lesson 4.2</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 5</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../lesson5-1/">Lesson 5.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../lesson5-2/">Lesson 5.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="./">Lesson 5.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 6</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit6/lesson6-1/">Lesson 6.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit6/lesson6-2/">Lesson 6.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit6/lesson6-3/">Lesson 6.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 7</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit7/lesson7-1/">Lesson 7.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit7/lesson7-2/">Lesson 7.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit7/lesson7-3/">Lesson 7.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 8</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit8/lesson8-1/">Lesson 8.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit8/lesson8-2/">Lesson 8.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit8/lesson8-3/">Lesson 8.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 9</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit9/lesson9-1/">Lesson 9.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit9/lesson9-2/">Lesson 9.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit9/lesson9-3/">Lesson 9.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 10</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit10/lesson10-1/">Lesson 10.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit10/lesson10-2/">Lesson 10.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit10/lesson10-3/">Lesson 10.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 11</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit11/lesson11-1/">Lesson 11.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit11/lesson11-2/">Lesson 11.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit11/lesson11-3/">Lesson 11.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                        </ul>
+                    
+                </li>
+                
+                <li >
+                    
+                        <a href="../../../test/" 
+                           >
+                            Terminal
+                        </a>
+                    
+                </li>
+                
+            </ul>
+
+            <div class="search-container">
+                <input type="text" 
+                       class="search-input" 
+                       id="searchInput" 
+                       placeholder="Search lessons..."
+                       autocomplete="off">
+                <span class="search-icon">🔍</span>
+                <div class="search-results" id="searchResults"></div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        
+        <h1 id="malware-analysis-fundamentals">Malware Analysis Fundamentals</h1>
+<p>Understanding malware is critical for defense. This lesson teaches you how to safely analyze malicious software to understand its behavior, capabilities, and how to detect it.</p>
+<h2 id="safety-first">Safety First</h2>
+<p><strong>NEVER analyze malware on your main system!</strong></p>
+<h3 id="safe-analysis-environment">Safe Analysis Environment</h3>
+<p><strong>Requirements:</strong>
+1. <strong>Isolated VM</strong>: No network access to your main network
+2. <strong>Snapshots</strong>: Take snapshot before analysis, revert after
+3. <strong>Network isolation</strong>: Host-only or isolated network
+4. <strong>Monitoring tools</strong>: Process monitor, network monitor, API monitor
+5. <strong>Backups</strong>: Everything backed up before starting</p>
+<p><strong>Recommended setup:</strong></p>
+<pre><code>Host Machine (Your computer)
+    ↓
+Virtual Machine (Isolated)
+    ├─ No shared folders
+    ├─ No clipboard sharing
+    ├─ Host-only network (optional)
+    └─ Snapshot before analysis
+</code></pre>
+<p><strong>Tools for analysis VM:</strong>
+- Windows 10 (most malware targets Windows)
+- REMnux (Linux distro for malware analysis)
+- FLARE VM (Windows malware analysis distribution)</p>
+<h2 id="types-of-malware-analysis">Types of Malware Analysis</h2>
+<h3 id="static-analysis">Static Analysis</h3>
+<p><strong>Examine without executing.</strong></p>
+<p><strong>Basic static analysis:</strong>
+- File properties (size, type, creation date)
+- Strings extraction
+- PE header analysis
+- Hash calculation
+- VirusTotal lookup</p>
+<p><strong>Advanced static analysis:</strong>
+- Disassembly
+- Decompilation
+- Code analysis
+- Signature creation</p>
+<h3 id="dynamic-analysis">Dynamic Analysis</h3>
+<p><strong>Execute and observe behavior.</strong></p>
+<p><strong>What to monitor:</strong>
+- File system changes
+- Registry modifications
+- Network connections
+- Process creation
+- API calls
+- Memory modifications</p>
+<h3 id="hybrid-analysis">Hybrid Analysis</h3>
+<p><strong>Combination of static and dynamic.</strong>
+- Static analysis first (safer)
+- Dynamic analysis to confirm findings
+- Iterative process</p>
+<h2 id="static-analysis-tools-and-techniques">Static Analysis Tools and Techniques</h2>
+<h3 id="file-identification">File Identification</h3>
+<pre><code class="language-bash"># File type
+file suspicious.exe
+
+# Calculate hashes
+md5sum suspicious.exe
+sha1sum suspicious.exe
+sha256sum suspicious.exe
+
+# Detailed file info
+exiftool suspicious.exe
+</code></pre>
+<h3 id="strings-analysis">Strings Analysis</h3>
+<pre><code class="language-bash"># Extract strings (minimum 8 characters)
+strings -n 8 suspicious.exe &gt; strings.txt
+
+# Look for interesting strings
+grep -i &quot;http&quot; strings.txt
+grep -i &quot;password&quot; strings.txt
+grep -i &quot;\.exe&quot; strings.txt
+grep -i &quot;cmd&quot; strings.txt
+
+# Unicode strings
+strings -el suspicious.exe
+</code></pre>
+<p><strong>What to look for:</strong>
+- URLs and IP addresses
+- File paths
+- Registry keys
+- Function names
+- Error messages
+- Embedded files
+- Encryption keys</p>
+<h3 id="pe-header-analysis">PE Header Analysis</h3>
+<p><strong>Use PEview, PE-bear, or pestudio:</strong></p>
+<p><strong>Important sections:</strong>
+- <strong>Import table</strong>: What DLLs/functions it uses
+- <strong>Export table</strong>: Functions it provides
+- <strong>Resources</strong>: Embedded files, icons
+- <strong>Sections</strong>: Code, data, resources</p>
+<p><strong>Suspicious indicators:</strong>
+- Unusual entry point
+- Packed/compressed sections (high entropy)
+- Suspicious imports (network, process manipulation)
+- Modified timestamps
+- Unusual section names</p>
+<h3 id="detecting-packers">Detecting Packers</h3>
+<p><strong>Packers compress/encrypt malware to evade detection.</strong></p>
+<pre><code class="language-bash"># Detect packer
+upx -t suspicious.exe  # Check if UPX packed
+
+# Entropy analysis (high entropy = packed/encrypted)
+# Use pe-studio or similar tool
+</code></pre>
+<p><strong>Common packers:</strong>
+- UPX
+- ASPack
+- PECompact
+- Themida
+- VMProtect</p>
+<p><strong>Unpacking:</strong>
+- Some packers can be reversed (UPX: <code>upx -d file.exe</code>)
+- Others require manual unpacking or debugging</p>
+<h2 id="dynamic-analysis-tools">Dynamic Analysis Tools</h2>
+<h3 id="process-monitor-procmon">Process Monitor (Procmon)</h3>
+<p><strong>Windows Sysinternals tool - essential for dynamic analysis.</strong></p>
+<p><strong>Setup filters:</strong></p>
+<pre><code>Process Name is malware.exe
+Operation begins with Write
+Path contains HKCU\Software
+</code></pre>
+<p><strong>What to monitor:</strong>
+- File operations (Create, Write, Delete)
+- Registry operations (RegSetValue, RegCreateKey)
+- Network operations (TCP/UDP connects)
+- Process operations (Process Create, Thread Create)</p>
+<p><strong>Common malware behaviors:</strong>
+- Creating files in Temp or AppData
+- Modifying Run keys (persistence)
+- Modifying firewall settings
+- Dropping additional files
+- Injecting into other processes</p>
+<h3 id="process-explorer">Process Explorer</h3>
+<p><strong>View running processes and their properties:</strong>
+- Memory usage
+- Handles (files, registry keys open)
+- DLLs loaded
+- Network connections
+- Strings in memory</p>
+<p><strong>Suspicious indicators:</strong>
+- Unsigned executables
+- Unusual parent-child relationships
+- Process injection
+- Hidden processes</p>
+<h3 id="wireshark-tcpdump">Wireshark / tcpdump</h3>
+<p><strong>Monitor network traffic:</strong></p>
+<pre><code class="language-bash"># Capture all traffic
+sudo tcpdump -i any -w malware_traffic.pcap
+
+# In Wireshark:
+# - Filter by malware's IP
+# - Look for DNS queries (C2 domains)
+# - Extract objects (downloaded files)
+# - Analyze HTTP/HTTPS connections
+</code></pre>
+<p><strong>What to look for:</strong>
+- Command and control (C2) servers
+- Downloaded payloads
+- Exfiltrated data
+- Protocols used
+- Beaconing intervals</p>
+<h3 id="regshot">Regshot</h3>
+<p><strong>Registry comparison tool:</strong></p>
+<ol>
+<li>Take snapshot before execution</li>
+<li>Execute malware</li>
+<li>Take snapshot after execution</li>
+<li>Compare snapshots</li>
+</ol>
+<p><strong>Reveals:</strong>
+- New/modified registry keys
+- Persistence mechanisms
+- Configuration changes</p>
+<h2 id="malware-behaviors-to-identify">Malware Behaviors to Identify</h2>
+<h3 id="persistence-mechanisms">Persistence Mechanisms</h3>
+<p><strong>How malware survives reboot:</strong></p>
+<p><strong>Registry Run keys:</strong></p>
+<pre><code>HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+HKLM\Software\Microsoft\Windows\CurrentVersion\Run
+</code></pre>
+<p><strong>Scheduled tasks:</strong></p>
+<pre><code>C:\Windows\System32\Tasks\
+</code></pre>
+<p><strong>Services:</strong></p>
+<pre><code>HKLM\System\CurrentControlSet\Services\
+</code></pre>
+<p><strong>Startup folder:</strong></p>
+<pre><code>C:\Users\&lt;user&gt;\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\
+</code></pre>
+<p><strong>WMI Event Subscriptions:</strong>
+- Fileless persistence
+- Hard to detect</p>
+<h3 id="network-communication">Network Communication</h3>
+<p><strong>Beaconing:</strong>
+- Regular intervals (heartbeat to C2)
+- Indicates active C2 connection</p>
+<p><strong>Data exfiltration:</strong>
+- Large outbound transfers
+- Unusual protocols (DNS tunneling)
+- Encrypted connections</p>
+<p><strong>Domain Generation Algorithms (DGA):</strong>
+- Generates many domain names
+- Tries them until one works
+- Evades domain blacklisting</p>
+<h3 id="process-injection">Process Injection</h3>
+<p><strong>Running code in another process:</strong></p>
+<p><strong>Techniques:</strong>
+- DLL injection
+- Process hollowing
+- APC injection
+- Reflective DLL injection</p>
+<p><strong>Why:</strong>
+- Hide malicious code
+- Evade detection
+- Elevate privileges
+- Access process memory</p>
+<h3 id="credential-theft">Credential Theft</h3>
+<p><strong>Common techniques:</strong>
+- Mimikatz (extract passwords from memory)
+- Keylogging
+- Form grabbing (browser)
+- Credential dumping (SAM, LSASS)</p>
+<h2 id="dynamic-analysis-in-practice">Dynamic Analysis in Practice</h2>
+<h3 id="analysis-workflow">Analysis Workflow</h3>
+<p><strong>1. Preparation:</strong></p>
+<pre><code class="language-bash"># Take VM snapshot
+# Set up monitoring tools
+# Start Procmon with filters
+# Start Wireshark capture
+# Open Process Explorer
+</code></pre>
+<p><strong>2. Execution:</strong></p>
+<pre><code class="language-bash"># Execute malware
+# Observe immediate behavior
+# Let it run for 5-10 minutes
+# Interact with system (malware might wait)
+</code></pre>
+<p><strong>3. Observation:</strong>
+- What files created/modified?
+- What registry keys changed?
+- What network connections made?
+- What processes spawned?
+- Any anti-analysis techniques?</p>
+<p><strong>4. Documentation:</strong>
+- Screenshot everything
+- Save logs from all tools
+- Document timeline of events
+- Note any unusual behavior</p>
+<p><strong>5. Cleanup:</strong></p>
+<pre><code class="language-bash"># Save artifacts
+# Revert to clean snapshot
+# Never boot infected VM again without snapshot
+</code></pre>
+<h3 id="example-analysis">Example Analysis</h3>
+<p><strong>Sample: TrojanDownloader.exe</strong></p>
+<p><strong>Static analysis findings:</strong></p>
+<pre><code>File: TrojanDownloader.exe
+MD5: 3bc69e6373cd1e36c6a3eef2b8b30c1e
+Imports: URLDownloadToFileA, CreateProcessA, RegSetValueExA
+Strings: http://evil.com/payload.exe, Software\Microsoft\Windows\CurrentVersion\Run
+</code></pre>
+<p><strong>Dynamic analysis findings:</strong></p>
+<pre><code>File created: C:\Users\User\AppData\Local\Temp\payload.exe
+Registry modified: HKCU\Software\Microsoft\Windows\CurrentVersion\Run\Update = &quot;C:\Users\User\AppData\Local\Temp\payload.exe&quot;
+Network: Connected to evil.com:80
+Process: Created payload.exe
+</code></pre>
+<p><strong>Conclusion:</strong>
+- Downloads additional payload from evil.com
+- Achieves persistence via Run key
+- Executes downloaded payload
+- Classic trojan downloader behavior</p>
+<h2 id="anti-analysis-techniques">Anti-Analysis Techniques</h2>
+<p>Malware often detects analysis environments.</p>
+<h3 id="vm-detection">VM Detection</h3>
+<p><strong>Checks for:</strong>
+- VMware artifacts (files, registry keys)
+- VirtualBox guest additions
+- Hypervisor instructions
+- Hardware characteristics (unusual CPU, MAC addresses)</p>
+<h3 id="debugger-detection">Debugger Detection</h3>
+<p><strong>Techniques:</strong>
+- IsDebuggerPresent() API
+- PEB flags
+- Timing checks (debugger slower)
+- Exception handling</p>
+<h3 id="sandbox-evasion">Sandbox Evasion</h3>
+<p><strong>Malware may:</strong>
+- Sleep for extended periods
+- Check for mouse movement
+- Require user interaction
+- Check for internet connectivity
+- Validate environment (specific files/registry keys)</p>
+<h3 id="obfuscation">Obfuscation</h3>
+<p><strong>Code obfuscation:</strong>
+- String encryption
+- Control flow obfuscation
+- Dead code insertion
+- Polymorphic code</p>
+<h2 id="creating-indicators-of-compromise-iocs">Creating Indicators of Compromise (IOCs)</h2>
+<p><strong>From analysis, extract IOCs:</strong></p>
+<p><strong>File-based:</strong>
+- MD5/SHA256 hashes
+- File names
+- File sizes
+- File paths</p>
+<p><strong>Network-based:</strong>
+- IP addresses
+- Domain names
+- URLs
+- User-agents</p>
+<p><strong>Registry-based:</strong>
+- Registry keys created/modified
+- Registry values</p>
+<p><strong>Behavioral:</strong>
+- Process injection patterns
+- Service creation
+- Scheduled task names</p>
+<h3 id="yara-rules">YARA Rules</h3>
+<p><strong>Create detection signatures:</strong></p>
+<pre><code class="language-yara">rule TrojanDownloader {
+    meta:
+        description = &quot;Detects TrojanDownloader&quot;
+        author = &quot;Security Team&quot;
+        date = &quot;2024-01-01&quot;
+
+    strings:
+        $url = &quot;evil.com&quot; ascii
+        $registry = &quot;Software\\Microsoft\\Windows\\CurrentVersion\\Run&quot; ascii
+        $api1 = &quot;URLDownloadToFileA&quot; ascii
+        $api2 = &quot;CreateProcessA&quot; ascii
+
+    condition:
+        all of ($api*) and ($url or $registry)
+}
+</code></pre>
+<p><strong>Test YARA rule:</strong></p>
+<pre><code class="language-bash">yara my_rule.yar suspicious_file.exe
+</code></pre>
+<h2 id="automated-analysis">Automated Analysis</h2>
+<h3 id="cuckoo-sandbox">Cuckoo Sandbox</h3>
+<p><strong>Automated malware analysis system:</strong></p>
+<p><strong>Features:</strong>
+- Automated VM execution
+- Behavior analysis
+- Network traffic capture
+- Memory dumps
+- Screenshots
+- API call tracing</p>
+<p><strong>Setup:</strong></p>
+<pre><code class="language-bash"># Install dependencies
+sudo apt install python3 python3-pip mongodb postgresql
+
+# Install Cuckoo
+pip3 install cuckoo
+
+# Initialize
+cuckoo init
+
+# Configure VMs in conf/virtualbox.conf
+# Submit samples:
+cuckoo submit malware.exe
+</code></pre>
+<h3 id="online-sandboxes">Online Sandboxes</h3>
+<p><strong>When you can't set up local analysis:</strong></p>
+<p><strong>ANY.RUN:</strong>
+- Interactive analysis
+- Public and private submissions
+- Real-time interaction</p>
+<p><strong>Joe Sandbox:</strong>
+- Comprehensive analysis
+- Multiple OS support
+- Detailed reports</p>
+<p><strong>Hybrid Analysis:</strong>
+- Multiple engines
+- IOC extraction
+- MITRE ATT&amp;CK mapping</p>
+<p><strong>VirusTotal:</strong>
+- Multi-engine scanning
+- Behavior analysis
+- Community insights</p>
+<p><strong>Caution:</strong> Don't submit sensitive malware publicly!</p>
+<h2 id="reporting-findings">Reporting Findings</h2>
+<h3 id="analysis-report-structure">Analysis Report Structure</h3>
+<p><strong>1. Executive Summary</strong>
+- Malware type
+- Threat level
+- Key findings</p>
+<p><strong>2. Technical Details</strong>
+- File information (hashes, size, type)
+- Static analysis findings
+- Dynamic analysis findings
+- Network indicators</p>
+<p><strong>3. Indicators of Compromise</strong>
+- File hashes
+- IPs/domains
+- Registry keys
+- Filenames</p>
+<p><strong>4. Detection Rules</strong>
+- YARA rules
+- Snort/Suricata rules
+- Firewall rules</p>
+<p><strong>5. Mitigation Recommendations</strong>
+- Block IOCs
+- Patch vulnerabilities
+- Update signatures</p>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<p><strong>Malware analysis workflow:</strong>
+1. Safety first (isolated environment)
+2. Static analysis (understand without executing)
+3. Dynamic analysis (observe behavior)
+4. Document findings
+5. Create IOCs and rules
+6. Share intelligence</p>
+<p><strong>Essential skills:</strong>
+- Safe lab setup
+- Tool proficiency
+- Pattern recognition
+- Documentation
+- Patience and persistence</p>
+<p><strong>Remember:</strong>
+- Always use isolated VMs
+- Snapshot before analysis
+- Never analyze on production systems
+- Document everything
+- Share findings responsibly</p>
+<p>Malware analysis is part art, part science. The more samples you analyze, the better you'll become at spotting patterns and understanding malicious behavior.</p>
+<p>Next, we'll explore more advanced topics in traffic analysis and network forensics.</p>
+        
+
+        <!-- Lesson Navigation (only show on non-homepage pages) -->
+        
+        <div class="lesson-nav">
+            
+            <a href="../lesson5-2/" class="lesson-nav-button">
+                <span class="arrow">←</span>
+                <span>Previous: Lesson 5.2</span>
+            </a>
+            
+
+            <div class="lesson-nav-info">
+                <div class="current-lesson">Current Lesson</div>
+                <div class="lesson-title">Lesson 5.3</div>
+            </div>
+
+            
+            <a href="../../unit6/lesson6-1/" class="lesson-nav-button">
+                <span>Next: Lesson 6.1</span>
+                <span class="arrow">→</span>
+            </a>
+            
+        </div>
+        
+    </div>
+
+    <footer>
+        <p>NCHS Cybersecurity | Built with MkDocs</p>
+        
+        <p>Copyright &copy; 2025 Mohamed Morsy</p>
+        
+    </footer>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@5.3.0/css/xterm.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.min.js"></script>
+    
+    <script src="../../../search_index.js"></script>
+    
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const unitHeaders = document.querySelectorAll('.nav-links .nested > strong');
+            
+            unitHeaders.forEach(header => {
+                header.addEventListener('click', function(e) {
+                    e.stopPropagation(); 
+                    const parent = this.parentElement;
+                    parent.classList.toggle('collapsed');
+                });
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const searchResults = document.getElementById('searchResults');
+            
+            if (!searchInput || !searchResults) {
+                return;
+            }
+            
+            let searchIndex = null;
+            let useSimpleSearch = false;
+            
+            const simpleIndex = [
+                
+                    
+                
+                    
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 1.1",
+                                    url: '../../unit1/lesson1-1/',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                                {
+                                    title: "Lesson 1.2",
+                                    url: '../../unit1/lesson1-2/',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                                {
+                                    title: "Lesson 1.3",
+                                    url: '../../unit1/lesson1-3/',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                                {
+                                    title: "Lesson 1.4",
+                                    url: '../../unit1/lesson1-4/',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                                {
+                                    title: "Lesson 1.5",
+                                    url: '../../unit1/lesson1-5/',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                                {
+                                    title: "Lesson 1.6",
+                                    url: '../../unit1/lesson1-6/',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                                {
+                                    title: "Linux Installation Process",
+                                    url: '../../unit1/installation-process/',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 2.1",
+                                    url: '../../unit2/lesson2-1/',
+                                    path: 'Curriculum > Unit 2'
+                                },
+                                
+                                {
+                                    title: "Lesson 2.2",
+                                    url: '../../unit2/lesson2-2/',
+                                    path: 'Curriculum > Unit 2'
+                                },
+                                
+                                {
+                                    title: "Lesson 2.3",
+                                    url: '../../unit2/lesson2-3/',
+                                    path: 'Curriculum > Unit 2'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 3.1",
+                                    url: '../../unit3/lesson3-1/',
+                                    path: 'Curriculum > Unit 3'
+                                },
+                                
+                                {
+                                    title: "Lesson 3.2",
+                                    url: '../../unit3/lesson3-2/',
+                                    path: 'Curriculum > Unit 3'
+                                },
+                                
+                                {
+                                    title: "Lesson 3.3",
+                                    url: '../../unit3/lesson3-3/',
+                                    path: 'Curriculum > Unit 3'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 4.1",
+                                    url: '../../unit4/lesson4-1/',
+                                    path: 'Curriculum > Unit 4'
+                                },
+                                
+                                {
+                                    title: "Lesson 4.2",
+                                    url: '../../unit4/lesson4-2/',
+                                    path: 'Curriculum > Unit 4'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 5.1",
+                                    url: '../lesson5-1/',
+                                    path: 'Curriculum > Unit 5'
+                                },
+                                
+                                {
+                                    title: "Lesson 5.2",
+                                    url: '../lesson5-2/',
+                                    path: 'Curriculum > Unit 5'
+                                },
+                                
+                                {
+                                    title: "Lesson 5.3",
+                                    url: './',
+                                    path: 'Curriculum > Unit 5'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 6.1",
+                                    url: '../../unit6/lesson6-1/',
+                                    path: 'Curriculum > Unit 6'
+                                },
+                                
+                                {
+                                    title: "Lesson 6.2",
+                                    url: '../../unit6/lesson6-2/',
+                                    path: 'Curriculum > Unit 6'
+                                },
+                                
+                                {
+                                    title: "Lesson 6.3",
+                                    url: '../../unit6/lesson6-3/',
+                                    path: 'Curriculum > Unit 6'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 7.1",
+                                    url: '../../unit7/lesson7-1/',
+                                    path: 'Curriculum > Unit 7'
+                                },
+                                
+                                {
+                                    title: "Lesson 7.2",
+                                    url: '../../unit7/lesson7-2/',
+                                    path: 'Curriculum > Unit 7'
+                                },
+                                
+                                {
+                                    title: "Lesson 7.3",
+                                    url: '../../unit7/lesson7-3/',
+                                    path: 'Curriculum > Unit 7'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 8.1",
+                                    url: '../../unit8/lesson8-1/',
+                                    path: 'Curriculum > Unit 8'
+                                },
+                                
+                                {
+                                    title: "Lesson 8.2",
+                                    url: '../../unit8/lesson8-2/',
+                                    path: 'Curriculum > Unit 8'
+                                },
+                                
+                                {
+                                    title: "Lesson 8.3",
+                                    url: '../../unit8/lesson8-3/',
+                                    path: 'Curriculum > Unit 8'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 9.1",
+                                    url: '../../unit9/lesson9-1/',
+                                    path: 'Curriculum > Unit 9'
+                                },
+                                
+                                {
+                                    title: "Lesson 9.2",
+                                    url: '../../unit9/lesson9-2/',
+                                    path: 'Curriculum > Unit 9'
+                                },
+                                
+                                {
+                                    title: "Lesson 9.3",
+                                    url: '../../unit9/lesson9-3/',
+                                    path: 'Curriculum > Unit 9'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 10.1",
+                                    url: '../../unit10/lesson10-1/',
+                                    path: 'Curriculum > Unit 10'
+                                },
+                                
+                                {
+                                    title: "Lesson 10.2",
+                                    url: '../../unit10/lesson10-2/',
+                                    path: 'Curriculum > Unit 10'
+                                },
+                                
+                                {
+                                    title: "Lesson 10.3",
+                                    url: '../../unit10/lesson10-3/',
+                                    path: 'Curriculum > Unit 10'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 11.1",
+                                    url: '../../unit11/lesson11-1/',
+                                    path: 'Curriculum > Unit 11'
+                                },
+                                
+                                {
+                                    title: "Lesson 11.2",
+                                    url: '../../unit11/lesson11-2/',
+                                    path: 'Curriculum > Unit 11'
+                                },
+                                
+                                {
+                                    title: "Lesson 11.3",
+                                    url: '../../unit11/lesson11-3/',
+                                    path: 'Curriculum > Unit 11'
+                                },
+                                
+                            
+                        
+                    
+                
+                    
+                        {
+                            title: "Terminal",
+                            url: '../../../test/',
+                            path: 'Main'
+                        },
+                    
+                
+            ];
+            
+            if (typeof window.searchIndex !== 'undefined') {
+                searchIndex = window.searchIndex;
+                useSimpleSearch = false;
+                console.log('✓ Using embedded search index:', searchIndex.docs.length, 'documents');
+            } else {
+                const base_url = document.querySelector('base')?.getAttribute('href') || '/';
+                fetch(base_url + 'search_data.js')
+                    .then(response => response.text())
+                    .then(data => {
+                        eval(data);  
+                        if (window.searchIndex) {
+                            searchIndex = window.searchIndex;
+                            useSimpleSearch = false;
+                            console.log('✓ Loaded search index from JS:', searchIndex.docs.length, 'documents');
+                        }
+                    })
+                    .catch(() => {
+                        console.log('Using simple title search (full search not available)');
+                        useSimpleSearch = true;
+                    });
+                
+                useSimpleSearch = true; 
+            }
+            
+            function performSearch(query) {
+                if (!query || query.length < 2) {
+                    searchResults.classList.remove('active');
+                    return;
+                }
+                
+                if (useSimpleSearch || !searchIndex) {
+                    performSimpleSearch(query);
+                } else {
+                    performFullSearch(query);
+                }
+            }
+            
+            function performSimpleSearch(query) {
+                const lowerQuery = query.toLowerCase();
+                const results = simpleIndex.filter(item => 
+                    item.title.toLowerCase().includes(lowerQuery)
+                );
+                displaySimpleResults(results, query);
+            }
+            
+            function performFullSearch(query) {
+                const lowerQuery = query.toLowerCase();
+                const queryTerms = lowerQuery.split(/\s+/);
+                
+                const results = searchIndex.docs
+                    .map(doc => {
+                        let score = 0;
+                        let matchedText = '';
+                        
+                        if (doc.title && doc.title.toLowerCase().includes(lowerQuery)) {
+                            score += 10;
+                        }
+                        
+                        if (doc.text) {
+                            const text = doc.text.toLowerCase();
+                            queryTerms.forEach(term => {
+                                if (term.length < 2) return;
+                                const count = (text.match(new RegExp(escapeRegex(term), 'g')) || []).length;
+                                score += count;
+                                
+                                if (count > 0 && !matchedText) {
+                                    const index = text.indexOf(term);
+                                    const start = Math.max(0, index - 50);
+                                    const end = Math.min(text.length, index + term.length + 50);
+                                    matchedText = doc.text.substring(start, end);
+                                    if (start > 0) matchedText = '...' + matchedText;
+                                    if (end < text.length) matchedText = matchedText + '...';
+                                }
+                            });
+                        }
+                        
+                        return {
+                            title: doc.title,
+                            location: doc.location,
+                            text: matchedText || (doc.text ? doc.text.substring(0, 150) + '...' : ''),
+                            score: score
+                        };
+                    })
+                    .filter(result => result.score > 0)
+                    .sort((a, b) => b.score - a.score);
+                
+                displayFullResults(results, query);
+            }
+            
+            function displaySimpleResults(results, query) {
+                if (results.length === 0) {
+                    searchResults.innerHTML = '<div class="search-no-results">No results found</div>';
+                    searchResults.classList.add('active');
+                    return;
+                }
+                
+                const html = results.slice(0, 10).map(result => {
+                    const highlightedTitle = highlightText(result.title, query);
+                    return `
+                        <a href="${result.url}" class="search-result-item">
+                            <div class="search-result-title">${highlightedTitle}</div>
+                            <div class="search-result-path">${escapeHtml(result.path)}</div>
+                        </a>
+                    `;
+                }).join('');
+                
+                searchResults.innerHTML = html;
+                searchResults.classList.add('active');
+            }
+            
+            function displayFullResults(results, query) {
+                if (results.length === 0) {
+                    searchResults.innerHTML = '<div class="search-no-results">No results found</div>';
+                    searchResults.classList.add('active');
+                    return;
+                }
+                
+                const pathname = window.location.pathname;
+                let basePath = '/';
+                
+                const pathParts = pathname.split('/').filter(p => p);
+                
+                if (pathParts.length > 0 && !pathParts[0].endsWith('.html')) {
+                    const firstPart = pathParts[0];
+                    if (firstPart !== 'index' && firstPart !== 'search') {
+                        basePath = '/' + firstPart + '/';
+                    }
+                }
+                
+                console.log('Current pathname:', pathname);
+                console.log('Detected base path:', basePath);
+                
+                const html = results.slice(0, 10).map(result => {
+                    const highlightedTitle = highlightText(result.title, query);
+                    const highlightedText = highlightText(result.text, query);
+                    
+                    let path = result.location.replace(/^\//, '').replace(/\.html$/, '').replace(/\//g, ' > ');
+                    if (!path) path = 'Home';
+                    
+                    let url;
+                    if (basePath === '/') {
+                        url = result.location;
+                    } else {
+                        const cleanLocation = result.location.startsWith('/') ? result.location.substring(1) : result.location;
+                        url = basePath + cleanLocation;
+                    }
+                    
+                    console.log('Result:', result.title, '-> URL:', url);
+                    
+                    return `
+                        <a href="${url}" class="search-result-item">
+                            <div class="search-result-title">${highlightedTitle}</div>
+                            <div class="search-result-path">${escapeHtml(path)}</div>
+                            <div class="search-result-excerpt">${highlightedText}</div>
+                        </a>
+                    `;
+                }).join('');
+                
+                searchResults.innerHTML = html;
+                searchResults.classList.add('active');
+            }
+            
+            function highlightText(text, query) {
+                if (!text) return '';
+                const queryTerms = query.split(/\s+/).filter(t => t.length >= 2);
+                let result = escapeHtml(text);
+                queryTerms.forEach(term => {
+                    const regex = new RegExp('(' + escapeRegex(term) + ')', 'gi');
+                    result = result.replace(regex, '<span class="search-highlight">$1</span>');
+                });
+                return result;
+            }
+            
+            function escapeRegex(string) {
+                return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            }
+            
+            function escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+            
+            let searchTimeout;
+            searchInput.addEventListener('input', function(e) {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => performSearch(e.target.value), 300);
+            });
+            
+            searchInput.addEventListener('focus', function(e) {
+                if (e.target.value.length >= 2) {
+                    performSearch(e.target.value);
+                }
+            });
+            
+            document.addEventListener('click', function(e) {
+                if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+                    searchResults.classList.remove('active');
+                }
+            });
+            
+            searchInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    searchResults.classList.remove('active');
+                    searchInput.blur();
+                }
+            });
+        });
+
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('pre code').forEach((block) => {
+                block.parentElement.style.position = 'relative';
+            });
+        });
+        
+    </script>
+</body>
+</html>

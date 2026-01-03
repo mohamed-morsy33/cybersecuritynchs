@@ -1,0 +1,2106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 1.5 - NCHS Cybersecurity</title>
+    
+    
+    <link rel="icon" href="../../../img/logo.png">
+    
+    
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DRPQMPQQS6"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-DRPQMPQQS6');
+    </script>
+    
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0e27;
+            --bg-secondary: #141b3a;
+            --text-primary: #00ff41;
+            --text-secondary: #7affa7;
+            --text-muted: #4a9960;
+            --accent: #ff0844;
+            --accent-secondary: #00d4ff;
+            --border: #1a3a2a;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--bg-primary);
+            color: var(--text-secondary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--bg-secondary);
+            border-bottom: 2px solid var(--text-primary);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 255, 65, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-logo a {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: 0.1em;
+            text-shadow: 0 0 10px var(--text-primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links > li {
+            position: relative;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 4px;
+            display: block;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--text-primary);
+            background: rgba(0, 255, 65, 0.1);
+            text-shadow: 0 0 10px var(--text-primary);
+        }
+
+        /* Dropdown menu */
+        .nav-links .dropdown {
+            position: relative;
+        }
+
+        .nav-links .dropdown > a::after {
+            content: ' ▼';
+            font-size: 0.7em;
+            margin-left: 5px;
+        }
+
+        .nav-links .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--bg-secondary);
+            border: 2px solid var(--text-primary);
+            border-radius: 4px;
+            min-width: 250px;
+            box-shadow: 0 8px 30px rgba(0, 255, 65, 0.3);
+            z-index: 1000;
+            padding: 10px 0;
+            margin-top: 5px;
+        }
+
+        .nav-links .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .nav-links .dropdown-content li {
+            list-style: none;
+        }
+
+        .nav-links .dropdown-content a {
+            padding: 10px 20px;
+            border-radius: 0;
+        }
+
+        .nav-links .dropdown-content .nested {
+            padding-left: 0;
+        }
+
+        .nav-links .dropdown-content .nested > strong {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .nav-links .dropdown-content .nested > strong:hover {
+            background: rgba(0, 255, 65, 0.1);
+        }
+
+        .nav-links .dropdown-content .nested > strong::after {
+            content: '▼';
+            font-size: 0.8em;
+            transition: transform 0.3s ease;
+            color: var(--text-primary);
+        }
+
+        .nav-links .dropdown-content .nested.collapsed > strong::after {
+            transform: rotate(-90deg);
+        }
+
+        .nav-links .dropdown-content .nested .unit-lessons {
+            max-height: 500px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .nav-links .dropdown-content .nested.collapsed .unit-lessons {
+            max-height: 0;
+        }
+
+        .nav-links .dropdown-content .nested .unit-lessons li {
+            padding-left: 20px;
+        }
+
+        .nav-links .dropdown-content .nested a {
+            padding: 8px 20px;
+            font-size: 0.9em;
+            color: var(--text-muted);
+        }
+
+        .nav-links .dropdown-content .nested a:hover {
+            color: var(--text-primary);
+            background: rgba(0, 255, 65, 0.05);
+        }
+
+        /* Mobile menu toggle */
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: 2px solid var(--text-primary);
+            color: var(--text-primary);
+            padding: 8px 15px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        /* Search */
+        .search-container {
+            position: relative;
+            margin-left: 20px;
+        }
+
+        .search-input {
+            padding: 8px 35px 8px 15px;
+            background: var(--bg-primary);
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            width: 250px;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--text-primary);
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+        }
+
+        .search-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
+        .search-results {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            right: 0;
+            background: var(--bg-secondary);
+            border: 2px solid var(--text-primary);
+            border-radius: 8px;
+            max-height: 400px;
+            overflow-y: auto;
+            display: none;
+            z-index: 2000;
+            box-shadow: 0 8px 30px rgba(0, 255, 65, 0.3);
+        }
+
+        .search-results.active {
+            display: block;
+        }
+
+        .search-result-item {
+            padding: 15px;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-result-item:hover {
+            background: rgba(0, 255, 65, 0.05);
+        }
+
+        .search-result-title {
+            color: var(--text-primary);
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .search-result-path {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-bottom: 8px;
+        }
+
+        .search-result-excerpt {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .search-highlight {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            padding: 2px 4px;
+            border-radius: 2px;
+            font-weight: 700;
+        }
+
+        .search-no-results {
+            padding: 20px;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        .search-results::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .search-results::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+
+        .search-results::-webkit-scrollbar-thumb {
+            background: var(--text-primary);
+            border-radius: 4px;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 30px;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--text-primary);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-shadow: 0 0 20px var(--text-primary);
+            letter-spacing: 0.05em;
+            border-bottom: 2px solid var(--text-primary);
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            border-left: 4px solid var(--text-primary);
+            padding-left: 15px;
+        }
+
+        h3 { font-size: 1.5rem; }
+        h4 { font-size: 1.25rem; }
+
+        p {
+            margin-bottom: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        a {
+            color: var(--accent-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--text-primary);
+            text-shadow: 0 0 10px var(--text-primary);
+        }
+
+        /* Code Blocks */
+        code {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            padding: 2px 8px;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        pre {
+            background: var(--bg-secondary);
+            border: 2px solid var(--text-primary);
+            border-radius: 8px;
+            padding: 20px;
+            overflow-x: auto;
+            margin: 20px 0;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
+        }
+
+        pre code {
+            background: transparent;
+            border: none;
+            padding: 0;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 1.2rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        li::marker {
+            color: var(--text-primary);
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+        }
+
+        th {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            padding: 12px;
+            text-align: left;
+            border: 1px solid var(--text-primary);
+            font-weight: 700;
+        }
+
+        td {
+            padding: 12px;
+            border: 1px solid var(--border);
+        }
+
+        tr:hover {
+            background: rgba(0, 255, 65, 0.05);
+        }
+
+        /* Blockquotes */
+        blockquote {
+            border-left: 4px solid var(--text-primary);
+            background: var(--bg-secondary);
+            padding: 15px 20px;
+            margin: 20px 0;
+            font-style: italic;
+        }
+
+        /* Images */
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        /* Horizontal Rule */
+        hr {
+            border: none;
+            border-top: 2px solid var(--text-primary);
+            margin: 30px 0;
+            opacity: 0.3;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 2px solid var(--text-primary);
+            padding: 30px;
+            margin-top: 60px;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        /* Scanline Effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                transparent 50%,
+                rgba(0, 255, 65, 0.02) 51%
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 9999;
+            animation: scan 8s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100%); }
+        }
+
+        /* Selection */
+        ::selection {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+            background: var(--bg-primary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--text-primary);
+            border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--bg-secondary);
+                flex-direction: column;
+                padding: 20px;
+                border-bottom: 2px solid var(--text-primary);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 20px 15px;
+            }
+
+            .search-container {
+                margin-left: 10px;
+            }
+
+            .search-input {
+                width: 200px;
+            }
+        }
+
+        /* Search Box */
+        .search-box {
+            padding: 10px;
+            background: var(--bg-primary);
+            border: 1px solid var(--text-primary);
+            border-radius: 4px;
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .search-box::placeholder {
+            color: var(--text-muted);
+        }
+
+        /* Lesson Navigation */
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 60px 0 40px 0;
+            padding: 30px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .lesson-nav-button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            background: var(--bg-primary);
+            border: 2px solid var(--text-primary);
+            border-radius: 8px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .lesson-nav-button:hover {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 255, 65, 0.3);
+        }
+
+        .lesson-nav-button.disabled {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .lesson-nav-button .arrow {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .lesson-nav-info {
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        .lesson-nav-info .current-lesson {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+
+        .lesson-nav-info .lesson-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 768px) {
+            .lesson-nav {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .lesson-nav-button {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .lesson-nav-info {
+                order: -1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo">
+                
+                <img src="../../../img/logo.png" alt="Logo">
+                
+                <a href="https://mohamed-morsy33.github.io/cybersecuritynchs/">NCHS Cybersecurity</a>
+            </div>
+            
+            <button class="nav-toggle" onclick="toggleMenu()">MENU</button>
+            
+            <ul class="nav-links" id="navLinks">
+                
+                <li >
+                    
+                        <a href="../../.." 
+                           >
+                            Home
+                        </a>
+                    
+                </li>
+                
+                <li class="dropdown">
+                    
+                        <a href="#">Curriculum</a>
+                        <ul class="dropdown-content">
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 1</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../lesson1-1/">Lesson 1.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../lesson1-2/">Lesson 1.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../lesson1-3/">Lesson 1.3</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../lesson1-4/">Lesson 1.4</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="./">Lesson 1.5</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../lesson1-6/">Lesson 1.6</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../installation-process/">Linux Installation Process</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 2</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit2/lesson2-1/">Lesson 2.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit2/lesson2-2/">Lesson 2.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit2/lesson2-3/">Lesson 2.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 3</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit3/lesson3-1/">Lesson 3.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit3/lesson3-2/">Lesson 3.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit3/lesson3-3/">Lesson 3.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 4</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit4/lesson4-1/">Lesson 4.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit4/lesson4-2/">Lesson 4.2</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 5</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit5/lesson5-1/">Lesson 5.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit5/lesson5-2/">Lesson 5.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit5/lesson5-3/">Lesson 5.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 6</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit6/lesson6-1/">Lesson 6.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit6/lesson6-2/">Lesson 6.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit6/lesson6-3/">Lesson 6.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 7</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit7/lesson7-1/">Lesson 7.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit7/lesson7-2/">Lesson 7.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit7/lesson7-3/">Lesson 7.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 8</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit8/lesson8-1/">Lesson 8.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit8/lesson8-2/">Lesson 8.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit8/lesson8-3/">Lesson 8.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 9</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit9/lesson9-1/">Lesson 9.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit9/lesson9-2/">Lesson 9.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit9/lesson9-3/">Lesson 9.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 10</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit10/lesson10-1/">Lesson 10.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit10/lesson10-2/">Lesson 10.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit10/lesson10-3/">Lesson 10.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 11</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit11/lesson11-1/">Lesson 11.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit11/lesson11-2/">Lesson 11.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit11/lesson11-3/">Lesson 11.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                        </ul>
+                    
+                </li>
+                
+                <li >
+                    
+                        <a href="../../../test/" 
+                           >
+                            Terminal
+                        </a>
+                    
+                </li>
+                
+            </ul>
+
+            <div class="search-container">
+                <input type="text" 
+                       class="search-input" 
+                       id="searchInput" 
+                       placeholder="Search lessons..."
+                       autocomplete="off">
+                <span class="search-icon">🔍</span>
+                <div class="search-results" id="searchResults"></div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        
+        <h1 id="basic-linux-commands">Basic Linux Commands</h1>
+<p>Now that you understand why Linux matters for cybersecurity, it's time to actually use it. The command line interface (CLI) is where you'll spend most of your time, so getting comfortable with basic commands is essential.</p>
+<h2 id="the-terminal">The Terminal</h2>
+<p>The <strong>terminal</strong> (also called shell or command line) is your interface to Linux. Unlike graphical interfaces where you click icons, here you type commands. It might feel awkward at first, but it's far more powerful and precise.</p>
+<p>When you open a terminal, you'll see a <strong>prompt</strong> that looks something like:</p>
+<pre><code>user@hostname:~$
+</code></pre>
+<p>Breaking this down:
+- <code>user</code>: Your username
+- <code>hostname</code>: The computer's name
+- <code>~</code>: Current directory (~ means home directory)
+- <code>$</code>: Regular user (if you see <code>#</code>, you're root)</p>
+<h2 id="navigation-commands">Navigation Commands</h2>
+<h3 id="pwd-print-working-directory">pwd - Print Working Directory</h3>
+<p>Shows where you currently are in the file system.</p>
+<pre><code class="language-bash">pwd
+# Output: /home/user
+</code></pre>
+<h3 id="ls-list-directory-contents">ls - List Directory Contents</h3>
+<p>Shows files and folders in current directory.</p>
+<pre><code class="language-bash"># Basic listing
+ls
+
+# Long format (detailed)
+ls -l
+
+# Show hidden files (start with .)
+ls -a
+
+# Combine flags
+ls -la
+
+# Human-readable file sizes
+ls -lh
+
+# Sort by modification time
+ls -lt
+</code></pre>
+<h3 id="cd-change-directory">cd - Change Directory</h3>
+<p>Move between directories.</p>
+<pre><code class="language-bash"># Go to home directory
+cd
+cd ~
+
+# Go to specific directory
+cd /etc
+
+# Go up one level
+cd ..
+
+# Go up two levels
+cd ../..
+
+# Go to previous directory
+cd -
+
+# Relative path (from current location)
+cd Documents
+
+# Absolute path (from root)
+cd /var/log
+</code></pre>
+<p><strong>Pro tip</strong>: Use Tab for autocomplete. Start typing a directory name and hit Tab.</p>
+<h2 id="file-manipulation">File Manipulation</h2>
+<h3 id="cat-concatenate-and-display-files">cat - Concatenate and Display Files</h3>
+<p>Display file contents.</p>
+<pre><code class="language-bash">cat file.txt
+
+# Display multiple files
+cat file1.txt file2.txt
+
+# Number lines
+cat -n file.txt
+</code></pre>
+<h3 id="less-view-files-page-by-page">less - View Files Page by Page</h3>
+<p>Better for large files.</p>
+<pre><code class="language-bash">less largefile.txt
+# Use arrow keys to scroll
+# Press 'q' to quit
+# Press '/' to search
+# Press 'n' for next search result
+</code></pre>
+<h3 id="head-and-tail-view-file-beginningsends">head and tail - View File Beginnings/Ends</h3>
+<pre><code class="language-bash"># First 10 lines
+head file.txt
+
+# First 20 lines
+head -n 20 file.txt
+
+# Last 10 lines
+tail file.txt
+
+# Last 20 lines
+tail -n 20 file.txt
+
+# Follow file (watch new lines appear)
+tail -f /var/log/syslog
+</code></pre>
+<h3 id="touch-create-empty-files">touch - Create Empty Files</h3>
+<pre><code class="language-bash">touch newfile.txt
+
+# Create multiple files
+touch file1.txt file2.txt file3.txt
+
+# Update timestamp of existing file
+touch existingfile.txt
+</code></pre>
+<h3 id="mkdir-make-directory">mkdir - Make Directory</h3>
+<pre><code class="language-bash">mkdir newfolder
+
+# Create nested directories
+mkdir -p parent/child/grandchild
+
+# Create multiple directories
+mkdir dir1 dir2 dir3
+</code></pre>
+<h3 id="cp-copy-filesdirectories">cp - Copy Files/Directories</h3>
+<pre><code class="language-bash"># Copy file
+cp source.txt destination.txt
+
+# Copy to directory
+cp file.txt /home/user/Documents/
+
+# Copy directory recursively
+cp -r sourcedir/ destdir/
+
+# Copy with verbose output
+cp -v file.txt copy.txt
+
+# Preserve permissions and timestamps
+cp -p file.txt copy.txt
+</code></pre>
+<h3 id="mv-moverename-files">mv - Move/Rename Files</h3>
+<pre><code class="language-bash"># Rename file
+mv oldname.txt newname.txt
+
+# Move file to directory
+mv file.txt /home/user/Documents/
+
+# Move multiple files
+mv file1.txt file2.txt /home/user/Documents/
+
+# Move directory
+mv olddir/ newdir/
+</code></pre>
+<h3 id="rm-remove-filesdirectories">rm - Remove Files/Directories</h3>
+<p><strong>WARNING: No recycle bin in Linux! Deleted = gone forever.</strong></p>
+<pre><code class="language-bash"># Remove file
+rm file.txt
+
+# Remove multiple files
+rm file1.txt file2.txt
+
+# Remove directory and contents
+rm -r directory/
+
+# Force removal (no confirmation)
+rm -f file.txt
+
+# Interactive (ask before each deletion)
+rm -i file.txt
+
+# Remove directory (force and recursive)
+rm -rf directory/
+</code></pre>
+<p><strong>NEVER run</strong>: <code>rm -rf /</code> or <code>rm -rf /*</code> - this deletes everything!</p>
+<h2 id="viewing-and-searching">Viewing and Searching</h2>
+<h3 id="grep-search-text">grep - Search Text</h3>
+<p>Find lines containing specific text.</p>
+<pre><code class="language-bash"># Search for word in file
+grep &quot;password&quot; file.txt
+
+# Case-insensitive search
+grep -i &quot;password&quot; file.txt
+
+# Show line numbers
+grep -n &quot;error&quot; logfile.txt
+
+# Recursive search in directory
+grep -r &quot;TODO&quot; /home/user/code/
+
+# Invert match (show lines NOT containing text)
+grep -v &quot;success&quot; logfile.txt
+
+# Count matches
+grep -c &quot;error&quot; logfile.txt
+</code></pre>
+<h3 id="find-find-files-and-directories">find - Find Files and Directories</h3>
+<pre><code class="language-bash"># Find files by name
+find /home -name &quot;*.txt&quot;
+
+# Find directories
+find /home -type d -name &quot;Documents&quot;
+
+# Find files modified in last 7 days
+find /home -mtime -7
+
+# Find files larger than 100MB
+find /home -size +100M
+
+# Find and delete
+find /tmp -name &quot;*.tmp&quot; -delete
+
+# Find with specific permissions
+find /home -perm 777
+</code></pre>
+<h3 id="locate-quick-file-search">locate - Quick File Search</h3>
+<p>Uses database, faster than find but less current.</p>
+<pre><code class="language-bash"># Update database first
+sudo updatedb
+
+# Find files
+locate password.txt
+
+# Case-insensitive
+locate -i PASSWORD.TXT
+</code></pre>
+<h2 id="file-permissions">File Permissions</h2>
+<p>Every file has permissions for owner, group, and others.</p>
+<h3 id="understanding-permissions">Understanding Permissions</h3>
+<pre><code class="language-bash">ls -l file.txt
+# Output: -rw-r--r-- 1 user group 1234 Jan 1 12:00 file.txt
+</code></pre>
+<p>Breaking down <code>-rw-r--r--</code>:
+- First character: File type (<code>-</code> = file, <code>d</code> = directory, <code>l</code> = link)
+- Next 3: Owner permissions (<code>rw-</code> = read, write, no execute)
+- Next 3: Group permissions (<code>r--</code> = read only)
+- Last 3: Other permissions (<code>r--</code> = read only)</p>
+<p>Permissions in numeric form:
+- <code>r</code> (read) = 4
+- <code>w</code> (write) = 2
+- <code>x</code> (execute) = 1</p>
+<p>So <code>rwx</code> = 4+2+1 = 7, <code>rw-</code> = 4+2 = 6, <code>r--</code> = 4</p>
+<h3 id="chmod-change-permissions">chmod - Change Permissions</h3>
+<pre><code class="language-bash"># Give owner execute permission
+chmod u+x script.sh
+
+# Remove write permission from group
+chmod g-w file.txt
+
+# Set specific permissions (numeric)
+chmod 755 script.sh  # rwxr-xr-x
+chmod 644 file.txt   # rw-r--r--
+
+# Recursive
+chmod -R 755 directory/
+</code></pre>
+<p>Common permission sets:
+- <code>777</code>: Everyone can do everything (usually bad idea)
+- <code>755</code>: Owner full access, others read/execute (typical for directories)
+- <code>644</code>: Owner read/write, others read (typical for files)
+- <code>600</code>: Owner read/write only (private files)</p>
+<h3 id="chown-change-owner">chown - Change Owner</h3>
+<pre><code class="language-bash"># Change owner
+sudo chown newowner file.txt
+
+# Change owner and group
+sudo chown newowner:newgroup file.txt
+
+# Recursive
+sudo chown -R newowner directory/
+</code></pre>
+<h2 id="system-information">System Information</h2>
+<h3 id="whoami-current-user">whoami - Current User</h3>
+<pre><code class="language-bash">whoami
+# Output: user
+</code></pre>
+<h3 id="hostname-computer-name">hostname - Computer Name</h3>
+<pre><code class="language-bash">hostname
+# Output: kali-linux
+</code></pre>
+<h3 id="uname-system-information">uname - System Information</h3>
+<pre><code class="language-bash"># Basic info
+uname
+
+# All information
+uname -a
+
+# Kernel version
+uname -r
+</code></pre>
+<h3 id="df-disk-space">df - Disk Space</h3>
+<pre><code class="language-bash"># Show disk usage
+df
+
+# Human-readable
+df -h
+
+# Specific filesystem
+df -h /home
+</code></pre>
+<h3 id="du-directory-size">du - Directory Size</h3>
+<pre><code class="language-bash"># Size of directory
+du -sh /home/user
+
+# Size of all items in directory
+du -h /home/user
+
+# Show total only
+du -s /home/user
+</code></pre>
+<h3 id="free-memory-usage">free - Memory Usage</h3>
+<pre><code class="language-bash"># Show memory
+free
+
+# Human-readable
+free -h
+</code></pre>
+<h3 id="top-process-monitor">top - Process Monitor</h3>
+<p>Real-time view of running processes.</p>
+<pre><code class="language-bash">top
+# Press 'q' to quit
+# Press 'k' to kill a process
+# Press 'M' to sort by memory
+# Press 'P' to sort by CPU
+</code></pre>
+<p>Better alternative: <code>htop</code> (if installed)</p>
+<pre><code class="language-bash">htop
+</code></pre>
+<h3 id="ps-process-status">ps - Process Status</h3>
+<pre><code class="language-bash"># Current user's processes
+ps
+
+# All processes
+ps aux
+
+# Search for specific process
+ps aux | grep firefox
+</code></pre>
+<h2 id="process-management">Process Management</h2>
+<h3 id="running-commands-in-background">Running Commands in Background</h3>
+<pre><code class="language-bash"># Run in background
+command &amp;
+
+# Example
+python3 script.py &amp;
+</code></pre>
+<h3 id="jobs-list-background-jobs">jobs - List Background Jobs</h3>
+<pre><code class="language-bash">jobs
+</code></pre>
+<h3 id="fg-bring-to-foreground">fg - Bring to Foreground</h3>
+<pre><code class="language-bash"># Bring last job to foreground
+fg
+
+# Bring specific job
+fg %1
+</code></pre>
+<h3 id="kill-terminate-process">kill - Terminate Process</h3>
+<pre><code class="language-bash"># Kill by PID
+kill 1234
+
+# Force kill
+kill -9 1234
+
+# Kill by name
+killall firefox
+</code></pre>
+<h2 id="redirection-and-pipes">Redirection and Pipes</h2>
+<h3 id="output-redirection">Output Redirection</h3>
+<pre><code class="language-bash"># Write to file (overwrite)
+echo &quot;Hello&quot; &gt; file.txt
+
+# Append to file
+echo &quot;World&quot; &gt;&gt; file.txt
+
+# Redirect errors
+command 2&gt; error.log
+
+# Redirect both output and errors
+command &gt; output.log 2&gt;&amp;1
+</code></pre>
+<h3 id="pipes">Pipes</h3>
+<p>Send output of one command as input to another.</p>
+<pre><code class="language-bash"># Count lines
+cat file.txt | wc -l
+
+# Search in output
+ps aux | grep python
+
+# Chain multiple commands
+cat file.txt | grep &quot;error&quot; | wc -l
+
+# Sort and unique
+cat file.txt | sort | uniq
+</code></pre>
+<h2 id="text-processing">Text Processing</h2>
+<h3 id="wc-word-count">wc - Word Count</h3>
+<pre><code class="language-bash"># Count lines, words, characters
+wc file.txt
+
+# Just lines
+wc -l file.txt
+
+# Just words
+wc -w file.txt
+</code></pre>
+<h3 id="sort-sort-lines">sort - Sort Lines</h3>
+<pre><code class="language-bash"># Sort alphabetically
+sort file.txt
+
+# Sort numerically
+sort -n numbers.txt
+
+# Reverse sort
+sort -r file.txt
+
+# Sort and remove duplicates
+sort -u file.txt
+</code></pre>
+<h3 id="uniq-remove-duplicates">uniq - Remove Duplicates</h3>
+<p>Must be sorted first!</p>
+<pre><code class="language-bash"># Remove adjacent duplicates
+sort file.txt | uniq
+
+# Count occurrences
+sort file.txt | uniq -c
+
+# Show only duplicates
+sort file.txt | uniq -d
+</code></pre>
+<h2 id="archives-and-compression">Archives and Compression</h2>
+<h3 id="tar-archive-files">tar - Archive Files</h3>
+<pre><code class="language-bash"># Create archive
+tar -cvf archive.tar directory/
+
+# Extract archive
+tar -xvf archive.tar
+
+# Create compressed archive (gzip)
+tar -czvf archive.tar.gz directory/
+
+# Extract compressed archive
+tar -xzvf archive.tar.gz
+
+# List contents without extracting
+tar -tvf archive.tar
+</code></pre>
+<p>Flags explained:
+- <code>c</code>: create
+- <code>x</code>: extract
+- <code>v</code>: verbose
+- <code>f</code>: file
+- <code>z</code>: gzip compression
+- <code>j</code>: bzip2 compression</p>
+<h3 id="zipunzip-zip-archives">zip/unzip - Zip Archives</h3>
+<pre><code class="language-bash"># Create zip
+zip archive.zip file1 file2
+
+# Create zip of directory
+zip -r archive.zip directory/
+
+# Extract zip
+unzip archive.zip
+
+# List contents
+unzip -l archive.zip
+</code></pre>
+<h2 id="network-commands">Network Commands</h2>
+<h3 id="ping-test-connectivity">ping - Test Connectivity</h3>
+<pre><code class="language-bash"># Ping host
+ping google.com
+
+# Ping 4 times only
+ping -c 4 google.com
+</code></pre>
+<h3 id="wget-download-files">wget - Download Files</h3>
+<pre><code class="language-bash"># Download file
+wget https://example.com/file.txt
+
+# Download with different name
+wget -O newname.txt https://example.com/file.txt
+
+# Download in background
+wget -b https://example.com/largefile.zip
+</code></pre>
+<h3 id="curl-transfer-data">curl - Transfer Data</h3>
+<pre><code class="language-bash"># Download file
+curl -O https://example.com/file.txt
+
+# Save with different name
+curl -o newname.txt https://example.com/file.txt
+
+# Follow redirects
+curl -L https://example.com
+
+# Show headers only
+curl -I https://example.com
+</code></pre>
+<h3 id="ifconfig-ip-network-configuration">ifconfig / ip - Network Configuration</h3>
+<pre><code class="language-bash"># Show network interfaces (older)
+ifconfig
+
+# Show network interfaces (modern)
+ip addr show
+
+# Show routing table
+ip route show
+</code></pre>
+<h2 id="command-tips-and-tricks">Command Tips and Tricks</h2>
+<h3 id="command-history">Command History</h3>
+<pre><code class="language-bash"># Show history
+history
+
+# Run previous command
+!!
+
+# Run command from history
+!123
+
+# Search history
+Ctrl+R (then start typing)
+
+# Clear history
+history -c
+</code></pre>
+<h3 id="tab-completion">Tab Completion</h3>
+<ul>
+<li>Press Tab once: Complete if unique</li>
+<li>Press Tab twice: Show all possibilities</li>
+</ul>
+<h3 id="keyboard-shortcuts">Keyboard Shortcuts</h3>
+<ul>
+<li><code>Ctrl+C</code>: Cancel current command</li>
+<li><code>Ctrl+Z</code>: Suspend current command</li>
+<li><code>Ctrl+D</code>: Exit terminal / End of input</li>
+<li><code>Ctrl+L</code>: Clear screen (same as <code>clear</code>)</li>
+<li><code>Ctrl+A</code>: Move to beginning of line</li>
+<li><code>Ctrl+E</code>: Move to end of line</li>
+<li><code>Ctrl+U</code>: Delete from cursor to beginning</li>
+<li><code>Ctrl+K</code>: Delete from cursor to end</li>
+</ul>
+<h3 id="getting-help">Getting Help</h3>
+<pre><code class="language-bash"># Manual pages
+man command
+
+# Example
+man ls
+
+# Quick help
+command --help
+
+# Example
+ls --help
+</code></pre>
+<h2 id="practical-examples">Practical Examples</h2>
+<h3 id="find-all-txt-files-in-home-directory">Find all .txt files in home directory</h3>
+<pre><code class="language-bash">find ~ -name &quot;*.txt&quot;
+</code></pre>
+<h3 id="search-for-password-in-all-files">Search for "password" in all files</h3>
+<pre><code class="language-bash">grep -r &quot;password&quot; /home/user/
+</code></pre>
+<h3 id="find-largest-files-in-directory">Find largest files in directory</h3>
+<pre><code class="language-bash">du -ah /home/user | sort -rh | head -10
+</code></pre>
+<h3 id="count-how-many-times-ip-appears-in-log">Count how many times IP appears in log</h3>
+<pre><code class="language-bash">grep &quot;192.168.1.100&quot; /var/log/apache2/access.log | wc -l
+</code></pre>
+<h3 id="find-all-running-python-processes">Find all running Python processes</h3>
+<pre><code class="language-bash">ps aux | grep python
+</code></pre>
+<h3 id="monitor-log-file-in-real-time">Monitor log file in real-time</h3>
+<pre><code class="language-bash">tail -f /var/log/syslog
+</code></pre>
+<h3 id="create-directory-structure">Create directory structure</h3>
+<pre><code class="language-bash">mkdir -p project/{src,docs,tests}
+</code></pre>
+<h2 id="next-steps">Next Steps</h2>
+<p>Practice these commands! The only way to get comfortable is repetition. Try:
+1. Navigate your file system using only terminal
+2. Create, move, and delete files
+3. Search for specific content in files
+4. Monitor system processes
+5. Combine commands with pipes</p>
+<p>In the next lesson, we'll cover more advanced Linux topics including package management, user administration, and system services.</p>
+<p>Remember: Google is your friend. If you forget a command or need to know options, search for it or use <code>man</code>. Every security professional regularly looks up commands—it's not about memorization, it's about knowing what's possible and where to find information.</p>
+        
+
+        <!-- Lesson Navigation (only show on non-homepage pages) -->
+        
+        <div class="lesson-nav">
+            
+            <a href="../lesson1-4/" class="lesson-nav-button">
+                <span class="arrow">←</span>
+                <span>Previous: Lesson 1.4</span>
+            </a>
+            
+
+            <div class="lesson-nav-info">
+                <div class="current-lesson">Current Lesson</div>
+                <div class="lesson-title">Lesson 1.5</div>
+            </div>
+
+            
+            <a href="../lesson1-6/" class="lesson-nav-button">
+                <span>Next: Lesson 1.6</span>
+                <span class="arrow">→</span>
+            </a>
+            
+        </div>
+        
+    </div>
+
+    <footer>
+        <p>NCHS Cybersecurity | Built with MkDocs</p>
+        
+        <p>Copyright &copy; 2025 Mohamed Morsy</p>
+        
+    </footer>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@5.3.0/css/xterm.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.min.js"></script>
+    
+    <script src="../../../search_index.js"></script>
+    
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const unitHeaders = document.querySelectorAll('.nav-links .nested > strong');
+            
+            unitHeaders.forEach(header => {
+                header.addEventListener('click', function(e) {
+                    e.stopPropagation(); 
+                    const parent = this.parentElement;
+                    parent.classList.toggle('collapsed');
+                });
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const searchResults = document.getElementById('searchResults');
+            
+            if (!searchInput || !searchResults) {
+                return;
+            }
+            
+            let searchIndex = null;
+            let useSimpleSearch = false;
+            
+            const simpleIndex = [
+                
+                    
+                
+                    
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 1.1",
+                                    url: '../lesson1-1/',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                                {
+                                    title: "Lesson 1.2",
+                                    url: '../lesson1-2/',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                                {
+                                    title: "Lesson 1.3",
+                                    url: '../lesson1-3/',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                                {
+                                    title: "Lesson 1.4",
+                                    url: '../lesson1-4/',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                                {
+                                    title: "Lesson 1.5",
+                                    url: './',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                                {
+                                    title: "Lesson 1.6",
+                                    url: '../lesson1-6/',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                                {
+                                    title: "Linux Installation Process",
+                                    url: '../installation-process/',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 2.1",
+                                    url: '../../unit2/lesson2-1/',
+                                    path: 'Curriculum > Unit 2'
+                                },
+                                
+                                {
+                                    title: "Lesson 2.2",
+                                    url: '../../unit2/lesson2-2/',
+                                    path: 'Curriculum > Unit 2'
+                                },
+                                
+                                {
+                                    title: "Lesson 2.3",
+                                    url: '../../unit2/lesson2-3/',
+                                    path: 'Curriculum > Unit 2'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 3.1",
+                                    url: '../../unit3/lesson3-1/',
+                                    path: 'Curriculum > Unit 3'
+                                },
+                                
+                                {
+                                    title: "Lesson 3.2",
+                                    url: '../../unit3/lesson3-2/',
+                                    path: 'Curriculum > Unit 3'
+                                },
+                                
+                                {
+                                    title: "Lesson 3.3",
+                                    url: '../../unit3/lesson3-3/',
+                                    path: 'Curriculum > Unit 3'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 4.1",
+                                    url: '../../unit4/lesson4-1/',
+                                    path: 'Curriculum > Unit 4'
+                                },
+                                
+                                {
+                                    title: "Lesson 4.2",
+                                    url: '../../unit4/lesson4-2/',
+                                    path: 'Curriculum > Unit 4'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 5.1",
+                                    url: '../../unit5/lesson5-1/',
+                                    path: 'Curriculum > Unit 5'
+                                },
+                                
+                                {
+                                    title: "Lesson 5.2",
+                                    url: '../../unit5/lesson5-2/',
+                                    path: 'Curriculum > Unit 5'
+                                },
+                                
+                                {
+                                    title: "Lesson 5.3",
+                                    url: '../../unit5/lesson5-3/',
+                                    path: 'Curriculum > Unit 5'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 6.1",
+                                    url: '../../unit6/lesson6-1/',
+                                    path: 'Curriculum > Unit 6'
+                                },
+                                
+                                {
+                                    title: "Lesson 6.2",
+                                    url: '../../unit6/lesson6-2/',
+                                    path: 'Curriculum > Unit 6'
+                                },
+                                
+                                {
+                                    title: "Lesson 6.3",
+                                    url: '../../unit6/lesson6-3/',
+                                    path: 'Curriculum > Unit 6'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 7.1",
+                                    url: '../../unit7/lesson7-1/',
+                                    path: 'Curriculum > Unit 7'
+                                },
+                                
+                                {
+                                    title: "Lesson 7.2",
+                                    url: '../../unit7/lesson7-2/',
+                                    path: 'Curriculum > Unit 7'
+                                },
+                                
+                                {
+                                    title: "Lesson 7.3",
+                                    url: '../../unit7/lesson7-3/',
+                                    path: 'Curriculum > Unit 7'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 8.1",
+                                    url: '../../unit8/lesson8-1/',
+                                    path: 'Curriculum > Unit 8'
+                                },
+                                
+                                {
+                                    title: "Lesson 8.2",
+                                    url: '../../unit8/lesson8-2/',
+                                    path: 'Curriculum > Unit 8'
+                                },
+                                
+                                {
+                                    title: "Lesson 8.3",
+                                    url: '../../unit8/lesson8-3/',
+                                    path: 'Curriculum > Unit 8'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 9.1",
+                                    url: '../../unit9/lesson9-1/',
+                                    path: 'Curriculum > Unit 9'
+                                },
+                                
+                                {
+                                    title: "Lesson 9.2",
+                                    url: '../../unit9/lesson9-2/',
+                                    path: 'Curriculum > Unit 9'
+                                },
+                                
+                                {
+                                    title: "Lesson 9.3",
+                                    url: '../../unit9/lesson9-3/',
+                                    path: 'Curriculum > Unit 9'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 10.1",
+                                    url: '../../unit10/lesson10-1/',
+                                    path: 'Curriculum > Unit 10'
+                                },
+                                
+                                {
+                                    title: "Lesson 10.2",
+                                    url: '../../unit10/lesson10-2/',
+                                    path: 'Curriculum > Unit 10'
+                                },
+                                
+                                {
+                                    title: "Lesson 10.3",
+                                    url: '../../unit10/lesson10-3/',
+                                    path: 'Curriculum > Unit 10'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 11.1",
+                                    url: '../../unit11/lesson11-1/',
+                                    path: 'Curriculum > Unit 11'
+                                },
+                                
+                                {
+                                    title: "Lesson 11.2",
+                                    url: '../../unit11/lesson11-2/',
+                                    path: 'Curriculum > Unit 11'
+                                },
+                                
+                                {
+                                    title: "Lesson 11.3",
+                                    url: '../../unit11/lesson11-3/',
+                                    path: 'Curriculum > Unit 11'
+                                },
+                                
+                            
+                        
+                    
+                
+                    
+                        {
+                            title: "Terminal",
+                            url: '../../../test/',
+                            path: 'Main'
+                        },
+                    
+                
+            ];
+            
+            if (typeof window.searchIndex !== 'undefined') {
+                searchIndex = window.searchIndex;
+                useSimpleSearch = false;
+                console.log('✓ Using embedded search index:', searchIndex.docs.length, 'documents');
+            } else {
+                const base_url = document.querySelector('base')?.getAttribute('href') || '/';
+                fetch(base_url + 'search_data.js')
+                    .then(response => response.text())
+                    .then(data => {
+                        eval(data);  
+                        if (window.searchIndex) {
+                            searchIndex = window.searchIndex;
+                            useSimpleSearch = false;
+                            console.log('✓ Loaded search index from JS:', searchIndex.docs.length, 'documents');
+                        }
+                    })
+                    .catch(() => {
+                        console.log('Using simple title search (full search not available)');
+                        useSimpleSearch = true;
+                    });
+                
+                useSimpleSearch = true; 
+            }
+            
+            function performSearch(query) {
+                if (!query || query.length < 2) {
+                    searchResults.classList.remove('active');
+                    return;
+                }
+                
+                if (useSimpleSearch || !searchIndex) {
+                    performSimpleSearch(query);
+                } else {
+                    performFullSearch(query);
+                }
+            }
+            
+            function performSimpleSearch(query) {
+                const lowerQuery = query.toLowerCase();
+                const results = simpleIndex.filter(item => 
+                    item.title.toLowerCase().includes(lowerQuery)
+                );
+                displaySimpleResults(results, query);
+            }
+            
+            function performFullSearch(query) {
+                const lowerQuery = query.toLowerCase();
+                const queryTerms = lowerQuery.split(/\s+/);
+                
+                const results = searchIndex.docs
+                    .map(doc => {
+                        let score = 0;
+                        let matchedText = '';
+                        
+                        if (doc.title && doc.title.toLowerCase().includes(lowerQuery)) {
+                            score += 10;
+                        }
+                        
+                        if (doc.text) {
+                            const text = doc.text.toLowerCase();
+                            queryTerms.forEach(term => {
+                                if (term.length < 2) return;
+                                const count = (text.match(new RegExp(escapeRegex(term), 'g')) || []).length;
+                                score += count;
+                                
+                                if (count > 0 && !matchedText) {
+                                    const index = text.indexOf(term);
+                                    const start = Math.max(0, index - 50);
+                                    const end = Math.min(text.length, index + term.length + 50);
+                                    matchedText = doc.text.substring(start, end);
+                                    if (start > 0) matchedText = '...' + matchedText;
+                                    if (end < text.length) matchedText = matchedText + '...';
+                                }
+                            });
+                        }
+                        
+                        return {
+                            title: doc.title,
+                            location: doc.location,
+                            text: matchedText || (doc.text ? doc.text.substring(0, 150) + '...' : ''),
+                            score: score
+                        };
+                    })
+                    .filter(result => result.score > 0)
+                    .sort((a, b) => b.score - a.score);
+                
+                displayFullResults(results, query);
+            }
+            
+            function displaySimpleResults(results, query) {
+                if (results.length === 0) {
+                    searchResults.innerHTML = '<div class="search-no-results">No results found</div>';
+                    searchResults.classList.add('active');
+                    return;
+                }
+                
+                const html = results.slice(0, 10).map(result => {
+                    const highlightedTitle = highlightText(result.title, query);
+                    return `
+                        <a href="${result.url}" class="search-result-item">
+                            <div class="search-result-title">${highlightedTitle}</div>
+                            <div class="search-result-path">${escapeHtml(result.path)}</div>
+                        </a>
+                    `;
+                }).join('');
+                
+                searchResults.innerHTML = html;
+                searchResults.classList.add('active');
+            }
+            
+            function displayFullResults(results, query) {
+                if (results.length === 0) {
+                    searchResults.innerHTML = '<div class="search-no-results">No results found</div>';
+                    searchResults.classList.add('active');
+                    return;
+                }
+                
+                const pathname = window.location.pathname;
+                let basePath = '/';
+                
+                const pathParts = pathname.split('/').filter(p => p);
+                
+                if (pathParts.length > 0 && !pathParts[0].endsWith('.html')) {
+                    const firstPart = pathParts[0];
+                    if (firstPart !== 'index' && firstPart !== 'search') {
+                        basePath = '/' + firstPart + '/';
+                    }
+                }
+                
+                console.log('Current pathname:', pathname);
+                console.log('Detected base path:', basePath);
+                
+                const html = results.slice(0, 10).map(result => {
+                    const highlightedTitle = highlightText(result.title, query);
+                    const highlightedText = highlightText(result.text, query);
+                    
+                    let path = result.location.replace(/^\//, '').replace(/\.html$/, '').replace(/\//g, ' > ');
+                    if (!path) path = 'Home';
+                    
+                    let url;
+                    if (basePath === '/') {
+                        url = result.location;
+                    } else {
+                        const cleanLocation = result.location.startsWith('/') ? result.location.substring(1) : result.location;
+                        url = basePath + cleanLocation;
+                    }
+                    
+                    console.log('Result:', result.title, '-> URL:', url);
+                    
+                    return `
+                        <a href="${url}" class="search-result-item">
+                            <div class="search-result-title">${highlightedTitle}</div>
+                            <div class="search-result-path">${escapeHtml(path)}</div>
+                            <div class="search-result-excerpt">${highlightedText}</div>
+                        </a>
+                    `;
+                }).join('');
+                
+                searchResults.innerHTML = html;
+                searchResults.classList.add('active');
+            }
+            
+            function highlightText(text, query) {
+                if (!text) return '';
+                const queryTerms = query.split(/\s+/).filter(t => t.length >= 2);
+                let result = escapeHtml(text);
+                queryTerms.forEach(term => {
+                    const regex = new RegExp('(' + escapeRegex(term) + ')', 'gi');
+                    result = result.replace(regex, '<span class="search-highlight">$1</span>');
+                });
+                return result;
+            }
+            
+            function escapeRegex(string) {
+                return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            }
+            
+            function escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+            
+            let searchTimeout;
+            searchInput.addEventListener('input', function(e) {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => performSearch(e.target.value), 300);
+            });
+            
+            searchInput.addEventListener('focus', function(e) {
+                if (e.target.value.length >= 2) {
+                    performSearch(e.target.value);
+                }
+            });
+            
+            document.addEventListener('click', function(e) {
+                if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+                    searchResults.classList.remove('active');
+                }
+            });
+            
+            searchInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    searchResults.classList.remove('active');
+                    searchInput.blur();
+                }
+            });
+        });
+
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('pre code').forEach((block) => {
+                block.parentElement.style.position = 'relative';
+            });
+        });
+        
+    </script>
+</body>
+</html>

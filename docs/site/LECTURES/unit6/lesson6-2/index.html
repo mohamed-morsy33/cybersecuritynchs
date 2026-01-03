@@ -1,0 +1,1978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 6.2 - NCHS Cybersecurity</title>
+    
+    
+    <link rel="icon" href="../../../img/logo.png">
+    
+    
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DRPQMPQQS6"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-DRPQMPQQS6');
+    </script>
+    
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0e27;
+            --bg-secondary: #141b3a;
+            --text-primary: #00ff41;
+            --text-secondary: #7affa7;
+            --text-muted: #4a9960;
+            --accent: #ff0844;
+            --accent-secondary: #00d4ff;
+            --border: #1a3a2a;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--bg-primary);
+            color: var(--text-secondary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--bg-secondary);
+            border-bottom: 2px solid var(--text-primary);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 255, 65, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-logo a {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: 0.1em;
+            text-shadow: 0 0 10px var(--text-primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links > li {
+            position: relative;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 4px;
+            display: block;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--text-primary);
+            background: rgba(0, 255, 65, 0.1);
+            text-shadow: 0 0 10px var(--text-primary);
+        }
+
+        /* Dropdown menu */
+        .nav-links .dropdown {
+            position: relative;
+        }
+
+        .nav-links .dropdown > a::after {
+            content: ' ▼';
+            font-size: 0.7em;
+            margin-left: 5px;
+        }
+
+        .nav-links .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--bg-secondary);
+            border: 2px solid var(--text-primary);
+            border-radius: 4px;
+            min-width: 250px;
+            box-shadow: 0 8px 30px rgba(0, 255, 65, 0.3);
+            z-index: 1000;
+            padding: 10px 0;
+            margin-top: 5px;
+        }
+
+        .nav-links .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .nav-links .dropdown-content li {
+            list-style: none;
+        }
+
+        .nav-links .dropdown-content a {
+            padding: 10px 20px;
+            border-radius: 0;
+        }
+
+        .nav-links .dropdown-content .nested {
+            padding-left: 0;
+        }
+
+        .nav-links .dropdown-content .nested > strong {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .nav-links .dropdown-content .nested > strong:hover {
+            background: rgba(0, 255, 65, 0.1);
+        }
+
+        .nav-links .dropdown-content .nested > strong::after {
+            content: '▼';
+            font-size: 0.8em;
+            transition: transform 0.3s ease;
+            color: var(--text-primary);
+        }
+
+        .nav-links .dropdown-content .nested.collapsed > strong::after {
+            transform: rotate(-90deg);
+        }
+
+        .nav-links .dropdown-content .nested .unit-lessons {
+            max-height: 500px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .nav-links .dropdown-content .nested.collapsed .unit-lessons {
+            max-height: 0;
+        }
+
+        .nav-links .dropdown-content .nested .unit-lessons li {
+            padding-left: 20px;
+        }
+
+        .nav-links .dropdown-content .nested a {
+            padding: 8px 20px;
+            font-size: 0.9em;
+            color: var(--text-muted);
+        }
+
+        .nav-links .dropdown-content .nested a:hover {
+            color: var(--text-primary);
+            background: rgba(0, 255, 65, 0.05);
+        }
+
+        /* Mobile menu toggle */
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: 2px solid var(--text-primary);
+            color: var(--text-primary);
+            padding: 8px 15px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        /* Search */
+        .search-container {
+            position: relative;
+            margin-left: 20px;
+        }
+
+        .search-input {
+            padding: 8px 35px 8px 15px;
+            background: var(--bg-primary);
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            width: 250px;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--text-primary);
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+        }
+
+        .search-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
+        .search-results {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            right: 0;
+            background: var(--bg-secondary);
+            border: 2px solid var(--text-primary);
+            border-radius: 8px;
+            max-height: 400px;
+            overflow-y: auto;
+            display: none;
+            z-index: 2000;
+            box-shadow: 0 8px 30px rgba(0, 255, 65, 0.3);
+        }
+
+        .search-results.active {
+            display: block;
+        }
+
+        .search-result-item {
+            padding: 15px;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-result-item:hover {
+            background: rgba(0, 255, 65, 0.05);
+        }
+
+        .search-result-title {
+            color: var(--text-primary);
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .search-result-path {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-bottom: 8px;
+        }
+
+        .search-result-excerpt {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .search-highlight {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            padding: 2px 4px;
+            border-radius: 2px;
+            font-weight: 700;
+        }
+
+        .search-no-results {
+            padding: 20px;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        .search-results::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .search-results::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+
+        .search-results::-webkit-scrollbar-thumb {
+            background: var(--text-primary);
+            border-radius: 4px;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 30px;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--text-primary);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-shadow: 0 0 20px var(--text-primary);
+            letter-spacing: 0.05em;
+            border-bottom: 2px solid var(--text-primary);
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            border-left: 4px solid var(--text-primary);
+            padding-left: 15px;
+        }
+
+        h3 { font-size: 1.5rem; }
+        h4 { font-size: 1.25rem; }
+
+        p {
+            margin-bottom: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        a {
+            color: var(--accent-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--text-primary);
+            text-shadow: 0 0 10px var(--text-primary);
+        }
+
+        /* Code Blocks */
+        code {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            padding: 2px 8px;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        pre {
+            background: var(--bg-secondary);
+            border: 2px solid var(--text-primary);
+            border-radius: 8px;
+            padding: 20px;
+            overflow-x: auto;
+            margin: 20px 0;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
+        }
+
+        pre code {
+            background: transparent;
+            border: none;
+            padding: 0;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 1.2rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        li::marker {
+            color: var(--text-primary);
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+        }
+
+        th {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            padding: 12px;
+            text-align: left;
+            border: 1px solid var(--text-primary);
+            font-weight: 700;
+        }
+
+        td {
+            padding: 12px;
+            border: 1px solid var(--border);
+        }
+
+        tr:hover {
+            background: rgba(0, 255, 65, 0.05);
+        }
+
+        /* Blockquotes */
+        blockquote {
+            border-left: 4px solid var(--text-primary);
+            background: var(--bg-secondary);
+            padding: 15px 20px;
+            margin: 20px 0;
+            font-style: italic;
+        }
+
+        /* Images */
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        /* Horizontal Rule */
+        hr {
+            border: none;
+            border-top: 2px solid var(--text-primary);
+            margin: 30px 0;
+            opacity: 0.3;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 2px solid var(--text-primary);
+            padding: 30px;
+            margin-top: 60px;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        /* Scanline Effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                transparent 50%,
+                rgba(0, 255, 65, 0.02) 51%
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 9999;
+            animation: scan 8s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100%); }
+        }
+
+        /* Selection */
+        ::selection {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+            background: var(--bg-primary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--text-primary);
+            border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--bg-secondary);
+                flex-direction: column;
+                padding: 20px;
+                border-bottom: 2px solid var(--text-primary);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 20px 15px;
+            }
+
+            .search-container {
+                margin-left: 10px;
+            }
+
+            .search-input {
+                width: 200px;
+            }
+        }
+
+        /* Search Box */
+        .search-box {
+            padding: 10px;
+            background: var(--bg-primary);
+            border: 1px solid var(--text-primary);
+            border-radius: 4px;
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .search-box::placeholder {
+            color: var(--text-muted);
+        }
+
+        /* Lesson Navigation */
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 60px 0 40px 0;
+            padding: 30px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .lesson-nav-button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            background: var(--bg-primary);
+            border: 2px solid var(--text-primary);
+            border-radius: 8px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .lesson-nav-button:hover {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 255, 65, 0.3);
+        }
+
+        .lesson-nav-button.disabled {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .lesson-nav-button .arrow {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .lesson-nav-info {
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        .lesson-nav-info .current-lesson {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+
+        .lesson-nav-info .lesson-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 768px) {
+            .lesson-nav {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .lesson-nav-button {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .lesson-nav-info {
+                order: -1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo">
+                
+                <img src="../../../img/logo.png" alt="Logo">
+                
+                <a href="https://mohamed-morsy33.github.io/cybersecuritynchs/">NCHS Cybersecurity</a>
+            </div>
+            
+            <button class="nav-toggle" onclick="toggleMenu()">MENU</button>
+            
+            <ul class="nav-links" id="navLinks">
+                
+                <li >
+                    
+                        <a href="../../.." 
+                           >
+                            Home
+                        </a>
+                    
+                </li>
+                
+                <li class="dropdown">
+                    
+                        <a href="#">Curriculum</a>
+                        <ul class="dropdown-content">
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 1</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit1/lesson1-1/">Lesson 1.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit1/lesson1-2/">Lesson 1.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit1/lesson1-3/">Lesson 1.3</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit1/lesson1-4/">Lesson 1.4</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit1/lesson1-5/">Lesson 1.5</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit1/lesson1-6/">Lesson 1.6</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit1/installation-process/">Linux Installation Process</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 2</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit2/lesson2-1/">Lesson 2.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit2/lesson2-2/">Lesson 2.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit2/lesson2-3/">Lesson 2.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 3</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit3/lesson3-1/">Lesson 3.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit3/lesson3-2/">Lesson 3.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit3/lesson3-3/">Lesson 3.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 4</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit4/lesson4-1/">Lesson 4.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit4/lesson4-2/">Lesson 4.2</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 5</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit5/lesson5-1/">Lesson 5.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit5/lesson5-2/">Lesson 5.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit5/lesson5-3/">Lesson 5.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 6</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../lesson6-1/">Lesson 6.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="./">Lesson 6.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../lesson6-3/">Lesson 6.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 7</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit7/lesson7-1/">Lesson 7.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit7/lesson7-2/">Lesson 7.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit7/lesson7-3/">Lesson 7.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 8</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit8/lesson8-1/">Lesson 8.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit8/lesson8-2/">Lesson 8.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit8/lesson8-3/">Lesson 8.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 9</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit9/lesson9-1/">Lesson 9.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit9/lesson9-2/">Lesson 9.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit9/lesson9-3/">Lesson 9.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 10</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit10/lesson10-1/">Lesson 10.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit10/lesson10-2/">Lesson 10.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit10/lesson10-3/">Lesson 10.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 11</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit11/lesson11-1/">Lesson 11.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit11/lesson11-2/">Lesson 11.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit11/lesson11-3/">Lesson 11.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                        </ul>
+                    
+                </li>
+                
+                <li >
+                    
+                        <a href="../../../test/" 
+                           >
+                            Terminal
+                        </a>
+                    
+                </li>
+                
+            </ul>
+
+            <div class="search-container">
+                <input type="text" 
+                       class="search-input" 
+                       id="searchInput" 
+                       placeholder="Search lessons..."
+                       autocomplete="off">
+                <span class="search-icon">🔍</span>
+                <div class="search-results" id="searchResults"></div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        
+        <h1 id="advanced-wireshark-techniques-and-protocol-analysis">Advanced Wireshark Techniques and Protocol Analysis</h1>
+<p>You know the basics of Wireshark. Now let's explore advanced techniques that security professionals use to hunt threats, analyze complex protocols, and extract forensic evidence from network traffic.</p>
+<h2 id="advanced-display-filters">Advanced Display Filters</h2>
+<h3 id="filter-operators">Filter Operators</h3>
+<p><strong>Comparison operators:</strong></p>
+<pre><code>eq or ==    Equal
+ne or !=    Not equal
+gt or &gt;     Greater than
+lt or &lt;     Less than
+ge or &gt;=    Greater than or equal
+le or &lt;=    Less than or equal
+</code></pre>
+<p><strong>Logical operators:</strong></p>
+<pre><code>and or &amp;&amp;   Logical AND
+or  or ||   Logical OR
+not or !    Logical NOT
+</code></pre>
+<p><strong>Membership operators:</strong></p>
+<pre><code>in          Value in set
+contains    String contains substring
+matches     Regex match
+</code></pre>
+<h3 id="complex-filter-examples">Complex Filter Examples</h3>
+<p><strong>Find large HTTP responses:</strong></p>
+<pre><code>http.response &amp;&amp; frame.len &gt; 10000
+</code></pre>
+<p><strong>Detect potential data exfiltration:</strong></p>
+<pre><code>(http.request.method == &quot;POST&quot; || ftp-data) &amp;&amp; frame.len &gt; 50000
+</code></pre>
+<p><strong>Find failed authentication attempts:</strong></p>
+<pre><code>http.response.code == 401 || http.response.code == 403
+</code></pre>
+<p><strong>Detect potential C2 beaconing (regular intervals):</strong></p>
+<pre><code>tcp.flags.push == 1 &amp;&amp; tcp.len &lt; 100 &amp;&amp; tcp.len &gt; 0
+</code></pre>
+<p><strong>Find cleartext passwords:</strong></p>
+<pre><code>tcp contains &quot;password=&quot; || tcp contains &quot;pwd=&quot; || tcp contains &quot;pass=&quot;
+</code></pre>
+<p><strong>Detect SQL injection attempts:</strong></p>
+<pre><code>http.request.uri contains &quot;union select&quot; || http.request.uri contains &quot;' or 1=1&quot;
+</code></pre>
+<p><strong>Find encrypted traffic without proper certificates:</strong></p>
+<pre><code>ssl.handshake.type == 11 &amp;&amp; !ssl.handshake.certificate
+</code></pre>
+<h3 id="filter-macros">Filter Macros</h3>
+<p><strong>Create reusable filter expressions:</strong></p>
+<pre><code># Define in profile
+${web} = tcp.port == 80 || tcp.port == 443 || tcp.port == 8080
+
+# Use in filters
+${web} &amp;&amp; ip.addr == 192.168.1.100
+</code></pre>
+<h2 id="protocol-analysis">Protocol Analysis</h2>
+<h3 id="httphttps-analysis">HTTP/HTTPS Analysis</h3>
+<p><strong>Extract HTTP objects:</strong>
+1. File → Export Objects → HTTP
+2. Filter by content type
+3. Save files for analysis</p>
+<p><strong>Analyze HTTP headers:</strong></p>
+<pre><code>http.request.method == &quot;GET&quot;
+http.user_agent contains &quot;curl&quot;
+http.cookie contains &quot;session&quot;
+http.referer
+</code></pre>
+<p><strong>Detect suspicious user agents:</strong></p>
+<pre><code>http.user_agent contains &quot;sqlmap&quot; ||
+http.user_agent contains &quot;nikto&quot; ||
+http.user_agent contains &quot;nmap&quot; ||
+http.user_agent contains &quot;masscan&quot;
+</code></pre>
+<p><strong>Find redirects:</strong></p>
+<pre><code>http.response.code == 301 || http.response.code == 302
+</code></pre>
+<h3 id="dns-analysis">DNS Analysis</h3>
+<p><strong>Identify DNS tunneling:</strong></p>
+<pre><code>dns.qry.name.len &gt; 50
+</code></pre>
+<p><strong>Find unusual query types:</strong></p>
+<pre><code>dns.qry.type != 1 &amp;&amp; dns.qry.type != 28  # Not A or AAAA records
+</code></pre>
+<p><strong>Detect DGA (Domain Generation Algorithm):</strong></p>
+<pre><code>dns.qry.name matches &quot;[a-z]{20,}\\.&quot;  # Long random-looking domains
+</code></pre>
+<p><strong>Extract all queried domains:</strong></p>
+<pre><code>dns.flags.response == 0
+</code></pre>
+<p>Statistics → DNS → Query/Response</p>
+<h3 id="tlsssl-analysis">TLS/SSL Analysis</h3>
+<p><strong>Identify weak cipher suites:</strong></p>
+<pre><code>ssl.handshake.ciphersuite == 0x0005  # RSA_WITH_RC4_128_SHA (weak)
+</code></pre>
+<p><strong>Find expired certificates:</strong></p>
+<pre><code>x509ce.validity.notAfter &lt; &quot;2024-01-01&quot;
+</code></pre>
+<p><strong>Detect SSL/TLS downgrade attacks:</strong></p>
+<pre><code>ssl.handshake.version &lt; 0x0303  # TLS 1.2 is 0x0303
+</code></pre>
+<p><strong>Extract certificate details:</strong></p>
+<pre><code>x509ce.dNSName
+x509af.utcTime
+</code></pre>
+<h3 id="smb-analysis">SMB Analysis</h3>
+<p><strong>Detect lateral movement:</strong></p>
+<pre><code>smb2.cmd == 5  # Session Setup
+</code></pre>
+<p><strong>Find file access:</strong></p>
+<pre><code>smb2.filename
+</code></pre>
+<p><strong>Detect credential theft attempts:</strong></p>
+<pre><code>ntlmssp.auth.username
+</code></pre>
+<h2 id="tcp-stream-analysis">TCP Stream Analysis</h2>
+<h3 id="following-streams">Following Streams</h3>
+<p><strong>Right-click packet → Follow → TCP Stream</strong></p>
+<p><strong>Use cases:</strong>
+- Reconstruct file transfers
+- Read email content
+- View HTTP requests/responses
+- Analyze protocol handshakes</p>
+<p><strong>Filter after following:</strong></p>
+<pre><code>tcp.stream eq 42
+</code></pre>
+<h3 id="stream-index">Stream Index</h3>
+<p><strong>Show all streams:</strong></p>
+<pre><code>Statistics → Conversations → TCP
+</code></pre>
+<p><strong>Filter specific stream:</strong></p>
+<pre><code>tcp.stream == 5
+</code></pre>
+<p><strong>Find streams with errors:</strong></p>
+<pre><code>tcp.analysis.retransmission || tcp.analysis.lost_segment
+</code></pre>
+<h2 id="advanced-statistical-analysis">Advanced Statistical Analysis</h2>
+<h3 id="io-graphs">I/O Graphs</h3>
+<p><strong>Statistics → I/O Graph</strong></p>
+<p><strong>Create multiple graphs:</strong>
+1. Total packets over time
+2. HTTP traffic (port 80)
+3. HTTPS traffic (port 443)
+4. DNS queries</p>
+<p><strong>Example filters:</strong></p>
+<pre><code>Graph 1: (no filter) - All traffic
+Graph 2: tcp.port == 80 - HTTP
+Graph 3: tcp.port == 443 - HTTPS
+Graph 4: dns - DNS queries
+</code></pre>
+<p><strong>Identify anomalies:</strong>
+- Traffic spikes
+- Regular beaconing patterns
+- Unusual times (3 AM traffic)</p>
+<h3 id="protocol-hierarchy">Protocol Hierarchy</h3>
+<p><strong>Statistics → Protocol Hierarchy</strong></p>
+<p><strong>Shows:</strong>
+- Percentage of each protocol
+- Packet count
+- Byte count</p>
+<p><strong>Identify unusual protocols:</strong>
+- High percentage of ICMP (C2 tunneling?)
+- Unexpected protocols (IRC on corporate network?)
+- Encrypted protocols on unusual ports</p>
+<h3 id="endpoints">Endpoints</h3>
+<p><strong>Statistics → Endpoints</strong></p>
+<p><strong>View by:</strong>
+- Ethernet (MAC addresses)
+- IPv4/IPv6 (IP addresses)
+- TCP/UDP (ports)</p>
+<p><strong>Identify:</strong>
+- Top talkers (most traffic)
+- Unusual connections
+- Port scanning (many ports from one IP)</p>
+<h3 id="conversations">Conversations</h3>
+<p><strong>Statistics → Conversations</strong></p>
+<p><strong>Shows:</strong>
+- Communication pairs
+- Packets/bytes exchanged
+- Duration</p>
+<p><strong>Use to:</strong>
+- Find large data transfers
+- Identify C2 communication
+- Detect lateral movement
+- Track specific connections</p>
+<h2 id="expert-information">Expert Information</h2>
+<p><strong>Analyze → Expert Information</strong></p>
+<p><strong>Categories:</strong>
+- <strong>Errors</strong>: Malformed packets, checksums
+- <strong>Warnings</strong>: Unusual events
+- <strong>Notes</strong>: Standard protocol events
+- <strong>Chats</strong>: Application messages</p>
+<p><strong>Common indicators:</strong>
+- TCP retransmissions (network issues or attacks)
+- TCP out-of-order (possible MITM)
+- Checksum errors (corrupted or crafted packets)
+- Connection resets (blocked connections)</p>
+<h2 id="decrypting-traffic">Decrypting Traffic</h2>
+<h3 id="decrypting-ssltls">Decrypting SSL/TLS</h3>
+<p><strong>Method 1: Using Server Private Key</strong></p>
+<ol>
+<li>Edit → Preferences → Protocols → TLS</li>
+<li>RSA keys list → Add</li>
+<li>IP: server IP</li>
+<li>Port: 443</li>
+<li>Protocol: http</li>
+<li>Key file: server.key</li>
+</ol>
+<p><strong>Limitations:</strong>
+- Only works with RSA key exchange
+- Doesn't work with forward secrecy (DHE/ECDHE)</p>
+<p><strong>Method 2: Using Browser Session Keys</strong></p>
+<p>Set environment variable:</p>
+<pre><code class="language-bash">export SSLKEYLOGFILE=/path/to/sslkeys.log
+</code></pre>
+<p>Launch browser, capture traffic:
+1. Edit → Preferences → Protocols → TLS
+2. (Pre)-Master-Secret log filename: /path/to/sslkeys.log</p>
+<p><strong>This works with forward secrecy!</strong></p>
+<h3 id="decrypting-wpawpa2">Decrypting WPA/WPA2</h3>
+<p><strong>Capture WPA handshake:</strong>
+1. Capture during client connection
+2. Edit → Preferences → Protocols → IEEE 802.11
+3. Enable decryption
+4. Add key: wpa-pwd:password:SSID</p>
+<p><strong>Requirements:</strong>
+- Captured 4-way handshake
+- Know the password</p>
+<h2 id="packet-manipulation">Packet Manipulation</h2>
+<h3 id="editing-packets">Editing Packets</h3>
+<p><strong>Method 1: Hex editing</strong></p>
+<p>Right-click packet → Copy → Bytes as Hex Stream</p>
+<p>Edit and inject using:</p>
+<pre><code class="language-bash"># Create raw packet file
+xxd -r -p hex_data &gt; packet.bin
+
+# Inject with scapy
+from scapy.all import *
+packet = rdpcap(&quot;packet.bin&quot;)
+send(packet)
+</code></pre>
+<p><strong>Method 2: Using tcprewrite</strong></p>
+<pre><code class="language-bash"># Change MAC addresses
+tcprewrite --enet-smac=00:11:22:33:44:55 \
+           --enet-dmac=aa:bb:cc:dd:ee:ff \
+           --infile=input.pcap --outfile=output.pcap
+
+# Change IP addresses
+tcprewrite --srcipmap=0.0.0.0/0:10.0.0.0/24 \
+           --dstipmap=0.0.0.0/0:192.168.1.0/24 \
+           --infile=input.pcap --outfile=output.pcap
+</code></pre>
+<h2 id="wireshark-profiles">Wireshark Profiles</h2>
+<h3 id="creating-custom-profiles">Creating Custom Profiles</h3>
+<p><strong>Edit → Configuration Profiles → New</strong></p>
+<p><strong>Per-profile settings:</strong>
+- Custom coloring rules
+- Display columns
+- Filter expressions
+- Preferences</p>
+<p><strong>Example profiles:</strong>
+- Web traffic analysis
+- Malware investigation
+- Wireless analysis
+- VoIP troubleshooting</p>
+<h3 id="custom-columns">Custom Columns</h3>
+<p><strong>Edit → Preferences → Appearance → Columns</strong></p>
+<p><strong>Useful custom columns:</strong></p>
+<pre><code>Type: Custom
+Title: &quot;HTTP Host&quot;
+Field: http.host
+
+Type: Custom
+Title: &quot;DNS Query&quot;
+Field: dns.qry.name
+
+Type: Custom  
+Title: &quot;TLS SNI&quot;
+Field: tls.handshake.extensions_server_name
+</code></pre>
+<h2 id="advanced-coloring-rules">Advanced Coloring Rules</h2>
+<p><strong>View → Coloring Rules</strong></p>
+<p><strong>Example rules:</strong></p>
+<p><strong>Red - Retransmissions:</strong></p>
+<pre><code>tcp.analysis.retransmission
+</code></pre>
+<p><strong>Orange - HTTP errors:</strong></p>
+<pre><code>http.response.code &gt;= 400
+</code></pre>
+<p><strong>Yellow - DNS queries:</strong></p>
+<pre><code>dns.flags.response == 0
+</code></pre>
+<p><strong>Green - Successful HTTP:</strong></p>
+<pre><code>http.response.code == 200
+</code></pre>
+<p><strong>Purple - Encrypted traffic:</strong></p>
+<pre><code>ssl || tls
+</code></pre>
+<h2 id="command-line-power-tshark">Command-Line Power: tshark</h2>
+<p><strong>tshark</strong> is Wireshark's CLI version.</p>
+<h3 id="basic-usage">Basic Usage</h3>
+<pre><code class="language-bash"># Capture to file
+tshark -i eth0 -w capture.pcap
+
+# Capture with filter
+tshark -i eth0 -f &quot;port 80&quot; -w http.pcap
+
+# Read from file
+tshark -r capture.pcap
+
+# Apply display filter
+tshark -r capture.pcap -Y &quot;http.request&quot;
+</code></pre>
+<h3 id="field-extraction">Field Extraction</h3>
+<pre><code class="language-bash"># Extract HTTP hosts
+tshark -r capture.pcap -Y &quot;http.request&quot; -T fields -e http.host
+
+# Extract source IPs and ports
+tshark -r capture.pcap -T fields -e ip.src -e tcp.srcport
+
+# Extract DNS queries
+tshark -r capture.pcap -Y &quot;dns.flags.response == 0&quot; -T fields -e dns.qry.name
+
+# Extract TLS SNI
+tshark -r capture.pcap -Y &quot;tls.handshake.type == 1&quot; -T fields -e tls.handshake.extensions_server_name
+</code></pre>
+<h3 id="statistics-with-tshark">Statistics with tshark</h3>
+<pre><code class="language-bash"># Protocol hierarchy
+tshark -r capture.pcap -q -z io,phs
+
+# Conversations
+tshark -r capture.pcap -q -z conv,tcp
+
+# HTTP requests
+tshark -r capture.pcap -q -z http,tree
+
+# DNS queries
+tshark -r capture.pcap -q -z dns,tree
+</code></pre>
+<h3 id="automation-scripts">Automation Scripts</h3>
+<p><strong>Extract all URLs:</strong></p>
+<pre><code class="language-bash">#!/bin/bash
+tshark -r $1 -Y &quot;http.request&quot; -T fields \
+    -e ip.src -e http.host -e http.request.uri | \
+    awk '{print $1 &quot; http://&quot; $2 $3}' | \
+    sort -u &gt; urls.txt
+</code></pre>
+<p><strong>Find potential C2 beaconing:</strong></p>
+<pre><code class="language-bash">#!/bin/bash
+tshark -r $1 -T fields -e ip.dst -e frame.time_relative | \
+    awk '{print $1, $2-prev[$1]; prev[$1]=$2}' | \
+    awk '$2 &gt; 55 &amp;&amp; $2 &lt; 65 {count[$1]++} 
+         END {for (ip in count) if (count[ip] &gt; 10) print ip, count[ip]}'
+</code></pre>
+<h2 id="detecting-common-attacks">Detecting Common Attacks</h2>
+<h3 id="port-scan-detection">Port Scan Detection</h3>
+<p><strong>SYN scan:</strong></p>
+<pre><code>tcp.flags.syn == 1 &amp;&amp; tcp.flags.ack == 0
+</code></pre>
+<p><strong>Multiple destination ports from same source:</strong></p>
+<pre><code>Statistics → Conversations → TCP
+Sort by &quot;Packets A→B&quot;
+</code></pre>
+<h3 id="arp-spoofing-detection">ARP Spoofing Detection</h3>
+<pre><code>arp.duplicate-address-detected
+</code></pre>
+<p><strong>Or look for:</strong>
+- Same IP with different MACs
+- Gratuitous ARP from non-gateway</p>
+<h3 id="dns-tunneling-detection">DNS Tunneling Detection</h3>
+<pre><code>dns.qry.name.len &gt; 50 || dns.response.len &gt; 512
+</code></pre>
+<h3 id="http-tunneling">HTTP Tunneling</h3>
+<pre><code>http.request.method == &quot;CONNECT&quot;
+</code></pre>
+<h3 id="brute-force-detection">Brute Force Detection</h3>
+<p><strong>HTTP:</strong></p>
+<pre><code>http.response.code == 401
+</code></pre>
+<p>Count 401s per source IP.</p>
+<p><strong>SSH:</strong></p>
+<pre><code>tcp.port == 22 &amp;&amp; tcp.flags.syn == 1
+</code></pre>
+<p>High volume of connections.</p>
+<h2 id="performance-optimization">Performance Optimization</h2>
+<h3 id="for-large-captures">For Large Captures</h3>
+<p><strong>Use capture filters (not display filters):</strong></p>
+<pre><code class="language-bash"># Only HTTP/HTTPS
+tcpdump -i eth0 -w capture.pcap &quot;port 80 or port 443&quot;
+</code></pre>
+<p><strong>Split large files:</strong></p>
+<pre><code class="language-bash">editcap -c 100000 large.pcap split.pcap
+</code></pre>
+<p><strong>Index files:</strong>
+Wireshark automatically creates .pcapng indexes for faster access.</p>
+<p><strong>Use tshark for analysis:</strong>
+Faster than GUI for batch processing.</p>
+<h2 id="practical-scenarios">Practical Scenarios</h2>
+<h3 id="scenario-1-investigating-data-exfiltration">Scenario 1: Investigating Data Exfiltration</h3>
+<p><strong>Steps:</strong>
+1. Filter large outbound transfers:
+   <code>tcp.port == 443 &amp;&amp; tcp.len &gt; 1000</code>
+2. Statistics → Conversations
+3. Identify unusual destinations
+4. Follow TCP streams
+5. Export objects if HTTP
+6. Check DNS queries for suspicious domains</p>
+<h3 id="scenario-2-malware-c2-analysis">Scenario 2: Malware C2 Analysis</h3>
+<p><strong>Steps:</strong>
+1. Find beaconing patterns (I/O Graph)
+2. Extract regular connections
+3. Filter DNS queries:
+   <code>dns.flags.response == 0</code>
+4. Follow TCP streams for C2 traffic
+5. Extract IOCs (IPs, domains, URIs)</p>
+<h3 id="scenario-3-incident-response">Scenario 3: Incident Response</h3>
+<p><strong>Steps:</strong>
+1. Timeline with I/O Graph
+2. Identify initial compromise time
+3. Track lateral movement:
+   <code>smb2 || rdp || winrm</code>
+4. Find data exfiltration
+5. Extract IOCs
+6. Document in timeline</p>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<p><strong>Advanced Wireshark skills:</strong>
+- Complex display filters
+- Protocol-specific analysis
+- Stream reconstruction
+- Statistical analysis
+- Decryption techniques
+- CLI automation with tshark</p>
+<p><strong>Detection techniques:</strong>
+- Port scans
+- ARP spoofing
+- DNS tunneling
+- C2 beaconing
+- Data exfiltration</p>
+<p><strong>Best practices:</strong>
+- Use appropriate filters
+- Leverage statistics
+- Automate with tshark
+- Create custom profiles
+- Document findings</p>
+<p><strong>Remember:</strong>
+- Wireshark shows what happened
+- Your job is interpreting it
+- Context is everything
+- Practice makes perfect</p>
+<p>Mastering Wireshark takes time. Analyze real traffic, practice with CTF challenges, and review public PCAPs. The more you use it, the more patterns you'll recognize.</p>
+<p>Next lesson, we'll explore network forensics—using captured traffic as evidence and reconstructing attack timelines.</p>
+        
+
+        <!-- Lesson Navigation (only show on non-homepage pages) -->
+        
+        <div class="lesson-nav">
+            
+            <a href="../lesson6-1/" class="lesson-nav-button">
+                <span class="arrow">←</span>
+                <span>Previous: Lesson 6.1</span>
+            </a>
+            
+
+            <div class="lesson-nav-info">
+                <div class="current-lesson">Current Lesson</div>
+                <div class="lesson-title">Lesson 6.2</div>
+            </div>
+
+            
+            <a href="../lesson6-3/" class="lesson-nav-button">
+                <span>Next: Lesson 6.3</span>
+                <span class="arrow">→</span>
+            </a>
+            
+        </div>
+        
+    </div>
+
+    <footer>
+        <p>NCHS Cybersecurity | Built with MkDocs</p>
+        
+        <p>Copyright &copy; 2025 Mohamed Morsy</p>
+        
+    </footer>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@5.3.0/css/xterm.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.min.js"></script>
+    
+    <script src="../../../search_index.js"></script>
+    
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const unitHeaders = document.querySelectorAll('.nav-links .nested > strong');
+            
+            unitHeaders.forEach(header => {
+                header.addEventListener('click', function(e) {
+                    e.stopPropagation(); 
+                    const parent = this.parentElement;
+                    parent.classList.toggle('collapsed');
+                });
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const searchResults = document.getElementById('searchResults');
+            
+            if (!searchInput || !searchResults) {
+                return;
+            }
+            
+            let searchIndex = null;
+            let useSimpleSearch = false;
+            
+            const simpleIndex = [
+                
+                    
+                
+                    
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 1.1",
+                                    url: '../../unit1/lesson1-1/',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                                {
+                                    title: "Lesson 1.2",
+                                    url: '../../unit1/lesson1-2/',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                                {
+                                    title: "Lesson 1.3",
+                                    url: '../../unit1/lesson1-3/',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                                {
+                                    title: "Lesson 1.4",
+                                    url: '../../unit1/lesson1-4/',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                                {
+                                    title: "Lesson 1.5",
+                                    url: '../../unit1/lesson1-5/',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                                {
+                                    title: "Lesson 1.6",
+                                    url: '../../unit1/lesson1-6/',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                                {
+                                    title: "Linux Installation Process",
+                                    url: '../../unit1/installation-process/',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 2.1",
+                                    url: '../../unit2/lesson2-1/',
+                                    path: 'Curriculum > Unit 2'
+                                },
+                                
+                                {
+                                    title: "Lesson 2.2",
+                                    url: '../../unit2/lesson2-2/',
+                                    path: 'Curriculum > Unit 2'
+                                },
+                                
+                                {
+                                    title: "Lesson 2.3",
+                                    url: '../../unit2/lesson2-3/',
+                                    path: 'Curriculum > Unit 2'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 3.1",
+                                    url: '../../unit3/lesson3-1/',
+                                    path: 'Curriculum > Unit 3'
+                                },
+                                
+                                {
+                                    title: "Lesson 3.2",
+                                    url: '../../unit3/lesson3-2/',
+                                    path: 'Curriculum > Unit 3'
+                                },
+                                
+                                {
+                                    title: "Lesson 3.3",
+                                    url: '../../unit3/lesson3-3/',
+                                    path: 'Curriculum > Unit 3'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 4.1",
+                                    url: '../../unit4/lesson4-1/',
+                                    path: 'Curriculum > Unit 4'
+                                },
+                                
+                                {
+                                    title: "Lesson 4.2",
+                                    url: '../../unit4/lesson4-2/',
+                                    path: 'Curriculum > Unit 4'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 5.1",
+                                    url: '../../unit5/lesson5-1/',
+                                    path: 'Curriculum > Unit 5'
+                                },
+                                
+                                {
+                                    title: "Lesson 5.2",
+                                    url: '../../unit5/lesson5-2/',
+                                    path: 'Curriculum > Unit 5'
+                                },
+                                
+                                {
+                                    title: "Lesson 5.3",
+                                    url: '../../unit5/lesson5-3/',
+                                    path: 'Curriculum > Unit 5'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 6.1",
+                                    url: '../lesson6-1/',
+                                    path: 'Curriculum > Unit 6'
+                                },
+                                
+                                {
+                                    title: "Lesson 6.2",
+                                    url: './',
+                                    path: 'Curriculum > Unit 6'
+                                },
+                                
+                                {
+                                    title: "Lesson 6.3",
+                                    url: '../lesson6-3/',
+                                    path: 'Curriculum > Unit 6'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 7.1",
+                                    url: '../../unit7/lesson7-1/',
+                                    path: 'Curriculum > Unit 7'
+                                },
+                                
+                                {
+                                    title: "Lesson 7.2",
+                                    url: '../../unit7/lesson7-2/',
+                                    path: 'Curriculum > Unit 7'
+                                },
+                                
+                                {
+                                    title: "Lesson 7.3",
+                                    url: '../../unit7/lesson7-3/',
+                                    path: 'Curriculum > Unit 7'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 8.1",
+                                    url: '../../unit8/lesson8-1/',
+                                    path: 'Curriculum > Unit 8'
+                                },
+                                
+                                {
+                                    title: "Lesson 8.2",
+                                    url: '../../unit8/lesson8-2/',
+                                    path: 'Curriculum > Unit 8'
+                                },
+                                
+                                {
+                                    title: "Lesson 8.3",
+                                    url: '../../unit8/lesson8-3/',
+                                    path: 'Curriculum > Unit 8'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 9.1",
+                                    url: '../../unit9/lesson9-1/',
+                                    path: 'Curriculum > Unit 9'
+                                },
+                                
+                                {
+                                    title: "Lesson 9.2",
+                                    url: '../../unit9/lesson9-2/',
+                                    path: 'Curriculum > Unit 9'
+                                },
+                                
+                                {
+                                    title: "Lesson 9.3",
+                                    url: '../../unit9/lesson9-3/',
+                                    path: 'Curriculum > Unit 9'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 10.1",
+                                    url: '../../unit10/lesson10-1/',
+                                    path: 'Curriculum > Unit 10'
+                                },
+                                
+                                {
+                                    title: "Lesson 10.2",
+                                    url: '../../unit10/lesson10-2/',
+                                    path: 'Curriculum > Unit 10'
+                                },
+                                
+                                {
+                                    title: "Lesson 10.3",
+                                    url: '../../unit10/lesson10-3/',
+                                    path: 'Curriculum > Unit 10'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 11.1",
+                                    url: '../../unit11/lesson11-1/',
+                                    path: 'Curriculum > Unit 11'
+                                },
+                                
+                                {
+                                    title: "Lesson 11.2",
+                                    url: '../../unit11/lesson11-2/',
+                                    path: 'Curriculum > Unit 11'
+                                },
+                                
+                                {
+                                    title: "Lesson 11.3",
+                                    url: '../../unit11/lesson11-3/',
+                                    path: 'Curriculum > Unit 11'
+                                },
+                                
+                            
+                        
+                    
+                
+                    
+                        {
+                            title: "Terminal",
+                            url: '../../../test/',
+                            path: 'Main'
+                        },
+                    
+                
+            ];
+            
+            if (typeof window.searchIndex !== 'undefined') {
+                searchIndex = window.searchIndex;
+                useSimpleSearch = false;
+                console.log('✓ Using embedded search index:', searchIndex.docs.length, 'documents');
+            } else {
+                const base_url = document.querySelector('base')?.getAttribute('href') || '/';
+                fetch(base_url + 'search_data.js')
+                    .then(response => response.text())
+                    .then(data => {
+                        eval(data);  
+                        if (window.searchIndex) {
+                            searchIndex = window.searchIndex;
+                            useSimpleSearch = false;
+                            console.log('✓ Loaded search index from JS:', searchIndex.docs.length, 'documents');
+                        }
+                    })
+                    .catch(() => {
+                        console.log('Using simple title search (full search not available)');
+                        useSimpleSearch = true;
+                    });
+                
+                useSimpleSearch = true; 
+            }
+            
+            function performSearch(query) {
+                if (!query || query.length < 2) {
+                    searchResults.classList.remove('active');
+                    return;
+                }
+                
+                if (useSimpleSearch || !searchIndex) {
+                    performSimpleSearch(query);
+                } else {
+                    performFullSearch(query);
+                }
+            }
+            
+            function performSimpleSearch(query) {
+                const lowerQuery = query.toLowerCase();
+                const results = simpleIndex.filter(item => 
+                    item.title.toLowerCase().includes(lowerQuery)
+                );
+                displaySimpleResults(results, query);
+            }
+            
+            function performFullSearch(query) {
+                const lowerQuery = query.toLowerCase();
+                const queryTerms = lowerQuery.split(/\s+/);
+                
+                const results = searchIndex.docs
+                    .map(doc => {
+                        let score = 0;
+                        let matchedText = '';
+                        
+                        if (doc.title && doc.title.toLowerCase().includes(lowerQuery)) {
+                            score += 10;
+                        }
+                        
+                        if (doc.text) {
+                            const text = doc.text.toLowerCase();
+                            queryTerms.forEach(term => {
+                                if (term.length < 2) return;
+                                const count = (text.match(new RegExp(escapeRegex(term), 'g')) || []).length;
+                                score += count;
+                                
+                                if (count > 0 && !matchedText) {
+                                    const index = text.indexOf(term);
+                                    const start = Math.max(0, index - 50);
+                                    const end = Math.min(text.length, index + term.length + 50);
+                                    matchedText = doc.text.substring(start, end);
+                                    if (start > 0) matchedText = '...' + matchedText;
+                                    if (end < text.length) matchedText = matchedText + '...';
+                                }
+                            });
+                        }
+                        
+                        return {
+                            title: doc.title,
+                            location: doc.location,
+                            text: matchedText || (doc.text ? doc.text.substring(0, 150) + '...' : ''),
+                            score: score
+                        };
+                    })
+                    .filter(result => result.score > 0)
+                    .sort((a, b) => b.score - a.score);
+                
+                displayFullResults(results, query);
+            }
+            
+            function displaySimpleResults(results, query) {
+                if (results.length === 0) {
+                    searchResults.innerHTML = '<div class="search-no-results">No results found</div>';
+                    searchResults.classList.add('active');
+                    return;
+                }
+                
+                const html = results.slice(0, 10).map(result => {
+                    const highlightedTitle = highlightText(result.title, query);
+                    return `
+                        <a href="${result.url}" class="search-result-item">
+                            <div class="search-result-title">${highlightedTitle}</div>
+                            <div class="search-result-path">${escapeHtml(result.path)}</div>
+                        </a>
+                    `;
+                }).join('');
+                
+                searchResults.innerHTML = html;
+                searchResults.classList.add('active');
+            }
+            
+            function displayFullResults(results, query) {
+                if (results.length === 0) {
+                    searchResults.innerHTML = '<div class="search-no-results">No results found</div>';
+                    searchResults.classList.add('active');
+                    return;
+                }
+                
+                const pathname = window.location.pathname;
+                let basePath = '/';
+                
+                const pathParts = pathname.split('/').filter(p => p);
+                
+                if (pathParts.length > 0 && !pathParts[0].endsWith('.html')) {
+                    const firstPart = pathParts[0];
+                    if (firstPart !== 'index' && firstPart !== 'search') {
+                        basePath = '/' + firstPart + '/';
+                    }
+                }
+                
+                console.log('Current pathname:', pathname);
+                console.log('Detected base path:', basePath);
+                
+                const html = results.slice(0, 10).map(result => {
+                    const highlightedTitle = highlightText(result.title, query);
+                    const highlightedText = highlightText(result.text, query);
+                    
+                    let path = result.location.replace(/^\//, '').replace(/\.html$/, '').replace(/\//g, ' > ');
+                    if (!path) path = 'Home';
+                    
+                    let url;
+                    if (basePath === '/') {
+                        url = result.location;
+                    } else {
+                        const cleanLocation = result.location.startsWith('/') ? result.location.substring(1) : result.location;
+                        url = basePath + cleanLocation;
+                    }
+                    
+                    console.log('Result:', result.title, '-> URL:', url);
+                    
+                    return `
+                        <a href="${url}" class="search-result-item">
+                            <div class="search-result-title">${highlightedTitle}</div>
+                            <div class="search-result-path">${escapeHtml(path)}</div>
+                            <div class="search-result-excerpt">${highlightedText}</div>
+                        </a>
+                    `;
+                }).join('');
+                
+                searchResults.innerHTML = html;
+                searchResults.classList.add('active');
+            }
+            
+            function highlightText(text, query) {
+                if (!text) return '';
+                const queryTerms = query.split(/\s+/).filter(t => t.length >= 2);
+                let result = escapeHtml(text);
+                queryTerms.forEach(term => {
+                    const regex = new RegExp('(' + escapeRegex(term) + ')', 'gi');
+                    result = result.replace(regex, '<span class="search-highlight">$1</span>');
+                });
+                return result;
+            }
+            
+            function escapeRegex(string) {
+                return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            }
+            
+            function escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+            
+            let searchTimeout;
+            searchInput.addEventListener('input', function(e) {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => performSearch(e.target.value), 300);
+            });
+            
+            searchInput.addEventListener('focus', function(e) {
+                if (e.target.value.length >= 2) {
+                    performSearch(e.target.value);
+                }
+            });
+            
+            document.addEventListener('click', function(e) {
+                if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+                    searchResults.classList.remove('active');
+                }
+            });
+            
+            searchInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    searchResults.classList.remove('active');
+                    searchInput.blur();
+                }
+            });
+        });
+
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('pre code').forEach((block) => {
+                block.parentElement.style.position = 'relative';
+            });
+        });
+        
+    </script>
+</body>
+</html>

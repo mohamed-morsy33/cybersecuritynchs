@@ -1,0 +1,2148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 11.1 - NCHS Cybersecurity</title>
+    
+    
+    <link rel="icon" href="../../../img/logo.png">
+    
+    
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DRPQMPQQS6"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-DRPQMPQQS6');
+    </script>
+    
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0e27;
+            --bg-secondary: #141b3a;
+            --text-primary: #00ff41;
+            --text-secondary: #7affa7;
+            --text-muted: #4a9960;
+            --accent: #ff0844;
+            --accent-secondary: #00d4ff;
+            --border: #1a3a2a;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--bg-primary);
+            color: var(--text-secondary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--bg-secondary);
+            border-bottom: 2px solid var(--text-primary);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 255, 65, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-logo a {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: 0.1em;
+            text-shadow: 0 0 10px var(--text-primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links > li {
+            position: relative;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 4px;
+            display: block;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--text-primary);
+            background: rgba(0, 255, 65, 0.1);
+            text-shadow: 0 0 10px var(--text-primary);
+        }
+
+        /* Dropdown menu */
+        .nav-links .dropdown {
+            position: relative;
+        }
+
+        .nav-links .dropdown > a::after {
+            content: ' ▼';
+            font-size: 0.7em;
+            margin-left: 5px;
+        }
+
+        .nav-links .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--bg-secondary);
+            border: 2px solid var(--text-primary);
+            border-radius: 4px;
+            min-width: 250px;
+            box-shadow: 0 8px 30px rgba(0, 255, 65, 0.3);
+            z-index: 1000;
+            padding: 10px 0;
+            margin-top: 5px;
+        }
+
+        .nav-links .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .nav-links .dropdown-content li {
+            list-style: none;
+        }
+
+        .nav-links .dropdown-content a {
+            padding: 10px 20px;
+            border-radius: 0;
+        }
+
+        .nav-links .dropdown-content .nested {
+            padding-left: 0;
+        }
+
+        .nav-links .dropdown-content .nested > strong {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .nav-links .dropdown-content .nested > strong:hover {
+            background: rgba(0, 255, 65, 0.1);
+        }
+
+        .nav-links .dropdown-content .nested > strong::after {
+            content: '▼';
+            font-size: 0.8em;
+            transition: transform 0.3s ease;
+            color: var(--text-primary);
+        }
+
+        .nav-links .dropdown-content .nested.collapsed > strong::after {
+            transform: rotate(-90deg);
+        }
+
+        .nav-links .dropdown-content .nested .unit-lessons {
+            max-height: 500px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .nav-links .dropdown-content .nested.collapsed .unit-lessons {
+            max-height: 0;
+        }
+
+        .nav-links .dropdown-content .nested .unit-lessons li {
+            padding-left: 20px;
+        }
+
+        .nav-links .dropdown-content .nested a {
+            padding: 8px 20px;
+            font-size: 0.9em;
+            color: var(--text-muted);
+        }
+
+        .nav-links .dropdown-content .nested a:hover {
+            color: var(--text-primary);
+            background: rgba(0, 255, 65, 0.05);
+        }
+
+        /* Mobile menu toggle */
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: 2px solid var(--text-primary);
+            color: var(--text-primary);
+            padding: 8px 15px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        /* Search */
+        .search-container {
+            position: relative;
+            margin-left: 20px;
+        }
+
+        .search-input {
+            padding: 8px 35px 8px 15px;
+            background: var(--bg-primary);
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            width: 250px;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--text-primary);
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+        }
+
+        .search-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
+        .search-results {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            right: 0;
+            background: var(--bg-secondary);
+            border: 2px solid var(--text-primary);
+            border-radius: 8px;
+            max-height: 400px;
+            overflow-y: auto;
+            display: none;
+            z-index: 2000;
+            box-shadow: 0 8px 30px rgba(0, 255, 65, 0.3);
+        }
+
+        .search-results.active {
+            display: block;
+        }
+
+        .search-result-item {
+            padding: 15px;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-result-item:hover {
+            background: rgba(0, 255, 65, 0.05);
+        }
+
+        .search-result-title {
+            color: var(--text-primary);
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .search-result-path {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-bottom: 8px;
+        }
+
+        .search-result-excerpt {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .search-highlight {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            padding: 2px 4px;
+            border-radius: 2px;
+            font-weight: 700;
+        }
+
+        .search-no-results {
+            padding: 20px;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        .search-results::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .search-results::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+
+        .search-results::-webkit-scrollbar-thumb {
+            background: var(--text-primary);
+            border-radius: 4px;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 30px;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--text-primary);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-shadow: 0 0 20px var(--text-primary);
+            letter-spacing: 0.05em;
+            border-bottom: 2px solid var(--text-primary);
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            border-left: 4px solid var(--text-primary);
+            padding-left: 15px;
+        }
+
+        h3 { font-size: 1.5rem; }
+        h4 { font-size: 1.25rem; }
+
+        p {
+            margin-bottom: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        a {
+            color: var(--accent-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--text-primary);
+            text-shadow: 0 0 10px var(--text-primary);
+        }
+
+        /* Code Blocks */
+        code {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            padding: 2px 8px;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        pre {
+            background: var(--bg-secondary);
+            border: 2px solid var(--text-primary);
+            border-radius: 8px;
+            padding: 20px;
+            overflow-x: auto;
+            margin: 20px 0;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
+        }
+
+        pre code {
+            background: transparent;
+            border: none;
+            padding: 0;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 1.2rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        li::marker {
+            color: var(--text-primary);
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+        }
+
+        th {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            padding: 12px;
+            text-align: left;
+            border: 1px solid var(--text-primary);
+            font-weight: 700;
+        }
+
+        td {
+            padding: 12px;
+            border: 1px solid var(--border);
+        }
+
+        tr:hover {
+            background: rgba(0, 255, 65, 0.05);
+        }
+
+        /* Blockquotes */
+        blockquote {
+            border-left: 4px solid var(--text-primary);
+            background: var(--bg-secondary);
+            padding: 15px 20px;
+            margin: 20px 0;
+            font-style: italic;
+        }
+
+        /* Images */
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        /* Horizontal Rule */
+        hr {
+            border: none;
+            border-top: 2px solid var(--text-primary);
+            margin: 30px 0;
+            opacity: 0.3;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 2px solid var(--text-primary);
+            padding: 30px;
+            margin-top: 60px;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        /* Scanline Effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                transparent 50%,
+                rgba(0, 255, 65, 0.02) 51%
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 9999;
+            animation: scan 8s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100%); }
+        }
+
+        /* Selection */
+        ::selection {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+            background: var(--bg-primary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--text-primary);
+            border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--bg-secondary);
+                flex-direction: column;
+                padding: 20px;
+                border-bottom: 2px solid var(--text-primary);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 20px 15px;
+            }
+
+            .search-container {
+                margin-left: 10px;
+            }
+
+            .search-input {
+                width: 200px;
+            }
+        }
+
+        /* Search Box */
+        .search-box {
+            padding: 10px;
+            background: var(--bg-primary);
+            border: 1px solid var(--text-primary);
+            border-radius: 4px;
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .search-box::placeholder {
+            color: var(--text-muted);
+        }
+
+        /* Lesson Navigation */
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 60px 0 40px 0;
+            padding: 30px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .lesson-nav-button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            background: var(--bg-primary);
+            border: 2px solid var(--text-primary);
+            border-radius: 8px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .lesson-nav-button:hover {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 255, 65, 0.3);
+        }
+
+        .lesson-nav-button.disabled {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .lesson-nav-button .arrow {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .lesson-nav-info {
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        .lesson-nav-info .current-lesson {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+
+        .lesson-nav-info .lesson-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 768px) {
+            .lesson-nav {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .lesson-nav-button {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .lesson-nav-info {
+                order: -1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo">
+                
+                <img src="../../../img/logo.png" alt="Logo">
+                
+                <a href="https://mohamed-morsy33.github.io/cybersecuritynchs/">NCHS Cybersecurity</a>
+            </div>
+            
+            <button class="nav-toggle" onclick="toggleMenu()">MENU</button>
+            
+            <ul class="nav-links" id="navLinks">
+                
+                <li >
+                    
+                        <a href="../../.." 
+                           >
+                            Home
+                        </a>
+                    
+                </li>
+                
+                <li class="dropdown">
+                    
+                        <a href="#">Curriculum</a>
+                        <ul class="dropdown-content">
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 1</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit1/lesson1-1/">Lesson 1.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit1/lesson1-2/">Lesson 1.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit1/lesson1-3/">Lesson 1.3</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit1/lesson1-4/">Lesson 1.4</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit1/lesson1-5/">Lesson 1.5</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit1/lesson1-6/">Lesson 1.6</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit1/installation-process/">Linux Installation Process</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 2</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit2/lesson2-1/">Lesson 2.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit2/lesson2-2/">Lesson 2.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit2/lesson2-3/">Lesson 2.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 3</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit3/lesson3-1/">Lesson 3.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit3/lesson3-2/">Lesson 3.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit3/lesson3-3/">Lesson 3.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 4</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit4/lesson4-1/">Lesson 4.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit4/lesson4-2/">Lesson 4.2</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 5</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit5/lesson5-1/">Lesson 5.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit5/lesson5-2/">Lesson 5.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit5/lesson5-3/">Lesson 5.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 6</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit6/lesson6-1/">Lesson 6.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit6/lesson6-2/">Lesson 6.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit6/lesson6-3/">Lesson 6.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 7</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit7/lesson7-1/">Lesson 7.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit7/lesson7-2/">Lesson 7.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit7/lesson7-3/">Lesson 7.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 8</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit8/lesson8-1/">Lesson 8.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit8/lesson8-2/">Lesson 8.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit8/lesson8-3/">Lesson 8.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 9</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit9/lesson9-1/">Lesson 9.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit9/lesson9-2/">Lesson 9.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit9/lesson9-3/">Lesson 9.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 10</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit10/lesson10-1/">Lesson 10.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit10/lesson10-2/">Lesson 10.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit10/lesson10-3/">Lesson 10.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 11</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="./">Lesson 11.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../lesson11-2/">Lesson 11.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../lesson11-3/">Lesson 11.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                        </ul>
+                    
+                </li>
+                
+                <li >
+                    
+                        <a href="../../../test/" 
+                           >
+                            Terminal
+                        </a>
+                    
+                </li>
+                
+            </ul>
+
+            <div class="search-container">
+                <input type="text" 
+                       class="search-input" 
+                       id="searchInput" 
+                       placeholder="Search lessons..."
+                       autocomplete="off">
+                <span class="search-icon">🔍</span>
+                <div class="search-results" id="searchResults"></div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        
+        <h1 id="encryption-systems">Encryption Systems</h1>
+<p>We've covered cryptographic concepts earlier, but now let's dive deeper into how encryption systems work in practice. This lesson examines real-world encryption implementations, protocols, and technologies that protect data in modern computing.</p>
+<h2 id="understanding-encryption-systems">Understanding Encryption Systems</h2>
+<p>An <strong>encryption system</strong> is the complete infrastructure for securing data, including:
+- Encryption algorithms
+- Key management
+- Protocols
+- Implementation
+- Policies and procedures</p>
+<p>It's not just about the math—it's about the entire ecosystem.</p>
+<h2 id="transport-layer-security-tls">Transport Layer Security (TLS)</h2>
+<p><strong>TLS</strong> (formerly SSL) is the foundation of secure internet communication. Every HTTPS website uses TLS.</p>
+<h3 id="tls-handshake-process">TLS Handshake Process</h3>
+<p>When you visit https://example.com, here's what happens:</p>
+<p><strong>1. Client Hello</strong>
+- Client sends: TLS version, supported cipher suites, random number
+- Example cipher suite: <code>TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384</code></p>
+<p><strong>2. Server Hello</strong>
+- Server responds: Chosen cipher suite, random number
+- Server sends certificate (public key + identity)</p>
+<p><strong>3. Certificate Verification</strong>
+- Client validates certificate chain
+- Checks: CA signature, expiration, revocation status, domain name</p>
+<p><strong>4. Key Exchange</strong>
+Using chosen method (e.g., ECDHE - Elliptic Curve Diffie-Hellman Ephemeral):
+- Client and server compute shared secret
+- This becomes the symmetric key</p>
+<p><strong>5. Finished Messages</strong>
+- Both sides send encrypted confirmation
+- Handshake complete</p>
+<p><strong>6. Application Data</strong>
+- All subsequent traffic encrypted with AES (or chosen symmetric cipher)
+- Fast symmetric encryption for bulk data
+- Keys unique to this session</p>
+<h3 id="tls-versions">TLS Versions</h3>
+<p><strong>SSL 2.0 / 3.0</strong>: <strong>DEPRECATED</strong> - broken, do not use
+<strong>TLS 1.0 / 1.1</strong>: <strong>DEPRECATED</strong> - vulnerable, being phased out
+<strong>TLS 1.2</strong>: Current standard, widely supported
+<strong>TLS 1.3</strong>: Latest version, faster and more secure</p>
+<p>TLS 1.3 improvements:
+- Fewer cipher suites (removed weak options)
+- Faster handshake (0-RTT mode)
+- Forward secrecy by default
+- Simplified protocol</p>
+<h3 id="certificate-authorities-and-pki">Certificate Authorities and PKI</h3>
+<p><strong>Certificate</strong>: Digital document binding public key to identity</p>
+<p><strong>Contents:</strong>
+- Subject (domain name, organization)
+- Issuer (CA that signed it)
+- Validity period
+- Public key
+- Signature (CA's private key)</p>
+<p><strong>Certificate chain:</strong></p>
+<pre><code>Root CA (in browser trust store)
+    ↓
+Intermediate CA
+    ↓
+End-entity certificate (example.com)
+</code></pre>
+<p><strong>Validation process:</strong>
+1. Browser receives certificate
+2. Checks signature from Intermediate CA
+3. Checks Intermediate CA signed by Root CA
+4. Root CA in browser's trust store? → Valid!</p>
+<p><strong>Certificate types:</strong>
+- <strong>DV (Domain Validated)</strong>: Proves domain ownership only
+- <strong>OV (Organization Validated)</strong>: Verifies organization identity
+- <strong>EV (Extended Validation)</strong>: Strictest verification (shows green bar)</p>
+<p><strong>Certificate revocation:</strong>
+- <strong>CRL (Certificate Revocation List)</strong>: Published list of revoked certificates
+- <strong>OCSP (Online Certificate Status Protocol)</strong>: Real-time status check
+- <strong>OCSP Stapling</strong>: Server provides OCSP response, reduces latency</p>
+<h3 id="perfect-forward-secrecy-pfs">Perfect Forward Secrecy (PFS)</h3>
+<p><strong>Problem</strong>: If server's private key is compromised, attacker can decrypt past traffic.</p>
+<p><strong>Solution</strong>: Ephemeral key exchange (DHE, ECDHE)
+- Session keys derived from temporary keys
+- Temporary keys discarded after session
+- Compromise of server key doesn't compromise past sessions</p>
+<p><strong>Cipher suites with PFS:</strong>
+- <code>TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384</code> ✓
+- <code>TLS_RSA_WITH_AES_256_GCM_SHA384</code> ✗ (no PFS)</p>
+<h3 id="tls-best-practices">TLS Best Practices</h3>
+<p><strong>Configuration:</strong></p>
+<pre><code># Disable old versions
+ssl_protocols TLSv1.2 TLSv1.3;
+
+# Strong cipher suites only
+ssl_ciphers 'ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384';
+
+# Prefer server cipher suite order
+ssl_prefer_server_ciphers on;
+
+# HSTS (force HTTPS)
+add_header Strict-Transport-Security &quot;max-age=31536000; includeSubDomains&quot; always;
+
+# OCSP stapling
+ssl_stapling on;
+ssl_stapling_verify on;
+</code></pre>
+<p><strong>Testing:</strong>
+- SSL Labs Server Test (ssllabs.com/ssltest)
+- Check cipher suite support
+- Verify certificate chain
+- Test for vulnerabilities</p>
+<h2 id="vpn-technologies">VPN Technologies</h2>
+<p><strong>Virtual Private Networks</strong> create encrypted tunnels over untrusted networks.</p>
+<h3 id="ipsec">IPsec</h3>
+<p><strong>IPsec</strong> (Internet Protocol Security) secures IP communications.</p>
+<p><strong>Modes:</strong>
+- <strong>Transport mode</strong>: Encrypts payload only, original IP header intact
+- <strong>Tunnel mode</strong>: Encrypts entire packet, new IP header added</p>
+<p><strong>Protocols:</strong>
+- <strong>AH (Authentication Header)</strong>: Authentication and integrity, no encryption
+- <strong>ESP (Encapsulating Security Payload)</strong>: Authentication, integrity, and encryption</p>
+<p><strong>Key exchange:</strong>
+- <strong>IKE (Internet Key Exchange)</strong>: Establishes security associations (SAs)
+  - Phase 1: Establish secure channel
+  - Phase 2: Negotiate IPsec parameters</p>
+<p><strong>Use cases:</strong>
+- Site-to-site VPNs (connecting branch offices)
+- Remote access VPNs
+- Securing cloud connections</p>
+<h3 id="openvpn">OpenVPN</h3>
+<p>Open-source VPN using SSL/TLS.</p>
+<p><strong>Advantages:</strong>
+- Highly configurable
+- Works over TCP or UDP
+- Bypasses most firewalls
+- Strong encryption (AES-256)
+- Cross-platform</p>
+<p><strong>Configuration example:</strong></p>
+<pre><code># Server config
+port 1194
+proto udp
+dev tun
+ca ca.crt
+cert server.crt
+key server.key
+dh dh2048.pem
+server 10.8.0.0 255.255.255.0
+cipher AES-256-CBC
+auth SHA256
+</code></pre>
+<h3 id="wireguard">WireGuard</h3>
+<p>Modern VPN protocol, simpler and faster than OpenVPN or IPsec.</p>
+<p><strong>Features:</strong>
+- Minimal codebase (~4,000 lines vs. OpenVPN's ~100,000)
+- Modern cryptography (Curve25519, ChaCha20, Poly1305)
+- Fast performance
+- Built into Linux kernel</p>
+<p><strong>Configuration:</strong></p>
+<pre><code>[Interface]
+PrivateKey = &lt;private_key&gt;
+Address = 10.0.0.1/24
+ListenPort = 51820
+
+[Peer]
+PublicKey = &lt;peer_public_key&gt;
+AllowedIPs = 10.0.0.2/32
+</code></pre>
+<p><strong>Use cases:</strong>
+- Point-to-point VPNs
+- Simple site-to-site connections
+- Mobile VPN clients</p>
+<h3 id="vpn-protocols-comparison">VPN Protocols Comparison</h3>
+<table>
+<thead>
+<tr>
+<th>Protocol</th>
+<th>Speed</th>
+<th>Security</th>
+<th>Complexity</th>
+<th>Best For</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IPsec</td>
+<td>Medium</td>
+<td>High</td>
+<td>High</td>
+<td>Site-to-site</td>
+</tr>
+<tr>
+<td>OpenVPN</td>
+<td>Medium</td>
+<td>High</td>
+<td>Medium</td>
+<td>General purpose</td>
+</tr>
+<tr>
+<td>WireGuard</td>
+<td>Fast</td>
+<td>High</td>
+<td>Low</td>
+<td>Modern implementations</td>
+</tr>
+<tr>
+<td>L2TP/IPsec</td>
+<td>Slow</td>
+<td>Medium</td>
+<td>Medium</td>
+<td>Legacy compatibility</td>
+</tr>
+<tr>
+<td>PPTP</td>
+<td>Fast</td>
+<td><strong>Low</strong></td>
+<td>Low</td>
+<td><strong>Don't use</strong></td>
+</tr>
+</tbody>
+</table>
+<h2 id="disk-encryption">Disk Encryption</h2>
+<p>Protecting data at rest.</p>
+<h3 id="full-disk-encryption-fde">Full Disk Encryption (FDE)</h3>
+<p>Encrypts entire disk, transparent to user after boot.</p>
+<p><strong>BitLocker (Windows):</strong></p>
+<pre><code class="language-powershell"># Enable BitLocker
+Enable-BitLocker -MountPoint &quot;C:&quot; -EncryptionMethod Aes256 -UsedSpaceOnly
+
+# Backup recovery key
+Backup-BitLockerKeyProtector -MountPoint &quot;C:&quot; -KeyProtectorId $KeyProtectorId
+</code></pre>
+<p><strong>FileVault (macOS):</strong>
+- System Preferences → Security &amp; Privacy → FileVault
+- Recovery key backed up to iCloud or stored locally</p>
+<p><strong>LUKS (Linux):</strong></p>
+<pre><code class="language-bash"># Create encrypted partition
+cryptsetup luksFormat /dev/sdb1
+
+# Open encrypted partition
+cryptsetup luksOpen /dev/sdb1 encrypted_volume
+
+# Format and mount
+mkfs.ext4 /dev/mapper/encrypted_volume
+mount /dev/mapper/encrypted_volume /mnt/encrypted
+</code></pre>
+<h3 id="self-encrypting-drives-seds">Self-Encrypting Drives (SEDs)</h3>
+<p>Hardware-based encryption in the drive itself.</p>
+<p><strong>Advantages:</strong>
+- No performance impact
+- Encryption always on
+- Instant secure erase (destroy key)
+- OS-independent</p>
+<p><strong>Standards:</strong>
+- TCG Opal
+- eDrive (Microsoft)</p>
+<p><strong>Considerations:</strong>
+- Trust the manufacturer
+- Firmware vulnerabilities possible
+- Key stored on drive</p>
+<h3 id="filefolder-encryption">File/Folder Encryption</h3>
+<p>Encrypt specific files or folders.</p>
+<p><strong>Tools:</strong>
+- <strong>GPG</strong>: Command-line encryption</p>
+<pre><code class="language-bash"># Encrypt file
+gpg --encrypt --recipient user@example.com file.txt
+
+# Decrypt file
+gpg --decrypt file.txt.gpg &gt; file.txt
+</code></pre>
+<ul>
+<li><strong>VeraCrypt</strong>: Encrypted containers and partitions</li>
+<li><strong>7-Zip</strong>: Encrypted archives</li>
+<li><strong>AxCrypt</strong>: User-friendly file encryption</li>
+</ul>
+<h2 id="email-encryption">Email Encryption</h2>
+<p>Email is inherently insecure (travels through multiple servers, stored unencrypted).</p>
+<h3 id="smime">S/MIME</h3>
+<p><strong>S/MIME</strong> (Secure/Multipurpose Internet Mail Extensions) uses certificates.</p>
+<p><strong>How it works:</strong>
+1. Obtain S/MIME certificate from CA
+2. Install in email client
+3. Send digitally signed emails (proves sender)
+4. Encrypt emails with recipient's public key</p>
+<p><strong>Advantages:</strong>
+- Built into most email clients
+- Centralized certificate management
+- Corporate PKI integration</p>
+<p><strong>Disadvantages:</strong>
+- Requires certificate from CA (cost)
+- Recipients need certificates too</p>
+<h3 id="pgpgpg">PGP/GPG</h3>
+<p><strong>PGP</strong> (Pretty Good Privacy) / <strong>GPG</strong> (GNU Privacy Guard) use web of trust model.</p>
+<p><strong>How it works:</strong>
+1. Generate key pair</p>
+<pre><code class="language-bash">gpg --gen-key
+</code></pre>
+<ol>
+<li>Share public key</li>
+</ol>
+<pre><code class="language-bash">gpg --export --armor user@example.com &gt; public_key.asc
+</code></pre>
+<ol>
+<li>Encrypt email</li>
+</ol>
+<pre><code class="language-bash">gpg --encrypt --recipient recipient@example.com message.txt
+</code></pre>
+<p><strong>Web of Trust:</strong>
+- No central authority
+- Users sign each other's keys
+- Trust based on signatures</p>
+<p><strong>Advantages:</strong>
+- Free and open source
+- No dependence on CAs
+- Strong community</p>
+<p><strong>Disadvantages:</strong>
+- Complex for non-technical users
+- Key management challenges
+- Not widely adopted</p>
+<h2 id="end-to-end-encryption-e2ee">End-to-End Encryption (E2EE)</h2>
+<p>Messages encrypted on sender's device, decrypted only on recipient's device. Service provider can't read them.</p>
+<h3 id="signal-protocol">Signal Protocol</h3>
+<p>Used by Signal, WhatsApp, Facebook Messenger (secret conversations).</p>
+<p><strong>Features:</strong>
+- <strong>Double Ratchet Algorithm</strong>: Keys constantly change
+- <strong>Forward secrecy</strong>: Past messages safe if keys compromised
+- <strong>Future secrecy</strong>: Future messages safe too
+- <strong>Deniability</strong>: Can't prove who sent message</p>
+<p><strong>How it works:</strong>
+1. Initial key exchange (using identity keys)
+2. Each message uses ephemeral keys
+3. Keys "ratchet" forward after each message
+4. Old keys destroyed</p>
+<p><strong>Security properties:</strong>
+- End-to-end encryption
+- Authentication (know who you're talking to)
+- Forward secrecy
+- Break-in recovery (compromise is temporary)</p>
+<h3 id="other-e2ee-systems">Other E2EE Systems</h3>
+<p><strong>Matrix/Element:</strong>
+- Decentralized messaging
+- End-to-end encryption
+- Open protocol</p>
+<p><strong>Telegram (Secret Chats):</strong>
+- MTProto protocol
+- Optional E2EE (not default)
+- Device-specific (no cloud sync)</p>
+<p><strong>iMessage:</strong>
+- Apple's E2EE messaging
+- Seamless user experience
+- Closed-source</p>
+<h2 id="blockchain-and-cryptocurrency">Blockchain and Cryptocurrency</h2>
+<p>Cryptography enables decentralized trustless systems.</p>
+<h3 id="bitcoin-fundamentals">Bitcoin Fundamentals</h3>
+<p><strong>Public/Private Keys:</strong>
+- Private key: Random 256-bit number (keep secret!)
+- Public key: Derived from private key (elliptic curve cryptography)
+- Address: Hash of public key (what you share)</p>
+<p><strong>Transaction signing:</strong></p>
+<pre><code>1. Create transaction (sending Bitcoin)
+2. Hash transaction data
+3. Sign hash with private key (ECDSA)
+4. Broadcast transaction + signature
+5. Network verifies signature with public key
+</code></pre>
+<p><strong>Blockchain:</strong>
+- Chain of blocks
+- Each block contains:
+  - Transactions
+  - Timestamp
+  - Hash of previous block
+  - Nonce (for mining)</p>
+<p><strong>Mining (Proof of Work):</strong></p>
+<pre><code>Hash(Block Data + Nonce) must be &lt; Target
+</code></pre>
+<ul>
+<li>Miners try different nonces</li>
+<li>First to find valid hash wins block reward</li>
+<li>Difficulty adjusts to maintain ~10 min block time</li>
+</ul>
+<p><strong>Security:</strong>
+- Immutability (changing past blocks requires recalculating all subsequent blocks)
+- Consensus (longest chain is truth)
+- 51% attack would require more computing power than rest of network</p>
+<h3 id="ethereum-and-smart-contracts">Ethereum and Smart Contracts</h3>
+<p><strong>Smart contracts</strong>: Programs on blockchain</p>
+<p><strong>Example simple contract:</strong></p>
+<pre><code class="language-solidity">contract SimpleStorage {
+    uint storedData;
+
+    function set(uint x) public {
+        storedData = x;
+    }
+
+    function get() public view returns (uint) {
+        return storedData;
+    }
+}
+</code></pre>
+<p><strong>Cryptographic elements:</strong>
+- Same public/private key cryptography as Bitcoin
+- Transactions signed with private key
+- Contract code executed by all nodes
+- State changes recorded on blockchain</p>
+<h2 id="quantum-resistant-cryptography">Quantum-Resistant Cryptography</h2>
+<p>Quantum computers threaten current cryptography:</p>
+<h3 id="whats-at-risk">What's at Risk?</h3>
+<p><strong>RSA and ECC</strong>: Shor's algorithm can break these on quantum computers</p>
+<p><strong>Symmetric encryption</strong>: Grover's algorithm speeds up brute force, but doubling key size mitigates risk
+- AES-128 → AES-256 remains secure</p>
+<h3 id="post-quantum-algorithms">Post-Quantum Algorithms</h3>
+<p>NIST is standardizing new algorithms:</p>
+<p><strong>Lattice-based:</strong>
+- CRYSTALS-Kyber (key exchange)
+- CRYSTALS-Dilithium (digital signatures)</p>
+<p><strong>Hash-based:</strong>
+- SPHINCS+ (digital signatures)</p>
+<p><strong>Code-based:</strong>
+- Classic McEliece (key exchange)</p>
+<p><strong>Migration timeline:</strong>
+- Standards published: 2024
+- Implementation: 2025-2030
+- Full migration: 2030s</p>
+<p><strong>Preparation:</strong>
+- Use crypto-agility (easy to swap algorithms)
+- Monitor quantum computing progress
+- Plan migration strategy</p>
+<h2 id="hardware-security-modules-hsms">Hardware Security Modules (HSMs)</h2>
+<p>Physical devices that safeguard cryptographic keys.</p>
+<p><strong>Features:</strong>
+- Tamper-resistant hardware
+- Key generation in secure environment
+- Keys never leave device
+- FIPS 140-2/140-3 certified</p>
+<p><strong>Use cases:</strong>
+- Certificate authorities
+- Payment processing
+- Code signing
+- Database encryption keys
+- Cryptocurrency exchanges</p>
+<p><strong>Types:</strong>
+- <strong>General-purpose HSMs</strong>: Thales, Utimaco
+- <strong>Cloud HSMs</strong>: AWS CloudHSM, Azure Dedicated HSM
+- <strong>Payment HSMs</strong>: Specialized for financial transactions</p>
+<h2 id="trusted-platform-module-tpm">Trusted Platform Module (TPM)</h2>
+<p>Microchip on motherboard providing hardware-based security.</p>
+<p><strong>Functions:</strong>
+- Secure key storage
+- Random number generation
+- Platform integrity measurement
+- Attestation (prove system state)</p>
+<p><strong>Uses:</strong>
+- BitLocker encryption
+- Secure boot
+- Device authentication
+- Protection of encryption keys</p>
+<p><strong>TPM 2.0:</strong>
+- Current standard
+- Algorithm agility
+- Better performance
+- Required for Windows 11</p>
+<h2 id="secure-enclaves">Secure Enclaves</h2>
+<p>Isolated execution environments within CPUs.</p>
+<p><strong>Intel SGX (Software Guard Extensions):</strong>
+- Encrypted memory regions (enclaves)
+- Code and data protected from OS and hypervisor
+- Remote attestation</p>
+<p><strong>ARM TrustZone:</strong>
+- Separate secure world
+- Used in mobile devices
+- Fingerprint data, secure payments</p>
+<p><strong>Apple Secure Enclave:</strong>
+- Dedicated processor
+- Stores biometric data
+- Manages encryption keys</p>
+<h2 id="key-management-best-practices">Key Management Best Practices</h2>
+<h3 id="key-lifecycle">Key Lifecycle</h3>
+<p><strong>1. Generation:</strong>
+- Use cryptographically secure random number generators
+- Generate keys in secure environment
+- Adequate key length</p>
+<p><strong>2. Storage:</strong>
+- Encrypt keys (key encryption keys)
+- Use HSMs for critical keys
+- Access control
+- Audit logging</p>
+<p><strong>3. Distribution:</strong>
+- Secure key exchange protocols
+- Out-of-band verification
+- Split knowledge (no single person has full key)</p>
+<p><strong>4. Usage:</strong>
+- Limit key lifetime
+- Usage restrictions (what can key be used for)
+- Rate limiting</p>
+<p><strong>5. Rotation:</strong>
+- Regular key rotation
+- Re-encrypt data with new keys
+- Overlap period (old and new keys both valid)</p>
+<p><strong>6. Destruction:</strong>
+- Secure deletion (overwrite)
+- Destroy all copies
+- Document destruction</p>
+<h3 id="key-escrow-and-recovery">Key Escrow and Recovery</h3>
+<p><strong>Problem</strong>: What if keys are lost?</p>
+<p><strong>Solutions:</strong></p>
+<p><strong>Key Escrow:</strong>
+- Trusted third party holds key copy
+- Strict controls on access
+- Used in some enterprise settings</p>
+<p><strong>M-of-N:</strong>
+- Key split into N parts
+- M parts needed to reconstruct
+- Example: 3-of-5 (any 3 of 5 people can recover)</p>
+<p><strong>Secret Sharing (Shamir):</strong>
+- Mathematical scheme for splitting secrets
+- Threshold scheme (need minimum shares)</p>
+<p><strong>Considerations:</strong>
+- Recovery vs. security trade-off
+- Compliance requirements
+- User trust</p>
+<h2 id="cryptographic-protocols-in-practice">Cryptographic Protocols in Practice</h2>
+<h3 id="ssh-secure-shell">SSH (Secure Shell)</h3>
+<p>Remote access with strong authentication and encryption.</p>
+<p><strong>Key-based authentication:</strong></p>
+<pre><code class="language-bash"># Generate key pair
+ssh-keygen -t ed25519
+
+# Copy public key to server
+ssh-copy-id user@server
+
+# Connect (no password needed)
+ssh user@server
+</code></pre>
+<p><strong>SSH tunneling:</strong></p>
+<pre><code class="language-bash"># Local port forwarding
+ssh -L 8080:localhost:80 user@server
+
+# Dynamic port forwarding (SOCKS proxy)
+ssh -D 1080 user@server
+</code></pre>
+<p><strong>Best practices:</strong>
+- Disable password authentication
+- Use strong key types (ed25519, rsa 4096)
+- Regularly rotate keys
+- Monitor authorized_keys files</p>
+<h3 id="tor-the-onion-router">Tor (The Onion Router)</h3>
+<p>Anonymous communication using layered encryption.</p>
+<p><strong>How it works:</strong></p>
+<pre><code>User → Entry Node → Middle Node → Exit Node → Destination
+
+Each layer encrypted separately:
+- Exit node sees traffic to destination (no source)
+- Entry node sees source (no destination)
+- Middle node sees neither
+</code></pre>
+<p><strong>Uses:</strong>
+- Anonymous browsing
+- Censorship circumvention
+- Whistleblowing
+- Privacy protection</p>
+<p><strong>Limitations:</strong>
+- Slow (multiple hops)
+- Exit node can see unencrypted traffic
+- Timing attacks possible
+- Not foolproof anonymity</p>
+<h2 id="implementation-pitfalls">Implementation Pitfalls</h2>
+<p>Common mistakes that weaken encryption systems:</p>
+<h3 id="1-weak-random-number-generation">1. Weak Random Number Generation</h3>
+<pre><code class="language-python"># BAD
+import random
+key = random.randint(0, 2**256)
+
+# GOOD
+import secrets
+key = secrets.randbelow(2**256)
+</code></pre>
+<h3 id="2-improper-key-storage">2. Improper Key Storage</h3>
+<pre><code class="language-python"># BAD
+API_KEY = &quot;secret123&quot;  # Hardcoded in source
+
+# BETTER
+API_KEY = os.environ.get('API_KEY')  # Environment variable
+
+# BEST
+# Use key management service (AWS KMS, Azure Key Vault, HashiCorp Vault)
+</code></pre>
+<h3 id="3-ecb-mode">3. ECB Mode</h3>
+<pre><code class="language-python"># BAD - patterns visible in ciphertext
+cipher = AES.new(key, AES.MODE_ECB)
+
+# GOOD - use authenticated encryption
+cipher = AES.new(key, AES.MODE_GCM, nonce=nonce)
+</code></pre>
+<h3 id="4-not-verifying-certificates">4. Not Verifying Certificates</h3>
+<pre><code class="language-python"># BAD - disables certificate verification
+requests.get('https://example.com', verify=False)
+
+# GOOD - verify by default
+requests.get('https://example.com')
+</code></pre>
+<h3 id="5-custom-cryptography">5. Custom Cryptography</h3>
+<ul>
+<li><strong>Never roll your own crypto</strong></li>
+<li>Use established libraries: OpenSSL, libsodium, cryptography.io</li>
+<li>Implement standard algorithms correctly</li>
+<li>Get expert review for custom protocols</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>Encryption systems are complex but essential:</p>
+<p><strong>Key principles:</strong>
+1. <strong>Use standard algorithms</strong>: Don't create your own
+2. <strong>Key management is critical</strong>: Keys are more valuable than data
+3. <strong>Defense in depth</strong>: Encryption is one layer
+4. <strong>Implementation matters</strong>: Correct use of cryptography is crucial
+5. <strong>Stay current</strong>: Threats evolve, so must defenses</p>
+<p><strong>Practical takeaways:</strong>
+- Use TLS 1.3 for web traffic
+- Enable full disk encryption
+- Use E2EE messaging (Signal protocol)
+- Implement proper key management
+- Plan for post-quantum migration</p>
+<p><strong>Remember</strong>: Cryptography is a tool. Strong cryptography used incorrectly provides false security. Proper implementation, key management, and security architecture are equally important.</p>
+<p>The goal isn't just to encrypt—it's to protect confidentiality, integrity, and authenticity in a way that's practical, maintainable, and resilient against evolving threats.</p>
+<p>You've now completed the cybersecurity curriculum. You understand systems from the ground up—from CPU rings to encryption protocols. You know how attackers think and how defenders respond. Most importantly, you understand the ethical responsibilities that come with this knowledge.</p>
+<p>The field of cybersecurity is constantly evolving. Continue learning, practicing, and contributing to a more secure digital world.</p>
+        
+
+        <!-- Lesson Navigation (only show on non-homepage pages) -->
+        
+        <div class="lesson-nav">
+            
+            <a href="../../unit10/lesson10-3/" class="lesson-nav-button">
+                <span class="arrow">←</span>
+                <span>Previous: Lesson 10.3</span>
+            </a>
+            
+
+            <div class="lesson-nav-info">
+                <div class="current-lesson">Current Lesson</div>
+                <div class="lesson-title">Lesson 11.1</div>
+            </div>
+
+            
+            <a href="../lesson11-2/" class="lesson-nav-button">
+                <span>Next: Lesson 11.2</span>
+                <span class="arrow">→</span>
+            </a>
+            
+        </div>
+        
+    </div>
+
+    <footer>
+        <p>NCHS Cybersecurity | Built with MkDocs</p>
+        
+        <p>Copyright &copy; 2025 Mohamed Morsy</p>
+        
+    </footer>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@5.3.0/css/xterm.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.min.js"></script>
+    
+    <script src="../../../search_index.js"></script>
+    
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const unitHeaders = document.querySelectorAll('.nav-links .nested > strong');
+            
+            unitHeaders.forEach(header => {
+                header.addEventListener('click', function(e) {
+                    e.stopPropagation(); 
+                    const parent = this.parentElement;
+                    parent.classList.toggle('collapsed');
+                });
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const searchResults = document.getElementById('searchResults');
+            
+            if (!searchInput || !searchResults) {
+                return;
+            }
+            
+            let searchIndex = null;
+            let useSimpleSearch = false;
+            
+            const simpleIndex = [
+                
+                    
+                
+                    
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 1.1",
+                                    url: '../../unit1/lesson1-1/',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                                {
+                                    title: "Lesson 1.2",
+                                    url: '../../unit1/lesson1-2/',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                                {
+                                    title: "Lesson 1.3",
+                                    url: '../../unit1/lesson1-3/',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                                {
+                                    title: "Lesson 1.4",
+                                    url: '../../unit1/lesson1-4/',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                                {
+                                    title: "Lesson 1.5",
+                                    url: '../../unit1/lesson1-5/',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                                {
+                                    title: "Lesson 1.6",
+                                    url: '../../unit1/lesson1-6/',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                                {
+                                    title: "Linux Installation Process",
+                                    url: '../../unit1/installation-process/',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 2.1",
+                                    url: '../../unit2/lesson2-1/',
+                                    path: 'Curriculum > Unit 2'
+                                },
+                                
+                                {
+                                    title: "Lesson 2.2",
+                                    url: '../../unit2/lesson2-2/',
+                                    path: 'Curriculum > Unit 2'
+                                },
+                                
+                                {
+                                    title: "Lesson 2.3",
+                                    url: '../../unit2/lesson2-3/',
+                                    path: 'Curriculum > Unit 2'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 3.1",
+                                    url: '../../unit3/lesson3-1/',
+                                    path: 'Curriculum > Unit 3'
+                                },
+                                
+                                {
+                                    title: "Lesson 3.2",
+                                    url: '../../unit3/lesson3-2/',
+                                    path: 'Curriculum > Unit 3'
+                                },
+                                
+                                {
+                                    title: "Lesson 3.3",
+                                    url: '../../unit3/lesson3-3/',
+                                    path: 'Curriculum > Unit 3'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 4.1",
+                                    url: '../../unit4/lesson4-1/',
+                                    path: 'Curriculum > Unit 4'
+                                },
+                                
+                                {
+                                    title: "Lesson 4.2",
+                                    url: '../../unit4/lesson4-2/',
+                                    path: 'Curriculum > Unit 4'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 5.1",
+                                    url: '../../unit5/lesson5-1/',
+                                    path: 'Curriculum > Unit 5'
+                                },
+                                
+                                {
+                                    title: "Lesson 5.2",
+                                    url: '../../unit5/lesson5-2/',
+                                    path: 'Curriculum > Unit 5'
+                                },
+                                
+                                {
+                                    title: "Lesson 5.3",
+                                    url: '../../unit5/lesson5-3/',
+                                    path: 'Curriculum > Unit 5'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 6.1",
+                                    url: '../../unit6/lesson6-1/',
+                                    path: 'Curriculum > Unit 6'
+                                },
+                                
+                                {
+                                    title: "Lesson 6.2",
+                                    url: '../../unit6/lesson6-2/',
+                                    path: 'Curriculum > Unit 6'
+                                },
+                                
+                                {
+                                    title: "Lesson 6.3",
+                                    url: '../../unit6/lesson6-3/',
+                                    path: 'Curriculum > Unit 6'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 7.1",
+                                    url: '../../unit7/lesson7-1/',
+                                    path: 'Curriculum > Unit 7'
+                                },
+                                
+                                {
+                                    title: "Lesson 7.2",
+                                    url: '../../unit7/lesson7-2/',
+                                    path: 'Curriculum > Unit 7'
+                                },
+                                
+                                {
+                                    title: "Lesson 7.3",
+                                    url: '../../unit7/lesson7-3/',
+                                    path: 'Curriculum > Unit 7'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 8.1",
+                                    url: '../../unit8/lesson8-1/',
+                                    path: 'Curriculum > Unit 8'
+                                },
+                                
+                                {
+                                    title: "Lesson 8.2",
+                                    url: '../../unit8/lesson8-2/',
+                                    path: 'Curriculum > Unit 8'
+                                },
+                                
+                                {
+                                    title: "Lesson 8.3",
+                                    url: '../../unit8/lesson8-3/',
+                                    path: 'Curriculum > Unit 8'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 9.1",
+                                    url: '../../unit9/lesson9-1/',
+                                    path: 'Curriculum > Unit 9'
+                                },
+                                
+                                {
+                                    title: "Lesson 9.2",
+                                    url: '../../unit9/lesson9-2/',
+                                    path: 'Curriculum > Unit 9'
+                                },
+                                
+                                {
+                                    title: "Lesson 9.3",
+                                    url: '../../unit9/lesson9-3/',
+                                    path: 'Curriculum > Unit 9'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 10.1",
+                                    url: '../../unit10/lesson10-1/',
+                                    path: 'Curriculum > Unit 10'
+                                },
+                                
+                                {
+                                    title: "Lesson 10.2",
+                                    url: '../../unit10/lesson10-2/',
+                                    path: 'Curriculum > Unit 10'
+                                },
+                                
+                                {
+                                    title: "Lesson 10.3",
+                                    url: '../../unit10/lesson10-3/',
+                                    path: 'Curriculum > Unit 10'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 11.1",
+                                    url: './',
+                                    path: 'Curriculum > Unit 11'
+                                },
+                                
+                                {
+                                    title: "Lesson 11.2",
+                                    url: '../lesson11-2/',
+                                    path: 'Curriculum > Unit 11'
+                                },
+                                
+                                {
+                                    title: "Lesson 11.3",
+                                    url: '../lesson11-3/',
+                                    path: 'Curriculum > Unit 11'
+                                },
+                                
+                            
+                        
+                    
+                
+                    
+                        {
+                            title: "Terminal",
+                            url: '../../../test/',
+                            path: 'Main'
+                        },
+                    
+                
+            ];
+            
+            if (typeof window.searchIndex !== 'undefined') {
+                searchIndex = window.searchIndex;
+                useSimpleSearch = false;
+                console.log('✓ Using embedded search index:', searchIndex.docs.length, 'documents');
+            } else {
+                const base_url = document.querySelector('base')?.getAttribute('href') || '/';
+                fetch(base_url + 'search_data.js')
+                    .then(response => response.text())
+                    .then(data => {
+                        eval(data);  
+                        if (window.searchIndex) {
+                            searchIndex = window.searchIndex;
+                            useSimpleSearch = false;
+                            console.log('✓ Loaded search index from JS:', searchIndex.docs.length, 'documents');
+                        }
+                    })
+                    .catch(() => {
+                        console.log('Using simple title search (full search not available)');
+                        useSimpleSearch = true;
+                    });
+                
+                useSimpleSearch = true; 
+            }
+            
+            function performSearch(query) {
+                if (!query || query.length < 2) {
+                    searchResults.classList.remove('active');
+                    return;
+                }
+                
+                if (useSimpleSearch || !searchIndex) {
+                    performSimpleSearch(query);
+                } else {
+                    performFullSearch(query);
+                }
+            }
+            
+            function performSimpleSearch(query) {
+                const lowerQuery = query.toLowerCase();
+                const results = simpleIndex.filter(item => 
+                    item.title.toLowerCase().includes(lowerQuery)
+                );
+                displaySimpleResults(results, query);
+            }
+            
+            function performFullSearch(query) {
+                const lowerQuery = query.toLowerCase();
+                const queryTerms = lowerQuery.split(/\s+/);
+                
+                const results = searchIndex.docs
+                    .map(doc => {
+                        let score = 0;
+                        let matchedText = '';
+                        
+                        if (doc.title && doc.title.toLowerCase().includes(lowerQuery)) {
+                            score += 10;
+                        }
+                        
+                        if (doc.text) {
+                            const text = doc.text.toLowerCase();
+                            queryTerms.forEach(term => {
+                                if (term.length < 2) return;
+                                const count = (text.match(new RegExp(escapeRegex(term), 'g')) || []).length;
+                                score += count;
+                                
+                                if (count > 0 && !matchedText) {
+                                    const index = text.indexOf(term);
+                                    const start = Math.max(0, index - 50);
+                                    const end = Math.min(text.length, index + term.length + 50);
+                                    matchedText = doc.text.substring(start, end);
+                                    if (start > 0) matchedText = '...' + matchedText;
+                                    if (end < text.length) matchedText = matchedText + '...';
+                                }
+                            });
+                        }
+                        
+                        return {
+                            title: doc.title,
+                            location: doc.location,
+                            text: matchedText || (doc.text ? doc.text.substring(0, 150) + '...' : ''),
+                            score: score
+                        };
+                    })
+                    .filter(result => result.score > 0)
+                    .sort((a, b) => b.score - a.score);
+                
+                displayFullResults(results, query);
+            }
+            
+            function displaySimpleResults(results, query) {
+                if (results.length === 0) {
+                    searchResults.innerHTML = '<div class="search-no-results">No results found</div>';
+                    searchResults.classList.add('active');
+                    return;
+                }
+                
+                const html = results.slice(0, 10).map(result => {
+                    const highlightedTitle = highlightText(result.title, query);
+                    return `
+                        <a href="${result.url}" class="search-result-item">
+                            <div class="search-result-title">${highlightedTitle}</div>
+                            <div class="search-result-path">${escapeHtml(result.path)}</div>
+                        </a>
+                    `;
+                }).join('');
+                
+                searchResults.innerHTML = html;
+                searchResults.classList.add('active');
+            }
+            
+            function displayFullResults(results, query) {
+                if (results.length === 0) {
+                    searchResults.innerHTML = '<div class="search-no-results">No results found</div>';
+                    searchResults.classList.add('active');
+                    return;
+                }
+                
+                const pathname = window.location.pathname;
+                let basePath = '/';
+                
+                const pathParts = pathname.split('/').filter(p => p);
+                
+                if (pathParts.length > 0 && !pathParts[0].endsWith('.html')) {
+                    const firstPart = pathParts[0];
+                    if (firstPart !== 'index' && firstPart !== 'search') {
+                        basePath = '/' + firstPart + '/';
+                    }
+                }
+                
+                console.log('Current pathname:', pathname);
+                console.log('Detected base path:', basePath);
+                
+                const html = results.slice(0, 10).map(result => {
+                    const highlightedTitle = highlightText(result.title, query);
+                    const highlightedText = highlightText(result.text, query);
+                    
+                    let path = result.location.replace(/^\//, '').replace(/\.html$/, '').replace(/\//g, ' > ');
+                    if (!path) path = 'Home';
+                    
+                    let url;
+                    if (basePath === '/') {
+                        url = result.location;
+                    } else {
+                        const cleanLocation = result.location.startsWith('/') ? result.location.substring(1) : result.location;
+                        url = basePath + cleanLocation;
+                    }
+                    
+                    console.log('Result:', result.title, '-> URL:', url);
+                    
+                    return `
+                        <a href="${url}" class="search-result-item">
+                            <div class="search-result-title">${highlightedTitle}</div>
+                            <div class="search-result-path">${escapeHtml(path)}</div>
+                            <div class="search-result-excerpt">${highlightedText}</div>
+                        </a>
+                    `;
+                }).join('');
+                
+                searchResults.innerHTML = html;
+                searchResults.classList.add('active');
+            }
+            
+            function highlightText(text, query) {
+                if (!text) return '';
+                const queryTerms = query.split(/\s+/).filter(t => t.length >= 2);
+                let result = escapeHtml(text);
+                queryTerms.forEach(term => {
+                    const regex = new RegExp('(' + escapeRegex(term) + ')', 'gi');
+                    result = result.replace(regex, '<span class="search-highlight">$1</span>');
+                });
+                return result;
+            }
+            
+            function escapeRegex(string) {
+                return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            }
+            
+            function escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+            
+            let searchTimeout;
+            searchInput.addEventListener('input', function(e) {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => performSearch(e.target.value), 300);
+            });
+            
+            searchInput.addEventListener('focus', function(e) {
+                if (e.target.value.length >= 2) {
+                    performSearch(e.target.value);
+                }
+            });
+            
+            document.addEventListener('click', function(e) {
+                if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+                    searchResults.classList.remove('active');
+                }
+            });
+            
+            searchInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    searchResults.classList.remove('active');
+                    searchInput.blur();
+                }
+            });
+        });
+
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('pre code').forEach((block) => {
+                block.parentElement.style.position = 'relative';
+            });
+        });
+        
+    </script>
+</body>
+</html>

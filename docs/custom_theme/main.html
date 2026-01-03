@@ -11,7 +11,6 @@
     
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
     
-    <!-- Google Analytics -->
     {% if config.theme.analytics and config.theme.analytics.gtag %}
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ config.theme.analytics.gtag }}"></script>
     <script>
@@ -157,6 +156,45 @@
         }
 
         .nav-links .dropdown-content .nested {
+            padding-left: 0;
+        }
+
+        .nav-links .dropdown-content .nested > strong {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .nav-links .dropdown-content .nested > strong:hover {
+            background: rgba(0, 255, 65, 0.1);
+        }
+
+        .nav-links .dropdown-content .nested > strong::after {
+            content: '▼';
+            font-size: 0.8em;
+            transition: transform 0.3s ease;
+            color: var(--text-primary);
+        }
+
+        .nav-links .dropdown-content .nested.collapsed > strong::after {
+            transform: rotate(-90deg);
+        }
+
+        .nav-links .dropdown-content .nested .unit-lessons {
+            max-height: 500px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .nav-links .dropdown-content .nested.collapsed .unit-lessons {
+            max-height: 0;
+        }
+
+        .nav-links .dropdown-content .nested .unit-lessons li {
             padding-left: 20px;
         }
 
@@ -646,13 +684,15 @@
                         <ul class="dropdown-content">
                             {% for child in nav_item.children %}
                                 {% if child.children %}
-                                    <li class="nested">
-                                        <strong style="color: var(--text-primary); padding: 10px 20px; display: block;">{{ child.title }}</strong>
-                                        {% for subchild in child.children %}
-                                        <li class="nested">
-                                            <a href="{{ subchild.url | url }}">{{ subchild.title }}</a>
-                                        </li>
-                                        {% endfor %}
+                                    <li class="nested collapsed">
+                                        <strong>{{ child.title }}</strong>
+                                        <ul class="unit-lessons">
+                                            {% for subchild in child.children %}
+                                            <li>
+                                                <a href="{{ subchild.url | url }}">{{ subchild.title }}</a>
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
                                     </li>
                                 {% else %}
                                     <li>
@@ -730,11 +770,9 @@
         {% endif %}
     </footer>
 
-    <!-- Xterm.js for terminal -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@5.3.0/css/xterm.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.min.js"></script>
     
-    <!-- Search index - embedded in theme -->
     <script src="{{ 'search_index.js' | url }}"></script>
     
     <script>
@@ -743,7 +781,18 @@
             navLinks.classList.toggle('active');
         }
 
-        // Content-based search with fallback
+        document.addEventListener('DOMContentLoaded', function() {
+            const unitHeaders = document.querySelectorAll('.nav-links .nested > strong');
+            
+            unitHeaders.forEach(header => {
+                header.addEventListener('click', function(e) {
+                    e.stopPropagation(); 
+                    const parent = this.parentElement;
+                    parent.classList.toggle('collapsed');
+                });
+            });
+        });
+
         document.addEventListener('DOMContentLoaded', function() {
             const searchInput = document.getElementById('searchInput');
             const searchResults = document.getElementById('searchResults');
@@ -755,7 +804,6 @@
             let searchIndex = null;
             let useSimpleSearch = false;
             
-            // Simple search index built from navigation (fallback)
             const simpleIndex = [
                 {% for nav_item in nav %}
                     {% if nav_item.children %}
@@ -786,18 +834,16 @@
                 {% endfor %}
             ];
             
-            // Check if we have embedded search data
             if (typeof window.searchIndex !== 'undefined') {
                 searchIndex = window.searchIndex;
                 useSimpleSearch = false;
                 console.log('✓ Using embedded search index:', searchIndex.docs.length, 'documents');
             } else {
-                // Try to load from JSON
                 const base_url = document.querySelector('base')?.getAttribute('href') || '/';
                 fetch(base_url + 'search_data.js')
                     .then(response => response.text())
                     .then(data => {
-                        eval(data);  // This loads window.searchIndex
+                        eval(data);  
                         if (window.searchIndex) {
                             searchIndex = window.searchIndex;
                             useSimpleSearch = false;
@@ -809,7 +855,7 @@
                         useSimpleSearch = true;
                     });
                 
-                useSimpleSearch = true; // Start with simple until loaded
+                useSimpleSearch = true; 
             }
             
             function performSearch(query) {
@@ -905,18 +951,12 @@
                     return;
                 }
                 
-                // Detect base path from current URL
-                // If we're at /cybersecuritynchs/unit1/, the base is /cybersecuritynchs/
                 const pathname = window.location.pathname;
                 let basePath = '/';
                 
-                // Extract base path (everything before the last meaningful segment)
-                // For /cybersecuritynchs/LECTURES/unit1/lesson1-1/ -> /cybersecuritynchs/
                 const pathParts = pathname.split('/').filter(p => p);
                 
-                // Check if we have a subdirectory (common patterns: /reponame/, /docs/, etc)
                 if (pathParts.length > 0 && !pathParts[0].endsWith('.html')) {
-                    // If first part looks like a repo name (not a file), use it as base
                     const firstPart = pathParts[0];
                     if (firstPart !== 'index' && firstPart !== 'search') {
                         basePath = '/' + firstPart + '/';
@@ -933,12 +973,10 @@
                     let path = result.location.replace(/^\//, '').replace(/\.html$/, '').replace(/\//g, ' > ');
                     if (!path) path = 'Home';
                     
-                    // Construct URL with base path
                     let url;
                     if (basePath === '/') {
                         url = result.location;
                     } else {
-                        // Remove leading slash from result.location and prepend basePath
                         const cleanLocation = result.location.startsWith('/') ? result.location.substring(1) : result.location;
                         url = basePath + cleanLocation;
                     }
@@ -1005,11 +1043,9 @@
             });
         });
 
-        // Highlight.js integration if enabled
         {% if config.theme.highlightjs %}
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('pre code').forEach((block) => {
-                // Add terminal-like styling
                 block.parentElement.style.position = 'relative';
             });
         });

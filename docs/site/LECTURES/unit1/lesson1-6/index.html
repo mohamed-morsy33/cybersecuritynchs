@@ -1,0 +1,2171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 1.6 - NCHS Cybersecurity</title>
+    
+    
+    <link rel="icon" href="../../../img/logo.png">
+    
+    
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DRPQMPQQS6"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-DRPQMPQQS6');
+    </script>
+    
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0e27;
+            --bg-secondary: #141b3a;
+            --text-primary: #00ff41;
+            --text-secondary: #7affa7;
+            --text-muted: #4a9960;
+            --accent: #ff0844;
+            --accent-secondary: #00d4ff;
+            --border: #1a3a2a;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--bg-primary);
+            color: var(--text-secondary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--bg-secondary);
+            border-bottom: 2px solid var(--text-primary);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 255, 65, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-logo a {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: 0.1em;
+            text-shadow: 0 0 10px var(--text-primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links > li {
+            position: relative;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 4px;
+            display: block;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--text-primary);
+            background: rgba(0, 255, 65, 0.1);
+            text-shadow: 0 0 10px var(--text-primary);
+        }
+
+        /* Dropdown menu */
+        .nav-links .dropdown {
+            position: relative;
+        }
+
+        .nav-links .dropdown > a::after {
+            content: ' ▼';
+            font-size: 0.7em;
+            margin-left: 5px;
+        }
+
+        .nav-links .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--bg-secondary);
+            border: 2px solid var(--text-primary);
+            border-radius: 4px;
+            min-width: 250px;
+            box-shadow: 0 8px 30px rgba(0, 255, 65, 0.3);
+            z-index: 1000;
+            padding: 10px 0;
+            margin-top: 5px;
+        }
+
+        .nav-links .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .nav-links .dropdown-content li {
+            list-style: none;
+        }
+
+        .nav-links .dropdown-content a {
+            padding: 10px 20px;
+            border-radius: 0;
+        }
+
+        .nav-links .dropdown-content .nested {
+            padding-left: 0;
+        }
+
+        .nav-links .dropdown-content .nested > strong {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .nav-links .dropdown-content .nested > strong:hover {
+            background: rgba(0, 255, 65, 0.1);
+        }
+
+        .nav-links .dropdown-content .nested > strong::after {
+            content: '▼';
+            font-size: 0.8em;
+            transition: transform 0.3s ease;
+            color: var(--text-primary);
+        }
+
+        .nav-links .dropdown-content .nested.collapsed > strong::after {
+            transform: rotate(-90deg);
+        }
+
+        .nav-links .dropdown-content .nested .unit-lessons {
+            max-height: 500px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .nav-links .dropdown-content .nested.collapsed .unit-lessons {
+            max-height: 0;
+        }
+
+        .nav-links .dropdown-content .nested .unit-lessons li {
+            padding-left: 20px;
+        }
+
+        .nav-links .dropdown-content .nested a {
+            padding: 8px 20px;
+            font-size: 0.9em;
+            color: var(--text-muted);
+        }
+
+        .nav-links .dropdown-content .nested a:hover {
+            color: var(--text-primary);
+            background: rgba(0, 255, 65, 0.05);
+        }
+
+        /* Mobile menu toggle */
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: 2px solid var(--text-primary);
+            color: var(--text-primary);
+            padding: 8px 15px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        /* Search */
+        .search-container {
+            position: relative;
+            margin-left: 20px;
+        }
+
+        .search-input {
+            padding: 8px 35px 8px 15px;
+            background: var(--bg-primary);
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            width: 250px;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--text-primary);
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+        }
+
+        .search-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
+        .search-results {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            right: 0;
+            background: var(--bg-secondary);
+            border: 2px solid var(--text-primary);
+            border-radius: 8px;
+            max-height: 400px;
+            overflow-y: auto;
+            display: none;
+            z-index: 2000;
+            box-shadow: 0 8px 30px rgba(0, 255, 65, 0.3);
+        }
+
+        .search-results.active {
+            display: block;
+        }
+
+        .search-result-item {
+            padding: 15px;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-result-item:hover {
+            background: rgba(0, 255, 65, 0.05);
+        }
+
+        .search-result-title {
+            color: var(--text-primary);
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .search-result-path {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-bottom: 8px;
+        }
+
+        .search-result-excerpt {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .search-highlight {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            padding: 2px 4px;
+            border-radius: 2px;
+            font-weight: 700;
+        }
+
+        .search-no-results {
+            padding: 20px;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        .search-results::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .search-results::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+
+        .search-results::-webkit-scrollbar-thumb {
+            background: var(--text-primary);
+            border-radius: 4px;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 30px;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--text-primary);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-shadow: 0 0 20px var(--text-primary);
+            letter-spacing: 0.05em;
+            border-bottom: 2px solid var(--text-primary);
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            border-left: 4px solid var(--text-primary);
+            padding-left: 15px;
+        }
+
+        h3 { font-size: 1.5rem; }
+        h4 { font-size: 1.25rem; }
+
+        p {
+            margin-bottom: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        a {
+            color: var(--accent-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--text-primary);
+            text-shadow: 0 0 10px var(--text-primary);
+        }
+
+        /* Code Blocks */
+        code {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            padding: 2px 8px;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        pre {
+            background: var(--bg-secondary);
+            border: 2px solid var(--text-primary);
+            border-radius: 8px;
+            padding: 20px;
+            overflow-x: auto;
+            margin: 20px 0;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
+        }
+
+        pre code {
+            background: transparent;
+            border: none;
+            padding: 0;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 1.2rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        li::marker {
+            color: var(--text-primary);
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+        }
+
+        th {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            padding: 12px;
+            text-align: left;
+            border: 1px solid var(--text-primary);
+            font-weight: 700;
+        }
+
+        td {
+            padding: 12px;
+            border: 1px solid var(--border);
+        }
+
+        tr:hover {
+            background: rgba(0, 255, 65, 0.05);
+        }
+
+        /* Blockquotes */
+        blockquote {
+            border-left: 4px solid var(--text-primary);
+            background: var(--bg-secondary);
+            padding: 15px 20px;
+            margin: 20px 0;
+            font-style: italic;
+        }
+
+        /* Images */
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        /* Horizontal Rule */
+        hr {
+            border: none;
+            border-top: 2px solid var(--text-primary);
+            margin: 30px 0;
+            opacity: 0.3;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 2px solid var(--text-primary);
+            padding: 30px;
+            margin-top: 60px;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        /* Scanline Effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                transparent 50%,
+                rgba(0, 255, 65, 0.02) 51%
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 9999;
+            animation: scan 8s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100%); }
+        }
+
+        /* Selection */
+        ::selection {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+            background: var(--bg-primary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--text-primary);
+            border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--bg-secondary);
+                flex-direction: column;
+                padding: 20px;
+                border-bottom: 2px solid var(--text-primary);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 20px 15px;
+            }
+
+            .search-container {
+                margin-left: 10px;
+            }
+
+            .search-input {
+                width: 200px;
+            }
+        }
+
+        /* Search Box */
+        .search-box {
+            padding: 10px;
+            background: var(--bg-primary);
+            border: 1px solid var(--text-primary);
+            border-radius: 4px;
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .search-box::placeholder {
+            color: var(--text-muted);
+        }
+
+        /* Lesson Navigation */
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 60px 0 40px 0;
+            padding: 30px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .lesson-nav-button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            background: var(--bg-primary);
+            border: 2px solid var(--text-primary);
+            border-radius: 8px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .lesson-nav-button:hover {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 255, 65, 0.3);
+        }
+
+        .lesson-nav-button.disabled {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .lesson-nav-button .arrow {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .lesson-nav-info {
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        .lesson-nav-info .current-lesson {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+
+        .lesson-nav-info .lesson-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 768px) {
+            .lesson-nav {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .lesson-nav-button {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .lesson-nav-info {
+                order: -1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo">
+                
+                <img src="../../../img/logo.png" alt="Logo">
+                
+                <a href="https://mohamed-morsy33.github.io/cybersecuritynchs/">NCHS Cybersecurity</a>
+            </div>
+            
+            <button class="nav-toggle" onclick="toggleMenu()">MENU</button>
+            
+            <ul class="nav-links" id="navLinks">
+                
+                <li >
+                    
+                        <a href="../../.." 
+                           >
+                            Home
+                        </a>
+                    
+                </li>
+                
+                <li class="dropdown">
+                    
+                        <a href="#">Curriculum</a>
+                        <ul class="dropdown-content">
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 1</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../lesson1-1/">Lesson 1.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../lesson1-2/">Lesson 1.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../lesson1-3/">Lesson 1.3</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../lesson1-4/">Lesson 1.4</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../lesson1-5/">Lesson 1.5</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="./">Lesson 1.6</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../installation-process/">Linux Installation Process</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 2</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit2/lesson2-1/">Lesson 2.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit2/lesson2-2/">Lesson 2.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit2/lesson2-3/">Lesson 2.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 3</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit3/lesson3-1/">Lesson 3.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit3/lesson3-2/">Lesson 3.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit3/lesson3-3/">Lesson 3.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 4</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit4/lesson4-1/">Lesson 4.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit4/lesson4-2/">Lesson 4.2</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 5</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit5/lesson5-1/">Lesson 5.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit5/lesson5-2/">Lesson 5.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit5/lesson5-3/">Lesson 5.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 6</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit6/lesson6-1/">Lesson 6.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit6/lesson6-2/">Lesson 6.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit6/lesson6-3/">Lesson 6.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 7</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit7/lesson7-1/">Lesson 7.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit7/lesson7-2/">Lesson 7.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit7/lesson7-3/">Lesson 7.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 8</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit8/lesson8-1/">Lesson 8.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit8/lesson8-2/">Lesson 8.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit8/lesson8-3/">Lesson 8.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 9</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit9/lesson9-1/">Lesson 9.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit9/lesson9-2/">Lesson 9.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit9/lesson9-3/">Lesson 9.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 10</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit10/lesson10-1/">Lesson 10.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit10/lesson10-2/">Lesson 10.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit10/lesson10-3/">Lesson 10.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 11</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../../unit11/lesson11-1/">Lesson 11.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit11/lesson11-2/">Lesson 11.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../../unit11/lesson11-3/">Lesson 11.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                        </ul>
+                    
+                </li>
+                
+                <li >
+                    
+                        <a href="../../../test/" 
+                           >
+                            Terminal
+                        </a>
+                    
+                </li>
+                
+            </ul>
+
+            <div class="search-container">
+                <input type="text" 
+                       class="search-input" 
+                       id="searchInput" 
+                       placeholder="Search lessons..."
+                       autocomplete="off">
+                <span class="search-icon">🔍</span>
+                <div class="search-results" id="searchResults"></div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        
+        <h1 id="package-management-and-system-administration">Package Management and System Administration</h1>
+<p>Linux systems need software installation, updates, and maintenance. As a security professional, you'll constantly be installing tools, updating systems, and managing services. This lesson covers the essential system administration tasks.</p>
+<h2 id="package-management">Package Management</h2>
+<p><strong>Package managers</strong> handle software installation, updates, and removal. Different Linux distributions use different package managers.</p>
+<h3 id="apt-debianubuntukali">APT (Debian/Ubuntu/Kali)</h3>
+<p><strong>APT</strong> (Advanced Package Tool) is used on Debian-based systems like Ubuntu and Kali Linux.</p>
+<h4 id="updating-package-lists">Updating Package Lists</h4>
+<pre><code class="language-bash"># Update package index
+sudo apt update
+
+# Always do this before installing new software!
+</code></pre>
+<h4 id="upgrading-packages">Upgrading Packages</h4>
+<pre><code class="language-bash"># Upgrade all installed packages
+sudo apt upgrade
+
+# Upgrade with automatic handling of dependencies
+sudo apt full-upgrade
+
+# Upgrade specific package
+sudo apt upgrade package-name
+</code></pre>
+<h4 id="installing-packages">Installing Packages</h4>
+<pre><code class="language-bash"># Install package
+sudo apt install nmap
+
+# Install multiple packages
+sudo apt install nmap wireshark metasploit-framework
+
+# Install without confirmation
+sudo apt install -y nmap
+
+# Reinstall package
+sudo apt install --reinstall nmap
+</code></pre>
+<h4 id="removing-packages">Removing Packages</h4>
+<pre><code class="language-bash"># Remove package (keep configuration files)
+sudo apt remove nmap
+
+# Remove package and configuration files
+sudo apt purge nmap
+
+# Remove unused dependencies
+sudo apt autoremove
+
+# Clean up downloaded package files
+sudo apt clean
+</code></pre>
+<h4 id="searching-for-packages">Searching for Packages</h4>
+<pre><code class="language-bash"># Search for package
+apt search nmap
+
+# Show package information
+apt show nmap
+
+# List installed packages
+apt list --installed
+
+# List upgradeable packages
+apt list --upgradeable
+</code></pre>
+<h3 id="yumdnf-red-hatfedoracentos">YUM/DNF (Red Hat/Fedora/CentOS)</h3>
+<p>Used on Red Hat-based systems.</p>
+<pre><code class="language-bash"># Update package lists
+sudo yum update  # or sudo dnf update
+
+# Install package
+sudo yum install nmap
+
+# Remove package
+sudo yum remove nmap
+
+# Search for package
+yum search nmap
+
+# Show package info
+yum info nmap
+</code></pre>
+<h3 id="installing-from-source">Installing from Source</h3>
+<p>Sometimes you need to compile software from source code.</p>
+<pre><code class="language-bash"># 1. Download source code
+wget https://example.com/software.tar.gz
+
+# 2. Extract
+tar -xzvf software.tar.gz
+cd software/
+
+# 3. Configure
+./configure
+
+# 4. Compile
+make
+
+# 5. Install
+sudo make install
+
+# 6. Uninstall (if needed)
+sudo make uninstall
+</code></pre>
+<p><strong>Common compilation dependencies:</strong></p>
+<pre><code class="language-bash">sudo apt install build-essential
+sudo apt install gcc g++ make
+</code></pre>
+<h2 id="user-management">User Management</h2>
+<h3 id="creating-users">Creating Users</h3>
+<pre><code class="language-bash"># Create new user
+sudo useradd john
+
+# Create user with home directory
+sudo useradd -m john
+
+# Create user with specific shell
+sudo useradd -m -s /bin/bash john
+
+# Set password
+sudo passwd john
+</code></pre>
+<h3 id="modifying-users">Modifying Users</h3>
+<pre><code class="language-bash"># Change user's shell
+sudo usermod -s /bin/zsh john
+
+# Add user to group
+sudo usermod -aG sudo john    # Add to sudo group
+sudo usermod -aG docker john  # Add to docker group
+
+# Change home directory
+sudo usermod -d /home/newjohn john
+
+# Lock user account
+sudo usermod -L john
+
+# Unlock user account
+sudo usermod -U john
+</code></pre>
+<h3 id="deleting-users">Deleting Users</h3>
+<pre><code class="language-bash"># Delete user (keep home directory)
+sudo userdel john
+
+# Delete user and home directory
+sudo userdel -r john
+</code></pre>
+<h3 id="user-information">User Information</h3>
+<pre><code class="language-bash"># Show current user
+whoami
+
+# Show all users
+cat /etc/passwd
+
+# Show logged in users
+who
+
+# Show what users are doing
+w
+
+# Last logins
+last
+
+# Show user's groups
+groups username
+
+# Show user ID and group ID
+id username
+</code></pre>
+<h3 id="switching-users">Switching Users</h3>
+<pre><code class="language-bash"># Switch to another user
+su - john
+
+# Switch to root
+su -
+
+# Run command as another user
+sudo -u john command
+
+# Open shell as root
+sudo -i
+
+# Run command as root
+sudo command
+</code></pre>
+<h2 id="group-management">Group Management</h2>
+<h3 id="creating-groups">Creating Groups</h3>
+<pre><code class="language-bash"># Create group
+sudo groupadd developers
+
+# Create group with specific GID
+sudo groupadd -g 1001 developers
+</code></pre>
+<h3 id="managing-groups">Managing Groups</h3>
+<pre><code class="language-bash"># Add user to group
+sudo usermod -aG developers john
+
+# Remove user from group
+sudo gpasswd -d john developers
+
+# Delete group
+sudo groupdel developers
+
+# Show all groups
+cat /etc/group
+</code></pre>
+<h2 id="file-system-management">File System Management</h2>
+<h3 id="mounting-and-unmounting">Mounting and Unmounting</h3>
+<pre><code class="language-bash"># Mount a device
+sudo mount /dev/sdb1 /mnt/usb
+
+# Unmount
+sudo umount /mnt/usb
+
+# Mount with specific filesystem type
+sudo mount -t ntfs /dev/sdb1 /mnt/windows
+
+# Show mounted filesystems
+mount
+
+# Show disk usage
+df -h
+</code></pre>
+<h3 id="etcfstab-automatic-mounting">/etc/fstab - Automatic Mounting</h3>
+<p>Edit <code>/etc/fstab</code> to automatically mount filesystems at boot:</p>
+<pre><code class="language-bash">sudo nano /etc/fstab
+</code></pre>
+<p>Example entry:</p>
+<pre><code>/dev/sdb1  /mnt/data  ext4  defaults  0  2
+</code></pre>
+<h3 id="checking-disk-health">Checking Disk Health</h3>
+<pre><code class="language-bash"># Check filesystem
+sudo fsck /dev/sdb1
+
+# Check and repair
+sudo fsck -y /dev/sdb1
+
+# SMART status (if installed)
+sudo smartctl -a /dev/sda
+</code></pre>
+<h2 id="service-management-systemd">Service Management (systemd)</h2>
+<p>Modern Linux uses <strong>systemd</strong> to manage services.</p>
+<h3 id="managing-services">Managing Services</h3>
+<pre><code class="language-bash"># Start service
+sudo systemctl start apache2
+
+# Stop service
+sudo systemctl stop apache2
+
+# Restart service
+sudo systemctl restart apache2
+
+# Reload configuration
+sudo systemctl reload apache2
+
+# Enable service (start at boot)
+sudo systemctl enable apache2
+
+# Disable service (don't start at boot)
+sudo systemctl disable apache2
+
+# Check service status
+sudo systemctl status apache2
+
+# Show if service is active
+systemctl is-active apache2
+
+# Show if service is enabled
+systemctl is-enabled apache2
+</code></pre>
+<h3 id="viewing-services">Viewing Services</h3>
+<pre><code class="language-bash"># List all services
+systemctl list-units --type=service
+
+# List enabled services
+systemctl list-unit-files --type=service --state=enabled
+
+# List failed services
+systemctl --failed
+</code></pre>
+<h3 id="viewing-logs">Viewing Logs</h3>
+<pre><code class="language-bash"># View service logs
+sudo journalctl -u apache2
+
+# Follow logs (real-time)
+sudo journalctl -u apache2 -f
+
+# View logs since boot
+sudo journalctl -b
+
+# View recent logs
+sudo journalctl -n 50
+
+# View logs for specific time
+sudo journalctl --since &quot;2024-01-01&quot; --until &quot;2024-01-02&quot;
+</code></pre>
+<h2 id="system-logs">System Logs</h2>
+<h3 id="log-locations">Log Locations</h3>
+<pre><code class="language-bash">/var/log/syslog        # General system log
+/var/log/auth.log      # Authentication log
+/var/log/kern.log      # Kernel log
+/var/log/apache2/      # Apache logs
+/var/log/mysql/        # MySQL logs
+</code></pre>
+<h3 id="viewing-logs_1">Viewing Logs</h3>
+<pre><code class="language-bash"># View recent system log
+tail -f /var/log/syslog
+
+# View authentication attempts
+sudo tail -f /var/log/auth.log
+
+# Search for failed logins
+sudo grep &quot;Failed password&quot; /var/log/auth.log
+
+# Count failed login attempts
+sudo grep &quot;Failed password&quot; /var/log/auth.log | wc -l
+</code></pre>
+<h2 id="scheduled-tasks-cron">Scheduled Tasks (Cron)</h2>
+<p><strong>Cron</strong> runs commands on a schedule.</p>
+<h3 id="crontab-syntax">Crontab Syntax</h3>
+<pre><code>* * * * * command
+│ │ │ │ │
+│ │ │ │ └─── Day of week (0-7, Sunday = 0 or 7)
+│ │ │ └───── Month (1-12)
+│ │ └─────── Day of month (1-31)
+│ └───────── Hour (0-23)
+└─────────── Minute (0-59)
+</code></pre>
+<h3 id="managing-crontab">Managing Crontab</h3>
+<pre><code class="language-bash"># Edit current user's crontab
+crontab -e
+
+# List crontab
+crontab -l
+
+# Remove crontab
+crontab -r
+
+# Edit another user's crontab
+sudo crontab -u john -e
+</code></pre>
+<h3 id="examples">Examples</h3>
+<pre><code class="language-bash"># Run every day at 2 AM
+0 2 * * * /path/to/backup.sh
+
+# Run every hour
+0 * * * * /path/to/check.sh
+
+# Run every 15 minutes
+*/15 * * * * /path/to/script.sh
+
+# Run every Monday at 3 PM
+0 15 * * 1 /path/to/weekly.sh
+
+# Run at reboot
+@reboot /path/to/startup.sh
+
+# Run daily
+@daily /path/to/daily.sh
+</code></pre>
+<h3 id="system-wide-cron">System-wide Cron</h3>
+<pre><code class="language-bash"># Edit system crontabs
+sudo vim /etc/crontab
+
+# Or place scripts in:
+/etc/cron.daily/      # Runs daily
+/etc/cron.hourly/     # Runs hourly
+/etc/cron.weekly/     # Runs weekly
+/etc/cron.monthly/    # Runs monthly
+</code></pre>
+<h2 id="system-monitoring">System Monitoring</h2>
+<h3 id="resource-monitoring">Resource Monitoring</h3>
+<pre><code class="language-bash"># Real-time process monitor
+top
+
+# Better alternative (if installed)
+htop
+
+# Disk I/O statistics
+iostat
+
+# Virtual memory statistics
+vmstat
+
+# Network statistics
+netstat -tuln    # Listening ports
+netstat -plant   # All connections
+
+# Modern alternative to netstat
+ss -tuln         # Listening ports
+ss -plant        # All connections
+</code></pre>
+<h3 id="system-information">System Information</h3>
+<pre><code class="language-bash"># CPU information
+lscpu
+cat /proc/cpuinfo
+
+# Memory information
+free -h
+cat /proc/meminfo
+
+# Disk information
+lsblk
+fdisk -l
+
+# PCI devices
+lspci
+
+# USB devices
+lsusb
+
+# Kernel version
+uname -r
+
+# Distribution information
+cat /etc/os-release
+lsb_release -a
+</code></pre>
+<h2 id="network-configuration">Network Configuration</h2>
+<h3 id="network-interfaces">Network Interfaces</h3>
+<pre><code class="language-bash"># Show interfaces (old)
+ifconfig
+
+# Show interfaces (modern)
+ip addr show
+ip a
+
+# Bring interface up
+sudo ip link set eth0 up
+
+# Bring interface down
+sudo ip link set eth0 down
+
+# Set IP address
+sudo ip addr add 192.168.1.100/24 dev eth0
+
+# Delete IP address
+sudo ip addr del 192.168.1.100/24 dev eth0
+</code></pre>
+<h3 id="network-configuration-files">Network Configuration Files</h3>
+<h4 id="etcnetworkinterfaces-debian">/etc/network/interfaces (Debian)</h4>
+<pre><code class="language-bash">sudo nano /etc/network/interfaces
+</code></pre>
+<p>Static IP example:</p>
+<pre><code>auto eth0
+iface eth0 inet static
+    address 192.168.1.100
+    netmask 255.255.255.0
+    gateway 192.168.1.1
+    dns-nameservers 8.8.8.8 8.8.4.4
+</code></pre>
+<p>DHCP example:</p>
+<pre><code>auto eth0
+iface eth0 inet dhcp
+</code></pre>
+<h4 id="netplan-ubuntu-1804">netplan (Ubuntu 18.04+)</h4>
+<pre><code class="language-bash">sudo nano /etc/netplan/01-netcfg.yaml
+</code></pre>
+<p>Example:</p>
+<pre><code class="language-yaml">network:
+  version: 2
+  ethernets:
+    eth0:
+      dhcp4: false
+      addresses: [192.168.1.100/24]
+      gateway4: 192.168.1.1
+      nameservers:
+        addresses: [8.8.8.8, 8.8.4.4]
+</code></pre>
+<p>Apply changes:</p>
+<pre><code class="language-bash">sudo netplan apply
+</code></pre>
+<h3 id="dns-configuration">DNS Configuration</h3>
+<pre><code class="language-bash"># Edit DNS servers
+sudo nano /etc/resolv.conf
+</code></pre>
+<p>Example:</p>
+<pre><code>nameserver 8.8.8.8
+nameserver 8.8.4.4
+</code></pre>
+<h3 id="hostname">Hostname</h3>
+<pre><code class="language-bash"># Show hostname
+hostname
+
+# Change hostname temporarily
+sudo hostname newhostname
+
+# Change hostname permanently
+sudo hostnamectl set-hostname newhostname
+
+# Edit hosts file
+sudo nano /etc/hosts
+</code></pre>
+<h2 id="firewall-iptablesufw">Firewall (iptables/ufw)</h2>
+<h3 id="ufw-uncomplicated-firewall">UFW (Uncomplicated Firewall)</h3>
+<p>Easier to use than raw iptables.</p>
+<pre><code class="language-bash"># Enable firewall
+sudo ufw enable
+
+# Disable firewall
+sudo ufw disable
+
+# Show status
+sudo ufw status
+
+# Verbose status
+sudo ufw status verbose
+
+# Allow port
+sudo ufw allow 22
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+
+# Allow from specific IP
+sudo ufw allow from 192.168.1.100
+
+# Allow specific IP to specific port
+sudo ufw allow from 192.168.1.100 to any port 22
+
+# Deny port
+sudo ufw deny 23
+
+# Delete rule
+sudo ufw delete allow 80
+
+# Reset firewall (remove all rules)
+sudo ufw reset
+
+# Set default policies
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+</code></pre>
+<h3 id="iptables-advanced">iptables (Advanced)</h3>
+<p>Lower-level firewall control.</p>
+<pre><code class="language-bash"># List rules
+sudo iptables -L
+
+# List with line numbers
+sudo iptables -L --line-numbers
+
+# Allow incoming SSH
+sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+
+# Allow established connections
+sudo iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+# Drop all other incoming
+sudo iptables -A INPUT -j DROP
+
+# Save rules (Debian/Ubuntu)
+sudo iptables-save &gt; /etc/iptables/rules.v4
+
+# Restore rules
+sudo iptables-restore &lt; /etc/iptables/rules.v4
+
+# Flush all rules
+sudo iptables -F
+</code></pre>
+<h2 id="system-updates-and-security">System Updates and Security</h2>
+<h3 id="keeping-system-updated">Keeping System Updated</h3>
+<pre><code class="language-bash"># Update and upgrade (Debian/Ubuntu)
+sudo apt update &amp;&amp; sudo apt upgrade -y
+
+# Security updates only
+sudo apt update &amp;&amp; sudo apt upgrade -y --only-upgrade
+
+# Automatic updates (install package)
+sudo apt install unattended-upgrades
+
+# Configure automatic updates
+sudo dpkg-reconfigure unattended-upgrades
+</code></pre>
+<h3 id="security-hardening-basics">Security Hardening Basics</h3>
+<pre><code class="language-bash"># Disable root login via SSH
+sudo nano /etc/ssh/sshd_config
+# Set: PermitRootLogin no
+sudo systemctl restart sshd
+
+# Change SSH port (security through obscurity)
+# In /etc/ssh/sshd_config: Port 2222
+
+# Disable password authentication (use keys only)
+# In /etc/ssh/sshd_config: PasswordAuthentication no
+
+# Install fail2ban (blocks repeated failed logins)
+sudo apt install fail2ban
+sudo systemctl enable fail2ban
+sudo systemctl start fail2ban
+</code></pre>
+<h2 id="backups">Backups</h2>
+<h3 id="using-tar-for-backups">Using tar for Backups</h3>
+<pre><code class="language-bash"># Backup home directory
+sudo tar -czvf /backup/home-$(date +%Y%m%d).tar.gz /home
+
+# Restore from backup
+sudo tar -xzvf /backup/home-20240101.tar.gz -C /
+</code></pre>
+<h3 id="using-rsync-for-backups">Using rsync for Backups</h3>
+<pre><code class="language-bash"># Backup to another location
+sudo rsync -avz /home /backup/
+
+# Backup over network
+sudo rsync -avz /home user@remote:/backup/
+
+# Exclude certain files
+sudo rsync -avz --exclude='*.tmp' /home /backup/
+</code></pre>
+<h2 id="practical-security-examples">Practical Security Examples</h2>
+<h3 id="check-for-failed-login-attempts">Check for Failed Login Attempts</h3>
+<pre><code class="language-bash">sudo grep &quot;Failed password&quot; /var/log/auth.log | tail -20
+</code></pre>
+<h3 id="find-recently-modified-files">Find Recently Modified Files</h3>
+<pre><code class="language-bash">find /etc -mtime -1  # Modified in last 24 hours
+</code></pre>
+<h3 id="check-listening-ports">Check Listening Ports</h3>
+<pre><code class="language-bash">sudo ss -tuln
+sudo netstat -tuln
+</code></pre>
+<h3 id="see-active-connections">See Active Connections</h3>
+<pre><code class="language-bash">sudo ss -plant
+sudo netstat -plant
+</code></pre>
+<h3 id="check-for-unusual-processes">Check for Unusual Processes</h3>
+<pre><code class="language-bash">ps aux | grep -v &quot;\[&quot; | grep -v &quot;root&quot; | sort -k 3 -r | head
+</code></pre>
+<h3 id="monitor-system-logs-in-real-time">Monitor System Logs in Real-Time</h3>
+<pre><code class="language-bash">sudo tail -f /var/log/syslog | grep -i error
+</code></pre>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<p>System administration skills you now have:
+- Package management (installing/removing software)
+- User and group management
+- Service management (starting/stopping/enabling services)
+- Log viewing and monitoring
+- Scheduled tasks (cron)
+- Network configuration
+- Basic firewall rules
+- System security hardening</p>
+<p>These are fundamental skills every security professional needs. You'll use these daily whether you're:
+- Setting up security tools
+- Investigating incidents
+- Hardening systems
+- Monitoring for threats
+- Analyzing logs</p>
+<p>Practice these commands regularly. Set up a virtual machine and experiment. Break things (in your VM!) and fix them. That's how you truly learn system administration.</p>
+<p>In the next lessons, we'll move beyond Linux basics and start applying these skills to security-specific scenarios.</p>
+        
+
+        <!-- Lesson Navigation (only show on non-homepage pages) -->
+        
+        <div class="lesson-nav">
+            
+            <a href="../lesson1-5/" class="lesson-nav-button">
+                <span class="arrow">←</span>
+                <span>Previous: Lesson 1.5</span>
+            </a>
+            
+
+            <div class="lesson-nav-info">
+                <div class="current-lesson">Current Lesson</div>
+                <div class="lesson-title">Lesson 1.6</div>
+            </div>
+
+            
+            <a href="../installation-process/" class="lesson-nav-button">
+                <span>Next: Linux Installation Process</span>
+                <span class="arrow">→</span>
+            </a>
+            
+        </div>
+        
+    </div>
+
+    <footer>
+        <p>NCHS Cybersecurity | Built with MkDocs</p>
+        
+        <p>Copyright &copy; 2025 Mohamed Morsy</p>
+        
+    </footer>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@5.3.0/css/xterm.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.min.js"></script>
+    
+    <script src="../../../search_index.js"></script>
+    
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const unitHeaders = document.querySelectorAll('.nav-links .nested > strong');
+            
+            unitHeaders.forEach(header => {
+                header.addEventListener('click', function(e) {
+                    e.stopPropagation(); 
+                    const parent = this.parentElement;
+                    parent.classList.toggle('collapsed');
+                });
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const searchResults = document.getElementById('searchResults');
+            
+            if (!searchInput || !searchResults) {
+                return;
+            }
+            
+            let searchIndex = null;
+            let useSimpleSearch = false;
+            
+            const simpleIndex = [
+                
+                    
+                
+                    
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 1.1",
+                                    url: '../lesson1-1/',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                                {
+                                    title: "Lesson 1.2",
+                                    url: '../lesson1-2/',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                                {
+                                    title: "Lesson 1.3",
+                                    url: '../lesson1-3/',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                                {
+                                    title: "Lesson 1.4",
+                                    url: '../lesson1-4/',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                                {
+                                    title: "Lesson 1.5",
+                                    url: '../lesson1-5/',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                                {
+                                    title: "Lesson 1.6",
+                                    url: './',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                                {
+                                    title: "Linux Installation Process",
+                                    url: '../installation-process/',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 2.1",
+                                    url: '../../unit2/lesson2-1/',
+                                    path: 'Curriculum > Unit 2'
+                                },
+                                
+                                {
+                                    title: "Lesson 2.2",
+                                    url: '../../unit2/lesson2-2/',
+                                    path: 'Curriculum > Unit 2'
+                                },
+                                
+                                {
+                                    title: "Lesson 2.3",
+                                    url: '../../unit2/lesson2-3/',
+                                    path: 'Curriculum > Unit 2'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 3.1",
+                                    url: '../../unit3/lesson3-1/',
+                                    path: 'Curriculum > Unit 3'
+                                },
+                                
+                                {
+                                    title: "Lesson 3.2",
+                                    url: '../../unit3/lesson3-2/',
+                                    path: 'Curriculum > Unit 3'
+                                },
+                                
+                                {
+                                    title: "Lesson 3.3",
+                                    url: '../../unit3/lesson3-3/',
+                                    path: 'Curriculum > Unit 3'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 4.1",
+                                    url: '../../unit4/lesson4-1/',
+                                    path: 'Curriculum > Unit 4'
+                                },
+                                
+                                {
+                                    title: "Lesson 4.2",
+                                    url: '../../unit4/lesson4-2/',
+                                    path: 'Curriculum > Unit 4'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 5.1",
+                                    url: '../../unit5/lesson5-1/',
+                                    path: 'Curriculum > Unit 5'
+                                },
+                                
+                                {
+                                    title: "Lesson 5.2",
+                                    url: '../../unit5/lesson5-2/',
+                                    path: 'Curriculum > Unit 5'
+                                },
+                                
+                                {
+                                    title: "Lesson 5.3",
+                                    url: '../../unit5/lesson5-3/',
+                                    path: 'Curriculum > Unit 5'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 6.1",
+                                    url: '../../unit6/lesson6-1/',
+                                    path: 'Curriculum > Unit 6'
+                                },
+                                
+                                {
+                                    title: "Lesson 6.2",
+                                    url: '../../unit6/lesson6-2/',
+                                    path: 'Curriculum > Unit 6'
+                                },
+                                
+                                {
+                                    title: "Lesson 6.3",
+                                    url: '../../unit6/lesson6-3/',
+                                    path: 'Curriculum > Unit 6'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 7.1",
+                                    url: '../../unit7/lesson7-1/',
+                                    path: 'Curriculum > Unit 7'
+                                },
+                                
+                                {
+                                    title: "Lesson 7.2",
+                                    url: '../../unit7/lesson7-2/',
+                                    path: 'Curriculum > Unit 7'
+                                },
+                                
+                                {
+                                    title: "Lesson 7.3",
+                                    url: '../../unit7/lesson7-3/',
+                                    path: 'Curriculum > Unit 7'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 8.1",
+                                    url: '../../unit8/lesson8-1/',
+                                    path: 'Curriculum > Unit 8'
+                                },
+                                
+                                {
+                                    title: "Lesson 8.2",
+                                    url: '../../unit8/lesson8-2/',
+                                    path: 'Curriculum > Unit 8'
+                                },
+                                
+                                {
+                                    title: "Lesson 8.3",
+                                    url: '../../unit8/lesson8-3/',
+                                    path: 'Curriculum > Unit 8'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 9.1",
+                                    url: '../../unit9/lesson9-1/',
+                                    path: 'Curriculum > Unit 9'
+                                },
+                                
+                                {
+                                    title: "Lesson 9.2",
+                                    url: '../../unit9/lesson9-2/',
+                                    path: 'Curriculum > Unit 9'
+                                },
+                                
+                                {
+                                    title: "Lesson 9.3",
+                                    url: '../../unit9/lesson9-3/',
+                                    path: 'Curriculum > Unit 9'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 10.1",
+                                    url: '../../unit10/lesson10-1/',
+                                    path: 'Curriculum > Unit 10'
+                                },
+                                
+                                {
+                                    title: "Lesson 10.2",
+                                    url: '../../unit10/lesson10-2/',
+                                    path: 'Curriculum > Unit 10'
+                                },
+                                
+                                {
+                                    title: "Lesson 10.3",
+                                    url: '../../unit10/lesson10-3/',
+                                    path: 'Curriculum > Unit 10'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 11.1",
+                                    url: '../../unit11/lesson11-1/',
+                                    path: 'Curriculum > Unit 11'
+                                },
+                                
+                                {
+                                    title: "Lesson 11.2",
+                                    url: '../../unit11/lesson11-2/',
+                                    path: 'Curriculum > Unit 11'
+                                },
+                                
+                                {
+                                    title: "Lesson 11.3",
+                                    url: '../../unit11/lesson11-3/',
+                                    path: 'Curriculum > Unit 11'
+                                },
+                                
+                            
+                        
+                    
+                
+                    
+                        {
+                            title: "Terminal",
+                            url: '../../../test/',
+                            path: 'Main'
+                        },
+                    
+                
+            ];
+            
+            if (typeof window.searchIndex !== 'undefined') {
+                searchIndex = window.searchIndex;
+                useSimpleSearch = false;
+                console.log('✓ Using embedded search index:', searchIndex.docs.length, 'documents');
+            } else {
+                const base_url = document.querySelector('base')?.getAttribute('href') || '/';
+                fetch(base_url + 'search_data.js')
+                    .then(response => response.text())
+                    .then(data => {
+                        eval(data);  
+                        if (window.searchIndex) {
+                            searchIndex = window.searchIndex;
+                            useSimpleSearch = false;
+                            console.log('✓ Loaded search index from JS:', searchIndex.docs.length, 'documents');
+                        }
+                    })
+                    .catch(() => {
+                        console.log('Using simple title search (full search not available)');
+                        useSimpleSearch = true;
+                    });
+                
+                useSimpleSearch = true; 
+            }
+            
+            function performSearch(query) {
+                if (!query || query.length < 2) {
+                    searchResults.classList.remove('active');
+                    return;
+                }
+                
+                if (useSimpleSearch || !searchIndex) {
+                    performSimpleSearch(query);
+                } else {
+                    performFullSearch(query);
+                }
+            }
+            
+            function performSimpleSearch(query) {
+                const lowerQuery = query.toLowerCase();
+                const results = simpleIndex.filter(item => 
+                    item.title.toLowerCase().includes(lowerQuery)
+                );
+                displaySimpleResults(results, query);
+            }
+            
+            function performFullSearch(query) {
+                const lowerQuery = query.toLowerCase();
+                const queryTerms = lowerQuery.split(/\s+/);
+                
+                const results = searchIndex.docs
+                    .map(doc => {
+                        let score = 0;
+                        let matchedText = '';
+                        
+                        if (doc.title && doc.title.toLowerCase().includes(lowerQuery)) {
+                            score += 10;
+                        }
+                        
+                        if (doc.text) {
+                            const text = doc.text.toLowerCase();
+                            queryTerms.forEach(term => {
+                                if (term.length < 2) return;
+                                const count = (text.match(new RegExp(escapeRegex(term), 'g')) || []).length;
+                                score += count;
+                                
+                                if (count > 0 && !matchedText) {
+                                    const index = text.indexOf(term);
+                                    const start = Math.max(0, index - 50);
+                                    const end = Math.min(text.length, index + term.length + 50);
+                                    matchedText = doc.text.substring(start, end);
+                                    if (start > 0) matchedText = '...' + matchedText;
+                                    if (end < text.length) matchedText = matchedText + '...';
+                                }
+                            });
+                        }
+                        
+                        return {
+                            title: doc.title,
+                            location: doc.location,
+                            text: matchedText || (doc.text ? doc.text.substring(0, 150) + '...' : ''),
+                            score: score
+                        };
+                    })
+                    .filter(result => result.score > 0)
+                    .sort((a, b) => b.score - a.score);
+                
+                displayFullResults(results, query);
+            }
+            
+            function displaySimpleResults(results, query) {
+                if (results.length === 0) {
+                    searchResults.innerHTML = '<div class="search-no-results">No results found</div>';
+                    searchResults.classList.add('active');
+                    return;
+                }
+                
+                const html = results.slice(0, 10).map(result => {
+                    const highlightedTitle = highlightText(result.title, query);
+                    return `
+                        <a href="${result.url}" class="search-result-item">
+                            <div class="search-result-title">${highlightedTitle}</div>
+                            <div class="search-result-path">${escapeHtml(result.path)}</div>
+                        </a>
+                    `;
+                }).join('');
+                
+                searchResults.innerHTML = html;
+                searchResults.classList.add('active');
+            }
+            
+            function displayFullResults(results, query) {
+                if (results.length === 0) {
+                    searchResults.innerHTML = '<div class="search-no-results">No results found</div>';
+                    searchResults.classList.add('active');
+                    return;
+                }
+                
+                const pathname = window.location.pathname;
+                let basePath = '/';
+                
+                const pathParts = pathname.split('/').filter(p => p);
+                
+                if (pathParts.length > 0 && !pathParts[0].endsWith('.html')) {
+                    const firstPart = pathParts[0];
+                    if (firstPart !== 'index' && firstPart !== 'search') {
+                        basePath = '/' + firstPart + '/';
+                    }
+                }
+                
+                console.log('Current pathname:', pathname);
+                console.log('Detected base path:', basePath);
+                
+                const html = results.slice(0, 10).map(result => {
+                    const highlightedTitle = highlightText(result.title, query);
+                    const highlightedText = highlightText(result.text, query);
+                    
+                    let path = result.location.replace(/^\//, '').replace(/\.html$/, '').replace(/\//g, ' > ');
+                    if (!path) path = 'Home';
+                    
+                    let url;
+                    if (basePath === '/') {
+                        url = result.location;
+                    } else {
+                        const cleanLocation = result.location.startsWith('/') ? result.location.substring(1) : result.location;
+                        url = basePath + cleanLocation;
+                    }
+                    
+                    console.log('Result:', result.title, '-> URL:', url);
+                    
+                    return `
+                        <a href="${url}" class="search-result-item">
+                            <div class="search-result-title">${highlightedTitle}</div>
+                            <div class="search-result-path">${escapeHtml(path)}</div>
+                            <div class="search-result-excerpt">${highlightedText}</div>
+                        </a>
+                    `;
+                }).join('');
+                
+                searchResults.innerHTML = html;
+                searchResults.classList.add('active');
+            }
+            
+            function highlightText(text, query) {
+                if (!text) return '';
+                const queryTerms = query.split(/\s+/).filter(t => t.length >= 2);
+                let result = escapeHtml(text);
+                queryTerms.forEach(term => {
+                    const regex = new RegExp('(' + escapeRegex(term) + ')', 'gi');
+                    result = result.replace(regex, '<span class="search-highlight">$1</span>');
+                });
+                return result;
+            }
+            
+            function escapeRegex(string) {
+                return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            }
+            
+            function escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+            
+            let searchTimeout;
+            searchInput.addEventListener('input', function(e) {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => performSearch(e.target.value), 300);
+            });
+            
+            searchInput.addEventListener('focus', function(e) {
+                if (e.target.value.length >= 2) {
+                    performSearch(e.target.value);
+                }
+            });
+            
+            document.addEventListener('click', function(e) {
+                if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+                    searchResults.classList.remove('active');
+                }
+            });
+            
+            searchInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    searchResults.classList.remove('active');
+                    searchInput.blur();
+                }
+            });
+        });
+
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('pre code').forEach((block) => {
+                block.parentElement.style.position = 'relative';
+            });
+        });
+        
+    </script>
+</body>
+</html>
