@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linux Installation Process - NCHS Cybersecurity</title>
+    <title>Lesson 8.3 - NCHS Cybersecurity</title>
     
     
     <link rel="icon" href="../../../img/logo.png">
@@ -698,31 +698,31 @@
                                         <ul class="unit-lessons">
                                             
                                             <li>
-                                                <a href="../lesson1-1/">Lesson 1.1</a>
+                                                <a href="../../unit1/lesson1-1/">Lesson 1.1</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-2/">Lesson 1.2</a>
+                                                <a href="../../unit1/lesson1-2/">Lesson 1.2</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-3/">Lesson 1.3</a>
+                                                <a href="../../unit1/lesson1-3/">Lesson 1.3</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-4/">Lesson 1.4</a>
+                                                <a href="../../unit1/lesson1-4/">Lesson 1.4</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-5/">Lesson 1.5</a>
+                                                <a href="../../unit1/lesson1-5/">Lesson 1.5</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-6/">Lesson 1.6</a>
+                                                <a href="../../unit1/lesson1-6/">Lesson 1.6</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="./">Linux Installation Process</a>
+                                                <a href="../../unit1/installation-process/">Linux Installation Process</a>
                                             </li>
                                             
                                         </ul>
@@ -857,15 +857,15 @@
                                         <ul class="unit-lessons">
                                             
                                             <li>
-                                                <a href="../../unit8/lesson8-1/">Lesson 8.1</a>
+                                                <a href="../lesson8-1/">Lesson 8.1</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../../unit8/lesson8-2/">Lesson 8.2</a>
+                                                <a href="../lesson8-2/">Lesson 8.2</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../../unit8/lesson8-3/">Lesson 8.3</a>
+                                                <a href="./">Lesson 8.3</a>
                                             </li>
                                             
                                         </ul>
@@ -964,142 +964,462 @@
 
     <div class="container">
         
-        <h2 id="what-is-it"><em>What</em> is it?</h2>
-<p>Kali is an operating system that was made <strong><em>specially</em></strong> for cybersecurity work (and hacking as well). It has a large toolkit of useful programs that we're going to learn about, including Hydra, Nmap, Wireshark, Tcpdump, MacChanger, Chisel, Aircrack-ng, etc.</p>
-<h2 id="some-vocab">Some Vocab:</h2>
-<p>As much as we know vocabulary might not be that interesting, it's important to know for the future, since there's a LOT of acronyms and words in cybersecurity that you're going to be hearing and using, so it's best to get used to it.</p>
-<ul>
-<li><strong>Operating System (OS)</strong>: The main software that runs your computer, like Windows, macOS, iOS, GNU/Linux, etc.</li>
-<li><strong>Virtual Machine (VM)</strong>: It's basically a computer <em>inside</em> another computer. You can run your regular OS, like Windows, and still have Kali Linux inside of it</li>
-<li><strong>ISO File (International Organization for Standardization File)</strong>: Sounds fancy, but really it's just a full copy of an OS within one tiny file</li>
-<li><strong>Hypervisor</strong>: Software that creates and manages VMs. Examples are VirtualBox and VMWare Workstation. There's also QEMU, but mostly Linux users use that, and you're likely running on Windows or mac</li>
-<li><strong>Bootable USB</strong>: Just a USB drive (which you hopefully already know about) that can start up a computer and install an OS (we don't need this yet)</li>
-<li><strong>Partitioning</strong>: A more advanced topic, but it's dividing up your drive into sections called <em>partitions</em>, which are like walls for a room. We don't need this yet, but it is good to know</li>
-</ul>
-<p>Now, let's get into the nitty-gritty:</p>
-<h2 id="method-1-easy-way">Method 1: Easy way :)</h2>
-<h3 id="minimum-requirements">Minimum Requirements*:</h3>
+        <h1 id="professional-ethics-and-responsible-disclosure">Professional Ethics and Responsible Disclosure</h1>
+<p>Beyond laws and compliance, cybersecurity professionals face ethical dilemmas daily. This lesson explores real-world ethical challenges, responsible disclosure, and how to navigate gray areas in security work.</p>
+<h2 id="the-hacker-ethic-revisited">The Hacker Ethic Revisited</h2>
+<h3 id="original-hacker-ethic-steven-levy">Original Hacker Ethic (Steven Levy)</h3>
 <ol>
-<li><code>8 GB</code> of RAM</li>
-<li><code>20-30 GB</code> of free hard drive space</li>
-<li>A decently fast CPU (you probably have this)</li>
+<li><strong>Access to computers should be unlimited and total</strong></li>
+<li><strong>All information should be free</strong></li>
+<li><strong>Mistrust authority—promote decentralization</strong></li>
+<li><strong>Hackers should be judged by their hacking, not bogus criteria</strong></li>
+<li><strong>You can create art and beauty on a computer</strong></li>
+<li><strong>Computers can change your life for the better</strong></li>
 </ol>
-<p>*But, how do I know if I meet them? Well, you can press <em><code>Ctrl+Shift+Esc</code></em> on Windows and click on <strong>"Performance"</strong> inside of Task Manager, and it'll give you a spec (specifications) sheet. On mac, you can click on <strong>"About"</strong> in the top menu bar of your computer. On Linux, you can type <strong><code>uname -a</code></strong>, or use a custom program like <code>fastfetch</code></p>
-<h2 id="big-disclaimer-for-windows-users">BIG DISCLAIMER FOR WINDOWS USERS:</h2>
-<ul>
-<li>You NEED to DISABLE something called Hyper-V. If you don't know what that is, for Windows users, Hyper-V will conflict with Virtualbox, making it run poorly and crash often</li>
-<li>To check if you hve Hyper-V, press <code>Win+R</code>, and type <code>optionalfeatures</code>, then press <code>Enter</code></li>
-<li>Look for a "Hyper-V" in the list of shown items. If it's checked, then it's enabled. Uncheck it.<ul>
-<li>Alternative method: go to cmd (Command Prompt), and right click and "Run as Administrator". Then use the following command: <code>bcdedit /set hypervisorlaunchtype off</code></li>
-</ul>
-</li>
-<li>Finally, restart your computer</li>
-</ul>
-<h2 id="big-disclaimer-for-macos-users">BIG DISCLAIMER FOR MACOS USERS:</h2>
-<ul>
-<li>You need to check if you're using an Intel-based Mac or Apple Silicon machine. If your device is M1, M2, M*, then it's <strong>Apple Silicon</strong></li>
-<li>If this is the case, you will need to use a different software for virtualization. You have some options, like <a href="https://getutm.app">UTM</a> or <a href="https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion">VMware Fusion</a>. </li>
-<li>Also, you will have to install Kali Linux using the 
-<em><strong>ARM64 version! Not x86-64!</strong></em></li>
-</ul>
-<hr />
-<p>Now, go to <a href="https://virtualbox.org">virtualbox.org</a></p>
-<p>Click on the download for your OS, and install the program by following the instruction wizard.</p>
-<p><img alt="Virtual Box" src="../../../img/virtual_box.png" /></p>
-<ul>
-<li>Now, go to the <a href="https://kali.org/get-kali">Kali Linux website</a>.</li>
-<li>Download the "Installer" ISO file (<code>~ 4 GB</code> in size)</li>
-<li>Then choose the 64-bit version for modern computers.</li>
-<li>If your computer is old, it could be 32-bit. If so, you may need to check your system specifications as explained above. However, it probably isn't.</li>
-</ul>
-<p><img alt="Kali Installation" src="../../../img/kali_img.png" /></p>
-<blockquote>
-<p>Remember, Apple Silicon machines will install the ARM64 version of Kali Linux instead!</p>
-</blockquote>
-<ul>
-<li>Finally, make your Virtual Machine. Open up VirtualBox and click "New"</li>
-<li>Name it whatever, I'd call it "Kali Linux", or "Kali Machine".</li>
-<li>Type: Linux, Version: Debian (64-bit)</li>
-<li>Allocate at least <code>4 GB</code> of RAM, AKA <code>4096 MB</code>, by dragging the slider or typing in the number in the RAM text box</li>
-<li>Create a Virtual Hrd Disk (allocate <code>25-30 GB</code> minimum)<ul>
-<li>Choose VDI (VirtualBox Disk Image)</li>
-<li>Also select "dynamically allocated" to save space, and allows the VM to grow dynamically in storage size as you begin to add more things</li>
-</ul>
-</li>
-<li>After clicking done, tell it to create, but do NOT tell it to also start yet</li>
-<li>Click on your virtual machine, and then go to settings</li>
-<li>Then go to Storage, and click the empty disk icon</li>
-<li>This is where we "choose a disk file", and select the downloaded Kali ISO</li>
-<li>Then under System, enable PAE/NX if available to you. PAE is Physical Address Extension, and NX is No Execute. These allow for &gt; <code>4 GB</code> of RAM access and prevents non-executable code from being executed in memory segments. If you don't know what that means, just ignore this</li>
-<li>Under Display, increase video memory to <code>128 MB</code></li>
-<li>Finally, save and exit Settings, and click on Start to boot your VM</li>
-<li>Select "Graphical Install" (press Enter, navigate using arrow keys)</li>
-<li>Choose your language, location, keyboard (these can later be changed, doesn't really matter)</li>
-<li>You can set a hostname, or keep the default (kali)</li>
-</ul>
-<h3 id="important-username-is-kali-and-password-is-kali-by-default"><strong>IMPORTANT</strong>: username is <em>kali</em> and password is <em>kali</em> by default!</h3>
-<ul>
-<li>Choose "Guided - use entire disk" for your partitioning</li>
-<li>Then select "All files in one partition"</li>
-<li>Confirm and wait a while. Take a walk outside, take a short nap, whatever you want. Just wait 10-20 minutes and it'll be done</li>
-<li>Restart when prompted</li>
-<li>On first login, enter the username and password</li>
-<li>Then, click the <code>SUPER</code> key (<code>Win</code> key or <code>Cmd</code> key on mac) and type "terminal" or "console" into the search, and open the app</li>
-<li>In the terminal, you can type <code>sudo apt update &amp;&amp; sudo apt upgrade -y</code><ul>
-<li>This command just updates your system</li>
-<li>When prompted with a password, type in your password</li>
-</ul>
-</li>
-<li>Happy Linux!</li>
-</ul>
-<h2 id="method-2-hard-way-bare-metal-installation">Method 2: Hard way (bare metal installation)</h2>
-<p>Alright. You're ready for the real deal. No problem. </p>
-<p><code>WARNING! ⚠️⚠️</code>: This version of installation WILL take space on your disk! This means it will be physically installed, and it will NOT be installed as a VM! Just like Windows or macOS, it will be physically on your device. If you do this incorrectly, it may <strong>wipe your device completely</strong>. I'm not liable for if you mistakenly wipe your drive, it's up to you. Also, I personally do <strong>not recommend you install Kali Linux on a physical drive</strong>. If you want to use Linux for extra practice, install a distribution like <a href="https://www.debian.org/">Debian</a> or <a href="https://linuxmint.com/">Linux Mint</a>. You are risking data loss if done incorrectly, so proceed at your own risk.</p>
-<p>Important things to note are:</p>
-<ul>
-<li>If you install on bare metal, AKA on your physical device, your device may have incompatibility issues. I would recommend doing your own research before doing so</li>
-<li>You may want to install Linux on a secondary drive, since if you use your main one, you will have to create a special partition for Linux to use exclusively, which is more difficult</li>
-<li>You'll need a USB drive with preferably <code>8 GB</code> or more of storage</li>
-<li>You may need to adjust your BIOS (manufacturer specific, meaning it depends on what company made your computer and maybe even where you bought it from) to allow for other bootable devices, which can include removing Secure Boot</li>
-<li>There's some specifics for ARM64 machines like Apple Silicon that will be different!</li>
-<li>Overall, you are likely going to have to do your OWN research to make sure you don't mess anything up.</li>
-</ul>
-<p>Without further ado, these are some general instructions (not perfect):</p>
+<h3 id="modern-security-professional-ethic">Modern Security Professional Ethic</h3>
+<p><strong>Adapted for today's reality:</strong></p>
 <ol>
-<li>Create a bootable USB drive using an app like Balena Etcher or Rufus</li>
-<li>Make space on your hard drive by creating a disk partition of ~<code>30 GB</code> or more, or install on a secondary hard drive</li>
-<li>Boot from the USB drive from BIOS after restarting your computer and smashing the BIOS key as it boots up (typically <code>Esc</code>, <code>F11</code>, <code>F12</code>, or <code>Del</code> depending on the manufacturer)</li>
-<li>Follow the installation process, but make sure you select the right drive and if it's on the same disk as Windows or Mac, you install "alongside" it, not replace </li>
-<li>After going through the setup, you may re-enter the BIOS to change the boot order. What this means is move Linux above Windows so that on first boot you boot into Linux (optional)</li>
+<li><strong>Access should be authorized and purposeful</strong></li>
+<li><strong>Information should be protected and shared responsibly</strong></li>
+<li><strong>Work within established systems while advocating for change</strong></li>
+<li><strong>Skills should serve legitimate purposes</strong></li>
+<li><strong>Security is both technical art and critical necessity</strong></li>
+<li><strong>Technology should improve society safely and ethically</strong></li>
 </ol>
-<p>Some important extras:</p>
-<ul>
-<li>Make sure you regularly update your system at least weekly</li>
-<li>Make decent credentials or use a <a href="https://www.yubico.com/">physical key</a></li>
-<li>Never just copy/paste a command without understanding it, look it up at least (even from me!)</li>
-<li>Install packages wisely and preferably from trusted sources</li>
-</ul>
-<p>Happy Linux! :)</p>
+<h2 id="ethical-dilemmas-in-security">Ethical Dilemmas in Security</h2>
+<h3 id="scenario-1-the-vulnerable-system">Scenario 1: The Vulnerable System</h3>
+<p><strong>Situation:</strong>
+While browsing a company's website, you notice a SQL injection vulnerability. You could access customer data with minimal effort. The company has no security contact or bug bounty program.</p>
+<p><strong>Options:</strong>
+A. Exploit it to prove it's real, screenshot evidence, report
+B. Report without exploiting
+C. Ignore it
+D. Publicly disclose immediately</p>
+<p><strong>Ethical analysis:</strong>
+- <strong>A is illegal</strong> (unauthorized access, even for good intent)
+- <strong>B is correct</strong> (responsible, legal)
+- <strong>C is negligent</strong> (you have knowledge, failure to act)
+- <strong>D is harmful</strong> (gives criminals time to exploit)</p>
+<p><strong>Best practice:</strong> Report through appropriate channels without exploitation</p>
+<h3 id="scenario-2-the-insider-threat">Scenario 2: The Insider Threat</h3>
+<p><strong>Situation:</strong>
+During a penetration test, you discover evidence that an employee is stealing customer credit cards. Your engagement scope is network security, not fraud investigation.</p>
+<p><strong>Considerations:</strong>
+- Scope of engagement (authorized to see this data?)
+- Chain of custody (evidence admissible?)
+- Client relationship (who do you tell?)
+- Legal obligations (mandatory reporting?)
+- Timing (immediate vs. end of engagement?)</p>
+<p><strong>Best practice:</strong>
+1. Document findings carefully
+2. Report to engagement sponsor immediately
+3. Do not investigate further (outside scope)
+4. Preserve evidence properly
+5. Follow client's legal counsel direction</p>
+<h3 id="scenario-3-the-government-request">Scenario 3: The Government Request</h3>
+<p><strong>Situation:</strong>
+Law enforcement requests access to your company's systems to investigate a customer. They have a warrant, but it's overly broad and could compromise other customers' privacy.</p>
+<p><strong>Considerations:</strong>
+- Legal obligation vs. customer privacy
+- Warrant validity and scope
+- Company policy
+- Precedent setting
+- Public interest</p>
+<p><strong>Best practice:</strong>
+- Verify warrant authenticity
+- Legal counsel review
+- Narrow scope if possible
+- Document everything
+- Transparency (if legally allowed)</p>
+<h3 id="scenario-4-the-zero-day">Scenario 4: The Zero-Day</h3>
+<p><strong>Situation:</strong>
+You discover a critical zero-day in widely-used software. No patch exists. Disclosure could endanger millions.</p>
+<p><strong>Options:</strong>
+- Immediate public disclosure
+- Vendor notification with deadline
+- Sell to broker
+- Report to government
+- Keep quiet</p>
+<p><strong>Best practice:</strong> Coordinated disclosure
+1. Notify vendor privately
+2. Give reasonable time to patch (typically 90 days)
+3. Offer assistance
+4. Public disclosure after patch or deadline
+5. Never sell exploits</p>
+<h2 id="responsible-disclosure">Responsible Disclosure</h2>
+<h3 id="full-disclosure">Full Disclosure</h3>
+<p><strong>Philosophy:</strong> Immediate public disclosure
+<strong>Argument:</strong> Pressures vendors, informs users quickly
+<strong>Problems:</strong> Gives attackers weaponizable information</p>
+<p><strong>Rarely appropriate</strong> - only for:
+- Vendor unresponsive for extended period
+- Active exploitation already occurring
+- Public safety critical and vendor negligent</p>
+<h3 id="coordinated-disclosure">Coordinated Disclosure</h3>
+<p><strong>Process:</strong>
+1. <strong>Discover vulnerability</strong>
+2. <strong>Verify and document</strong> (proof of concept)
+3. <strong>Identify vendor contact</strong> (security@, PSIRT)
+4. <strong>Initial notification</strong> (encrypted if possible)
+5. <strong>Provide details</strong> (after acknowledgment)
+6. <strong>Allow remediation time</strong> (30-90 days typical)
+7. <strong>Coordinate public disclosure</strong> (with vendor)
+8. <strong>Public disclosure</strong> (after patch or deadline)</p>
+<p><strong>Timeline example:</strong></p>
+<pre><code>Day 0:   Discover vulnerability
+Day 1:   Initial vendor notification
+Day 3:   Vendor acknowledges
+Day 5:   Full technical details provided
+Day 30:  Vendor provides patch timeline
+Day 60:  Patch developed
+Day 75:  Patch released
+Day 90:  Public disclosure (if not patched, disclose anyway)
+</code></pre>
+<h3 id="vendor-response-types">Vendor Response Types</h3>
+<p><strong>Good vendor:</strong>
+- Acknowledges quickly
+- Provides timeline
+- Communicates regularly
+- Credits researcher
+- Releases patch
+- Thanks publicly</p>
+<p><strong>Poor vendor:</strong>
+- Ignores reports
+- Denies vulnerability
+- Threatens legal action
+- Misses deadlines
+- No communication</p>
+<p><strong>What to do with poor vendor:</strong>
+- Document all communication
+- Set clear deadline
+- Escalate (CERT, media)
+- Disclose after deadline
+- Protect yourself legally</p>
+<h3 id="bug-bounty-programs">Bug Bounty Programs</h3>
+<p><strong>Platforms:</strong>
+- HackerOne
+- Bugcrowd
+- Synack
+- Intigriti</p>
+<p><strong>Benefits:</strong>
+- Clear rules of engagement
+- Legal protection
+- Financial reward
+- Recognition</p>
+<p><strong>Typical payouts:</strong>
+- Low severity: $50-$500
+- Medium severity: $500-$2,500
+- High severity: $2,500-$10,000
+- Critical severity: $10,000-$50,000+</p>
+<p><strong>Hall of fame examples:</strong>
+- Google: Paid $12+ million in bounties
+- Microsoft: Over $13 million since 2013
+- Facebook: $40,000 for single bug</p>
+<h3 id="responsible-disclosure-template">Responsible Disclosure Template</h3>
+<p><strong>Email subject:</strong></p>
+<pre><code>Security Vulnerability Report - [Brief Description]
+</code></pre>
+<p><strong>Email body:</strong></p>
+<pre><code>Hello [Company] Security Team,
+
+I am a security researcher and have discovered a security vulnerability 
+in [Product/Service]. I am reporting this to you in good faith to help 
+improve your security.
+
+Vulnerability Summary:
+- Type: [SQL Injection, XSS, etc.]
+- Severity: [Critical/High/Medium/Low]
+- Affected: [URL, product, version]
+
+I have prepared a detailed technical report and proof of concept. 
+I am happy to provide these details once we establish secure 
+communication.
+
+Please acknowledge receipt of this email. I plan to publicly disclose 
+this vulnerability 90 days from today, or sooner if a patch is released.
+
+I am available to assist with remediation and can be reached at:
+[Contact information]
+
+Thank you for your attention to this matter.
+
+Best regards,
+[Your name]
+</code></pre>
+<h2 id="working-with-sensitive-data">Working with Sensitive Data</h2>
+<h3 id="handling-customer-data">Handling Customer Data</h3>
+<p><strong>Principles:</strong>
+- <strong>Need to know</strong> - only access what's required
+- <strong>Least privilege</strong> - minimum permissions necessary
+- <strong>Audit trail</strong> - log all access
+- <strong>Data minimization</strong> - use test data when possible
+- <strong>Secure destruction</strong> - properly delete when done</p>
+<p><strong>During penetration testing:</strong>
+- Don't exfiltrate real data
+- Don't view unnecessary data
+- Screenshot only what's needed
+- Blur sensitive information
+- Secure all evidence</p>
+<h3 id="protecting-trade-secrets">Protecting Trade Secrets</h3>
+<p><strong>During security work:</strong>
+- Sign NDAs appropriately
+- Secure your systems
+- Encrypt communications
+- Don't discuss publicly
+- Separate client data</p>
+<p><strong>After engagement:</strong>
+- Return/destroy all data
+- Remove from personal systems
+- Don't reuse techniques that reveal client info
+- Don't use as portfolio without permission</p>
+<h2 id="conflicts-of-interest">Conflicts of Interest</h2>
+<h3 id="multiple-clients">Multiple Clients</h3>
+<p><strong>Scenario:</strong> You work for Company A and Company B, who are competitors.</p>
+<p><strong>Issues:</strong>
+- Knowledge from A could benefit B
+- Techniques developed for A used for B
+- Appearance of impropriety</p>
+<p><strong>Best practices:</strong>
+- Disclose potential conflicts
+- Get written consent
+- Information barriers
+- Document everything
+- When in doubt, decline</p>
+<h3 id="employment-and-consulting">Employment and Consulting</h3>
+<p><strong>Moonlighting:</strong>
+- Check employment agreement
+- Ensure no conflict with employer
+- Don't use employer resources
+- Don't compete directly</p>
+<p><strong>Former employers:</strong>
+- Respect confidentiality agreements
+- Don't use proprietary information
+- Don't solicit former clients (if restricted)
+- Clean separation</p>
+<h2 id="social-responsibility">Social Responsibility</h2>
+<h3 id="critical-infrastructure">Critical Infrastructure</h3>
+<p><strong>Extra care required for:</strong>
+- Power grids
+- Water systems
+- Healthcare
+- Transportation
+- Financial systems</p>
+<p><strong>Considerations:</strong>
+- Lives may depend on availability
+- Nation-state actors target these
+- Disclosure timing more critical
+- Coordinate with authorities</p>
+<p><strong>Example:</strong> Stuxnet targeting Iranian nuclear facilities raised questions about cyber weapons ethics</p>
+<h3 id="dual-use-technology">Dual-Use Technology</h3>
+<p><strong>Security tools can be misused:</strong>
+- Port scanners
+- Exploit frameworks
+- Password crackers
+- Network interceptors</p>
+<p><strong>Responsibility:</strong>
+- Don't enable criminals
+- Consider misuse potential
+- Implement safeguards where possible
+- Educate users</p>
+<h3 id="surveillance-technology">Surveillance Technology</h3>
+<p><strong>Ethical questions:</strong>
+- Employee monitoring - how much is too much?
+- Government surveillance - where's the line?
+- Selling to oppressive regimes - should you?</p>
+<p><strong>Personal stance required:</strong>
+- Know your boundaries
+- Some work you may refuse
+- Document concerns
+- Whistleblowing as last resort</p>
+<h2 id="whistleblowing">Whistleblowing</h2>
+<h3 id="when-to-blow-the-whistle">When to Blow the Whistle</h3>
+<p><strong>Indicators:</strong>
+- Illegal activity
+- Serious safety threat
+- Major regulatory violation
+- Cover-up of wrongdoing
+- All internal channels exhausted</p>
+<p><strong>NOT appropriate for:</strong>
+- Minor policy violations
+- Personal disputes
+- Speculation
+- Revenge</p>
+<h3 id="how-to-whistleblow">How to Whistleblow</h3>
+<p><strong>Internal channels first:</strong>
+1. Supervisor
+2. Management
+3. Compliance office
+4. Legal department
+5. Board of directors</p>
+<p><strong>External channels:</strong>
+- Regulatory agencies
+- Law enforcement
+- Media (last resort)</p>
+<p><strong>Protections:</strong>
+- Sarbanes-Oxley (SOX)
+- Dodd-Frank
+- Whistleblower Protection Act
+- Varies by jurisdiction</p>
+<p><strong>Risks:</strong>
+- Retaliation (despite protections)
+- Career impact
+- Legal costs
+- Stress
+- Loss of employment</p>
+<p><strong>If you must:</strong>
+- Document everything
+- Legal counsel
+- Secure communications
+- Anonymous if possible
+- Protect yourself</p>
+<h2 id="building-an-ethical-culture">Building an Ethical Culture</h2>
+<h3 id="as-an-individual">As an Individual</h3>
+<p><strong>Daily practices:</strong>
+- Question assumptions
+- Seek diverse perspectives
+- Admit mistakes
+- Learn from failures
+- Mentor others
+- Share knowledge responsibly</p>
+<p><strong>Red flags to notice:</strong>
+- Pressure to cut corners
+- Normalizing unethical behavior
+- Lack of oversight
+- Retaliation for raising concerns</p>
+<h3 id="as-a-leader">As a Leader</h3>
+<p><strong>Set the tone:</strong>
+- Model ethical behavior
+- Reward ethical choices
+- Create safe reporting channels
+- Address violations consistently
+- Invest in training
+- Celebrate ethical wins</p>
+<p><strong>Policies to implement:</strong>
+- Code of ethics
+- Whistleblower protection
+- Conflict of interest disclosure
+- Responsible disclosure policy
+- Security research policy</p>
+<h3 id="as-an-organization">As an Organization</h3>
+<p><strong>Structure:</strong>
+- Ethics officer/committee
+- Anonymous reporting hotline
+- Regular training
+- Ethical decision-making framework
+- Incident review process</p>
+<p><strong>Culture:</strong>
+- Psychological safety
+- Speak-up culture
+- Diversity of thought
+- Continuous improvement
+- Accountability at all levels</p>
+<h2 id="ethical-decision-making-framework">Ethical Decision-Making Framework</h2>
+<p><strong>When facing ethical dilemma:</strong></p>
+<p><strong>1. Identify the issue</strong>
+- What is the ethical question?
+- Who are the stakeholders?
+- What are the facts?</p>
+<p><strong>2. Consider alternatives</strong>
+- What are all possible actions?
+- What are consequences of each?
+- Are there creative solutions?</p>
+<p><strong>3. Evaluate against principles</strong>
+- Is it legal?
+- Is it fair?
+- How would I feel if it were public?
+- Does it align with professional standards?
+- Would I want this done to me?</p>
+<p><strong>4. Make a decision</strong>
+- Choose the most ethical option
+- Document reasoning
+- Be prepared to explain</p>
+<p><strong>5. Implement and reflect</strong>
+- Take action
+- Monitor outcomes
+- Learn from experience
+- Adjust if needed</p>
+<h2 id="real-world-examples">Real-World Examples</h2>
+<h3 id="case-study-project-zero">Case Study: Project Zero</h3>
+<p><strong>Google's approach:</strong>
+- 90-day disclosure deadline
+- Extensions only if patch nearly ready
+- Public disclosure regardless of patch status
+- Highly controversial but consistent</p>
+<p><strong>Outcomes:</strong>
+- Faster patches overall
+- Some vendor anger
+- Industry debate on timelines
+- Generally improved security</p>
+<h3 id="case-study-marcus-hutchins">Case Study: Marcus Hutchins</h3>
+<p><strong>Background:</strong>
+- Stopped WannaCry ransomware
+- Hailed as hero
+- Arrested for old malware development
+- Community divided</p>
+<p><strong>Lessons:</strong>
+- Past actions have consequences
+- Redemption is possible but complex
+- Legal jeopardy for security researchers
+- Grey area between research and crime</p>
+<h3 id="case-study-researcher-vs-company">Case Study: Researcher vs. Company</h3>
+<p><strong>Common pattern:</strong>
+1. Researcher finds bug
+2. Reports to company
+3. Company threatens legal action
+4. Researcher backs down or fights
+5. Public backlash against company
+6. Company reverses course (usually)</p>
+<p><strong>Examples:</strong>
+- Nissan threatening researcher
+- Avast threatening security journalist
+- Ring threatening researchers</p>
+<p><strong>Result:</strong> Safe harbor provisions becoming more common</p>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<p><strong>Professional ethics require:</strong>
+- Going beyond legal compliance
+- Considering broader impact
+- Protecting all stakeholders
+- Transparent decision-making
+- Continuous ethical reflection</p>
+<p><strong>Responsible disclosure:</strong>
+- Notify vendor privately
+- Reasonable timeline (90 days)
+- Coordinate public disclosure
+- Never sell exploits to bad actors
+- Protect users first</p>
+<p><strong>Handling dilemmas:</strong>
+- Use decision-making framework
+- Seek guidance when uncertain
+- Document reasoning
+- Err on side of caution
+- Learn from others' experiences</p>
+<p><strong>Remember:</strong>
+- Your reputation is your career
+- Ethics matter more than legal minimum
+- Short-term gains vs. long-term trust
+- When in doubt, ask
+- Do the right thing even when hard</p>
+<p>Cybersecurity is not just technical—it's deeply human. Your ethical choices shape the industry, protect users, and define what kind of professional you'll be. Choose wisely.</p>
         
 
         <!-- Lesson Navigation (only show on non-homepage pages) -->
         
         <div class="lesson-nav">
             
-            <a href="../lesson1-6/" class="lesson-nav-button">
+            <a href="../lesson8-2/" class="lesson-nav-button">
                 <span class="arrow">←</span>
-                <span>Previous: Lesson 1.6</span>
+                <span>Previous: Lesson 8.2</span>
             </a>
             
 
             <div class="lesson-nav-info">
                 <div class="current-lesson">Current Lesson</div>
-                <div class="lesson-title">Linux Installation Process</div>
+                <div class="lesson-title">Lesson 8.3</div>
             </div>
 
             
-            <a href="../../unit2/lesson2-1/" class="lesson-nav-button">
-                <span>Next: Lesson 2.1</span>
+            <a href="../../unit9/lesson9-1/" class="lesson-nav-button">
+                <span>Next: Lesson 9.1</span>
                 <span class="arrow">→</span>
             </a>
             
@@ -1158,43 +1478,43 @@
                                 
                                 {
                                     title: "Lesson 1.1",
-                                    url: '../lesson1-1/',
+                                    url: '../../unit1/lesson1-1/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.2",
-                                    url: '../lesson1-2/',
+                                    url: '../../unit1/lesson1-2/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.3",
-                                    url: '../lesson1-3/',
+                                    url: '../../unit1/lesson1-3/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.4",
-                                    url: '../lesson1-4/',
+                                    url: '../../unit1/lesson1-4/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.5",
-                                    url: '../lesson1-5/',
+                                    url: '../../unit1/lesson1-5/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.6",
-                                    url: '../lesson1-6/',
+                                    url: '../../unit1/lesson1-6/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Linux Installation Process",
-                                    url: './',
+                                    url: '../../unit1/installation-process/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
@@ -1330,19 +1650,19 @@
                                 
                                 {
                                     title: "Lesson 8.1",
-                                    url: '../../unit8/lesson8-1/',
+                                    url: '../lesson8-1/',
                                     path: 'Curriculum > Unit 8'
                                 },
                                 
                                 {
                                     title: "Lesson 8.2",
-                                    url: '../../unit8/lesson8-2/',
+                                    url: '../lesson8-2/',
                                     path: 'Curriculum > Unit 8'
                                 },
                                 
                                 {
                                     title: "Lesson 8.3",
-                                    url: '../../unit8/lesson8-3/',
+                                    url: './',
                                     path: 'Curriculum > Unit 8'
                                 },
                                 

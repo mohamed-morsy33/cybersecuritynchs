@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linux Installation Process - NCHS Cybersecurity</title>
+    <title>Lesson 6.3 - NCHS Cybersecurity</title>
     
     
     <link rel="icon" href="../../../img/logo.png">
@@ -698,31 +698,31 @@
                                         <ul class="unit-lessons">
                                             
                                             <li>
-                                                <a href="../lesson1-1/">Lesson 1.1</a>
+                                                <a href="../../unit1/lesson1-1/">Lesson 1.1</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-2/">Lesson 1.2</a>
+                                                <a href="../../unit1/lesson1-2/">Lesson 1.2</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-3/">Lesson 1.3</a>
+                                                <a href="../../unit1/lesson1-3/">Lesson 1.3</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-4/">Lesson 1.4</a>
+                                                <a href="../../unit1/lesson1-4/">Lesson 1.4</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-5/">Lesson 1.5</a>
+                                                <a href="../../unit1/lesson1-5/">Lesson 1.5</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-6/">Lesson 1.6</a>
+                                                <a href="../../unit1/lesson1-6/">Lesson 1.6</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="./">Linux Installation Process</a>
+                                                <a href="../../unit1/installation-process/">Linux Installation Process</a>
                                             </li>
                                             
                                         </ul>
@@ -815,15 +815,15 @@
                                         <ul class="unit-lessons">
                                             
                                             <li>
-                                                <a href="../../unit6/lesson6-1/">Lesson 6.1</a>
+                                                <a href="../lesson6-1/">Lesson 6.1</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../../unit6/lesson6-2/">Lesson 6.2</a>
+                                                <a href="../lesson6-2/">Lesson 6.2</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../../unit6/lesson6-3/">Lesson 6.3</a>
+                                                <a href="./">Lesson 6.3</a>
                                             </li>
                                             
                                         </ul>
@@ -964,142 +964,518 @@
 
     <div class="container">
         
-        <h2 id="what-is-it"><em>What</em> is it?</h2>
-<p>Kali is an operating system that was made <strong><em>specially</em></strong> for cybersecurity work (and hacking as well). It has a large toolkit of useful programs that we're going to learn about, including Hydra, Nmap, Wireshark, Tcpdump, MacChanger, Chisel, Aircrack-ng, etc.</p>
-<h2 id="some-vocab">Some Vocab:</h2>
-<p>As much as we know vocabulary might not be that interesting, it's important to know for the future, since there's a LOT of acronyms and words in cybersecurity that you're going to be hearing and using, so it's best to get used to it.</p>
-<ul>
-<li><strong>Operating System (OS)</strong>: The main software that runs your computer, like Windows, macOS, iOS, GNU/Linux, etc.</li>
-<li><strong>Virtual Machine (VM)</strong>: It's basically a computer <em>inside</em> another computer. You can run your regular OS, like Windows, and still have Kali Linux inside of it</li>
-<li><strong>ISO File (International Organization for Standardization File)</strong>: Sounds fancy, but really it's just a full copy of an OS within one tiny file</li>
-<li><strong>Hypervisor</strong>: Software that creates and manages VMs. Examples are VirtualBox and VMWare Workstation. There's also QEMU, but mostly Linux users use that, and you're likely running on Windows or mac</li>
-<li><strong>Bootable USB</strong>: Just a USB drive (which you hopefully already know about) that can start up a computer and install an OS (we don't need this yet)</li>
-<li><strong>Partitioning</strong>: A more advanced topic, but it's dividing up your drive into sections called <em>partitions</em>, which are like walls for a room. We don't need this yet, but it is good to know</li>
-</ul>
-<p>Now, let's get into the nitty-gritty:</p>
-<h2 id="method-1-easy-way">Method 1: Easy way :)</h2>
-<h3 id="minimum-requirements">Minimum Requirements*:</h3>
+        <h1 id="network-forensics-and-incident-investigation">Network Forensics and Incident Investigation</h1>
+<p>Network forensics is the capture, recording, and analysis of network traffic to discover security incidents, understand attacks, and provide evidence. This lesson teaches you how to conduct thorough network investigations.</p>
+<h2 id="network-forensics-fundamentals">Network Forensics Fundamentals</h2>
+<h3 id="what-is-network-forensics">What is Network Forensics?</h3>
+<p><strong>Network forensics involves:</strong>
+- Capturing network traffic
+- Preserving evidence
+- Analyzing packet data
+- Reconstructing events
+- Identifying attackers
+- Supporting legal proceedings</p>
+<p><strong>Different from network security monitoring:</strong>
+- Forensics looks backward (what happened?)
+- Monitoring looks at present (what's happening now?)
+- Both use similar tools but different approaches</p>
+<h3 id="legal-considerations">Legal Considerations</h3>
+<p><strong>Chain of custody:</strong>
+- Document who handled evidence
+- When and where it was collected
+- How it was stored
+- Any modifications made</p>
+<p><strong>Evidence admissibility:</strong>
+- Must be relevant
+- Must be authentic
+- Must be complete
+- Must be reliable</p>
+<p><strong>Best practices:</strong>
+- Hash all captures (MD5, SHA256)
+- Write-protect original evidence
+- Work on copies, not originals
+- Document every step
+- Timestamp everything</p>
+<h2 id="setting-up-for-forensics">Setting Up for Forensics</h2>
+<h3 id="network-tap-vs-span-port">Network Tap vs SPAN Port</h3>
+<p><strong>Network TAP (Test Access Point):</strong>
+- Physical device
+- Passive (doesn't affect traffic)
+- Sees all packets (no drops)
+- Expensive but reliable
+- Ideal for forensics</p>
+<p><strong>SPAN Port (Switch Port Analyzer):</strong>
+- Switch feature (port mirroring)
+- Free (uses existing hardware)
+- Can drop packets under load
+- Easier to deploy
+- Good for most scenarios</p>
+<p><strong>Placement considerations:</strong>
+- Internet connection (see all external traffic)
+- DMZ (monitor public servers)
+- Internal segments (detect lateral movement)
+- Critical servers (protect high-value assets)</p>
+<h3 id="full-packet-capture-systems">Full Packet Capture Systems</h3>
+<p><strong>Tools:</strong>
+- <strong>Security Onion</strong>: Complete forensics platform
+- <strong>Moloch</strong>: Large-scale packet capture
+- <strong>Stenographer</strong>: Google's packet capture system
+- <strong>tcpdump/tshark</strong>: Manual capture</p>
+<p><strong>Storage requirements:</strong></p>
+<pre><code>1 Gbps link fully utilized:
+- 450 GB per hour
+- 10.8 TB per day
+- 75.6 TB per week
+
+Typical corporate network (20% utilization):
+- 90 GB per hour
+- 2.16 TB per day
+- 15.12 TB per week
+</code></pre>
+<p><strong>Retention policies:</strong>
+- Keep everything: Weeks (expensive)
+- Keep metadata: Months
+- Keep full packets: Days to weeks
+- Balance cost vs. investigation needs</p>
+<h2 id="investigation-methodology">Investigation Methodology</h2>
+<h3 id="the-oscar-process">The OSCAR Process</h3>
+<p><strong>O - Obtain Information</strong>
+- When did incident occur?
+- What systems affected?
+- What type of incident?
+- Who reported it?</p>
+<p><strong>S - Strategize</strong>
+- Define investigation scope
+- Identify data sources
+- Determine timeline
+- Allocate resources</p>
+<p><strong>C - Collect Evidence</strong>
+- Capture network traffic
+- Collect logs
+- Preserve state
+- Document everything</p>
+<p><strong>A - Analyze</strong>
+- Process evidence
+- Identify patterns
+- Extract IOCs
+- Reconstruct events</p>
+<p><strong>R - Report</strong>
+- Document findings
+- Create timeline
+- Provide recommendations
+- Prepare for legal proceedings</p>
+<h3 id="initial-triage">Initial Triage</h3>
+<p><strong>Quick assessment questions:</strong></p>
 <ol>
-<li><code>8 GB</code> of RAM</li>
-<li><code>20-30 GB</code> of free hard drive space</li>
-<li>A decently fast CPU (you probably have this)</li>
+<li><strong>What happened?</strong></li>
+<li>Data breach?</li>
+<li>Malware infection?</li>
+<li>Unauthorized access?</li>
+<li>
+<p>DoS attack?</p>
+</li>
+<li>
+<p><strong>When did it happen?</strong></p>
+</li>
+<li>Check logs for timeframe</li>
+<li>Identify initial compromise</li>
+<li>
+<p>Determine duration</p>
+</li>
+<li>
+<p><strong>What's the scope?</strong></p>
+</li>
+<li>Single system or multiple?</li>
+<li>One network segment or multiple?</li>
+<li>
+<p>Internal or external attacker?</p>
+</li>
+<li>
+<p><strong>What data is available?</strong></p>
+</li>
+<li>Full packet captures?</li>
+<li>NetFlow data?</li>
+<li>Firewall logs?</li>
+<li>IDS alerts?</li>
 </ol>
-<p>*But, how do I know if I meet them? Well, you can press <em><code>Ctrl+Shift+Esc</code></em> on Windows and click on <strong>"Performance"</strong> inside of Task Manager, and it'll give you a spec (specifications) sheet. On mac, you can click on <strong>"About"</strong> in the top menu bar of your computer. On Linux, you can type <strong><code>uname -a</code></strong>, or use a custom program like <code>fastfetch</code></p>
-<h2 id="big-disclaimer-for-windows-users">BIG DISCLAIMER FOR WINDOWS USERS:</h2>
-<ul>
-<li>You NEED to DISABLE something called Hyper-V. If you don't know what that is, for Windows users, Hyper-V will conflict with Virtualbox, making it run poorly and crash often</li>
-<li>To check if you hve Hyper-V, press <code>Win+R</code>, and type <code>optionalfeatures</code>, then press <code>Enter</code></li>
-<li>Look for a "Hyper-V" in the list of shown items. If it's checked, then it's enabled. Uncheck it.<ul>
-<li>Alternative method: go to cmd (Command Prompt), and right click and "Run as Administrator". Then use the following command: <code>bcdedit /set hypervisorlaunchtype off</code></li>
-</ul>
-</li>
-<li>Finally, restart your computer</li>
-</ul>
-<h2 id="big-disclaimer-for-macos-users">BIG DISCLAIMER FOR MACOS USERS:</h2>
-<ul>
-<li>You need to check if you're using an Intel-based Mac or Apple Silicon machine. If your device is M1, M2, M*, then it's <strong>Apple Silicon</strong></li>
-<li>If this is the case, you will need to use a different software for virtualization. You have some options, like <a href="https://getutm.app">UTM</a> or <a href="https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion">VMware Fusion</a>. </li>
-<li>Also, you will have to install Kali Linux using the 
-<em><strong>ARM64 version! Not x86-64!</strong></em></li>
-</ul>
-<hr />
-<p>Now, go to <a href="https://virtualbox.org">virtualbox.org</a></p>
-<p>Click on the download for your OS, and install the program by following the instruction wizard.</p>
-<p><img alt="Virtual Box" src="../../../img/virtual_box.png" /></p>
-<ul>
-<li>Now, go to the <a href="https://kali.org/get-kali">Kali Linux website</a>.</li>
-<li>Download the "Installer" ISO file (<code>~ 4 GB</code> in size)</li>
-<li>Then choose the 64-bit version for modern computers.</li>
-<li>If your computer is old, it could be 32-bit. If so, you may need to check your system specifications as explained above. However, it probably isn't.</li>
-</ul>
-<p><img alt="Kali Installation" src="../../../img/kali_img.png" /></p>
-<blockquote>
-<p>Remember, Apple Silicon machines will install the ARM64 version of Kali Linux instead!</p>
-</blockquote>
-<ul>
-<li>Finally, make your Virtual Machine. Open up VirtualBox and click "New"</li>
-<li>Name it whatever, I'd call it "Kali Linux", or "Kali Machine".</li>
-<li>Type: Linux, Version: Debian (64-bit)</li>
-<li>Allocate at least <code>4 GB</code> of RAM, AKA <code>4096 MB</code>, by dragging the slider or typing in the number in the RAM text box</li>
-<li>Create a Virtual Hrd Disk (allocate <code>25-30 GB</code> minimum)<ul>
-<li>Choose VDI (VirtualBox Disk Image)</li>
-<li>Also select "dynamically allocated" to save space, and allows the VM to grow dynamically in storage size as you begin to add more things</li>
-</ul>
-</li>
-<li>After clicking done, tell it to create, but do NOT tell it to also start yet</li>
-<li>Click on your virtual machine, and then go to settings</li>
-<li>Then go to Storage, and click the empty disk icon</li>
-<li>This is where we "choose a disk file", and select the downloaded Kali ISO</li>
-<li>Then under System, enable PAE/NX if available to you. PAE is Physical Address Extension, and NX is No Execute. These allow for &gt; <code>4 GB</code> of RAM access and prevents non-executable code from being executed in memory segments. If you don't know what that means, just ignore this</li>
-<li>Under Display, increase video memory to <code>128 MB</code></li>
-<li>Finally, save and exit Settings, and click on Start to boot your VM</li>
-<li>Select "Graphical Install" (press Enter, navigate using arrow keys)</li>
-<li>Choose your language, location, keyboard (these can later be changed, doesn't really matter)</li>
-<li>You can set a hostname, or keep the default (kali)</li>
-</ul>
-<h3 id="important-username-is-kali-and-password-is-kali-by-default"><strong>IMPORTANT</strong>: username is <em>kali</em> and password is <em>kali</em> by default!</h3>
-<ul>
-<li>Choose "Guided - use entire disk" for your partitioning</li>
-<li>Then select "All files in one partition"</li>
-<li>Confirm and wait a while. Take a walk outside, take a short nap, whatever you want. Just wait 10-20 minutes and it'll be done</li>
-<li>Restart when prompted</li>
-<li>On first login, enter the username and password</li>
-<li>Then, click the <code>SUPER</code> key (<code>Win</code> key or <code>Cmd</code> key on mac) and type "terminal" or "console" into the search, and open the app</li>
-<li>In the terminal, you can type <code>sudo apt update &amp;&amp; sudo apt upgrade -y</code><ul>
-<li>This command just updates your system</li>
-<li>When prompted with a password, type in your password</li>
-</ul>
-</li>
-<li>Happy Linux!</li>
-</ul>
-<h2 id="method-2-hard-way-bare-metal-installation">Method 2: Hard way (bare metal installation)</h2>
-<p>Alright. You're ready for the real deal. No problem. </p>
-<p><code>WARNING! ⚠️⚠️</code>: This version of installation WILL take space on your disk! This means it will be physically installed, and it will NOT be installed as a VM! Just like Windows or macOS, it will be physically on your device. If you do this incorrectly, it may <strong>wipe your device completely</strong>. I'm not liable for if you mistakenly wipe your drive, it's up to you. Also, I personally do <strong>not recommend you install Kali Linux on a physical drive</strong>. If you want to use Linux for extra practice, install a distribution like <a href="https://www.debian.org/">Debian</a> or <a href="https://linuxmint.com/">Linux Mint</a>. You are risking data loss if done incorrectly, so proceed at your own risk.</p>
-<p>Important things to note are:</p>
-<ul>
-<li>If you install on bare metal, AKA on your physical device, your device may have incompatibility issues. I would recommend doing your own research before doing so</li>
-<li>You may want to install Linux on a secondary drive, since if you use your main one, you will have to create a special partition for Linux to use exclusively, which is more difficult</li>
-<li>You'll need a USB drive with preferably <code>8 GB</code> or more of storage</li>
-<li>You may need to adjust your BIOS (manufacturer specific, meaning it depends on what company made your computer and maybe even where you bought it from) to allow for other bootable devices, which can include removing Secure Boot</li>
-<li>There's some specifics for ARM64 machines like Apple Silicon that will be different!</li>
-<li>Overall, you are likely going to have to do your OWN research to make sure you don't mess anything up.</li>
-</ul>
-<p>Without further ado, these are some general instructions (not perfect):</p>
+<h2 id="analysis-techniques">Analysis Techniques</h2>
+<h3 id="timeline-reconstruction">Timeline Reconstruction</h3>
+<p><strong>Build chronological timeline:</strong></p>
 <ol>
-<li>Create a bootable USB drive using an app like Balena Etcher or Rufus</li>
-<li>Make space on your hard drive by creating a disk partition of ~<code>30 GB</code> or more, or install on a secondary hard drive</li>
-<li>Boot from the USB drive from BIOS after restarting your computer and smashing the BIOS key as it boots up (typically <code>Esc</code>, <code>F11</code>, <code>F12</code>, or <code>Del</code> depending on the manufacturer)</li>
-<li>Follow the installation process, but make sure you select the right drive and if it's on the same disk as Windows or Mac, you install "alongside" it, not replace </li>
-<li>After going through the setup, you may re-enter the BIOS to change the boot order. What this means is move Linux above Windows so that on first boot you boot into Linux (optional)</li>
+<li><strong>Initial compromise:</strong></li>
+<li>Phishing email timestamp</li>
+<li>Malware execution time</li>
+<li>
+<p>First C2 connection</p>
+</li>
+<li>
+<p><strong>Reconnaissance:</strong></p>
+</li>
+<li>Port scans</li>
+<li>Network mapping</li>
+<li>
+<p>Service enumeration</p>
+</li>
+<li>
+<p><strong>Lateral movement:</strong></p>
+</li>
+<li>SMB connections</li>
+<li>RDP sessions</li>
+<li>
+<p>Pass-the-hash attacks</p>
+</li>
+<li>
+<p><strong>Data exfiltration:</strong></p>
+</li>
+<li>Large uploads</li>
+<li>Unusual protocols</li>
+<li>
+<p>Off-hours transfers</p>
+</li>
+<li>
+<p><strong>Covering tracks:</strong></p>
+</li>
+<li>Log deletion</li>
+<li>Tool removal</li>
+<li>Backdoor installation</li>
 </ol>
-<p>Some important extras:</p>
-<ul>
-<li>Make sure you regularly update your system at least weekly</li>
-<li>Make decent credentials or use a <a href="https://www.yubico.com/">physical key</a></li>
-<li>Never just copy/paste a command without understanding it, look it up at least (even from me!)</li>
-<li>Install packages wisely and preferably from trusted sources</li>
-</ul>
-<p>Happy Linux! :)</p>
+<p><strong>Example timeline:</strong></p>
+<pre><code>2024-01-15 14:23:15 - User opens phishing email
+2024-01-15 14:23:47 - Macro executes, downloads malware
+2024-01-15 14:24:03 - First C2 connection to evil.com
+2024-01-15 14:30:12 - Port scan of internal network
+2024-01-15 15:45:33 - SMB connection to file server
+2024-01-15 16:12:44 - Large file transfer begins
+2024-01-15 18:34:22 - Backdoor installed for persistence
+</code></pre>
+<h3 id="identifying-the-attacker">Identifying the Attacker</h3>
+<p><strong>Attribution is difficult but look for:</strong></p>
+<p><strong>Network indicators:</strong>
+- Source IP addresses (VPN/Tor?)
+- Geolocation data
+- ASN (Autonomous System Number)
+- Infrastructure patterns</p>
+<p><strong>Behavioral indicators:</strong>
+- Tools used (custom or public?)
+- Techniques (match known groups?)
+- Timing (time zone indicators?)
+- Targets (specific or opportunistic?)</p>
+<p><strong>Language indicators:</strong>
+- Error messages
+- Comments in code
+- Keyboard layouts
+- Time formats</p>
+<p><strong>Never assume attribution is certain</strong> - VPNs, proxies, and compromised systems complicate this.</p>
+<h2 id="analyzing-specific-attack-types">Analyzing Specific Attack Types</h2>
+<h3 id="data-exfiltration-investigation">Data Exfiltration Investigation</h3>
+<p><strong>Look for:</strong></p>
+<p><strong>Large outbound transfers:</strong></p>
+<pre><code>tcp.len &gt; 1000 &amp;&amp; ip.dst != &lt;your_network&gt;
+</code></pre>
+<p><strong>Unusual protocols:</strong>
+- FTP from non-FTP servers
+- SSH from workstations
+- DNS queries with large responses</p>
+<p><strong>Off-hours activity:</strong></p>
+<pre><code>frame.time &gt;= &quot;2024-01-15 22:00:00&quot; &amp;&amp; 
+frame.time &lt;= &quot;2024-01-16 06:00:00&quot;
+</code></pre>
+<p><strong>Encrypted channels:</strong></p>
+<pre><code>ssl || ssh || tls
+</code></pre>
+<p><strong>DNS tunneling:</strong></p>
+<pre><code>dns.qry.name.len &gt; 50
+</code></pre>
+<p><strong>Analysis steps:</strong>
+1. Identify unusual large transfers
+2. Determine destination
+3. Extract transferred files if possible
+4. Identify compromised accounts
+5. Trace back to initial compromise</p>
+<h3 id="malware-c2-investigation">Malware C2 Investigation</h3>
+<p><strong>Beaconing detection:</strong></p>
+<p>Look for regular intervals in I/O graphs:</p>
+<pre><code class="language-bash">tshark -r capture.pcap -T fields \
+  -e frame.time_relative -e ip.dst | \
+  awk '{diff=$1-prev[$2]; prev[$2]=$1; 
+       if(diff&gt;55 &amp;&amp; diff&lt;65) print $2, diff}'
+</code></pre>
+<p><strong>C2 characteristics:</strong>
+- Regular check-ins (every 60 seconds)
+- Small packet sizes (commands)
+- Specific user agents
+- Base64 encoded data
+- Specific URLs or URI patterns</p>
+<p><strong>Extract C2 infrastructure:</strong></p>
+<pre><code class="language-bash"># Get all contacted IPs
+tshark -r capture.pcap -Y &quot;tcp.port == 443&quot; \
+  -T fields -e ip.dst | sort -u
+
+# Get all DNS queries
+tshark -r capture.pcap -Y &quot;dns.flags.response == 0&quot; \
+  -T fields -e dns.qry.name | sort -u
+</code></pre>
+<h3 id="lateral-movement-investigation">Lateral Movement Investigation</h3>
+<p><strong>Look for:</strong></p>
+<p><strong>SMB connections:</strong></p>
+<pre><code>smb2.cmd == 5  # Session Setup
+</code></pre>
+<p><strong>RDP connections:</strong></p>
+<pre><code>tcp.port == 3389
+</code></pre>
+<p><strong>WMI/PowerShell remoting:</strong></p>
+<pre><code>tcp.port == 5985 || tcp.port == 5986
+</code></pre>
+<p><strong>PsExec:</strong></p>
+<pre><code>smb2.filename contains &quot;psexecsvc&quot;
+</code></pre>
+<p><strong>Pass-the-hash:</strong></p>
+<pre><code>ntlmssp.auth.ntlmv2response
+</code></pre>
+<p><strong>Create lateral movement map:</strong></p>
+<pre><code>Source → Destination → Method → Time
+10.0.1.5 → 10.0.1.10 → RDP → 14:23:15
+10.0.1.10 → 10.0.1.20 → SMB → 14:45:22
+10.0.1.20 → 10.0.1.50 → WMI → 15:12:33
+</code></pre>
+<h3 id="credential-theft-investigation">Credential Theft Investigation</h3>
+<p><strong>Look for:</strong></p>
+<p><strong>Kerberos tickets:</strong></p>
+<pre><code>kerberos.CNameString
+</code></pre>
+<p><strong>NTLM authentication:</strong></p>
+<pre><code>ntlmssp.auth.username
+</code></pre>
+<p><strong>LDAP queries:</strong></p>
+<pre><code>ldap.filter contains &quot;samaccountname&quot;
+</code></pre>
+<p><strong>Password guessing:</strong></p>
+<pre><code>http.response.code == 401
+</code></pre>
+<p>Multiple 401s from same source = brute force.</p>
+<h2 id="carving-and-reconstruction">Carving and Reconstruction</h2>
+<h3 id="file-carving-from-pcaps">File Carving from PCAPs</h3>
+<p><strong>Extract files from HTTP:</strong></p>
+<p>Wireshark: File → Export Objects → HTTP</p>
+<p><strong>Command line:</strong></p>
+<pre><code class="language-bash"># Using tcpflow
+tcpflow -r capture.pcap -o output_dir
+
+# Using binwalk
+binwalk -e --dd='.*' capture.pcap
+</code></pre>
+<p><strong>Extract files from SMB:</strong></p>
+<pre><code class="language-bash">tshark -r capture.pcap -Y &quot;smb2.filename&quot; \
+  --export-objects smb,output_dir
+</code></pre>
+<h3 id="reconstructing-sessions">Reconstructing Sessions</h3>
+<p><strong>Email reconstruction:</strong></p>
+<pre><code class="language-bash"># Extract SMTP traffic
+tshark -r capture.pcap -Y &quot;tcp.port == 25&quot; \
+  -z follow,tcp,ascii,0 &gt; email.txt
+</code></pre>
+<p><strong>Web session reconstruction:</strong></p>
+<pre><code class="language-bash"># Extract HTTP session
+tshark -r capture.pcap -Y &quot;tcp.stream == 5&quot; \
+  -z follow,tcp,ascii,5 &gt; session.txt
+</code></pre>
+<p><strong>FTP file transfer:</strong></p>
+<pre><code class="language-bash"># Find data channel
+tshark -r capture.pcap -Y &quot;ftp-data&quot;
+
+# Extract file
+tshark -r capture.pcap -Y &quot;tcp.stream == 42&quot; \
+  -T fields -e data.data | xxd -r -p &gt; file.bin
+</code></pre>
+<h2 id="netflow-analysis">NetFlow Analysis</h2>
+<p><strong>NetFlow = flow records (not full packets)</strong></p>
+<p><strong>What NetFlow captures:</strong>
+- Source/Destination IP
+- Source/Destination Port
+- Protocol
+- Byte count
+- Packet count
+- Start/End time</p>
+<p><strong>What it doesn't capture:</strong>
+- Packet contents
+- Payloads
+- Exact sequences</p>
+<p><strong>Advantages:</strong>
+- Much smaller storage
+- Longer retention possible
+- Good for big picture analysis
+- Privacy-friendly</p>
+<p><strong>Tools:</strong>
+- nfdump
+- SiLK
+- Elastic Stack</p>
+<p><strong>Example queries:</strong></p>
+<pre><code class="language-bash"># Top talkers
+nfdump -R /data/flows -s ip/bytes
+
+# Find port scans
+nfdump -R /data/flows 'flags S and not flags A' \
+  -o extended | awk '{print $6}' | sort | uniq -c | sort -rn
+
+# Large transfers
+nfdump -R /data/flows 'bytes &gt; 100000000'
+</code></pre>
+<h2 id="creating-investigation-reports">Creating Investigation Reports</h2>
+<h3 id="report-structure">Report Structure</h3>
+<p><strong>1. Executive Summary</strong>
+- What happened (non-technical)
+- Impact
+- Key findings
+- Recommendations</p>
+<p><strong>2. Incident Overview</strong>
+- Timeline
+- Affected systems
+- Incident type
+- Attack vector</p>
+<p><strong>3. Technical Analysis</strong>
+- Evidence sources
+- Analysis methodology
+- Detailed findings
+- IOCs</p>
+<p><strong>4. Timeline of Events</strong>
+- Chronological reconstruction
+- Key events highlighted
+- Evidence references</p>
+<p><strong>5. Indicators of Compromise</strong>
+- File hashes
+- IP addresses
+- Domain names
+- URLs
+- Registry keys
+- Filenames</p>
+<p><strong>6. Attack Attribution</strong>
+- TTPs observed
+- Tool identification
+- Possible threat actors
+- Confidence level</p>
+<p><strong>7. Containment &amp; Remediation</strong>
+- Actions taken
+- Systems isolated
+- Accounts disabled
+- Patches applied</p>
+<p><strong>8. Recommendations</strong>
+- Short-term fixes
+- Long-term improvements
+- Policy changes
+- Training needs</p>
+<p><strong>9. Appendices</strong>
+- Raw evidence
+- Full packet captures
+- Log excerpts
+- Screenshots</p>
+<h3 id="visualization">Visualization</h3>
+<p><strong>Create visual aids:</strong></p>
+<p><strong>Network diagram:</strong>
+- Show attack path
+- Indicate compromised systems
+- Mark entry/exit points</p>
+<p><strong>Timeline visualization:</strong>
+- Graphical timeline
+- Major events marked
+- Duration indicators</p>
+<p><strong>Traffic graphs:</strong>
+- Volume over time
+- Spikes during attack
+- Normal vs. attack traffic</p>
+<p><strong>Attack tree:</strong>
+- Initial access
+- Privilege escalation
+- Lateral movement
+- Objectives achieved</p>
+<h2 id="automated-analysis">Automated Analysis</h2>
+<h3 id="rita-real-intelligence-threat-analytics">RITA (Real Intelligence Threat Analytics)</h3>
+<p><strong>Detects:</strong>
+- Beaconing
+- DNS tunneling
+- Long connections
+- Blacklisted IPs/domains</p>
+<pre><code class="language-bash"># Import data
+rita import /path/to/zeek/logs dataset_name
+
+# Show beacons
+rita show-beacons dataset_name
+
+# Show long connections
+rita show-long-connections dataset_name
+
+# HTML report
+rita html-report dataset_name
+</code></pre>
+<h3 id="zeek-formerly-bro">Zeek (formerly Bro)</h3>
+<p><strong>Network security monitor:</strong></p>
+<pre><code class="language-bash"># Analyze pcap
+zeek -r capture.pcap
+
+# Generated logs:
+# conn.log - Connections
+# http.log - HTTP requests
+# dns.log - DNS queries
+# ssl.log - SSL/TLS connections
+# files.log - Files transferred
+</code></pre>
+<p><strong>Query logs:</strong></p>
+<pre><code class="language-bash"># Find large uploads
+cat conn.log | zeek-cut id.orig_h id.resp_h \
+  id.resp_p orig_bytes | awk '$4 &gt; 1000000'
+
+# Extract all DNS queries
+cat dns.log | zeek-cut query | sort -u
+
+# Find HTTP POST requests
+cat http.log | zeek-cut method uri | grep POST
+</code></pre>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<p><strong>Network forensics skills:</strong>
+- Evidence collection and preservation
+- Timeline reconstruction
+- Attack pattern recognition
+- Attribution analysis
+- Report writing</p>
+<p><strong>Investigation approach:</strong>
+- Methodical and documented
+- Focus on answering key questions
+- Build comprehensive timeline
+- Extract actionable IOCs
+- Provide clear recommendations</p>
+<p><strong>Tools and techniques:</strong>
+- Wireshark for deep analysis
+- tshark for automation
+- NetFlow for big picture
+- Zeek for security monitoring
+- RITA for automated detection</p>
+<p><strong>Remember:</strong>
+- Treat everything as evidence
+- Document exhaustively
+- Maintain chain of custody
+- Work on copies, not originals
+- Time is critical (data retention)</p>
+<p>Network forensics is detective work. You're piecing together what happened from digital traces. Practice builds intuition—the more investigations you conduct, the faster you'll spot patterns and identify threats.</p>
+<p>Next, we'll move into applied cryptography and how encryption is actually used to secure systems and communications.</p>
         
 
         <!-- Lesson Navigation (only show on non-homepage pages) -->
         
         <div class="lesson-nav">
             
-            <a href="../lesson1-6/" class="lesson-nav-button">
+            <a href="../lesson6-2/" class="lesson-nav-button">
                 <span class="arrow">←</span>
-                <span>Previous: Lesson 1.6</span>
+                <span>Previous: Lesson 6.2</span>
             </a>
             
 
             <div class="lesson-nav-info">
                 <div class="current-lesson">Current Lesson</div>
-                <div class="lesson-title">Linux Installation Process</div>
+                <div class="lesson-title">Lesson 6.3</div>
             </div>
 
             
-            <a href="../../unit2/lesson2-1/" class="lesson-nav-button">
-                <span>Next: Lesson 2.1</span>
+            <a href="../../unit7/lesson7-1/" class="lesson-nav-button">
+                <span>Next: Lesson 7.1</span>
                 <span class="arrow">→</span>
             </a>
             
@@ -1158,43 +1534,43 @@
                                 
                                 {
                                     title: "Lesson 1.1",
-                                    url: '../lesson1-1/',
+                                    url: '../../unit1/lesson1-1/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.2",
-                                    url: '../lesson1-2/',
+                                    url: '../../unit1/lesson1-2/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.3",
-                                    url: '../lesson1-3/',
+                                    url: '../../unit1/lesson1-3/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.4",
-                                    url: '../lesson1-4/',
+                                    url: '../../unit1/lesson1-4/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.5",
-                                    url: '../lesson1-5/',
+                                    url: '../../unit1/lesson1-5/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.6",
-                                    url: '../lesson1-6/',
+                                    url: '../../unit1/lesson1-6/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Linux Installation Process",
-                                    url: './',
+                                    url: '../../unit1/installation-process/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
@@ -1286,19 +1662,19 @@
                                 
                                 {
                                     title: "Lesson 6.1",
-                                    url: '../../unit6/lesson6-1/',
+                                    url: '../lesson6-1/',
                                     path: 'Curriculum > Unit 6'
                                 },
                                 
                                 {
                                     title: "Lesson 6.2",
-                                    url: '../../unit6/lesson6-2/',
+                                    url: '../lesson6-2/',
                                     path: 'Curriculum > Unit 6'
                                 },
                                 
                                 {
                                     title: "Lesson 6.3",
-                                    url: '../../unit6/lesson6-3/',
+                                    url: './',
                                     path: 'Curriculum > Unit 6'
                                 },
                                 

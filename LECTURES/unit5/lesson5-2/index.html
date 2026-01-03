@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linux Installation Process - NCHS Cybersecurity</title>
+    <title>Lesson 5.2 - NCHS Cybersecurity</title>
     
     
     <link rel="icon" href="../../../img/logo.png">
@@ -698,31 +698,31 @@
                                         <ul class="unit-lessons">
                                             
                                             <li>
-                                                <a href="../lesson1-1/">Lesson 1.1</a>
+                                                <a href="../../unit1/lesson1-1/">Lesson 1.1</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-2/">Lesson 1.2</a>
+                                                <a href="../../unit1/lesson1-2/">Lesson 1.2</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-3/">Lesson 1.3</a>
+                                                <a href="../../unit1/lesson1-3/">Lesson 1.3</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-4/">Lesson 1.4</a>
+                                                <a href="../../unit1/lesson1-4/">Lesson 1.4</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-5/">Lesson 1.5</a>
+                                                <a href="../../unit1/lesson1-5/">Lesson 1.5</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-6/">Lesson 1.6</a>
+                                                <a href="../../unit1/lesson1-6/">Lesson 1.6</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="./">Linux Installation Process</a>
+                                                <a href="../../unit1/installation-process/">Linux Installation Process</a>
                                             </li>
                                             
                                         </ul>
@@ -794,15 +794,15 @@
                                         <ul class="unit-lessons">
                                             
                                             <li>
-                                                <a href="../../unit5/lesson5-1/">Lesson 5.1</a>
+                                                <a href="../lesson5-1/">Lesson 5.1</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../../unit5/lesson5-2/">Lesson 5.2</a>
+                                                <a href="./">Lesson 5.2</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../../unit5/lesson5-3/">Lesson 5.3</a>
+                                                <a href="../lesson5-3/">Lesson 5.3</a>
                                             </li>
                                             
                                         </ul>
@@ -964,142 +964,681 @@
 
     <div class="container">
         
-        <h2 id="what-is-it"><em>What</em> is it?</h2>
-<p>Kali is an operating system that was made <strong><em>specially</em></strong> for cybersecurity work (and hacking as well). It has a large toolkit of useful programs that we're going to learn about, including Hydra, Nmap, Wireshark, Tcpdump, MacChanger, Chisel, Aircrack-ng, etc.</p>
-<h2 id="some-vocab">Some Vocab:</h2>
-<p>As much as we know vocabulary might not be that interesting, it's important to know for the future, since there's a LOT of acronyms and words in cybersecurity that you're going to be hearing and using, so it's best to get used to it.</p>
-<ul>
-<li><strong>Operating System (OS)</strong>: The main software that runs your computer, like Windows, macOS, iOS, GNU/Linux, etc.</li>
-<li><strong>Virtual Machine (VM)</strong>: It's basically a computer <em>inside</em> another computer. You can run your regular OS, like Windows, and still have Kali Linux inside of it</li>
-<li><strong>ISO File (International Organization for Standardization File)</strong>: Sounds fancy, but really it's just a full copy of an OS within one tiny file</li>
-<li><strong>Hypervisor</strong>: Software that creates and manages VMs. Examples are VirtualBox and VMWare Workstation. There's also QEMU, but mostly Linux users use that, and you're likely running on Windows or mac</li>
-<li><strong>Bootable USB</strong>: Just a USB drive (which you hopefully already know about) that can start up a computer and install an OS (we don't need this yet)</li>
-<li><strong>Partitioning</strong>: A more advanced topic, but it's dividing up your drive into sections called <em>partitions</em>, which are like walls for a room. We don't need this yet, but it is good to know</li>
-</ul>
-<p>Now, let's get into the nitty-gritty:</p>
-<h2 id="method-1-easy-way">Method 1: Easy way :)</h2>
-<h3 id="minimum-requirements">Minimum Requirements*:</h3>
-<ol>
-<li><code>8 GB</code> of RAM</li>
-<li><code>20-30 GB</code> of free hard drive space</li>
-<li>A decently fast CPU (you probably have this)</li>
-</ol>
-<p>*But, how do I know if I meet them? Well, you can press <em><code>Ctrl+Shift+Esc</code></em> on Windows and click on <strong>"Performance"</strong> inside of Task Manager, and it'll give you a spec (specifications) sheet. On mac, you can click on <strong>"About"</strong> in the top menu bar of your computer. On Linux, you can type <strong><code>uname -a</code></strong>, or use a custom program like <code>fastfetch</code></p>
-<h2 id="big-disclaimer-for-windows-users">BIG DISCLAIMER FOR WINDOWS USERS:</h2>
-<ul>
-<li>You NEED to DISABLE something called Hyper-V. If you don't know what that is, for Windows users, Hyper-V will conflict with Virtualbox, making it run poorly and crash often</li>
-<li>To check if you hve Hyper-V, press <code>Win+R</code>, and type <code>optionalfeatures</code>, then press <code>Enter</code></li>
-<li>Look for a "Hyper-V" in the list of shown items. If it's checked, then it's enabled. Uncheck it.<ul>
-<li>Alternative method: go to cmd (Command Prompt), and right click and "Run as Administrator". Then use the following command: <code>bcdedit /set hypervisorlaunchtype off</code></li>
-</ul>
-</li>
-<li>Finally, restart your computer</li>
-</ul>
-<h2 id="big-disclaimer-for-macos-users">BIG DISCLAIMER FOR MACOS USERS:</h2>
-<ul>
-<li>You need to check if you're using an Intel-based Mac or Apple Silicon machine. If your device is M1, M2, M*, then it's <strong>Apple Silicon</strong></li>
-<li>If this is the case, you will need to use a different software for virtualization. You have some options, like <a href="https://getutm.app">UTM</a> or <a href="https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion">VMware Fusion</a>. </li>
-<li>Also, you will have to install Kali Linux using the 
-<em><strong>ARM64 version! Not x86-64!</strong></em></li>
-</ul>
-<hr />
-<p>Now, go to <a href="https://virtualbox.org">virtualbox.org</a></p>
-<p>Click on the download for your OS, and install the program by following the instruction wizard.</p>
-<p><img alt="Virtual Box" src="../../../img/virtual_box.png" /></p>
-<ul>
-<li>Now, go to the <a href="https://kali.org/get-kali">Kali Linux website</a>.</li>
-<li>Download the "Installer" ISO file (<code>~ 4 GB</code> in size)</li>
-<li>Then choose the 64-bit version for modern computers.</li>
-<li>If your computer is old, it could be 32-bit. If so, you may need to check your system specifications as explained above. However, it probably isn't.</li>
-</ul>
-<p><img alt="Kali Installation" src="../../../img/kali_img.png" /></p>
-<blockquote>
-<p>Remember, Apple Silicon machines will install the ARM64 version of Kali Linux instead!</p>
-</blockquote>
-<ul>
-<li>Finally, make your Virtual Machine. Open up VirtualBox and click "New"</li>
-<li>Name it whatever, I'd call it "Kali Linux", or "Kali Machine".</li>
-<li>Type: Linux, Version: Debian (64-bit)</li>
-<li>Allocate at least <code>4 GB</code> of RAM, AKA <code>4096 MB</code>, by dragging the slider or typing in the number in the RAM text box</li>
-<li>Create a Virtual Hrd Disk (allocate <code>25-30 GB</code> minimum)<ul>
-<li>Choose VDI (VirtualBox Disk Image)</li>
-<li>Also select "dynamically allocated" to save space, and allows the VM to grow dynamically in storage size as you begin to add more things</li>
-</ul>
-</li>
-<li>After clicking done, tell it to create, but do NOT tell it to also start yet</li>
-<li>Click on your virtual machine, and then go to settings</li>
-<li>Then go to Storage, and click the empty disk icon</li>
-<li>This is where we "choose a disk file", and select the downloaded Kali ISO</li>
-<li>Then under System, enable PAE/NX if available to you. PAE is Physical Address Extension, and NX is No Execute. These allow for &gt; <code>4 GB</code> of RAM access and prevents non-executable code from being executed in memory segments. If you don't know what that means, just ignore this</li>
-<li>Under Display, increase video memory to <code>128 MB</code></li>
-<li>Finally, save and exit Settings, and click on Start to boot your VM</li>
-<li>Select "Graphical Install" (press Enter, navigate using arrow keys)</li>
-<li>Choose your language, location, keyboard (these can later be changed, doesn't really matter)</li>
-<li>You can set a hostname, or keep the default (kali)</li>
-</ul>
-<h3 id="important-username-is-kali-and-password-is-kali-by-default"><strong>IMPORTANT</strong>: username is <em>kali</em> and password is <em>kali</em> by default!</h3>
-<ul>
-<li>Choose "Guided - use entire disk" for your partitioning</li>
-<li>Then select "All files in one partition"</li>
-<li>Confirm and wait a while. Take a walk outside, take a short nap, whatever you want. Just wait 10-20 minutes and it'll be done</li>
-<li>Restart when prompted</li>
-<li>On first login, enter the username and password</li>
-<li>Then, click the <code>SUPER</code> key (<code>Win</code> key or <code>Cmd</code> key on mac) and type "terminal" or "console" into the search, and open the app</li>
-<li>In the terminal, you can type <code>sudo apt update &amp;&amp; sudo apt upgrade -y</code><ul>
-<li>This command just updates your system</li>
-<li>When prompted with a password, type in your password</li>
-</ul>
-</li>
-<li>Happy Linux!</li>
-</ul>
-<h2 id="method-2-hard-way-bare-metal-installation">Method 2: Hard way (bare metal installation)</h2>
-<p>Alright. You're ready for the real deal. No problem. </p>
-<p><code>WARNING! ⚠️⚠️</code>: This version of installation WILL take space on your disk! This means it will be physically installed, and it will NOT be installed as a VM! Just like Windows or macOS, it will be physically on your device. If you do this incorrectly, it may <strong>wipe your device completely</strong>. I'm not liable for if you mistakenly wipe your drive, it's up to you. Also, I personally do <strong>not recommend you install Kali Linux on a physical drive</strong>. If you want to use Linux for extra practice, install a distribution like <a href="https://www.debian.org/">Debian</a> or <a href="https://linuxmint.com/">Linux Mint</a>. You are risking data loss if done incorrectly, so proceed at your own risk.</p>
-<p>Important things to note are:</p>
-<ul>
-<li>If you install on bare metal, AKA on your physical device, your device may have incompatibility issues. I would recommend doing your own research before doing so</li>
-<li>You may want to install Linux on a secondary drive, since if you use your main one, you will have to create a special partition for Linux to use exclusively, which is more difficult</li>
-<li>You'll need a USB drive with preferably <code>8 GB</code> or more of storage</li>
-<li>You may need to adjust your BIOS (manufacturer specific, meaning it depends on what company made your computer and maybe even where you bought it from) to allow for other bootable devices, which can include removing Secure Boot</li>
-<li>There's some specifics for ARM64 machines like Apple Silicon that will be different!</li>
-<li>Overall, you are likely going to have to do your OWN research to make sure you don't mess anything up.</li>
-</ul>
-<p>Without further ado, these are some general instructions (not perfect):</p>
-<ol>
-<li>Create a bootable USB drive using an app like Balena Etcher or Rufus</li>
-<li>Make space on your hard drive by creating a disk partition of ~<code>30 GB</code> or more, or install on a secondary hard drive</li>
-<li>Boot from the USB drive from BIOS after restarting your computer and smashing the BIOS key as it boots up (typically <code>Esc</code>, <code>F11</code>, <code>F12</code>, or <code>Del</code> depending on the manufacturer)</li>
-<li>Follow the installation process, but make sure you select the right drive and if it's on the same disk as Windows or Mac, you install "alongside" it, not replace </li>
-<li>After going through the setup, you may re-enter the BIOS to change the boot order. What this means is move Linux above Windows so that on first boot you boot into Linux (optional)</li>
-</ol>
-<p>Some important extras:</p>
-<ul>
-<li>Make sure you regularly update your system at least weekly</li>
-<li>Make decent credentials or use a <a href="https://www.yubico.com/">physical key</a></li>
-<li>Never just copy/paste a command without understanding it, look it up at least (even from me!)</li>
-<li>Install packages wisely and preferably from trusted sources</li>
-</ul>
-<p>Happy Linux! :)</p>
+        <h1 id="advanced-scripting-for-security">Advanced Scripting for Security</h1>
+<p>You've learned basic scripting. Now let's level up with advanced techniques that security professionals use daily. These scripts automate reconnaissance, testing, analysis, and response—saving hours of manual work.</p>
+<h2 id="python-for-security-advanced-techniques">Python for Security - Advanced Techniques</h2>
+<h3 id="working-with-apis">Working with APIs</h3>
+<p>Most security tools and services provide APIs. Learn to interact with them.</p>
+<h4 id="http-requests-with-authentication">HTTP Requests with Authentication</h4>
+<pre><code class="language-python">import requests
+
+# Basic authentication
+response = requests.get('https://api.example.com/data',
+                       auth=('username', 'password'))
+
+# Bearer token authentication
+headers = {'Authorization': 'Bearer YOUR_TOKEN_HERE'}
+response = requests.get('https://api.example.com/data', headers=headers)
+
+# API key in header
+headers = {'X-API-Key': 'your-api-key'}
+response = requests.get('https://api.example.com/data', headers=headers)
+
+print(response.json())
+</code></pre>
+<h4 id="virustotal-api-integration">VirusTotal API Integration</h4>
+<pre><code class="language-python">import requests
+import hashlib
+
+def check_file_virustotal(filepath, api_key):
+    # Calculate file hash
+    with open(filepath, 'rb') as f:
+        file_hash = hashlib.sha256(f.read()).hexdigest()
+
+    # Check hash on VirusTotal
+    url = f'https://www.virustotal.com/api/v3/files/{file_hash}'
+    headers = {'x-apikey': api_key}
+
+    response = requests.get(url, headers=headers)
+
+    if response.status_code == 200:
+        data = response.json()
+        stats = data['data']['attributes']['last_analysis_stats']
+        print(f&quot;Malicious detections: {stats['malicious']}&quot;)
+        print(f&quot;Total engines: {sum(stats.values())}&quot;)
+        return stats
+    elif response.status_code == 404:
+        print(&quot;File not found in VirusTotal database&quot;)
+    else:
+        print(f&quot;Error: {response.status_code}&quot;)
+
+    return None
+
+# Usage
+check_file_virustotal('suspicious.exe', 'YOUR_API_KEY')
+</code></pre>
+<h3 id="multithreading-for-speed">Multithreading for Speed</h3>
+<p><strong>Speed up network scanning:</strong></p>
+<pre><code class="language-python">import threading
+import socket
+from queue import Queue
+
+# Thread-safe queue
+queue = Queue()
+open_ports = []
+
+def port_scan(target, port):
+    try:
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.settimeout(1)
+        result = sock.connect_ex((target, port))
+        if result == 0:
+            open_ports.append(port)
+            print(f&quot;Port {port} is open&quot;)
+        sock.close()
+    except:
+        pass
+
+def worker(target):
+    while not queue.empty():
+        port = queue.get()
+        port_scan(target, port)
+        queue.task_done()
+
+def threaded_port_scan(target, num_threads=100):
+    # Fill queue with ports
+    for port in range(1, 1025):
+        queue.put(port)
+
+    # Create threads
+    threads = []
+    for _ in range(num_threads):
+        thread = threading.Thread(target=worker, args=(target,))
+        thread.daemon = True
+        thread.start()
+        threads.append(thread)
+
+    # Wait for completion
+    queue.join()
+
+    return sorted(open_ports)
+
+# Usage
+target = &quot;192.168.1.1&quot;
+print(f&quot;Scanning {target}...&quot;)
+ports = threaded_port_scan(target)
+print(f&quot;Open ports: {ports}&quot;)
+</code></pre>
+<h3 id="subprocess-management">Subprocess Management</h3>
+<p><strong>Execute system commands safely:</strong></p>
+<pre><code class="language-python">import subprocess
+import shlex
+
+def run_command(command):
+    &quot;&quot;&quot;Safely execute shell command&quot;&quot;&quot;
+    try:
+        # Split command safely
+        args = shlex.split(command)
+
+        # Run command
+        result = subprocess.run(args, 
+                              capture_output=True, 
+                              text=True, 
+                              timeout=30)
+
+        return {
+            'stdout': result.stdout,
+            'stderr': result.stderr,
+            'returncode': result.returncode
+        }
+    except subprocess.TimeoutExpired:
+        return {'error': 'Command timed out'}
+    except Exception as e:
+        return {'error': str(e)}
+
+# Usage
+result = run_command('nmap -sV 192.168.1.1')
+print(result['stdout'])
+</code></pre>
+<h3 id="regular-expressions-for-log-parsing">Regular Expressions for Log Parsing</h3>
+<pre><code class="language-python">import re
+from collections import Counter
+
+def parse_auth_log(logfile):
+    &quot;&quot;&quot;Parse authentication log for failed logins&quot;&quot;&quot;
+    failed_ips = []
+
+    # Pattern for failed SSH attempts
+    pattern = r'Failed password for .+ from (\d+\.\d+\.\d+\.\d+)'
+
+    with open(logfile, 'r') as f:
+        for line in f:
+            match = re.search(pattern, line)
+            if match:
+                failed_ips.append(match.group(1))
+
+    # Count attempts per IP
+    ip_counts = Counter(failed_ips)
+
+    # IPs with more than 5 attempts
+    suspicious = {ip: count for ip, count in ip_counts.items() if count &gt; 5}
+
+    return suspicious
+
+# Usage
+suspicious_ips = parse_auth_log('/var/log/auth.log')
+for ip, count in suspicious_ips.items():
+    print(f&quot;{ip}: {count} failed attempts&quot;)
+</code></pre>
+<h3 id="working-with-json-and-databases">Working with JSON and Databases</h3>
+<pre><code class="language-python">import json
+import sqlite3
+
+def store_scan_results(results, db_path='scans.db'):
+    &quot;&quot;&quot;Store scan results in SQLite database&quot;&quot;&quot;
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+
+    # Create table
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS scans (
+            id INTEGER PRIMARY KEY,
+            target TEXT,
+            port INTEGER,
+            service TEXT,
+            timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+        )
+    ''')
+
+    # Insert results
+    for result in results:
+        cursor.execute('''
+            INSERT INTO scans (target, port, service)
+            VALUES (?, ?, ?)
+        ''', (result['target'], result['port'], result['service']))
+
+    conn.commit()
+    conn.close()
+
+def query_scans(target, db_path='scans.db'):
+    &quot;&quot;&quot;Query previous scans for a target&quot;&quot;&quot;
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+
+    cursor.execute('''
+        SELECT port, service, timestamp
+        FROM scans
+        WHERE target = ?
+        ORDER BY timestamp DESC
+    ''', (target,))
+
+    results = cursor.fetchall()
+    conn.close()
+
+    return results
+
+# Usage
+results = [
+    {'target': '192.168.1.1', 'port': 22, 'service': 'ssh'},
+    {'target': '192.168.1.1', 'port': 80, 'service': 'http'}
+]
+store_scan_results(results)
+
+previous_scans = query_scans('192.168.1.1')
+for scan in previous_scans:
+    print(f&quot;Port {scan[0]}: {scan[1]} (scanned: {scan[2]})&quot;)
+</code></pre>
+<h2 id="bash-scripting-advanced">Bash Scripting - Advanced</h2>
+<h3 id="automated-vulnerability-scanner">Automated Vulnerability Scanner</h3>
+<pre><code class="language-bash">#!/bin/bash
+# vulnerability_scanner.sh
+
+TARGET=$1
+OUTPUT_DIR=&quot;scan_results_$(date +%Y%m%d_%H%M%S)&quot;
+
+if [ -z &quot;$TARGET&quot; ]; then
+    echo &quot;Usage: $0 &lt;target&gt;&quot;
+    exit 1
+fi
+
+# Create output directory
+mkdir -p $OUTPUT_DIR
+
+echo &quot;[*] Starting scan of $TARGET&quot;
+echo &quot;[*] Results will be saved to $OUTPUT_DIR&quot;
+
+# Nmap scan
+echo &quot;[*] Running Nmap scan...&quot;
+nmap -sV -sC -oN $OUTPUT_DIR/nmap_scan.txt $TARGET
+nmap -p- -oN $OUTPUT_DIR/nmap_full.txt $TARGET &amp;
+
+# Nikto web scan
+echo &quot;[*] Running Nikto web scan...&quot;
+nikto -h $TARGET -o $OUTPUT_DIR/nikto_scan.txt &amp;
+
+# SSL scan
+echo &quot;[*] Running SSL scan...&quot;
+sslscan $TARGET &gt; $OUTPUT_DIR/ssl_scan.txt &amp;
+
+# DNS enumeration
+echo &quot;[*] Running DNS enumeration...&quot;
+dig any $TARGET &gt; $OUTPUT_DIR/dns_records.txt
+dnsrecon -d $TARGET -t std &gt; $OUTPUT_DIR/dns_recon.txt &amp;
+
+# Wait for background jobs
+wait
+
+# Summary report
+echo &quot;[*] Generating summary report...&quot;
+cat &gt; $OUTPUT_DIR/summary.txt &lt;&lt; EOF
+Vulnerability Scan Report
+Target: $TARGET
+Date: $(date)
+
+Files generated:
+- nmap_scan.txt: Service version detection
+- nmap_full.txt: Full port scan
+- nikto_scan.txt: Web vulnerabilities
+- ssl_scan.txt: SSL/TLS configuration
+- dns_records.txt: DNS records
+- dns_recon.txt: DNS reconnaissance
+
+Review each file for potential vulnerabilities.
+EOF
+
+echo &quot;[*] Scan complete! Results in $OUTPUT_DIR/&quot;
+</code></pre>
+<h3 id="log-analysis-script">Log Analysis Script</h3>
+<pre><code class="language-bash">#!/bin/bash
+# analyze_logs.sh
+
+LOG_FILE=&quot;/var/log/auth.log&quot;
+ALERT_THRESHOLD=5
+
+echo &quot;=== Security Log Analysis ===&quot;
+echo
+
+# Failed login attempts
+echo &quot;[*] Failed SSH Login Attempts:&quot;
+grep &quot;Failed password&quot; $LOG_FILE | \
+    awk '{print $(NF-3)}' | \
+    sort | uniq -c | sort -rn | \
+    while read count ip; do
+        if [ $count -gt $ALERT_THRESHOLD ]; then
+            echo &quot;  ALERT: $ip - $count attempts&quot;
+        else
+            echo &quot;  $ip - $count attempts&quot;
+        fi
+    done
+echo
+
+# Successful logins
+echo &quot;[*] Successful SSH Logins:&quot;
+grep &quot;Accepted password&quot; $LOG_FILE | \
+    awk '{print $(NF-3), $(NF-5)}' | \
+    sort | uniq -c | sort -rn | head -10
+echo
+
+# New user accounts
+echo &quot;[*] New User Accounts Created:&quot;
+grep &quot;new user&quot; $LOG_FILE | tail -5
+echo
+
+# Sudo usage
+echo &quot;[*] Recent Sudo Commands:&quot;
+grep &quot;sudo:&quot; $LOG_FILE | tail -10
+echo
+
+# Port scans (from firewall logs)
+if [ -f &quot;/var/log/syslog&quot; ]; then
+    echo &quot;[*] Possible Port Scans:&quot;
+    grep &quot;IPTables-Dropped&quot; /var/log/syslog | \
+        awk '{print $(NF-2)}' | \
+        grep -oP '\d+\.\d+\.\d+\.\d+' | \
+        sort | uniq -c | sort -rn | head -10
+fi
+</code></pre>
+<h3 id="automated-backup-script">Automated Backup Script</h3>
+<pre><code class="language-bash">#!/bin/bash
+# secure_backup.sh
+
+BACKUP_SOURCE=&quot;/important/data&quot;
+BACKUP_DEST=&quot;/backup/location&quot;
+ENCRYPTION_KEY=&quot;/path/to/encryption.key&quot;
+RETENTION_DAYS=30
+
+DATE=$(date +%Y%m%d_%H%M%S)
+BACKUP_FILE=&quot;backup_${DATE}.tar.gz.enc&quot;
+
+echo &quot;[*] Starting backup at $(date)&quot;
+
+# Create compressed archive
+echo &quot;[*] Creating archive...&quot;
+tar -czf - $BACKUP_SOURCE | \
+    openssl enc -aes-256-cbc -salt -pbkdf2 \
+    -pass file:$ENCRYPTION_KEY &gt; \
+    $BACKUP_DEST/$BACKUP_FILE
+
+if [ $? -eq 0 ]; then
+    echo &quot;[+] Backup created: $BACKUP_FILE&quot;
+
+    # Calculate hash
+    sha256sum $BACKUP_DEST/$BACKUP_FILE &gt; \
+        $BACKUP_DEST/${BACKUP_FILE}.sha256
+    echo &quot;[+] Hash generated&quot;
+
+    # Remove old backups
+    echo &quot;[*] Removing backups older than $RETENTION_DAYS days...&quot;
+    find $BACKUP_DEST -name &quot;backup_*.tar.gz.enc&quot; \
+        -mtime +$RETENTION_DAYS -delete
+
+    echo &quot;[+] Backup complete!&quot;
+else
+    echo &quot;[!] Backup failed!&quot;
+    exit 1
+fi
+
+# Send notification
+echo &quot;Backup completed successfully&quot; | \
+    mail -s &quot;Backup Report&quot; admin@example.com
+</code></pre>
+<h2 id="python-security-tools">Python Security Tools</h2>
+<h3 id="password-strength-checker">Password Strength Checker</h3>
+<pre><code class="language-python">import re
+import string
+
+def check_password_strength(password):
+    &quot;&quot;&quot;Analyze password strength&quot;&quot;&quot;
+    score = 0
+    feedback = []
+
+    # Length check
+    if len(password) &lt; 8:
+        feedback.append(&quot;Password too short (minimum 8 characters)&quot;)
+    elif len(password) &gt;= 12:
+        score += 2
+        feedback.append(&quot;Good length&quot;)
+    else:
+        score += 1
+
+    # Complexity checks
+    if re.search(r'[a-z]', password):
+        score += 1
+    else:
+        feedback.append(&quot;Add lowercase letters&quot;)
+
+    if re.search(r'[A-Z]', password):
+        score += 1
+    else:
+        feedback.append(&quot;Add uppercase letters&quot;)
+
+    if re.search(r'[0-9]', password):
+        score += 1
+    else:
+        feedback.append(&quot;Add numbers&quot;)
+
+    if re.search(r'[!@#$%^&amp;*(),.?&quot;:{}|&lt;&gt;]', password):
+        score += 2
+        feedback.append(&quot;Contains special characters&quot;)
+    else:
+        feedback.append(&quot;Add special characters&quot;)
+
+    # Common patterns
+    if re.search(r'(.)\1{2,}', password):
+        score -= 1
+        feedback.append(&quot;Avoid repeated characters&quot;)
+
+    if re.search(r'(123|abc|password|qwerty)', password.lower()):
+        score -= 2
+        feedback.append(&quot;Avoid common patterns&quot;)
+
+    # Determine strength
+    if score &lt; 3:
+        strength = &quot;Weak&quot;
+    elif score &lt; 5:
+        strength = &quot;Medium&quot;
+    elif score &lt; 7:
+        strength = &quot;Strong&quot;
+    else:
+        strength = &quot;Very Strong&quot;
+
+    return {
+        'strength': strength,
+        'score': score,
+        'feedback': feedback
+    }
+
+# Usage
+password = input(&quot;Enter password to check: &quot;)
+result = check_password_strength(password)
+print(f&quot;Strength: {result['strength']} (Score: {result['score']})&quot;)
+for item in result['feedback']:
+    print(f&quot;  - {item}&quot;)
+</code></pre>
+<h3 id="network-traffic-monitor">Network Traffic Monitor</h3>
+<pre><code class="language-python">from scapy.all import sniff, IP, TCP, UDP
+from collections import Counter
+import time
+
+class TrafficMonitor:
+    def __init__(self):
+        self.packets = []
+        self.start_time = time.time()
+        self.ip_counter = Counter()
+        self.port_counter = Counter()
+
+    def packet_callback(self, packet):
+        &quot;&quot;&quot;Process captured packet&quot;&quot;&quot;
+        if IP in packet:
+            src_ip = packet[IP].src
+            dst_ip = packet[IP].dst
+
+            # Count IPs
+            self.ip_counter[src_ip] += 1
+            self.ip_counter[dst_ip] += 1
+
+            # Get ports
+            if TCP in packet:
+                self.port_counter[packet[TCP].dport] += 1
+            elif UDP in packet:
+                self.port_counter[packet[UDP].dport] += 1
+
+            # Store packet info
+            self.packets.append({
+                'src': src_ip,
+                'dst': dst_ip,
+                'protocol': packet[IP].proto,
+                'size': len(packet)
+            })
+
+    def start_capture(self, interface='eth0', duration=60):
+        &quot;&quot;&quot;Capture packets for specified duration&quot;&quot;&quot;
+        print(f&quot;Starting capture on {interface} for {duration} seconds...&quot;)
+        sniff(iface=interface, prn=self.packet_callback, 
+              timeout=duration, store=False)
+
+    def analyze(self):
+        &quot;&quot;&quot;Analyze captured traffic&quot;&quot;&quot;
+        print(&quot;\n=== Traffic Analysis ===&quot;)
+        print(f&quot;Total packets: {len(self.packets)}&quot;)
+        print(f&quot;Duration: {time.time() - self.start_time:.2f} seconds&quot;)
+
+        print(&quot;\nTop 10 IPs by packet count:&quot;)
+        for ip, count in self.ip_counter.most_common(10):
+            print(f&quot;  {ip}: {count} packets&quot;)
+
+        print(&quot;\nTop 10 Destination Ports:&quot;)
+        for port, count in self.port_counter.most_common(10):
+            service = {
+                80: 'HTTP', 443: 'HTTPS', 22: 'SSH',
+                53: 'DNS', 25: 'SMTP', 21: 'FTP'
+            }.get(port, 'Unknown')
+            print(f&quot;  {port} ({service}): {count} packets&quot;)
+
+        # Detect anomalies
+        self.detect_anomalies()
+
+    def detect_anomalies(self):
+        &quot;&quot;&quot;Detect suspicious patterns&quot;&quot;&quot;
+        print(&quot;\n=== Anomaly Detection ===&quot;)
+
+        # Port scan detection
+        for ip, count in self.ip_counter.items():
+            unique_ports = sum(1 for p in self.packets 
+                             if p['src'] == ip)
+            if unique_ports &gt; 50:
+                print(f&quot;  ALERT: Possible port scan from {ip}&quot;)
+
+        # High volume
+        avg_packets = len(self.packets) / len(self.ip_counter)
+        for ip, count in self.ip_counter.most_common(5):
+            if count &gt; avg_packets * 10:
+                print(f&quot;  ALERT: High traffic volume from {ip}&quot;)
+
+# Usage (requires root)
+# monitor = TrafficMonitor()
+# monitor.start_capture(interface='eth0', duration=60)
+# monitor.analyze()
+</code></pre>
+<h3 id="automated-incident-response">Automated Incident Response</h3>
+<pre><code class="language-python">import subprocess
+import datetime
+import json
+
+class IncidentResponse:
+    def __init__(self):
+        self.incident_log = []
+
+    def log_action(self, action, details):
+        &quot;&quot;&quot;Log incident response action&quot;&quot;&quot;
+        entry = {
+            'timestamp': datetime.datetime.now().isoformat(),
+            'action': action,
+            'details': details
+        }
+        self.incident_log.append(entry)
+        print(f&quot;[{entry['timestamp']}] {action}: {details}&quot;)
+
+    def block_ip(self, ip_address):
+        &quot;&quot;&quot;Block malicious IP with iptables&quot;&quot;&quot;
+        try:
+            cmd = f&quot;sudo iptables -A INPUT -s {ip_address} -j DROP&quot;
+            subprocess.run(cmd.split(), check=True)
+            self.log_action('BLOCK_IP', f&quot;Blocked {ip_address}&quot;)
+            return True
+        except Exception as e:
+            self.log_action('ERROR', f&quot;Failed to block {ip_address}: {e}&quot;)
+            return False
+
+    def isolate_host(self, hostname):
+        &quot;&quot;&quot;Isolate compromised host&quot;&quot;&quot;
+        # This would integrate with your network management system
+        self.log_action('ISOLATE_HOST', f&quot;Isolated {hostname}&quot;)
+        # Actual implementation would vary by environment
+
+    def collect_evidence(self, target):
+        &quot;&quot;&quot;Collect forensic evidence&quot;&quot;&quot;
+        evidence_dir = f&quot;evidence_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}&quot;
+        subprocess.run(['mkdir', '-p', evidence_dir])
+
+        # Memory dump (if installed)
+        try:
+            subprocess.run(['sudo', 'dd', 'if=/dev/mem', 
+                          f'of={evidence_dir}/memory.img'], 
+                          timeout=300)
+            self.log_action('COLLECT_MEMORY', f&quot;Memory dumped to {evidence_dir}&quot;)
+        except:
+            pass
+
+        # Network connections
+        result = subprocess.run(['ss', '-tunap'], capture_output=True, text=True)
+        with open(f'{evidence_dir}/connections.txt', 'w') as f:
+            f.write(result.stdout)
+
+        # Process list
+        result = subprocess.run(['ps', 'aux'], capture_output=True, text=True)
+        with open(f'{evidence_dir}/processes.txt', 'w') as f:
+            f.write(result.stdout)
+
+        self.log_action('COLLECT_EVIDENCE', f&quot;Evidence saved to {evidence_dir}&quot;)
+        return evidence_dir
+
+    def notify_team(self, message):
+        &quot;&quot;&quot;Send notification to security team&quot;&quot;&quot;
+        # This would integrate with your notification system
+        # Email, Slack, PagerDuty, etc.
+        self.log_action('NOTIFY', message)
+
+    def save_incident_report(self, filename='incident_report.json'):
+        &quot;&quot;&quot;Save incident log to file&quot;&quot;&quot;
+        with open(filename, 'w') as f:
+            json.dump(self.incident_log, f, indent=2)
+        print(f&quot;Incident report saved to {filename}&quot;)
+
+# Usage example
+def respond_to_brute_force(attacking_ip):
+    &quot;&quot;&quot;Automated response to brute force attack&quot;&quot;&quot;
+    ir = IncidentResponse()
+
+    ir.log_action('DETECT', f&quot;Brute force attack detected from {attacking_ip}&quot;)
+
+    # Block the attacker
+    ir.block_ip(attacking_ip)
+
+    # Collect evidence
+    evidence_dir = ir.collect_evidence(attacking_ip)
+
+    # Notify team
+    ir.notify_team(f&quot;Brute force attack from {attacking_ip} blocked. &quot;
+                   f&quot;Evidence: {evidence_dir}&quot;)
+
+    # Save report
+    ir.save_incident_report()
+
+# respond_to_brute_force('192.168.1.100')
+</code></pre>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<p><strong>Advanced scripting enables:</strong>
+- Automation of repetitive tasks
+- Faster reconnaissance and scanning
+- Real-time monitoring and alerting
+- Automated incident response
+- Custom security tools</p>
+<p><strong>Best practices:</strong>
+- Error handling (try/except, exit codes)
+- Logging all actions
+- Input validation
+- Secure credential storage
+- Code comments and documentation
+- Testing before production use</p>
+<p><strong>Remember:</strong>
+- Scripts are tools—use responsibly
+- Always have permission before scanning
+- Test in isolated environments first
+- Keep scripts updated
+- Share knowledge with team</p>
+<p>These advanced scripting skills separate security professionals from beginners. Practice building your own tools, contribute to open-source projects, and continuously refine your automation skills.</p>
+<p>Next lesson, we'll explore malware analysis techniques and how to reverse engineer malicious code.</p>
         
 
         <!-- Lesson Navigation (only show on non-homepage pages) -->
         
         <div class="lesson-nav">
             
-            <a href="../lesson1-6/" class="lesson-nav-button">
+            <a href="../lesson5-1/" class="lesson-nav-button">
                 <span class="arrow">←</span>
-                <span>Previous: Lesson 1.6</span>
+                <span>Previous: Lesson 5.1</span>
             </a>
             
 
             <div class="lesson-nav-info">
                 <div class="current-lesson">Current Lesson</div>
-                <div class="lesson-title">Linux Installation Process</div>
+                <div class="lesson-title">Lesson 5.2</div>
             </div>
 
             
-            <a href="../../unit2/lesson2-1/" class="lesson-nav-button">
-                <span>Next: Lesson 2.1</span>
+            <a href="../lesson5-3/" class="lesson-nav-button">
+                <span>Next: Lesson 5.3</span>
                 <span class="arrow">→</span>
             </a>
             
@@ -1158,43 +1697,43 @@
                                 
                                 {
                                     title: "Lesson 1.1",
-                                    url: '../lesson1-1/',
+                                    url: '../../unit1/lesson1-1/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.2",
-                                    url: '../lesson1-2/',
+                                    url: '../../unit1/lesson1-2/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.3",
-                                    url: '../lesson1-3/',
+                                    url: '../../unit1/lesson1-3/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.4",
-                                    url: '../lesson1-4/',
+                                    url: '../../unit1/lesson1-4/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.5",
-                                    url: '../lesson1-5/',
+                                    url: '../../unit1/lesson1-5/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.6",
-                                    url: '../lesson1-6/',
+                                    url: '../../unit1/lesson1-6/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Linux Installation Process",
-                                    url: './',
+                                    url: '../../unit1/installation-process/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
@@ -1264,19 +1803,19 @@
                                 
                                 {
                                     title: "Lesson 5.1",
-                                    url: '../../unit5/lesson5-1/',
+                                    url: '../lesson5-1/',
                                     path: 'Curriculum > Unit 5'
                                 },
                                 
                                 {
                                     title: "Lesson 5.2",
-                                    url: '../../unit5/lesson5-2/',
+                                    url: './',
                                     path: 'Curriculum > Unit 5'
                                 },
                                 
                                 {
                                     title: "Lesson 5.3",
-                                    url: '../../unit5/lesson5-3/',
+                                    url: '../lesson5-3/',
                                     path: 'Curriculum > Unit 5'
                                 },
                                 

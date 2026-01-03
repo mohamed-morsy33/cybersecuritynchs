@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linux Installation Process - NCHS Cybersecurity</title>
+    <title>Lesson 3.3 - NCHS Cybersecurity</title>
     
     
     <link rel="icon" href="../../../img/logo.png">
@@ -698,31 +698,31 @@
                                         <ul class="unit-lessons">
                                             
                                             <li>
-                                                <a href="../lesson1-1/">Lesson 1.1</a>
+                                                <a href="../../unit1/lesson1-1/">Lesson 1.1</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-2/">Lesson 1.2</a>
+                                                <a href="../../unit1/lesson1-2/">Lesson 1.2</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-3/">Lesson 1.3</a>
+                                                <a href="../../unit1/lesson1-3/">Lesson 1.3</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-4/">Lesson 1.4</a>
+                                                <a href="../../unit1/lesson1-4/">Lesson 1.4</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-5/">Lesson 1.5</a>
+                                                <a href="../../unit1/lesson1-5/">Lesson 1.5</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-6/">Lesson 1.6</a>
+                                                <a href="../../unit1/lesson1-6/">Lesson 1.6</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="./">Linux Installation Process</a>
+                                                <a href="../../unit1/installation-process/">Linux Installation Process</a>
                                             </li>
                                             
                                         </ul>
@@ -756,15 +756,15 @@
                                         <ul class="unit-lessons">
                                             
                                             <li>
-                                                <a href="../../unit3/lesson3-1/">Lesson 3.1</a>
+                                                <a href="../lesson3-1/">Lesson 3.1</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../../unit3/lesson3-2/">Lesson 3.2</a>
+                                                <a href="../lesson3-2/">Lesson 3.2</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../../unit3/lesson3-3/">Lesson 3.3</a>
+                                                <a href="./">Lesson 3.3</a>
                                             </li>
                                             
                                         </ul>
@@ -964,142 +964,595 @@
 
     <div class="container">
         
-        <h2 id="what-is-it"><em>What</em> is it?</h2>
-<p>Kali is an operating system that was made <strong><em>specially</em></strong> for cybersecurity work (and hacking as well). It has a large toolkit of useful programs that we're going to learn about, including Hydra, Nmap, Wireshark, Tcpdump, MacChanger, Chisel, Aircrack-ng, etc.</p>
-<h2 id="some-vocab">Some Vocab:</h2>
-<p>As much as we know vocabulary might not be that interesting, it's important to know for the future, since there's a LOT of acronyms and words in cybersecurity that you're going to be hearing and using, so it's best to get used to it.</p>
-<ul>
-<li><strong>Operating System (OS)</strong>: The main software that runs your computer, like Windows, macOS, iOS, GNU/Linux, etc.</li>
-<li><strong>Virtual Machine (VM)</strong>: It's basically a computer <em>inside</em> another computer. You can run your regular OS, like Windows, and still have Kali Linux inside of it</li>
-<li><strong>ISO File (International Organization for Standardization File)</strong>: Sounds fancy, but really it's just a full copy of an OS within one tiny file</li>
-<li><strong>Hypervisor</strong>: Software that creates and manages VMs. Examples are VirtualBox and VMWare Workstation. There's also QEMU, but mostly Linux users use that, and you're likely running on Windows or mac</li>
-<li><strong>Bootable USB</strong>: Just a USB drive (which you hopefully already know about) that can start up a computer and install an OS (we don't need this yet)</li>
-<li><strong>Partitioning</strong>: A more advanced topic, but it's dividing up your drive into sections called <em>partitions</em>, which are like walls for a room. We don't need this yet, but it is good to know</li>
-</ul>
-<p>Now, let's get into the nitty-gritty:</p>
-<h2 id="method-1-easy-way">Method 1: Easy way :)</h2>
-<h3 id="minimum-requirements">Minimum Requirements*:</h3>
-<ol>
-<li><code>8 GB</code> of RAM</li>
-<li><code>20-30 GB</code> of free hard drive space</li>
-<li>A decently fast CPU (you probably have this)</li>
-</ol>
-<p>*But, how do I know if I meet them? Well, you can press <em><code>Ctrl+Shift+Esc</code></em> on Windows and click on <strong>"Performance"</strong> inside of Task Manager, and it'll give you a spec (specifications) sheet. On mac, you can click on <strong>"About"</strong> in the top menu bar of your computer. On Linux, you can type <strong><code>uname -a</code></strong>, or use a custom program like <code>fastfetch</code></p>
-<h2 id="big-disclaimer-for-windows-users">BIG DISCLAIMER FOR WINDOWS USERS:</h2>
-<ul>
-<li>You NEED to DISABLE something called Hyper-V. If you don't know what that is, for Windows users, Hyper-V will conflict with Virtualbox, making it run poorly and crash often</li>
-<li>To check if you hve Hyper-V, press <code>Win+R</code>, and type <code>optionalfeatures</code>, then press <code>Enter</code></li>
-<li>Look for a "Hyper-V" in the list of shown items. If it's checked, then it's enabled. Uncheck it.<ul>
-<li>Alternative method: go to cmd (Command Prompt), and right click and "Run as Administrator". Then use the following command: <code>bcdedit /set hypervisorlaunchtype off</code></li>
-</ul>
-</li>
-<li>Finally, restart your computer</li>
-</ul>
-<h2 id="big-disclaimer-for-macos-users">BIG DISCLAIMER FOR MACOS USERS:</h2>
-<ul>
-<li>You need to check if you're using an Intel-based Mac or Apple Silicon machine. If your device is M1, M2, M*, then it's <strong>Apple Silicon</strong></li>
-<li>If this is the case, you will need to use a different software for virtualization. You have some options, like <a href="https://getutm.app">UTM</a> or <a href="https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion">VMware Fusion</a>. </li>
-<li>Also, you will have to install Kali Linux using the 
-<em><strong>ARM64 version! Not x86-64!</strong></em></li>
-</ul>
-<hr />
-<p>Now, go to <a href="https://virtualbox.org">virtualbox.org</a></p>
-<p>Click on the download for your OS, and install the program by following the instruction wizard.</p>
-<p><img alt="Virtual Box" src="../../../img/virtual_box.png" /></p>
-<ul>
-<li>Now, go to the <a href="https://kali.org/get-kali">Kali Linux website</a>.</li>
-<li>Download the "Installer" ISO file (<code>~ 4 GB</code> in size)</li>
-<li>Then choose the 64-bit version for modern computers.</li>
-<li>If your computer is old, it could be 32-bit. If so, you may need to check your system specifications as explained above. However, it probably isn't.</li>
-</ul>
-<p><img alt="Kali Installation" src="../../../img/kali_img.png" /></p>
-<blockquote>
-<p>Remember, Apple Silicon machines will install the ARM64 version of Kali Linux instead!</p>
-</blockquote>
-<ul>
-<li>Finally, make your Virtual Machine. Open up VirtualBox and click "New"</li>
-<li>Name it whatever, I'd call it "Kali Linux", or "Kali Machine".</li>
-<li>Type: Linux, Version: Debian (64-bit)</li>
-<li>Allocate at least <code>4 GB</code> of RAM, AKA <code>4096 MB</code>, by dragging the slider or typing in the number in the RAM text box</li>
-<li>Create a Virtual Hrd Disk (allocate <code>25-30 GB</code> minimum)<ul>
-<li>Choose VDI (VirtualBox Disk Image)</li>
-<li>Also select "dynamically allocated" to save space, and allows the VM to grow dynamically in storage size as you begin to add more things</li>
-</ul>
-</li>
-<li>After clicking done, tell it to create, but do NOT tell it to also start yet</li>
-<li>Click on your virtual machine, and then go to settings</li>
-<li>Then go to Storage, and click the empty disk icon</li>
-<li>This is where we "choose a disk file", and select the downloaded Kali ISO</li>
-<li>Then under System, enable PAE/NX if available to you. PAE is Physical Address Extension, and NX is No Execute. These allow for &gt; <code>4 GB</code> of RAM access and prevents non-executable code from being executed in memory segments. If you don't know what that means, just ignore this</li>
-<li>Under Display, increase video memory to <code>128 MB</code></li>
-<li>Finally, save and exit Settings, and click on Start to boot your VM</li>
-<li>Select "Graphical Install" (press Enter, navigate using arrow keys)</li>
-<li>Choose your language, location, keyboard (these can later be changed, doesn't really matter)</li>
-<li>You can set a hostname, or keep the default (kali)</li>
-</ul>
-<h3 id="important-username-is-kali-and-password-is-kali-by-default"><strong>IMPORTANT</strong>: username is <em>kali</em> and password is <em>kali</em> by default!</h3>
-<ul>
-<li>Choose "Guided - use entire disk" for your partitioning</li>
-<li>Then select "All files in one partition"</li>
-<li>Confirm and wait a while. Take a walk outside, take a short nap, whatever you want. Just wait 10-20 minutes and it'll be done</li>
-<li>Restart when prompted</li>
-<li>On first login, enter the username and password</li>
-<li>Then, click the <code>SUPER</code> key (<code>Win</code> key or <code>Cmd</code> key on mac) and type "terminal" or "console" into the search, and open the app</li>
-<li>In the terminal, you can type <code>sudo apt update &amp;&amp; sudo apt upgrade -y</code><ul>
-<li>This command just updates your system</li>
-<li>When prompted with a password, type in your password</li>
-</ul>
-</li>
-<li>Happy Linux!</li>
-</ul>
-<h2 id="method-2-hard-way-bare-metal-installation">Method 2: Hard way (bare metal installation)</h2>
-<p>Alright. You're ready for the real deal. No problem. </p>
-<p><code>WARNING! ⚠️⚠️</code>: This version of installation WILL take space on your disk! This means it will be physically installed, and it will NOT be installed as a VM! Just like Windows or macOS, it will be physically on your device. If you do this incorrectly, it may <strong>wipe your device completely</strong>. I'm not liable for if you mistakenly wipe your drive, it's up to you. Also, I personally do <strong>not recommend you install Kali Linux on a physical drive</strong>. If you want to use Linux for extra practice, install a distribution like <a href="https://www.debian.org/">Debian</a> or <a href="https://linuxmint.com/">Linux Mint</a>. You are risking data loss if done incorrectly, so proceed at your own risk.</p>
-<p>Important things to note are:</p>
-<ul>
-<li>If you install on bare metal, AKA on your physical device, your device may have incompatibility issues. I would recommend doing your own research before doing so</li>
-<li>You may want to install Linux on a secondary drive, since if you use your main one, you will have to create a special partition for Linux to use exclusively, which is more difficult</li>
-<li>You'll need a USB drive with preferably <code>8 GB</code> or more of storage</li>
-<li>You may need to adjust your BIOS (manufacturer specific, meaning it depends on what company made your computer and maybe even where you bought it from) to allow for other bootable devices, which can include removing Secure Boot</li>
-<li>There's some specifics for ARM64 machines like Apple Silicon that will be different!</li>
-<li>Overall, you are likely going to have to do your OWN research to make sure you don't mess anything up.</li>
-</ul>
-<p>Without further ado, these are some general instructions (not perfect):</p>
-<ol>
-<li>Create a bootable USB drive using an app like Balena Etcher or Rufus</li>
-<li>Make space on your hard drive by creating a disk partition of ~<code>30 GB</code> or more, or install on a secondary hard drive</li>
-<li>Boot from the USB drive from BIOS after restarting your computer and smashing the BIOS key as it boots up (typically <code>Esc</code>, <code>F11</code>, <code>F12</code>, or <code>Del</code> depending on the manufacturer)</li>
-<li>Follow the installation process, but make sure you select the right drive and if it's on the same disk as Windows or Mac, you install "alongside" it, not replace </li>
-<li>After going through the setup, you may re-enter the BIOS to change the boot order. What this means is move Linux above Windows so that on first boot you boot into Linux (optional)</li>
-</ol>
-<p>Some important extras:</p>
-<ul>
-<li>Make sure you regularly update your system at least weekly</li>
-<li>Make decent credentials or use a <a href="https://www.yubico.com/">physical key</a></li>
-<li>Never just copy/paste a command without understanding it, look it up at least (even from me!)</li>
-<li>Install packages wisely and preferably from trusted sources</li>
-</ul>
-<p>Happy Linux! :)</p>
+        <h1 id="network-design-and-architecture">Network Design and Architecture</h1>
+<p>Understanding individual network components isn't enough. You need to know how they fit together to create secure, efficient networks. This lesson covers network design principles and common architectures you'll encounter.</p>
+<h2 id="network-design-principles">Network Design Principles</h2>
+<h3 id="defense-in-depth">Defense in Depth</h3>
+<p><strong>Multiple layers of security:</strong></p>
+<pre><code>Internet
+  ↓
+Border Firewall (Perimeter)
+  ↓
+DMZ (Public servers)
+  ↓
+Internal Firewall
+  ↓
+Core Network
+  ├─ VLANs (Segmentation)
+  ├─ IDS/IPS (Detection)
+  ├─ Access Controls (Authorization)
+  └─ Encryption (Confidentiality)
+</code></pre>
+<p><strong>No single point of failure</strong> for security.</p>
+<h3 id="segmentation">Segmentation</h3>
+<p><strong>Divide network into zones based on:</strong>
+- Security requirements
+- Function
+- Data sensitivity
+- Trust level</p>
+<p><strong>Benefits:</strong>
+- Contain breaches
+- Reduce attack surface
+- Apply different security policies
+- Improve performance</p>
+<h3 id="redundancy">Redundancy</h3>
+<p><strong>Eliminate single points of failure:</strong>
+- Multiple internet connections
+- Redundant switches/routers
+- Multiple power supplies
+- Backup systems
+- Geographic diversity</p>
+<p><strong>High availability = uptime</strong></p>
+<h3 id="scalability">Scalability</h3>
+<p><strong>Design for growth:</strong>
+- Add capacity without redesign
+- Modular architecture
+- Room for expansion
+- Future-proof technology choices</p>
+<h2 id="common-network-architectures">Common Network Architectures</h2>
+<h3 id="three-tier-architecture">Three-Tier Architecture</h3>
+<p><strong>Traditional enterprise design:</strong></p>
+<pre><code>┌─────────────────┐
+│   Core Layer    │  High-speed backbone
+│   (Switches)    │  Connects distribution layers
+└────────┬────────┘  No packet manipulation
+         │
+┌────────┴────────┐
+│ Distribution    │  Policy enforcement
+│    Layer        │  VLANs, ACLs, routing
+└────────┬────────┘  Aggregation point
+         │
+┌────────┴────────┐
+│  Access Layer   │  End-user connections
+│   (Switches)    │  Port security
+└─────────────────┘  PoE for phones, APs
+</code></pre>
+<p><strong>Core layer:</strong>
+- Purpose: Fast packet switching
+- Devices: High-performance Layer 3 switches
+- Features: Redundancy, high bandwidth
+- Minimal processing (routing only)</p>
+<p><strong>Distribution layer:</strong>
+- Purpose: Policy enforcement, routing
+- Devices: Layer 3 switches, routers
+- Features: VLANs, ACLs, firewalls
+- Connect access to core</p>
+<p><strong>Access layer:</strong>
+- Purpose: End-device connections
+- Devices: Layer 2 switches
+- Features: PoE, port security, VLANs
+- Desktops, printers, phones, APs</p>
+<p><strong>Advantages:</strong>
+- Clear hierarchy
+- Scalable
+- Maintainable
+- Predictable performance</p>
+<p><strong>Disadvantages:</strong>
+- Can be overbuilt for small networks
+- More equipment = more cost
+- Complexity</p>
+<h3 id="two-tier-collapsed-core">Two-Tier (Collapsed Core)</h3>
+<p><strong>Simplified for smaller networks:</strong></p>
+<pre><code>┌─────────────────┐
+│ Core/Distribution│ Combined layer
+│     Layer       │ Routing + policy
+└────────┬────────┘
+         │
+┌────────┴────────┐
+│  Access Layer   │ End-user connections
+└─────────────────┘
+</code></pre>
+<p><strong>When to use:</strong>
+- Smaller organizations
+- Limited budget
+- Fewer users (&lt;500)
+- Less complex requirements</p>
+<h3 id="spine-leaf-architecture">Spine-Leaf Architecture</h3>
+<p><strong>Modern data center design:</strong></p>
+<pre><code>      Spine1    Spine2    Spine3
+        │         │         │
+     ┌──┴────┬────┴────┬────┴───┐
+     │       │         │        │
+   Leaf1   Leaf2    Leaf3    Leaf4
+     │       │         │        │
+  Servers Servers  Servers  Servers
+</code></pre>
+<p><strong>Characteristics:</strong>
+- Every leaf connects to every spine
+- Two hops between any servers
+- Predictable latency
+- Easy to scale (add leaf switches)
+- No spanning tree needed</p>
+<p><strong>Advantages:</strong>
+- Low latency
+- High bandwidth
+- Scalability
+- Redundancy</p>
+<p><strong>Use cases:</strong>
+- Data centers
+- Cloud providers
+- High-performance computing</p>
+<h3 id="hub-and-spoke-star">Hub and Spoke (Star)</h3>
+<p><strong>Central site with remote locations:</strong></p>
+<pre><code>      HQ (Hub)
+     /  |  \
+    /   |   \
+Branch Branch Branch
+ (Spoke)(Spoke)(Spoke)
+</code></pre>
+<p><strong>Characteristics:</strong>
+- All traffic goes through hub
+- Spokes don't connect directly
+- Centralized management/security
+- VPN connections</p>
+<p><strong>Advantages:</strong>
+- Centralized control
+- Easier security management
+- Simplified monitoring</p>
+<p><strong>Disadvantages:</strong>
+- Hub is single point of failure
+- Bandwidth bottleneck at hub
+- Spoke-to-spoke requires two hops</p>
+<h3 id="full-mesh">Full Mesh</h3>
+<p><strong>Every site connects to every other site:</strong></p>
+<pre><code>  Site A ─── Site B
+   │  \      / │
+   │   \    /  │
+   │    \  /   │
+  Site C ─── Site D
+</code></pre>
+<p><strong>Advantages:</strong>
+- No single point of failure
+- Direct paths (low latency)
+- Load distribution</p>
+<p><strong>Disadvantages:</strong>
+- Expensive (many connections)
+- Complex management
+- Scales poorly (n×(n-1)/2 connections)</p>
+<p><strong>Use cases:</strong>
+- Critical systems
+- Financial trading
+- When budget allows</p>
+<h3 id="partial-mesh">Partial Mesh</h3>
+<p><strong>Compromise between hub-spoke and full mesh:</strong>
+- Critical sites: full mesh
+- Less critical: hub-and-spoke
+- Best of both worlds</p>
+<h2 id="network-zones">Network Zones</h2>
+<h3 id="dmz-demilitarized-zone">DMZ (Demilitarized Zone)</h3>
+<p><strong>Purpose:</strong> Host public-facing services</p>
+<p><strong>Design:</strong></p>
+<pre><code>Internet
+   ↓
+Firewall 1 (External)
+   ↓
+  DMZ
+  ├─ Web servers
+  ├─ Email servers
+  ├─ DNS servers
+  └─ FTP servers
+   ↓
+Firewall 2 (Internal)
+   ↓
+Internal Network
+</code></pre>
+<p><strong>Rules:</strong>
+- Internet → DMZ: Limited access (HTTP, HTTPS, SMTP)
+- DMZ → Internal: Very restricted (database queries only)
+- Internal → DMZ: Manage servers
+- Internal → Internet: Through firewall</p>
+<p><strong>Security benefits:</strong>
+- Public servers isolated
+- Breach contained to DMZ
+- Internal network protected
+- Two firewalls provide defense in depth</p>
+<h3 id="internal-network">Internal Network</h3>
+<p><strong>Corporate network for employees:</strong></p>
+<p><strong>Segmentation by:</strong>
+- Department (Sales, Engineering, HR)
+- Function (User workstations, Printers, VoIP)
+- Security level (Standard, Restricted, Confidential)</p>
+<p><strong>Example VLANs:</strong></p>
+<pre><code>VLAN 10: Users (192.168.10.0/24)
+VLAN 20: Servers (192.168.20.0/24)
+VLAN 30: Management (192.168.30.0/24)
+VLAN 40: Guest (192.168.40.0/24)
+VLAN 50: VoIP (192.168.50.0/24)
+</code></pre>
+<h3 id="management-network">Management Network</h3>
+<p><strong>Separate network for device management:</strong></p>
+<p><strong>Out-of-band management:</strong>
+- Dedicated network
+- Physical separation
+- Even if production network fails
+- Accessible via console servers</p>
+<p><strong>Devices managed:</strong>
+- Switches
+- Routers
+- Firewalls
+- Servers (IPMI, iLO, iDRAC)</p>
+<p><strong>Security:</strong>
+- Extremely restricted access
+- VPN required
+- MFA mandatory
+- All actions logged</p>
+<h3 id="guest-network">Guest Network</h3>
+<p><strong>Visitors and untrusted devices:</strong></p>
+<p><strong>Characteristics:</strong>
+- Isolated from internal network
+- Internet access only
+- Captive portal (login page)
+- Bandwidth limits
+- Time limits
+- Content filtering</p>
+<p><strong>Security:</strong>
+- No access to internal resources
+- Separate VLAN
+- Separate IP range
+- Strict firewall rules</p>
+<p><strong>Implementation:</strong></p>
+<pre><code>Guest VLAN 40
+   ↓
+Firewall rules:
+  Allow: Internet (HTTP, HTTPS)
+  Deny: Internal networks
+  Deny: Private IP ranges
+</code></pre>
+<h2 id="wireless-network-design">Wireless Network Design</h2>
+<h3 id="site-survey">Site Survey</h3>
+<p><strong>Before deploying wireless:</strong></p>
+<p><strong>Physical survey:</strong>
+- Building layout
+- Construction materials (affect signal)
+- Sources of interference
+- Coverage requirements
+- Capacity requirements</p>
+<p><strong>RF survey:</strong>
+- Measure signal strength
+- Identify dead zones
+- Find interference sources
+- Optimize channel selection
+- Determine AP placement</p>
+<p><strong>Tools:</strong>
+- Ekahau
+- NetSpot
+- AirMagnet
+- inSSIDer</p>
+<h3 id="controller-vs-autonomous-aps">Controller vs. Autonomous APs</h3>
+<p><strong>Controller-based (Enterprise):</strong>
+- Central wireless controller
+- Manages multiple APs
+- Centralized configuration
+- Roaming support
+- Guest portal
+- Scalable</p>
+<p><strong>Autonomous APs (Standalone):</strong>
+- Each AP configured independently
+- No controller needed
+- Simpler (small deployments)
+- Lower cost</p>
+<h3 id="wireless-security-architecture">Wireless Security Architecture</h3>
+<p><strong>SSID strategy:</strong></p>
+<pre><code>Corporate SSID
+  ├─ WPA2-Enterprise (802.1X)
+  ├─ Corporate VLAN
+  └─ Access to internal resources
+
+Guest SSID
+  ├─ WPA2-PSK or open with captive portal
+  ├─ Guest VLAN
+  └─ Internet only
+</code></pre>
+<p><strong>Best practices:</strong>
+- Separate SSIDs for different purposes
+- Unique VLANs per SSID
+- Enterprise authentication for employees
+- Guest isolation
+- Regular security audits</p>
+<h2 id="cloud-network-architecture">Cloud Network Architecture</h2>
+<h3 id="hybrid-cloud">Hybrid Cloud</h3>
+<p><strong>Combination of on-premises and cloud:</strong></p>
+<pre><code>On-Premises Data Center
+        ↓
+     VPN/Direct Connect
+        ↓
+   Cloud (AWS/Azure/GCP)
+</code></pre>
+<p><strong>Use cases:</strong>
+- Gradual migration
+- Burst capacity
+- Disaster recovery
+- Data sovereignty requirements</p>
+<h3 id="multi-cloud">Multi-Cloud</h3>
+<p><strong>Multiple cloud providers:</strong>
+- Avoid vendor lock-in
+- Leverage best features of each
+- Geographic distribution
+- Redundancy</p>
+<p><strong>Challenges:</strong>
+- Complex management
+- Security consistency
+- Cost tracking
+- Network connectivity</p>
+<h3 id="cloud-network-components">Cloud Network Components</h3>
+<p><strong>VPC (Virtual Private Cloud):</strong>
+- Logically isolated network
+- Define IP range
+- Subnets (public/private)
+- Route tables
+- Internet/NAT gateways</p>
+<p><strong>Security Groups:</strong>
+- Virtual firewalls
+- Instance-level
+- Stateful
+- Allow rules only</p>
+<p><strong>Network ACLs:</strong>
+- Subnet-level
+- Stateless
+- Allow and deny rules</p>
+<p><strong>VPC Peering:</strong>
+- Connect VPCs
+- Private connectivity
+- No internet gateway</p>
+<p><strong>Transit Gateway:</strong>
+- Central hub for VPC connectivity
+- Simplify complex networks</p>
+<h2 id="zero-trust-architecture">Zero Trust Architecture</h2>
+<p><strong>Never trust, always verify:</strong></p>
+<h3 id="traditional-perimeter-model">Traditional Perimeter Model</h3>
+<pre><code>Internet (Untrusted)
+      ↓
+   Firewall
+      ↓
+Internal Network (Trusted)
+</code></pre>
+<p><strong>Problem:</strong> Assumes internal = safe</p>
+<h3 id="zero-trust-model">Zero Trust Model</h3>
+<pre><code>   Every Request
+        ↓
+   Authenticate
+        ↓
+    Authorize
+        ↓
+    Encrypt
+        ↓
+   Continuous Verification
+</code></pre>
+<p><strong>Principles:</strong>
+1. <strong>Verify explicitly:</strong> Always authenticate and authorize
+2. <strong>Least privilege:</strong> Minimum necessary access
+3. <strong>Assume breach:</strong> Limit blast radius</p>
+<h3 id="implementation">Implementation</h3>
+<p><strong>Micro-segmentation:</strong>
+- Granular network zones
+- Per-application firewalls
+- Workload-specific policies</p>
+<p><strong>Identity-based access:</strong>
+- User and device identity
+- Continuous authentication
+- Context-aware (location, time, device posture)</p>
+<p><strong>Software-defined perimeter:</strong>
+- Application-level access
+- Hide infrastructure
+- Only authorized users see resources</p>
+<p><strong>Components:</strong>
+- Identity provider (Azure AD, Okta)
+- Access proxy
+- Policy engine
+- Endpoint verification
+- Encryption everywhere</p>
+<h2 id="network-documentation">Network Documentation</h2>
+<p><strong>Critical for security and operations:</strong></p>
+<h3 id="physical-diagrams">Physical Diagrams</h3>
+<p><strong>Rack layouts:</strong>
+- Equipment placement
+- Cable management
+- Power distribution
+- Cooling</p>
+<p><strong>Site diagrams:</strong>
+- Building locations
+- Equipment rooms
+- Cable paths
+- Access points</p>
+<h3 id="logical-diagrams">Logical Diagrams</h3>
+<p><strong>Network topology:</strong>
+- Devices and connections
+- IP addressing
+- VLANs
+- Routing</p>
+<p><strong>Security zones:</strong>
+- Trust boundaries
+- Firewall placement
+- DMZ layout
+- Access controls</p>
+<h3 id="configuration-documentation">Configuration Documentation</h3>
+<p><strong>IP addressing scheme:</strong></p>
+<pre><code>10.0.0.0/8 - Corporate
+  10.1.0.0/16 - HQ
+    10.1.10.0/24 - Servers
+    10.1.20.0/24 - Users
+    10.1.30.0/24 - Printers
+  10.2.0.0/16 - Branch 1
+  10.3.0.0/16 - Branch 2
+</code></pre>
+<p><strong>VLAN assignments:</strong>
+- VLAN numbers and names
+- IP ranges
+- Purpose
+- Security requirements</p>
+<p><strong>Firewall rules:</strong>
+- Rule number
+- Source/destination
+- Action
+- Purpose
+- Date created
+- Owner</p>
+<h3 id="change-management">Change Management</h3>
+<p><strong>Document all changes:</strong>
+- What changed
+- Why it changed
+- Who approved
+- When it changed
+- Rollback plan</p>
+<p><strong>Version control:</strong>
+- Configuration backups
+- Before/after states
+- Change history</p>
+<h2 id="network-monitoring-and-management">Network Monitoring and Management</h2>
+<h3 id="snmp-simple-network-management-protocol">SNMP (Simple Network Management Protocol)</h3>
+<p><strong>Monitor device health:</strong>
+- CPU usage
+- Memory usage
+- Interface statistics
+- Temperature
+- Fan status</p>
+<p><strong>SNMP versions:</strong>
+- v1: Basic, no security
+- v2c: Better but still no encryption
+- v3: Encrypted, authenticated (use this!)</p>
+<h3 id="netflowsflow">NetFlow/sFlow</h3>
+<p><strong>Traffic analysis:</strong>
+- Who's talking to whom
+- How much bandwidth used
+- Application identification
+- Anomaly detection</p>
+<p><strong>Use cases:</strong>
+- Capacity planning
+- Security monitoring
+- Troubleshooting
+- Billing</p>
+<h3 id="syslog">Syslog</h3>
+<p><strong>Centralized logging:</strong>
+- Collect logs from all devices
+- Correlation
+- Long-term retention
+- Compliance</p>
+<p><strong>Syslog server:</strong>
+- Receive logs
+- Parse and index
+- Alert on patterns
+- Reporting</p>
+<p><strong>Log sources:</strong>
+- Routers, switches
+- Firewalls
+- Servers
+- Applications
+- Security devices</p>
+<h2 id="disaster-recovery-and-business-continuity">Disaster Recovery and Business Continuity</h2>
+<h3 id="redundant-connections">Redundant Connections</h3>
+<p><strong>Multiple internet providers:</strong>
+- Different providers
+- Different paths
+- Automatic failover
+- BGP for redundancy</p>
+<h3 id="geographic-diversity">Geographic Diversity</h3>
+<p><strong>Separate locations:</strong>
+- Data replication
+- Disaster recovery site
+- Different power grids
+- Different network providers</p>
+<h3 id="recovery-time-objective-rto">Recovery Time Objective (RTO)</h3>
+<p><strong>How long can you be down?</strong>
+- Critical systems: minutes
+- Important systems: hours
+- Non-critical: days</p>
+<p><strong>Design accordingly:</strong>
+- Hot standby (instant failover)
+- Warm standby (quick startup)
+- Cold standby (restore from backup)</p>
+<h3 id="recovery-point-objective-rpo">Recovery Point Objective (RPO)</h3>
+<p><strong>How much data loss is acceptable?</strong>
+- Real-time replication (RPO = 0)
+- Frequent backups (RPO = minutes/hours)
+- Daily backups (RPO = 24 hours)</p>
+<h2 id="common-design-mistakes">Common Design Mistakes</h2>
+<p><strong>Flat networks:</strong>
+- No segmentation
+- Broadcast storms
+- Security nightmare</p>
+<p><strong>Over-complexity:</strong>
+- Too many layers
+- Difficult to troubleshoot
+- Management overhead</p>
+<p><strong>Under-provisioning:</strong>
+- Insufficient bandwidth
+- No growth room
+- Performance issues</p>
+<p><strong>No redundancy:</strong>
+- Single points of failure
+- Network goes down = business stops</p>
+<p><strong>Poor documentation:</strong>
+- Can't troubleshoot effectively
+- Dangerous changes
+- Knowledge loss when people leave</p>
+<p><strong>Ignoring security:</strong>
+- Security as afterthought
+- No defense in depth
+- Vulnerable to attacks</p>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<p><strong>Good network design:</strong>
+- Segmentation for security
+- Redundancy for availability
+- Scalability for growth
+- Documentation for management
+- Monitoring for visibility</p>
+<p><strong>Security integrated:</strong>
+- Multiple layers (defense in depth)
+- Least privilege access
+- Zero trust principles
+- Continuous monitoring</p>
+<p><strong>No one-size-fits-all:</strong>
+- Match design to requirements
+- Consider budget
+- Plan for growth
+- Regular review and updates</p>
+<p>Understanding network architecture helps you:
+- Design secure networks
+- Identify security gaps
+- Plan defenses effectively
+- Troubleshoot issues
+- Communicate with network teams</p>
+<p>In the next units, we'll apply these concepts to real-world security scenarios and see how attackers exploit architectural weaknesses.</p>
         
 
         <!-- Lesson Navigation (only show on non-homepage pages) -->
         
         <div class="lesson-nav">
             
-            <a href="../lesson1-6/" class="lesson-nav-button">
+            <a href="../lesson3-2/" class="lesson-nav-button">
                 <span class="arrow">←</span>
-                <span>Previous: Lesson 1.6</span>
+                <span>Previous: Lesson 3.2</span>
             </a>
             
 
             <div class="lesson-nav-info">
                 <div class="current-lesson">Current Lesson</div>
-                <div class="lesson-title">Linux Installation Process</div>
+                <div class="lesson-title">Lesson 3.3</div>
             </div>
 
             
-            <a href="../../unit2/lesson2-1/" class="lesson-nav-button">
-                <span>Next: Lesson 2.1</span>
+            <a href="../../unit4/lesson4-1/" class="lesson-nav-button">
+                <span>Next: Lesson 4.1</span>
                 <span class="arrow">→</span>
             </a>
             
@@ -1158,43 +1611,43 @@
                                 
                                 {
                                     title: "Lesson 1.1",
-                                    url: '../lesson1-1/',
+                                    url: '../../unit1/lesson1-1/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.2",
-                                    url: '../lesson1-2/',
+                                    url: '../../unit1/lesson1-2/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.3",
-                                    url: '../lesson1-3/',
+                                    url: '../../unit1/lesson1-3/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.4",
-                                    url: '../lesson1-4/',
+                                    url: '../../unit1/lesson1-4/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.5",
-                                    url: '../lesson1-5/',
+                                    url: '../../unit1/lesson1-5/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.6",
-                                    url: '../lesson1-6/',
+                                    url: '../../unit1/lesson1-6/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Linux Installation Process",
-                                    url: './',
+                                    url: '../../unit1/installation-process/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
@@ -1226,19 +1679,19 @@
                                 
                                 {
                                     title: "Lesson 3.1",
-                                    url: '../../unit3/lesson3-1/',
+                                    url: '../lesson3-1/',
                                     path: 'Curriculum > Unit 3'
                                 },
                                 
                                 {
                                     title: "Lesson 3.2",
-                                    url: '../../unit3/lesson3-2/',
+                                    url: '../lesson3-2/',
                                     path: 'Curriculum > Unit 3'
                                 },
                                 
                                 {
                                     title: "Lesson 3.3",
-                                    url: '../../unit3/lesson3-3/',
+                                    url: './',
                                     path: 'Curriculum > Unit 3'
                                 },
                                 

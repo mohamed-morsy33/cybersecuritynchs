@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linux Installation Process - NCHS Cybersecurity</title>
+    <title>Lesson 7.1 - NCHS Cybersecurity</title>
     
     
     <link rel="icon" href="../../../img/logo.png">
@@ -698,31 +698,31 @@
                                         <ul class="unit-lessons">
                                             
                                             <li>
-                                                <a href="../lesson1-1/">Lesson 1.1</a>
+                                                <a href="../../unit1/lesson1-1/">Lesson 1.1</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-2/">Lesson 1.2</a>
+                                                <a href="../../unit1/lesson1-2/">Lesson 1.2</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-3/">Lesson 1.3</a>
+                                                <a href="../../unit1/lesson1-3/">Lesson 1.3</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-4/">Lesson 1.4</a>
+                                                <a href="../../unit1/lesson1-4/">Lesson 1.4</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-5/">Lesson 1.5</a>
+                                                <a href="../../unit1/lesson1-5/">Lesson 1.5</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-6/">Lesson 1.6</a>
+                                                <a href="../../unit1/lesson1-6/">Lesson 1.6</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="./">Linux Installation Process</a>
+                                                <a href="../../unit1/installation-process/">Linux Installation Process</a>
                                             </li>
                                             
                                         </ul>
@@ -836,15 +836,15 @@
                                         <ul class="unit-lessons">
                                             
                                             <li>
-                                                <a href="../../unit7/lesson7-1/">Lesson 7.1</a>
+                                                <a href="./">Lesson 7.1</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../../unit7/lesson7-2/">Lesson 7.2</a>
+                                                <a href="../lesson7-2/">Lesson 7.2</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../../unit7/lesson7-3/">Lesson 7.3</a>
+                                                <a href="../lesson7-3/">Lesson 7.3</a>
                                             </li>
                                             
                                         </ul>
@@ -964,142 +964,479 @@
 
     <div class="container">
         
-        <h2 id="what-is-it"><em>What</em> is it?</h2>
-<p>Kali is an operating system that was made <strong><em>specially</em></strong> for cybersecurity work (and hacking as well). It has a large toolkit of useful programs that we're going to learn about, including Hydra, Nmap, Wireshark, Tcpdump, MacChanger, Chisel, Aircrack-ng, etc.</p>
-<h2 id="some-vocab">Some Vocab:</h2>
-<p>As much as we know vocabulary might not be that interesting, it's important to know for the future, since there's a LOT of acronyms and words in cybersecurity that you're going to be hearing and using, so it's best to get used to it.</p>
-<ul>
-<li><strong>Operating System (OS)</strong>: The main software that runs your computer, like Windows, macOS, iOS, GNU/Linux, etc.</li>
-<li><strong>Virtual Machine (VM)</strong>: It's basically a computer <em>inside</em> another computer. You can run your regular OS, like Windows, and still have Kali Linux inside of it</li>
-<li><strong>ISO File (International Organization for Standardization File)</strong>: Sounds fancy, but really it's just a full copy of an OS within one tiny file</li>
-<li><strong>Hypervisor</strong>: Software that creates and manages VMs. Examples are VirtualBox and VMWare Workstation. There's also QEMU, but mostly Linux users use that, and you're likely running on Windows or mac</li>
-<li><strong>Bootable USB</strong>: Just a USB drive (which you hopefully already know about) that can start up a computer and install an OS (we don't need this yet)</li>
-<li><strong>Partitioning</strong>: A more advanced topic, but it's dividing up your drive into sections called <em>partitions</em>, which are like walls for a room. We don't need this yet, but it is good to know</li>
-</ul>
-<p>Now, let's get into the nitty-gritty:</p>
-<h2 id="method-1-easy-way">Method 1: Easy way :)</h2>
-<h3 id="minimum-requirements">Minimum Requirements*:</h3>
+        <h1 id="cryptography-and-access-control">Cryptography and Access Control</h1>
+<p>You've seen how easily data can be intercepted on networks. Now let's talk about how to protect it. <strong>Cryptography</strong> is the practice of securing information by transforming it into an unreadable format. It's the foundation of digital security—from HTTPS to messaging apps to cryptocurrency.</p>
+<h2 id="what-is-cryptography">What is Cryptography?</h2>
+<p><strong>Cryptography</strong> comes from Greek words meaning "hidden writing." It's the science of using mathematical algorithms to:
+- <strong>Confidentiality</strong>: Keep data secret
+- <strong>Integrity</strong>: Ensure data hasn't been modified
+- <strong>Authentication</strong>: Verify identity
+- <strong>Non-repudiation</strong>: Prove actions can't be denied</p>
+<p>Without cryptography, the internet as we know it couldn't exist. Every secure transaction, every private message, every protected password relies on cryptographic principles.</p>
+<h2 id="the-basics-plaintext-and-ciphertext">The Basics: Plaintext and Ciphertext</h2>
+<p><strong>Plaintext</strong>: The original, readable data
+<strong>Ciphertext</strong>: The encrypted, unreadable data
+<strong>Encryption</strong>: Converting plaintext to ciphertext
+<strong>Decryption</strong>: Converting ciphertext back to plaintext
+<strong>Key</strong>: Secret value used in encryption/decryption
+<strong>Algorithm (Cipher)</strong>: The mathematical process for encryption</p>
+<p>The goal: without the key, ciphertext should be computationally infeasible to decrypt, even if you know the algorithm.</p>
+<h2 id="symmetric-encryption">Symmetric Encryption</h2>
+<p><strong>Symmetric encryption</strong> uses the same key for both encryption and decryption. It's like a locked box—the same key locks and unlocks it.</p>
+<h3 id="how-it-works">How It Works</h3>
+<pre><code>Plaintext → [Encryption Algorithm + Key] → Ciphertext
+Ciphertext → [Decryption Algorithm + Same Key] → Plaintext
+</code></pre>
+<p><strong>Advantages:</strong>
+- Fast and efficient
+- Simple to implement
+- Good for encrypting large amounts of data</p>
+<p><strong>Disadvantage:</strong>
+- Key distribution problem: how do you securely share the key?</p>
+<h3 id="common-symmetric-algorithms">Common Symmetric Algorithms</h3>
+<p><strong>AES (Advanced Encryption Standard):</strong>
+- Current industry standard
+- Key sizes: 128, 192, or 256 bits
+- Used everywhere: HTTPS, VPNs, disk encryption, file encryption
+- Extremely secure when properly implemented
+- Fast in both hardware and software</p>
+<p><strong>DES (Data Encryption Standard):</strong>
+- Old standard from 1970s
+- 56-bit key (too small—can be brute forced)
+- Deprecated, no longer secure
+- Historic importance only</p>
+<p><strong>3DES (Triple DES):</strong>
+- Applies DES three times with different keys
+- More secure than DES but slower
+- Being phased out in favor of AES</p>
+<p><strong>ChaCha20:</strong>
+- Modern stream cipher
+- Alternative to AES
+- Fast on devices without AES hardware acceleration
+- Used in TLS, SSH, VPNs</p>
+<h3 id="block-vs-stream-ciphers">Block vs. Stream Ciphers</h3>
+<p><strong>Block ciphers</strong> (like AES):
+- Encrypt fixed-size blocks of data (128 bits for AES)
+- Need padding if data isn't a multiple of block size
+- Require modes of operation (ECB, CBC, CTR, GCM)</p>
+<p><strong>Stream ciphers</strong> (like ChaCha20):
+- Encrypt data bit by bit or byte by byte
+- No padding needed
+- Often faster for streaming data</p>
+<h3 id="modes-of-operation">Modes of Operation</h3>
+<p>Block ciphers need a mode to handle multiple blocks:</p>
+<p><strong>ECB (Electronic Codebook)</strong> - DON'T USE:
+- Each block encrypted independently
+- Same plaintext block = same ciphertext block
+- Patterns visible in encrypted data
+- Insecure for most purposes</p>
+<p><strong>CBC (Cipher Block Chaining)</strong>:
+- Each block XORed with previous ciphertext
+- Requires initialization vector (IV)
+- Sequential processing
+- Common but being replaced</p>
+<p><strong>CTR (Counter)</strong>:
+- Turns block cipher into stream cipher
+- Can be parallelized (faster)
+- Used in modern protocols</p>
+<p><strong>GCM (Galois/Counter Mode)</strong>:
+- Provides encryption + authentication
+- Current best practice
+- Used in TLS 1.3, WPA3
+- Fast and secure</p>
+<h2 id="asymmetric-encryption-public-key-cryptography">Asymmetric Encryption (Public Key Cryptography)</h2>
+<p><strong>Asymmetric encryption</strong> uses two different keys: a public key (shared openly) and a private key (kept secret).</p>
+<h3 id="how-it-works_1">How It Works</h3>
+<pre><code>Plaintext → [Encryption + Public Key] → Ciphertext
+Ciphertext → [Decryption + Private Key] → Plaintext
+</code></pre>
+<p>Anyone can encrypt with your public key, but only you can decrypt with your private key.</p>
+<p><strong>Advantages:</strong>
+- Solves key distribution problem
+- Enables digital signatures
+- Foundation of secure communications</p>
+<p><strong>Disadvantages:</strong>
+- Slower than symmetric encryption
+- More computationally intensive
+- Larger key sizes needed</p>
+<h3 id="common-asymmetric-algorithms">Common Asymmetric Algorithms</h3>
+<p><strong>RSA (Rivest-Shamir-Adleman):</strong>
+- Most widely used
+- Key sizes: 2048, 3072, 4096 bits (2048 minimum today)
+- Based on difficulty of factoring large numbers
+- Used for key exchange, digital signatures
+- Quantum computers threaten RSA's future</p>
+<p><strong>ECC (Elliptic Curve Cryptography):</strong>
+- Smaller keys, same security as RSA
+- 256-bit ECC ≈ 3072-bit RSA
+- Faster and more efficient
+- Growing in popularity
+- Examples: ECDSA (signatures), ECDH (key exchange)</p>
+<p><strong>Diffie-Hellman:</strong>
+- Key exchange protocol
+- Allows two parties to agree on shared secret over insecure channel
+- Doesn't encrypt data directly
+- Foundation of forward secrecy</p>
+<p><strong>ElGamal:</strong>
+- Alternative to RSA
+- Used in PGP/GPG
+- Based on discrete logarithm problem</p>
+<h3 id="hybrid-cryptography">Hybrid Cryptography</h3>
+<p>In practice, we use both symmetric and asymmetric:</p>
 <ol>
-<li><code>8 GB</code> of RAM</li>
-<li><code>20-30 GB</code> of free hard drive space</li>
-<li>A decently fast CPU (you probably have this)</li>
+<li>Use asymmetric encryption to exchange a symmetric key</li>
+<li>Use symmetric encryption for actual data (faster)</li>
+<li>This is how HTTPS, VPNs, and encrypted messaging work</li>
 </ol>
-<p>*But, how do I know if I meet them? Well, you can press <em><code>Ctrl+Shift+Esc</code></em> on Windows and click on <strong>"Performance"</strong> inside of Task Manager, and it'll give you a spec (specifications) sheet. On mac, you can click on <strong>"About"</strong> in the top menu bar of your computer. On Linux, you can type <strong><code>uname -a</code></strong>, or use a custom program like <code>fastfetch</code></p>
-<h2 id="big-disclaimer-for-windows-users">BIG DISCLAIMER FOR WINDOWS USERS:</h2>
-<ul>
-<li>You NEED to DISABLE something called Hyper-V. If you don't know what that is, for Windows users, Hyper-V will conflict with Virtualbox, making it run poorly and crash often</li>
-<li>To check if you hve Hyper-V, press <code>Win+R</code>, and type <code>optionalfeatures</code>, then press <code>Enter</code></li>
-<li>Look for a "Hyper-V" in the list of shown items. If it's checked, then it's enabled. Uncheck it.<ul>
-<li>Alternative method: go to cmd (Command Prompt), and right click and "Run as Administrator". Then use the following command: <code>bcdedit /set hypervisorlaunchtype off</code></li>
-</ul>
-</li>
-<li>Finally, restart your computer</li>
-</ul>
-<h2 id="big-disclaimer-for-macos-users">BIG DISCLAIMER FOR MACOS USERS:</h2>
-<ul>
-<li>You need to check if you're using an Intel-based Mac or Apple Silicon machine. If your device is M1, M2, M*, then it's <strong>Apple Silicon</strong></li>
-<li>If this is the case, you will need to use a different software for virtualization. You have some options, like <a href="https://getutm.app">UTM</a> or <a href="https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion">VMware Fusion</a>. </li>
-<li>Also, you will have to install Kali Linux using the 
-<em><strong>ARM64 version! Not x86-64!</strong></em></li>
-</ul>
-<hr />
-<p>Now, go to <a href="https://virtualbox.org">virtualbox.org</a></p>
-<p>Click on the download for your OS, and install the program by following the instruction wizard.</p>
-<p><img alt="Virtual Box" src="../../../img/virtual_box.png" /></p>
-<ul>
-<li>Now, go to the <a href="https://kali.org/get-kali">Kali Linux website</a>.</li>
-<li>Download the "Installer" ISO file (<code>~ 4 GB</code> in size)</li>
-<li>Then choose the 64-bit version for modern computers.</li>
-<li>If your computer is old, it could be 32-bit. If so, you may need to check your system specifications as explained above. However, it probably isn't.</li>
-</ul>
-<p><img alt="Kali Installation" src="../../../img/kali_img.png" /></p>
-<blockquote>
-<p>Remember, Apple Silicon machines will install the ARM64 version of Kali Linux instead!</p>
-</blockquote>
-<ul>
-<li>Finally, make your Virtual Machine. Open up VirtualBox and click "New"</li>
-<li>Name it whatever, I'd call it "Kali Linux", or "Kali Machine".</li>
-<li>Type: Linux, Version: Debian (64-bit)</li>
-<li>Allocate at least <code>4 GB</code> of RAM, AKA <code>4096 MB</code>, by dragging the slider or typing in the number in the RAM text box</li>
-<li>Create a Virtual Hrd Disk (allocate <code>25-30 GB</code> minimum)<ul>
-<li>Choose VDI (VirtualBox Disk Image)</li>
-<li>Also select "dynamically allocated" to save space, and allows the VM to grow dynamically in storage size as you begin to add more things</li>
-</ul>
-</li>
-<li>After clicking done, tell it to create, but do NOT tell it to also start yet</li>
-<li>Click on your virtual machine, and then go to settings</li>
-<li>Then go to Storage, and click the empty disk icon</li>
-<li>This is where we "choose a disk file", and select the downloaded Kali ISO</li>
-<li>Then under System, enable PAE/NX if available to you. PAE is Physical Address Extension, and NX is No Execute. These allow for &gt; <code>4 GB</code> of RAM access and prevents non-executable code from being executed in memory segments. If you don't know what that means, just ignore this</li>
-<li>Under Display, increase video memory to <code>128 MB</code></li>
-<li>Finally, save and exit Settings, and click on Start to boot your VM</li>
-<li>Select "Graphical Install" (press Enter, navigate using arrow keys)</li>
-<li>Choose your language, location, keyboard (these can later be changed, doesn't really matter)</li>
-<li>You can set a hostname, or keep the default (kali)</li>
-</ul>
-<h3 id="important-username-is-kali-and-password-is-kali-by-default"><strong>IMPORTANT</strong>: username is <em>kali</em> and password is <em>kali</em> by default!</h3>
-<ul>
-<li>Choose "Guided - use entire disk" for your partitioning</li>
-<li>Then select "All files in one partition"</li>
-<li>Confirm and wait a while. Take a walk outside, take a short nap, whatever you want. Just wait 10-20 minutes and it'll be done</li>
-<li>Restart when prompted</li>
-<li>On first login, enter the username and password</li>
-<li>Then, click the <code>SUPER</code> key (<code>Win</code> key or <code>Cmd</code> key on mac) and type "terminal" or "console" into the search, and open the app</li>
-<li>In the terminal, you can type <code>sudo apt update &amp;&amp; sudo apt upgrade -y</code><ul>
-<li>This command just updates your system</li>
-<li>When prompted with a password, type in your password</li>
-</ul>
-</li>
-<li>Happy Linux!</li>
-</ul>
-<h2 id="method-2-hard-way-bare-metal-installation">Method 2: Hard way (bare metal installation)</h2>
-<p>Alright. You're ready for the real deal. No problem. </p>
-<p><code>WARNING! ⚠️⚠️</code>: This version of installation WILL take space on your disk! This means it will be physically installed, and it will NOT be installed as a VM! Just like Windows or macOS, it will be physically on your device. If you do this incorrectly, it may <strong>wipe your device completely</strong>. I'm not liable for if you mistakenly wipe your drive, it's up to you. Also, I personally do <strong>not recommend you install Kali Linux on a physical drive</strong>. If you want to use Linux for extra practice, install a distribution like <a href="https://www.debian.org/">Debian</a> or <a href="https://linuxmint.com/">Linux Mint</a>. You are risking data loss if done incorrectly, so proceed at your own risk.</p>
-<p>Important things to note are:</p>
-<ul>
-<li>If you install on bare metal, AKA on your physical device, your device may have incompatibility issues. I would recommend doing your own research before doing so</li>
-<li>You may want to install Linux on a secondary drive, since if you use your main one, you will have to create a special partition for Linux to use exclusively, which is more difficult</li>
-<li>You'll need a USB drive with preferably <code>8 GB</code> or more of storage</li>
-<li>You may need to adjust your BIOS (manufacturer specific, meaning it depends on what company made your computer and maybe even where you bought it from) to allow for other bootable devices, which can include removing Secure Boot</li>
-<li>There's some specifics for ARM64 machines like Apple Silicon that will be different!</li>
-<li>Overall, you are likely going to have to do your OWN research to make sure you don't mess anything up.</li>
-</ul>
-<p>Without further ado, these are some general instructions (not perfect):</p>
+<p>Example TLS handshake:
+1. Client and server use RSA or ECDH to agree on a symmetric key
+2. All subsequent traffic encrypted with AES using that key
+3. Best of both worlds: secure key exchange + fast encryption</p>
+<h2 id="hash-functions">Hash Functions</h2>
+<p><strong>Hash functions</strong> are one-way cryptographic operations that produce a fixed-size output (hash/digest) from any input.</p>
+<h3 id="properties-of-cryptographic-hashes">Properties of Cryptographic Hashes</h3>
 <ol>
-<li>Create a bootable USB drive using an app like Balena Etcher or Rufus</li>
-<li>Make space on your hard drive by creating a disk partition of ~<code>30 GB</code> or more, or install on a secondary hard drive</li>
-<li>Boot from the USB drive from BIOS after restarting your computer and smashing the BIOS key as it boots up (typically <code>Esc</code>, <code>F11</code>, <code>F12</code>, or <code>Del</code> depending on the manufacturer)</li>
-<li>Follow the installation process, but make sure you select the right drive and if it's on the same disk as Windows or Mac, you install "alongside" it, not replace </li>
-<li>After going through the setup, you may re-enter the BIOS to change the boot order. What this means is move Linux above Windows so that on first boot you boot into Linux (optional)</li>
+<li><strong>Deterministic</strong>: Same input always produces same output</li>
+<li><strong>Fast</strong>: Quick to compute</li>
+<li><strong>One-way</strong>: Computationally infeasible to reverse</li>
+<li><strong>Avalanche effect</strong>: Small input change drastically changes output</li>
+<li><strong>Collision resistant</strong>: Hard to find two inputs with same hash</li>
 </ol>
-<p>Some important extras:</p>
+<h3 id="common-hash-functions">Common Hash Functions</h3>
+<p><strong>MD5 (Message Digest 5):</strong>
+- 128-bit hash
+- <strong>BROKEN</strong> - collision attacks practical
+- Still seen but DO NOT USE for security
+- OK for checksums only</p>
+<p><strong>SHA-1 (Secure Hash Algorithm 1):</strong>
+- 160-bit hash
+- <strong>BROKEN</strong> - collision attacks demonstrated (2017)
+- Being phased out everywhere
+- Don't use for new projects</p>
+<p><strong>SHA-2 Family</strong> (SHA-224, SHA-256, SHA-384, SHA-512):
+- Current standard
+- SHA-256 most common (256-bit hash)
+- Very secure
+- Used in TLS, Bitcoin, code signing</p>
+<p><strong>SHA-3:</strong>
+- Latest standard
+- Different algorithm than SHA-2
+- Not widely adopted yet but available
+- Insurance against SHA-2 vulnerabilities</p>
+<p><strong>BLAKE2:</strong>
+- Fast alternative to SHA-2
+- As secure as SHA-3
+- Used in some modern systems</p>
+<h3 id="uses-of-hash-functions">Uses of Hash Functions</h3>
+<p><strong>Password Storage:</strong>
+Never store passwords in plaintext. Hash them:</p>
+<pre><code class="language-python">import hashlib
+
+password = &quot;user_password123&quot;
+hash_obj = hashlib.sha256(password.encode())
+stored_hash = hash_obj.hexdigest()
+# Store: stored_hash in database
+</code></pre>
+<p>To verify login:</p>
+<pre><code class="language-python">login_attempt = &quot;user_password123&quot;
+attempt_hash = hashlib.sha256(login_attempt.encode()).hexdigest()
+if attempt_hash == stored_hash:
+    print(&quot;Login successful&quot;)
+</code></pre>
+<p><strong>But simple hashing isn't enough!</strong> Attackers use rainbow tables (precomputed hashes).</p>
+<p><strong>Salt</strong>: Random data added to password before hashing:</p>
+<pre><code class="language-python">import os
+import hashlib
+
+salt = os.urandom(32)  # Random 32 bytes
+password = &quot;user_password123&quot;
+hash_input = salt + password.encode()
+password_hash = hashlib.sha256(hash_input).hexdigest()
+
+# Store both salt and hash
+# Each user gets unique salt, so same password → different hashes
+</code></pre>
+<p><strong>Even better</strong>: Use specialized password hashing algorithms:
+- <strong>bcrypt</strong>: Deliberately slow, has built-in salt
+- <strong>scrypt</strong>: Memory-hard (resists specialized hardware)
+- <strong>Argon2</strong>: Winner of password hashing competition, current best practice</p>
+<p><strong>File Integrity:</strong>
+Hash files to detect tampering:</p>
+<pre><code class="language-bash">sha256sum file.txt
+# Output: hash value that uniquely identifies file contents
+</code></pre>
+<p><strong>Digital Signatures:</strong>
+Hash the message, encrypt hash with private key = signature</p>
+<p><strong>Blockchain/Cryptocurrency:</strong>
+Each block contains hash of previous block, creating immutable chain</p>
+<h2 id="digital-signatures">Digital Signatures</h2>
+<p><strong>Digital signatures</strong> prove authenticity and integrity using asymmetric cryptography.</p>
+<h3 id="how-they-work">How They Work</h3>
+<p><strong>Signing:</strong>
+1. Hash the document
+2. Encrypt hash with sender's private key
+3. This encrypted hash is the signature</p>
+<p><strong>Verifying:</strong>
+1. Hash the received document
+2. Decrypt signature with sender's public key
+3. Compare: if hashes match, signature valid</p>
+<p><strong>What this proves:</strong>
+- <strong>Authenticity</strong>: Only holder of private key could create this signature
+- <strong>Integrity</strong>: If document changed, hash won't match
+- <strong>Non-repudiation</strong>: Signer can't deny signing</p>
+<h3 id="uses">Uses</h3>
 <ul>
-<li>Make sure you regularly update your system at least weekly</li>
-<li>Make decent credentials or use a <a href="https://www.yubico.com/">physical key</a></li>
-<li>Never just copy/paste a command without understanding it, look it up at least (even from me!)</li>
-<li>Install packages wisely and preferably from trusted sources</li>
+<li>Code signing (verify software hasn't been tampered)</li>
+<li>Email signatures (PGP/GPG)</li>
+<li>Legal documents</li>
+<li>Cryptocurrency transactions</li>
+<li>SSL/TLS certificates</li>
+<li>Software updates</li>
 </ul>
-<p>Happy Linux! :)</p>
+<h2 id="certificates-and-pki">Certificates and PKI</h2>
+<p><strong>Public Key Infrastructure (PKI)</strong> is the framework for managing public keys and digital certificates.</p>
+<h3 id="digital-certificates">Digital Certificates</h3>
+<p>A <strong>certificate</strong> binds a public key to an identity. It contains:
+- Subject (who the certificate is for)
+- Public key
+- Issuer (who vouches for this)
+- Validity period
+- Digital signature from issuer</p>
+<h3 id="certificate-authority-ca">Certificate Authority (CA)</h3>
+<p>A <strong>CA</strong> is a trusted entity that issues certificates. Your browser trusts certain root CAs.</p>
+<p><strong>Certificate chain:</strong>
+1. Root CA (trusted by OS/browser)
+2. Intermediate CA (issued by Root CA)
+3. End entity certificate (issued by Intermediate CA)</p>
+<p>When you visit an HTTPS site:
+1. Server sends its certificate
+2. Browser checks if certificate is signed by trusted CA
+3. Browser verifies certificate is valid (not expired, not revoked)
+4. Browser uses public key from certificate to establish encrypted connection</p>
+<p><strong>Security issues:</strong>
+- CAs have been compromised before
+- Malicious certificates can be issued
+- Certificate pinning helps (app only trusts specific certificates)</p>
+<h2 id="access-control">Access Control</h2>
+<p>Now let's talk about controlling who can access what. <strong>Access control</strong> is about authentication (who are you?) and authorization (what can you do?).</p>
+<h3 id="authentication-factors">Authentication Factors</h3>
+<p><strong>Something you know:</strong> Password, PIN, security question
+<strong>Something you have:</strong> Phone, hardware token, smart card
+<strong>Something you are:</strong> Biometrics (fingerprint, face, iris)
+<strong>Somewhere you are:</strong> Geolocation
+<strong>Something you do:</strong> Behavioral patterns (typing rhythm)</p>
+<p><strong>Multi-Factor Authentication (MFA)</strong>: Requires multiple factors. Much more secure than passwords alone.</p>
+<p>Example: Password (know) + Text code (have) + Fingerprint (are)</p>
+<h3 id="authentication-methods">Authentication Methods</h3>
+<p><strong>Password-Based:</strong>
+- Most common
+- Weakest when alone
+- Vulnerable to: brute force, dictionary attacks, phishing, keyloggers
+- Improvements: password managers, strong password policies, MFA</p>
+<p><strong>Certificate-Based:</strong>
+- Uses digital certificates
+- Common in enterprise (smart cards)
+- SSH keys are similar concept
+- More secure than passwords</p>
+<p><strong>Biometric:</strong>
+- Convenient but has issues
+- Can't change if compromised
+- False positives/negatives
+- Privacy concerns
+- Best as second factor, not only factor</p>
+<p><strong>Token-Based:</strong>
+- Hardware tokens (YubiKey, RSA SecurID)
+- Software tokens (Google Authenticator, Authy)
+- One-time passwords (OTP)
+- Time-based OTP (TOTP) - code changes every 30 seconds</p>
+<p><strong>SSO (Single Sign-On):</strong>
+- Authenticate once, access multiple services
+- Reduces password fatigue
+- Protocols: SAML, OAuth, OpenID Connect
+- Risk: compromise of SSO = compromise of everything</p>
+<h3 id="authorization-models">Authorization Models</h3>
+<p><strong>DAC (Discretionary Access Control):</strong>
+- Owner controls access to their resources
+- Common in operating systems (file permissions)
+- Flexible but hard to manage at scale</p>
+<p><strong>MAC (Mandatory Access Control):</strong>
+- System-enforced rules
+- Users can't change permissions
+- Used in high-security environments (military, classified systems)
+- Example: SELinux</p>
+<p><strong>RBAC (Role-Based Access Control):</strong>
+- Permissions assigned to roles, users assigned to roles
+- Easier to manage
+- Common in enterprises
+- Example: "Admin" role has all permissions, "User" role has read-only</p>
+<p><strong>ABAC (Attribute-Based Access Control):</strong>
+- Access based on attributes (user attributes, resource attributes, environment)
+- Most flexible
+- Example: "Allow access if user.department = 'Finance' AND time &lt; 5PM AND location = 'Office'"</p>
+<h3 id="principle-of-least-privilege">Principle of Least Privilege</h3>
+<p>Give users only the minimum access needed to do their job. This limits damage from:
+- Compromised accounts
+- Insider threats
+- Accidents</p>
+<p>Implement through:
+- Proper RBAC
+- Regular access reviews
+- Just-in-time access (temporary elevation)
+- Separation of duties</p>
+<h2 id="key-management">Key Management</h2>
+<p>The security of encrypted data depends entirely on keeping keys secure.</p>
+<h3 id="key-generation">Key Generation</h3>
+<ul>
+<li>Use cryptographically secure random number generators</li>
+<li>Never use weak or predictable keys</li>
+<li>Proper entropy (randomness) is critical</li>
+</ul>
+<p><strong>Bad:</strong></p>
+<pre><code class="language-python">import random
+key = random.randint(0, 1000000)  # NOT SECURE!
+</code></pre>
+<p><strong>Good:</strong></p>
+<pre><code class="language-python">import secrets
+key = secrets.token_bytes(32)  # 256-bit secure random key
+</code></pre>
+<h3 id="key-storage">Key Storage</h3>
+<p><strong>Never store keys in:</strong>
+- Source code
+- Configuration files (plain text)
+- Databases (unencrypted)
+- Environment variables (if avoidable)</p>
+<p><strong>Better options:</strong>
+- Hardware Security Modules (HSM)
+- Key Management Services (KMS) - AWS KMS, Azure Key Vault
+- Operating system keystores (Windows DPAPI, macOS Keychain)
+- Encrypted key files with strong passphrases</p>
+<h3 id="key-rotation">Key Rotation</h3>
+<ul>
+<li>Regularly change encryption keys</li>
+<li>Limits damage if key is compromised</li>
+<li>Balance security vs. operational complexity</li>
+</ul>
+<h3 id="key-escrow-and-recovery">Key Escrow and Recovery</h3>
+<ul>
+<li>What if key is lost?</li>
+<li>Escrow: trusted third party holds backup key</li>
+<li>Recovery: mechanisms to regain access</li>
+<li>Trade-off: convenience vs. security vs. privacy</li>
+</ul>
+<h2 id="real-world-applications">Real-World Applications</h2>
+<h3 id="httpstls">HTTPS/TLS</h3>
+<p>What happens when you visit https://example.com:</p>
+<ol>
+<li><strong>Client Hello</strong>: Browser sends supported cipher suites</li>
+<li><strong>Server Hello</strong>: Server picks cipher suite, sends certificate</li>
+<li><strong>Certificate Verification</strong>: Browser checks if certificate is valid</li>
+<li><strong>Key Exchange</strong>: Browser and server agree on symmetric key (using RSA or ECDH)</li>
+<li><strong>Encrypted Communication</strong>: All traffic encrypted with AES using agreed key</li>
+</ol>
+<p>This combines:
+- Asymmetric encryption (key exchange)
+- Symmetric encryption (data)
+- Hashing (integrity)
+- Digital signatures (authentication)</p>
+<h3 id="vpn">VPN</h3>
+<p><strong>VPN</strong> creates encrypted tunnel through public networks:</p>
+<ol>
+<li>Client authenticates to VPN server (password, certificate)</li>
+<li>Key exchange establishes encryption keys</li>
+<li>All traffic encrypted and sent through tunnel</li>
+<li>VPN server decrypts and forwards to destination</li>
+<li>Response encrypted and sent back</li>
+</ol>
+<p>Protocols: OpenVPN, WireGuard, IPsec, SSTP</p>
+<h3 id="end-to-end-encryption-e2ee">End-to-End Encryption (E2EE)</h3>
+<p>Messages encrypted on sender's device, decrypted only on recipient's device. Provider can't read messages.</p>
+<p><strong>Signal Protocol</strong> (used by Signal, WhatsApp, etc.):
+- Each user has identity key pair (long-term)
+- Ephemeral keys for each conversation
+- Perfect forward secrecy (old messages safe even if keys compromised)
+- Ratcheting (keys constantly change)</p>
+<h3 id="disk-encryption">Disk Encryption</h3>
+<p>Full-disk encryption protects data at rest:
+- <strong>BitLocker</strong> (Windows)
+- <strong>FileVault</strong> (macOS)<br />
+- <strong>LUKS</strong> (Linux)</p>
+<p>Transparent to user, encryption happens automatically. Decryption key derived from password or TPM chip.</p>
+<h2 id="attacks-on-cryptography">Attacks on Cryptography</h2>
+<h3 id="brute-force">Brute Force</h3>
+<p>Try every possible key. Effectiveness depends on key length:
+- 56-bit DES: Breakable in hours
+- 128-bit AES: Impossible with current technology
+- 256-bit AES: Will remain secure for foreseeable future</p>
+<h3 id="dictionary-attacks">Dictionary Attacks</h3>
+<p>Try common passwords/keys. Why password hashing should be slow and salted.</p>
+<h3 id="rainbow-tables">Rainbow Tables</h3>
+<p>Precomputed hashes for common passwords. Defeated by salting.</p>
+<h3 id="side-channel-attacks">Side-Channel Attacks</h3>
+<p>Attack the implementation, not the algorithm:
+- <strong>Timing attacks</strong>: Measure how long operations take
+- <strong>Power analysis</strong>: Monitor power consumption during crypto operations
+- <strong>Acoustic cryptanalysis</strong>: Listen to sounds devices make
+- <strong>Cold boot attack</strong>: Read RAM after system powered off</p>
+<h3 id="cryptanalysis">Cryptanalysis</h3>
+<p>Mathematically analyzing algorithms for weaknesses. This is how MD5 and SHA-1 were broken.</p>
+<h3 id="social-engineering">Social Engineering</h3>
+<p>Why attack encryption when you can trick someone into giving you the key? Often the weakest link.</p>
+<h2 id="best-practices">Best Practices</h2>
+<ol>
+<li><strong>Use established algorithms</strong>: Don't create your own crypto</li>
+<li><strong>Keep software updated</strong>: Vulnerabilities get patched</li>
+<li><strong>Use appropriate key sizes</strong>: 2048-bit RSA minimum, 256-bit AES</li>
+<li><strong>Implement properly</strong>: Easier said than done, use crypto libraries</li>
+<li><strong>Protect keys</strong>: They're more important than encrypted data</li>
+<li><strong>Use authenticated encryption</strong>: GCM mode, not ECB</li>
+<li><strong>Salt and hash passwords</strong>: Use bcrypt, scrypt, or Argon2</li>
+<li><strong>Enable HTTPS</strong>: Everywhere, always</li>
+<li><strong>Implement MFA</strong>: Passwords alone aren't enough</li>
+<li><strong>Principle of least privilege</strong>: Minimize access</li>
+</ol>
+<h2 id="the-future-quantum-cryptography">The Future: Quantum Cryptography</h2>
+<p><strong>Quantum computers</strong> threaten current cryptography:
+- Can break RSA and ECC
+- Symmetric encryption requires larger keys but remains secure</p>
+<p><strong>Post-quantum cryptography</strong>: Algorithms resistant to quantum computers
+- Lattice-based
+- Hash-based
+- Code-based
+- Multivariate</p>
+<p>NIST standardizing post-quantum algorithms now. Migration will take years.</p>
+<p><strong>Quantum key distribution (QKD)</strong>: Uses quantum mechanics to detect eavesdropping. Theoretically unbreakable but limited by distance and cost.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Cryptography is the foundation of digital security. Everything we do online—banking, shopping, communicating—relies on cryptographic protections. Understanding these principles is essential for any security professional.</p>
+<p>The key insights:
+- Encryption transforms readable data into unreadable form
+- Symmetric encryption is fast but has key distribution challenges
+- Asymmetric encryption solves distribution but is slower
+- Hashing provides integrity and is used for passwords
+- Digital signatures provide authentication
+- Access control determines who can access what
+- Key management is critical—keys are more valuable than data</p>
+<p>In the next lessons, we'll explore the ethical frameworks that guide how we use these powerful tools, and then dive into specific attack techniques and defenses.</p>
+<p>Remember: cryptography is a tool. Like any tool, it can be used for good or harm. The responsibility lies with those who wield it.</p>
         
 
         <!-- Lesson Navigation (only show on non-homepage pages) -->
         
         <div class="lesson-nav">
             
-            <a href="../lesson1-6/" class="lesson-nav-button">
+            <a href="../../unit6/lesson6-3/" class="lesson-nav-button">
                 <span class="arrow">←</span>
-                <span>Previous: Lesson 1.6</span>
+                <span>Previous: Lesson 6.3</span>
             </a>
             
 
             <div class="lesson-nav-info">
                 <div class="current-lesson">Current Lesson</div>
-                <div class="lesson-title">Linux Installation Process</div>
+                <div class="lesson-title">Lesson 7.1</div>
             </div>
 
             
-            <a href="../../unit2/lesson2-1/" class="lesson-nav-button">
-                <span>Next: Lesson 2.1</span>
+            <a href="../lesson7-2/" class="lesson-nav-button">
+                <span>Next: Lesson 7.2</span>
                 <span class="arrow">→</span>
             </a>
             
@@ -1158,43 +1495,43 @@
                                 
                                 {
                                     title: "Lesson 1.1",
-                                    url: '../lesson1-1/',
+                                    url: '../../unit1/lesson1-1/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.2",
-                                    url: '../lesson1-2/',
+                                    url: '../../unit1/lesson1-2/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.3",
-                                    url: '../lesson1-3/',
+                                    url: '../../unit1/lesson1-3/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.4",
-                                    url: '../lesson1-4/',
+                                    url: '../../unit1/lesson1-4/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.5",
-                                    url: '../lesson1-5/',
+                                    url: '../../unit1/lesson1-5/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.6",
-                                    url: '../lesson1-6/',
+                                    url: '../../unit1/lesson1-6/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Linux Installation Process",
-                                    url: './',
+                                    url: '../../unit1/installation-process/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
@@ -1308,19 +1645,19 @@
                                 
                                 {
                                     title: "Lesson 7.1",
-                                    url: '../../unit7/lesson7-1/',
+                                    url: './',
                                     path: 'Curriculum > Unit 7'
                                 },
                                 
                                 {
                                     title: "Lesson 7.2",
-                                    url: '../../unit7/lesson7-2/',
+                                    url: '../lesson7-2/',
                                     path: 'Curriculum > Unit 7'
                                 },
                                 
                                 {
                                     title: "Lesson 7.3",
-                                    url: '../../unit7/lesson7-3/',
+                                    url: '../lesson7-3/',
                                     path: 'Curriculum > Unit 7'
                                 },
                                 

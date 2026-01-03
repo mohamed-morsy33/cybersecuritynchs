@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linux Installation Process - NCHS Cybersecurity</title>
+    <title>Lesson 5.3 - NCHS Cybersecurity</title>
     
     
     <link rel="icon" href="../../../img/logo.png">
@@ -698,31 +698,31 @@
                                         <ul class="unit-lessons">
                                             
                                             <li>
-                                                <a href="../lesson1-1/">Lesson 1.1</a>
+                                                <a href="../../unit1/lesson1-1/">Lesson 1.1</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-2/">Lesson 1.2</a>
+                                                <a href="../../unit1/lesson1-2/">Lesson 1.2</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-3/">Lesson 1.3</a>
+                                                <a href="../../unit1/lesson1-3/">Lesson 1.3</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-4/">Lesson 1.4</a>
+                                                <a href="../../unit1/lesson1-4/">Lesson 1.4</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-5/">Lesson 1.5</a>
+                                                <a href="../../unit1/lesson1-5/">Lesson 1.5</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-6/">Lesson 1.6</a>
+                                                <a href="../../unit1/lesson1-6/">Lesson 1.6</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="./">Linux Installation Process</a>
+                                                <a href="../../unit1/installation-process/">Linux Installation Process</a>
                                             </li>
                                             
                                         </ul>
@@ -794,15 +794,15 @@
                                         <ul class="unit-lessons">
                                             
                                             <li>
-                                                <a href="../../unit5/lesson5-1/">Lesson 5.1</a>
+                                                <a href="../lesson5-1/">Lesson 5.1</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../../unit5/lesson5-2/">Lesson 5.2</a>
+                                                <a href="../lesson5-2/">Lesson 5.2</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../../unit5/lesson5-3/">Lesson 5.3</a>
+                                                <a href="./">Lesson 5.3</a>
                                             </li>
                                             
                                         </ul>
@@ -964,142 +964,457 @@
 
     <div class="container">
         
-        <h2 id="what-is-it"><em>What</em> is it?</h2>
-<p>Kali is an operating system that was made <strong><em>specially</em></strong> for cybersecurity work (and hacking as well). It has a large toolkit of useful programs that we're going to learn about, including Hydra, Nmap, Wireshark, Tcpdump, MacChanger, Chisel, Aircrack-ng, etc.</p>
-<h2 id="some-vocab">Some Vocab:</h2>
-<p>As much as we know vocabulary might not be that interesting, it's important to know for the future, since there's a LOT of acronyms and words in cybersecurity that you're going to be hearing and using, so it's best to get used to it.</p>
-<ul>
-<li><strong>Operating System (OS)</strong>: The main software that runs your computer, like Windows, macOS, iOS, GNU/Linux, etc.</li>
-<li><strong>Virtual Machine (VM)</strong>: It's basically a computer <em>inside</em> another computer. You can run your regular OS, like Windows, and still have Kali Linux inside of it</li>
-<li><strong>ISO File (International Organization for Standardization File)</strong>: Sounds fancy, but really it's just a full copy of an OS within one tiny file</li>
-<li><strong>Hypervisor</strong>: Software that creates and manages VMs. Examples are VirtualBox and VMWare Workstation. There's also QEMU, but mostly Linux users use that, and you're likely running on Windows or mac</li>
-<li><strong>Bootable USB</strong>: Just a USB drive (which you hopefully already know about) that can start up a computer and install an OS (we don't need this yet)</li>
-<li><strong>Partitioning</strong>: A more advanced topic, but it's dividing up your drive into sections called <em>partitions</em>, which are like walls for a room. We don't need this yet, but it is good to know</li>
-</ul>
-<p>Now, let's get into the nitty-gritty:</p>
-<h2 id="method-1-easy-way">Method 1: Easy way :)</h2>
-<h3 id="minimum-requirements">Minimum Requirements*:</h3>
+        <h1 id="malware-analysis-fundamentals">Malware Analysis Fundamentals</h1>
+<p>Understanding malware is critical for defense. This lesson teaches you how to safely analyze malicious software to understand its behavior, capabilities, and how to detect it.</p>
+<h2 id="safety-first">Safety First</h2>
+<p><strong>NEVER analyze malware on your main system!</strong></p>
+<h3 id="safe-analysis-environment">Safe Analysis Environment</h3>
+<p><strong>Requirements:</strong>
+1. <strong>Isolated VM</strong>: No network access to your main network
+2. <strong>Snapshots</strong>: Take snapshot before analysis, revert after
+3. <strong>Network isolation</strong>: Host-only or isolated network
+4. <strong>Monitoring tools</strong>: Process monitor, network monitor, API monitor
+5. <strong>Backups</strong>: Everything backed up before starting</p>
+<p><strong>Recommended setup:</strong></p>
+<pre><code>Host Machine (Your computer)
+    ↓
+Virtual Machine (Isolated)
+    ├─ No shared folders
+    ├─ No clipboard sharing
+    ├─ Host-only network (optional)
+    └─ Snapshot before analysis
+</code></pre>
+<p><strong>Tools for analysis VM:</strong>
+- Windows 10 (most malware targets Windows)
+- REMnux (Linux distro for malware analysis)
+- FLARE VM (Windows malware analysis distribution)</p>
+<h2 id="types-of-malware-analysis">Types of Malware Analysis</h2>
+<h3 id="static-analysis">Static Analysis</h3>
+<p><strong>Examine without executing.</strong></p>
+<p><strong>Basic static analysis:</strong>
+- File properties (size, type, creation date)
+- Strings extraction
+- PE header analysis
+- Hash calculation
+- VirusTotal lookup</p>
+<p><strong>Advanced static analysis:</strong>
+- Disassembly
+- Decompilation
+- Code analysis
+- Signature creation</p>
+<h3 id="dynamic-analysis">Dynamic Analysis</h3>
+<p><strong>Execute and observe behavior.</strong></p>
+<p><strong>What to monitor:</strong>
+- File system changes
+- Registry modifications
+- Network connections
+- Process creation
+- API calls
+- Memory modifications</p>
+<h3 id="hybrid-analysis">Hybrid Analysis</h3>
+<p><strong>Combination of static and dynamic.</strong>
+- Static analysis first (safer)
+- Dynamic analysis to confirm findings
+- Iterative process</p>
+<h2 id="static-analysis-tools-and-techniques">Static Analysis Tools and Techniques</h2>
+<h3 id="file-identification">File Identification</h3>
+<pre><code class="language-bash"># File type
+file suspicious.exe
+
+# Calculate hashes
+md5sum suspicious.exe
+sha1sum suspicious.exe
+sha256sum suspicious.exe
+
+# Detailed file info
+exiftool suspicious.exe
+</code></pre>
+<h3 id="strings-analysis">Strings Analysis</h3>
+<pre><code class="language-bash"># Extract strings (minimum 8 characters)
+strings -n 8 suspicious.exe &gt; strings.txt
+
+# Look for interesting strings
+grep -i &quot;http&quot; strings.txt
+grep -i &quot;password&quot; strings.txt
+grep -i &quot;\.exe&quot; strings.txt
+grep -i &quot;cmd&quot; strings.txt
+
+# Unicode strings
+strings -el suspicious.exe
+</code></pre>
+<p><strong>What to look for:</strong>
+- URLs and IP addresses
+- File paths
+- Registry keys
+- Function names
+- Error messages
+- Embedded files
+- Encryption keys</p>
+<h3 id="pe-header-analysis">PE Header Analysis</h3>
+<p><strong>Use PEview, PE-bear, or pestudio:</strong></p>
+<p><strong>Important sections:</strong>
+- <strong>Import table</strong>: What DLLs/functions it uses
+- <strong>Export table</strong>: Functions it provides
+- <strong>Resources</strong>: Embedded files, icons
+- <strong>Sections</strong>: Code, data, resources</p>
+<p><strong>Suspicious indicators:</strong>
+- Unusual entry point
+- Packed/compressed sections (high entropy)
+- Suspicious imports (network, process manipulation)
+- Modified timestamps
+- Unusual section names</p>
+<h3 id="detecting-packers">Detecting Packers</h3>
+<p><strong>Packers compress/encrypt malware to evade detection.</strong></p>
+<pre><code class="language-bash"># Detect packer
+upx -t suspicious.exe  # Check if UPX packed
+
+# Entropy analysis (high entropy = packed/encrypted)
+# Use pe-studio or similar tool
+</code></pre>
+<p><strong>Common packers:</strong>
+- UPX
+- ASPack
+- PECompact
+- Themida
+- VMProtect</p>
+<p><strong>Unpacking:</strong>
+- Some packers can be reversed (UPX: <code>upx -d file.exe</code>)
+- Others require manual unpacking or debugging</p>
+<h2 id="dynamic-analysis-tools">Dynamic Analysis Tools</h2>
+<h3 id="process-monitor-procmon">Process Monitor (Procmon)</h3>
+<p><strong>Windows Sysinternals tool - essential for dynamic analysis.</strong></p>
+<p><strong>Setup filters:</strong></p>
+<pre><code>Process Name is malware.exe
+Operation begins with Write
+Path contains HKCU\Software
+</code></pre>
+<p><strong>What to monitor:</strong>
+- File operations (Create, Write, Delete)
+- Registry operations (RegSetValue, RegCreateKey)
+- Network operations (TCP/UDP connects)
+- Process operations (Process Create, Thread Create)</p>
+<p><strong>Common malware behaviors:</strong>
+- Creating files in Temp or AppData
+- Modifying Run keys (persistence)
+- Modifying firewall settings
+- Dropping additional files
+- Injecting into other processes</p>
+<h3 id="process-explorer">Process Explorer</h3>
+<p><strong>View running processes and their properties:</strong>
+- Memory usage
+- Handles (files, registry keys open)
+- DLLs loaded
+- Network connections
+- Strings in memory</p>
+<p><strong>Suspicious indicators:</strong>
+- Unsigned executables
+- Unusual parent-child relationships
+- Process injection
+- Hidden processes</p>
+<h3 id="wireshark-tcpdump">Wireshark / tcpdump</h3>
+<p><strong>Monitor network traffic:</strong></p>
+<pre><code class="language-bash"># Capture all traffic
+sudo tcpdump -i any -w malware_traffic.pcap
+
+# In Wireshark:
+# - Filter by malware's IP
+# - Look for DNS queries (C2 domains)
+# - Extract objects (downloaded files)
+# - Analyze HTTP/HTTPS connections
+</code></pre>
+<p><strong>What to look for:</strong>
+- Command and control (C2) servers
+- Downloaded payloads
+- Exfiltrated data
+- Protocols used
+- Beaconing intervals</p>
+<h3 id="regshot">Regshot</h3>
+<p><strong>Registry comparison tool:</strong></p>
 <ol>
-<li><code>8 GB</code> of RAM</li>
-<li><code>20-30 GB</code> of free hard drive space</li>
-<li>A decently fast CPU (you probably have this)</li>
+<li>Take snapshot before execution</li>
+<li>Execute malware</li>
+<li>Take snapshot after execution</li>
+<li>Compare snapshots</li>
 </ol>
-<p>*But, how do I know if I meet them? Well, you can press <em><code>Ctrl+Shift+Esc</code></em> on Windows and click on <strong>"Performance"</strong> inside of Task Manager, and it'll give you a spec (specifications) sheet. On mac, you can click on <strong>"About"</strong> in the top menu bar of your computer. On Linux, you can type <strong><code>uname -a</code></strong>, or use a custom program like <code>fastfetch</code></p>
-<h2 id="big-disclaimer-for-windows-users">BIG DISCLAIMER FOR WINDOWS USERS:</h2>
-<ul>
-<li>You NEED to DISABLE something called Hyper-V. If you don't know what that is, for Windows users, Hyper-V will conflict with Virtualbox, making it run poorly and crash often</li>
-<li>To check if you hve Hyper-V, press <code>Win+R</code>, and type <code>optionalfeatures</code>, then press <code>Enter</code></li>
-<li>Look for a "Hyper-V" in the list of shown items. If it's checked, then it's enabled. Uncheck it.<ul>
-<li>Alternative method: go to cmd (Command Prompt), and right click and "Run as Administrator". Then use the following command: <code>bcdedit /set hypervisorlaunchtype off</code></li>
-</ul>
-</li>
-<li>Finally, restart your computer</li>
-</ul>
-<h2 id="big-disclaimer-for-macos-users">BIG DISCLAIMER FOR MACOS USERS:</h2>
-<ul>
-<li>You need to check if you're using an Intel-based Mac or Apple Silicon machine. If your device is M1, M2, M*, then it's <strong>Apple Silicon</strong></li>
-<li>If this is the case, you will need to use a different software for virtualization. You have some options, like <a href="https://getutm.app">UTM</a> or <a href="https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion">VMware Fusion</a>. </li>
-<li>Also, you will have to install Kali Linux using the 
-<em><strong>ARM64 version! Not x86-64!</strong></em></li>
-</ul>
-<hr />
-<p>Now, go to <a href="https://virtualbox.org">virtualbox.org</a></p>
-<p>Click on the download for your OS, and install the program by following the instruction wizard.</p>
-<p><img alt="Virtual Box" src="../../../img/virtual_box.png" /></p>
-<ul>
-<li>Now, go to the <a href="https://kali.org/get-kali">Kali Linux website</a>.</li>
-<li>Download the "Installer" ISO file (<code>~ 4 GB</code> in size)</li>
-<li>Then choose the 64-bit version for modern computers.</li>
-<li>If your computer is old, it could be 32-bit. If so, you may need to check your system specifications as explained above. However, it probably isn't.</li>
-</ul>
-<p><img alt="Kali Installation" src="../../../img/kali_img.png" /></p>
-<blockquote>
-<p>Remember, Apple Silicon machines will install the ARM64 version of Kali Linux instead!</p>
-</blockquote>
-<ul>
-<li>Finally, make your Virtual Machine. Open up VirtualBox and click "New"</li>
-<li>Name it whatever, I'd call it "Kali Linux", or "Kali Machine".</li>
-<li>Type: Linux, Version: Debian (64-bit)</li>
-<li>Allocate at least <code>4 GB</code> of RAM, AKA <code>4096 MB</code>, by dragging the slider or typing in the number in the RAM text box</li>
-<li>Create a Virtual Hrd Disk (allocate <code>25-30 GB</code> minimum)<ul>
-<li>Choose VDI (VirtualBox Disk Image)</li>
-<li>Also select "dynamically allocated" to save space, and allows the VM to grow dynamically in storage size as you begin to add more things</li>
-</ul>
-</li>
-<li>After clicking done, tell it to create, but do NOT tell it to also start yet</li>
-<li>Click on your virtual machine, and then go to settings</li>
-<li>Then go to Storage, and click the empty disk icon</li>
-<li>This is where we "choose a disk file", and select the downloaded Kali ISO</li>
-<li>Then under System, enable PAE/NX if available to you. PAE is Physical Address Extension, and NX is No Execute. These allow for &gt; <code>4 GB</code> of RAM access and prevents non-executable code from being executed in memory segments. If you don't know what that means, just ignore this</li>
-<li>Under Display, increase video memory to <code>128 MB</code></li>
-<li>Finally, save and exit Settings, and click on Start to boot your VM</li>
-<li>Select "Graphical Install" (press Enter, navigate using arrow keys)</li>
-<li>Choose your language, location, keyboard (these can later be changed, doesn't really matter)</li>
-<li>You can set a hostname, or keep the default (kali)</li>
-</ul>
-<h3 id="important-username-is-kali-and-password-is-kali-by-default"><strong>IMPORTANT</strong>: username is <em>kali</em> and password is <em>kali</em> by default!</h3>
-<ul>
-<li>Choose "Guided - use entire disk" for your partitioning</li>
-<li>Then select "All files in one partition"</li>
-<li>Confirm and wait a while. Take a walk outside, take a short nap, whatever you want. Just wait 10-20 minutes and it'll be done</li>
-<li>Restart when prompted</li>
-<li>On first login, enter the username and password</li>
-<li>Then, click the <code>SUPER</code> key (<code>Win</code> key or <code>Cmd</code> key on mac) and type "terminal" or "console" into the search, and open the app</li>
-<li>In the terminal, you can type <code>sudo apt update &amp;&amp; sudo apt upgrade -y</code><ul>
-<li>This command just updates your system</li>
-<li>When prompted with a password, type in your password</li>
-</ul>
-</li>
-<li>Happy Linux!</li>
-</ul>
-<h2 id="method-2-hard-way-bare-metal-installation">Method 2: Hard way (bare metal installation)</h2>
-<p>Alright. You're ready for the real deal. No problem. </p>
-<p><code>WARNING! ⚠️⚠️</code>: This version of installation WILL take space on your disk! This means it will be physically installed, and it will NOT be installed as a VM! Just like Windows or macOS, it will be physically on your device. If you do this incorrectly, it may <strong>wipe your device completely</strong>. I'm not liable for if you mistakenly wipe your drive, it's up to you. Also, I personally do <strong>not recommend you install Kali Linux on a physical drive</strong>. If you want to use Linux for extra practice, install a distribution like <a href="https://www.debian.org/">Debian</a> or <a href="https://linuxmint.com/">Linux Mint</a>. You are risking data loss if done incorrectly, so proceed at your own risk.</p>
-<p>Important things to note are:</p>
-<ul>
-<li>If you install on bare metal, AKA on your physical device, your device may have incompatibility issues. I would recommend doing your own research before doing so</li>
-<li>You may want to install Linux on a secondary drive, since if you use your main one, you will have to create a special partition for Linux to use exclusively, which is more difficult</li>
-<li>You'll need a USB drive with preferably <code>8 GB</code> or more of storage</li>
-<li>You may need to adjust your BIOS (manufacturer specific, meaning it depends on what company made your computer and maybe even where you bought it from) to allow for other bootable devices, which can include removing Secure Boot</li>
-<li>There's some specifics for ARM64 machines like Apple Silicon that will be different!</li>
-<li>Overall, you are likely going to have to do your OWN research to make sure you don't mess anything up.</li>
-</ul>
-<p>Without further ado, these are some general instructions (not perfect):</p>
-<ol>
-<li>Create a bootable USB drive using an app like Balena Etcher or Rufus</li>
-<li>Make space on your hard drive by creating a disk partition of ~<code>30 GB</code> or more, or install on a secondary hard drive</li>
-<li>Boot from the USB drive from BIOS after restarting your computer and smashing the BIOS key as it boots up (typically <code>Esc</code>, <code>F11</code>, <code>F12</code>, or <code>Del</code> depending on the manufacturer)</li>
-<li>Follow the installation process, but make sure you select the right drive and if it's on the same disk as Windows or Mac, you install "alongside" it, not replace </li>
-<li>After going through the setup, you may re-enter the BIOS to change the boot order. What this means is move Linux above Windows so that on first boot you boot into Linux (optional)</li>
-</ol>
-<p>Some important extras:</p>
-<ul>
-<li>Make sure you regularly update your system at least weekly</li>
-<li>Make decent credentials or use a <a href="https://www.yubico.com/">physical key</a></li>
-<li>Never just copy/paste a command without understanding it, look it up at least (even from me!)</li>
-<li>Install packages wisely and preferably from trusted sources</li>
-</ul>
-<p>Happy Linux! :)</p>
+<p><strong>Reveals:</strong>
+- New/modified registry keys
+- Persistence mechanisms
+- Configuration changes</p>
+<h2 id="malware-behaviors-to-identify">Malware Behaviors to Identify</h2>
+<h3 id="persistence-mechanisms">Persistence Mechanisms</h3>
+<p><strong>How malware survives reboot:</strong></p>
+<p><strong>Registry Run keys:</strong></p>
+<pre><code>HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+HKLM\Software\Microsoft\Windows\CurrentVersion\Run
+</code></pre>
+<p><strong>Scheduled tasks:</strong></p>
+<pre><code>C:\Windows\System32\Tasks\
+</code></pre>
+<p><strong>Services:</strong></p>
+<pre><code>HKLM\System\CurrentControlSet\Services\
+</code></pre>
+<p><strong>Startup folder:</strong></p>
+<pre><code>C:\Users\&lt;user&gt;\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\
+</code></pre>
+<p><strong>WMI Event Subscriptions:</strong>
+- Fileless persistence
+- Hard to detect</p>
+<h3 id="network-communication">Network Communication</h3>
+<p><strong>Beaconing:</strong>
+- Regular intervals (heartbeat to C2)
+- Indicates active C2 connection</p>
+<p><strong>Data exfiltration:</strong>
+- Large outbound transfers
+- Unusual protocols (DNS tunneling)
+- Encrypted connections</p>
+<p><strong>Domain Generation Algorithms (DGA):</strong>
+- Generates many domain names
+- Tries them until one works
+- Evades domain blacklisting</p>
+<h3 id="process-injection">Process Injection</h3>
+<p><strong>Running code in another process:</strong></p>
+<p><strong>Techniques:</strong>
+- DLL injection
+- Process hollowing
+- APC injection
+- Reflective DLL injection</p>
+<p><strong>Why:</strong>
+- Hide malicious code
+- Evade detection
+- Elevate privileges
+- Access process memory</p>
+<h3 id="credential-theft">Credential Theft</h3>
+<p><strong>Common techniques:</strong>
+- Mimikatz (extract passwords from memory)
+- Keylogging
+- Form grabbing (browser)
+- Credential dumping (SAM, LSASS)</p>
+<h2 id="dynamic-analysis-in-practice">Dynamic Analysis in Practice</h2>
+<h3 id="analysis-workflow">Analysis Workflow</h3>
+<p><strong>1. Preparation:</strong></p>
+<pre><code class="language-bash"># Take VM snapshot
+# Set up monitoring tools
+# Start Procmon with filters
+# Start Wireshark capture
+# Open Process Explorer
+</code></pre>
+<p><strong>2. Execution:</strong></p>
+<pre><code class="language-bash"># Execute malware
+# Observe immediate behavior
+# Let it run for 5-10 minutes
+# Interact with system (malware might wait)
+</code></pre>
+<p><strong>3. Observation:</strong>
+- What files created/modified?
+- What registry keys changed?
+- What network connections made?
+- What processes spawned?
+- Any anti-analysis techniques?</p>
+<p><strong>4. Documentation:</strong>
+- Screenshot everything
+- Save logs from all tools
+- Document timeline of events
+- Note any unusual behavior</p>
+<p><strong>5. Cleanup:</strong></p>
+<pre><code class="language-bash"># Save artifacts
+# Revert to clean snapshot
+# Never boot infected VM again without snapshot
+</code></pre>
+<h3 id="example-analysis">Example Analysis</h3>
+<p><strong>Sample: TrojanDownloader.exe</strong></p>
+<p><strong>Static analysis findings:</strong></p>
+<pre><code>File: TrojanDownloader.exe
+MD5: 3bc69e6373cd1e36c6a3eef2b8b30c1e
+Imports: URLDownloadToFileA, CreateProcessA, RegSetValueExA
+Strings: http://evil.com/payload.exe, Software\Microsoft\Windows\CurrentVersion\Run
+</code></pre>
+<p><strong>Dynamic analysis findings:</strong></p>
+<pre><code>File created: C:\Users\User\AppData\Local\Temp\payload.exe
+Registry modified: HKCU\Software\Microsoft\Windows\CurrentVersion\Run\Update = &quot;C:\Users\User\AppData\Local\Temp\payload.exe&quot;
+Network: Connected to evil.com:80
+Process: Created payload.exe
+</code></pre>
+<p><strong>Conclusion:</strong>
+- Downloads additional payload from evil.com
+- Achieves persistence via Run key
+- Executes downloaded payload
+- Classic trojan downloader behavior</p>
+<h2 id="anti-analysis-techniques">Anti-Analysis Techniques</h2>
+<p>Malware often detects analysis environments.</p>
+<h3 id="vm-detection">VM Detection</h3>
+<p><strong>Checks for:</strong>
+- VMware artifacts (files, registry keys)
+- VirtualBox guest additions
+- Hypervisor instructions
+- Hardware characteristics (unusual CPU, MAC addresses)</p>
+<h3 id="debugger-detection">Debugger Detection</h3>
+<p><strong>Techniques:</strong>
+- IsDebuggerPresent() API
+- PEB flags
+- Timing checks (debugger slower)
+- Exception handling</p>
+<h3 id="sandbox-evasion">Sandbox Evasion</h3>
+<p><strong>Malware may:</strong>
+- Sleep for extended periods
+- Check for mouse movement
+- Require user interaction
+- Check for internet connectivity
+- Validate environment (specific files/registry keys)</p>
+<h3 id="obfuscation">Obfuscation</h3>
+<p><strong>Code obfuscation:</strong>
+- String encryption
+- Control flow obfuscation
+- Dead code insertion
+- Polymorphic code</p>
+<h2 id="creating-indicators-of-compromise-iocs">Creating Indicators of Compromise (IOCs)</h2>
+<p><strong>From analysis, extract IOCs:</strong></p>
+<p><strong>File-based:</strong>
+- MD5/SHA256 hashes
+- File names
+- File sizes
+- File paths</p>
+<p><strong>Network-based:</strong>
+- IP addresses
+- Domain names
+- URLs
+- User-agents</p>
+<p><strong>Registry-based:</strong>
+- Registry keys created/modified
+- Registry values</p>
+<p><strong>Behavioral:</strong>
+- Process injection patterns
+- Service creation
+- Scheduled task names</p>
+<h3 id="yara-rules">YARA Rules</h3>
+<p><strong>Create detection signatures:</strong></p>
+<pre><code class="language-yara">rule TrojanDownloader {
+    meta:
+        description = &quot;Detects TrojanDownloader&quot;
+        author = &quot;Security Team&quot;
+        date = &quot;2024-01-01&quot;
+
+    strings:
+        $url = &quot;evil.com&quot; ascii
+        $registry = &quot;Software\\Microsoft\\Windows\\CurrentVersion\\Run&quot; ascii
+        $api1 = &quot;URLDownloadToFileA&quot; ascii
+        $api2 = &quot;CreateProcessA&quot; ascii
+
+    condition:
+        all of ($api*) and ($url or $registry)
+}
+</code></pre>
+<p><strong>Test YARA rule:</strong></p>
+<pre><code class="language-bash">yara my_rule.yar suspicious_file.exe
+</code></pre>
+<h2 id="automated-analysis">Automated Analysis</h2>
+<h3 id="cuckoo-sandbox">Cuckoo Sandbox</h3>
+<p><strong>Automated malware analysis system:</strong></p>
+<p><strong>Features:</strong>
+- Automated VM execution
+- Behavior analysis
+- Network traffic capture
+- Memory dumps
+- Screenshots
+- API call tracing</p>
+<p><strong>Setup:</strong></p>
+<pre><code class="language-bash"># Install dependencies
+sudo apt install python3 python3-pip mongodb postgresql
+
+# Install Cuckoo
+pip3 install cuckoo
+
+# Initialize
+cuckoo init
+
+# Configure VMs in conf/virtualbox.conf
+# Submit samples:
+cuckoo submit malware.exe
+</code></pre>
+<h3 id="online-sandboxes">Online Sandboxes</h3>
+<p><strong>When you can't set up local analysis:</strong></p>
+<p><strong>ANY.RUN:</strong>
+- Interactive analysis
+- Public and private submissions
+- Real-time interaction</p>
+<p><strong>Joe Sandbox:</strong>
+- Comprehensive analysis
+- Multiple OS support
+- Detailed reports</p>
+<p><strong>Hybrid Analysis:</strong>
+- Multiple engines
+- IOC extraction
+- MITRE ATT&amp;CK mapping</p>
+<p><strong>VirusTotal:</strong>
+- Multi-engine scanning
+- Behavior analysis
+- Community insights</p>
+<p><strong>Caution:</strong> Don't submit sensitive malware publicly!</p>
+<h2 id="reporting-findings">Reporting Findings</h2>
+<h3 id="analysis-report-structure">Analysis Report Structure</h3>
+<p><strong>1. Executive Summary</strong>
+- Malware type
+- Threat level
+- Key findings</p>
+<p><strong>2. Technical Details</strong>
+- File information (hashes, size, type)
+- Static analysis findings
+- Dynamic analysis findings
+- Network indicators</p>
+<p><strong>3. Indicators of Compromise</strong>
+- File hashes
+- IPs/domains
+- Registry keys
+- Filenames</p>
+<p><strong>4. Detection Rules</strong>
+- YARA rules
+- Snort/Suricata rules
+- Firewall rules</p>
+<p><strong>5. Mitigation Recommendations</strong>
+- Block IOCs
+- Patch vulnerabilities
+- Update signatures</p>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<p><strong>Malware analysis workflow:</strong>
+1. Safety first (isolated environment)
+2. Static analysis (understand without executing)
+3. Dynamic analysis (observe behavior)
+4. Document findings
+5. Create IOCs and rules
+6. Share intelligence</p>
+<p><strong>Essential skills:</strong>
+- Safe lab setup
+- Tool proficiency
+- Pattern recognition
+- Documentation
+- Patience and persistence</p>
+<p><strong>Remember:</strong>
+- Always use isolated VMs
+- Snapshot before analysis
+- Never analyze on production systems
+- Document everything
+- Share findings responsibly</p>
+<p>Malware analysis is part art, part science. The more samples you analyze, the better you'll become at spotting patterns and understanding malicious behavior.</p>
+<p>Next, we'll explore more advanced topics in traffic analysis and network forensics.</p>
         
 
         <!-- Lesson Navigation (only show on non-homepage pages) -->
         
         <div class="lesson-nav">
             
-            <a href="../lesson1-6/" class="lesson-nav-button">
+            <a href="../lesson5-2/" class="lesson-nav-button">
                 <span class="arrow">←</span>
-                <span>Previous: Lesson 1.6</span>
+                <span>Previous: Lesson 5.2</span>
             </a>
             
 
             <div class="lesson-nav-info">
                 <div class="current-lesson">Current Lesson</div>
-                <div class="lesson-title">Linux Installation Process</div>
+                <div class="lesson-title">Lesson 5.3</div>
             </div>
 
             
-            <a href="../../unit2/lesson2-1/" class="lesson-nav-button">
-                <span>Next: Lesson 2.1</span>
+            <a href="../../unit6/lesson6-1/" class="lesson-nav-button">
+                <span>Next: Lesson 6.1</span>
                 <span class="arrow">→</span>
             </a>
             
@@ -1158,43 +1473,43 @@
                                 
                                 {
                                     title: "Lesson 1.1",
-                                    url: '../lesson1-1/',
+                                    url: '../../unit1/lesson1-1/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.2",
-                                    url: '../lesson1-2/',
+                                    url: '../../unit1/lesson1-2/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.3",
-                                    url: '../lesson1-3/',
+                                    url: '../../unit1/lesson1-3/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.4",
-                                    url: '../lesson1-4/',
+                                    url: '../../unit1/lesson1-4/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.5",
-                                    url: '../lesson1-5/',
+                                    url: '../../unit1/lesson1-5/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.6",
-                                    url: '../lesson1-6/',
+                                    url: '../../unit1/lesson1-6/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Linux Installation Process",
-                                    url: './',
+                                    url: '../../unit1/installation-process/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
@@ -1264,19 +1579,19 @@
                                 
                                 {
                                     title: "Lesson 5.1",
-                                    url: '../../unit5/lesson5-1/',
+                                    url: '../lesson5-1/',
                                     path: 'Curriculum > Unit 5'
                                 },
                                 
                                 {
                                     title: "Lesson 5.2",
-                                    url: '../../unit5/lesson5-2/',
+                                    url: '../lesson5-2/',
                                     path: 'Curriculum > Unit 5'
                                 },
                                 
                                 {
                                     title: "Lesson 5.3",
-                                    url: '../../unit5/lesson5-3/',
+                                    url: './',
                                     path: 'Curriculum > Unit 5'
                                 },
                                 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linux Installation Process - NCHS Cybersecurity</title>
+    <title>Lesson 2.3 - NCHS Cybersecurity</title>
     
     
     <link rel="icon" href="../../../img/logo.png">
@@ -698,31 +698,31 @@
                                         <ul class="unit-lessons">
                                             
                                             <li>
-                                                <a href="../lesson1-1/">Lesson 1.1</a>
+                                                <a href="../../unit1/lesson1-1/">Lesson 1.1</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-2/">Lesson 1.2</a>
+                                                <a href="../../unit1/lesson1-2/">Lesson 1.2</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-3/">Lesson 1.3</a>
+                                                <a href="../../unit1/lesson1-3/">Lesson 1.3</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-4/">Lesson 1.4</a>
+                                                <a href="../../unit1/lesson1-4/">Lesson 1.4</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-5/">Lesson 1.5</a>
+                                                <a href="../../unit1/lesson1-5/">Lesson 1.5</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-6/">Lesson 1.6</a>
+                                                <a href="../../unit1/lesson1-6/">Lesson 1.6</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="./">Linux Installation Process</a>
+                                                <a href="../../unit1/installation-process/">Linux Installation Process</a>
                                             </li>
                                             
                                         </ul>
@@ -735,15 +735,15 @@
                                         <ul class="unit-lessons">
                                             
                                             <li>
-                                                <a href="../../unit2/lesson2-1/">Lesson 2.1</a>
+                                                <a href="../lesson2-1/">Lesson 2.1</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../../unit2/lesson2-2/">Lesson 2.2</a>
+                                                <a href="../lesson2-2/">Lesson 2.2</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../../unit2/lesson2-3/">Lesson 2.3</a>
+                                                <a href="./">Lesson 2.3</a>
                                             </li>
                                             
                                         </ul>
@@ -964,142 +964,468 @@
 
     <div class="container">
         
-        <h2 id="what-is-it"><em>What</em> is it?</h2>
-<p>Kali is an operating system that was made <strong><em>specially</em></strong> for cybersecurity work (and hacking as well). It has a large toolkit of useful programs that we're going to learn about, including Hydra, Nmap, Wireshark, Tcpdump, MacChanger, Chisel, Aircrack-ng, etc.</p>
-<h2 id="some-vocab">Some Vocab:</h2>
-<p>As much as we know vocabulary might not be that interesting, it's important to know for the future, since there's a LOT of acronyms and words in cybersecurity that you're going to be hearing and using, so it's best to get used to it.</p>
-<ul>
-<li><strong>Operating System (OS)</strong>: The main software that runs your computer, like Windows, macOS, iOS, GNU/Linux, etc.</li>
-<li><strong>Virtual Machine (VM)</strong>: It's basically a computer <em>inside</em> another computer. You can run your regular OS, like Windows, and still have Kali Linux inside of it</li>
-<li><strong>ISO File (International Organization for Standardization File)</strong>: Sounds fancy, but really it's just a full copy of an OS within one tiny file</li>
-<li><strong>Hypervisor</strong>: Software that creates and manages VMs. Examples are VirtualBox and VMWare Workstation. There's also QEMU, but mostly Linux users use that, and you're likely running on Windows or mac</li>
-<li><strong>Bootable USB</strong>: Just a USB drive (which you hopefully already know about) that can start up a computer and install an OS (we don't need this yet)</li>
-<li><strong>Partitioning</strong>: A more advanced topic, but it's dividing up your drive into sections called <em>partitions</em>, which are like walls for a room. We don't need this yet, but it is good to know</li>
-</ul>
-<p>Now, let's get into the nitty-gritty:</p>
-<h2 id="method-1-easy-way">Method 1: Easy way :)</h2>
-<h3 id="minimum-requirements">Minimum Requirements*:</h3>
-<ol>
-<li><code>8 GB</code> of RAM</li>
-<li><code>20-30 GB</code> of free hard drive space</li>
-<li>A decently fast CPU (you probably have this)</li>
-</ol>
-<p>*But, how do I know if I meet them? Well, you can press <em><code>Ctrl+Shift+Esc</code></em> on Windows and click on <strong>"Performance"</strong> inside of Task Manager, and it'll give you a spec (specifications) sheet. On mac, you can click on <strong>"About"</strong> in the top menu bar of your computer. On Linux, you can type <strong><code>uname -a</code></strong>, or use a custom program like <code>fastfetch</code></p>
-<h2 id="big-disclaimer-for-windows-users">BIG DISCLAIMER FOR WINDOWS USERS:</h2>
-<ul>
-<li>You NEED to DISABLE something called Hyper-V. If you don't know what that is, for Windows users, Hyper-V will conflict with Virtualbox, making it run poorly and crash often</li>
-<li>To check if you hve Hyper-V, press <code>Win+R</code>, and type <code>optionalfeatures</code>, then press <code>Enter</code></li>
-<li>Look for a "Hyper-V" in the list of shown items. If it's checked, then it's enabled. Uncheck it.<ul>
-<li>Alternative method: go to cmd (Command Prompt), and right click and "Run as Administrator". Then use the following command: <code>bcdedit /set hypervisorlaunchtype off</code></li>
-</ul>
-</li>
-<li>Finally, restart your computer</li>
-</ul>
-<h2 id="big-disclaimer-for-macos-users">BIG DISCLAIMER FOR MACOS USERS:</h2>
-<ul>
-<li>You need to check if you're using an Intel-based Mac or Apple Silicon machine. If your device is M1, M2, M*, then it's <strong>Apple Silicon</strong></li>
-<li>If this is the case, you will need to use a different software for virtualization. You have some options, like <a href="https://getutm.app">UTM</a> or <a href="https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion">VMware Fusion</a>. </li>
-<li>Also, you will have to install Kali Linux using the 
-<em><strong>ARM64 version! Not x86-64!</strong></em></li>
-</ul>
-<hr />
-<p>Now, go to <a href="https://virtualbox.org">virtualbox.org</a></p>
-<p>Click on the download for your OS, and install the program by following the instruction wizard.</p>
-<p><img alt="Virtual Box" src="../../../img/virtual_box.png" /></p>
-<ul>
-<li>Now, go to the <a href="https://kali.org/get-kali">Kali Linux website</a>.</li>
-<li>Download the "Installer" ISO file (<code>~ 4 GB</code> in size)</li>
-<li>Then choose the 64-bit version for modern computers.</li>
-<li>If your computer is old, it could be 32-bit. If so, you may need to check your system specifications as explained above. However, it probably isn't.</li>
-</ul>
-<p><img alt="Kali Installation" src="../../../img/kali_img.png" /></p>
-<blockquote>
-<p>Remember, Apple Silicon machines will install the ARM64 version of Kali Linux instead!</p>
-</blockquote>
-<ul>
-<li>Finally, make your Virtual Machine. Open up VirtualBox and click "New"</li>
-<li>Name it whatever, I'd call it "Kali Linux", or "Kali Machine".</li>
-<li>Type: Linux, Version: Debian (64-bit)</li>
-<li>Allocate at least <code>4 GB</code> of RAM, AKA <code>4096 MB</code>, by dragging the slider or typing in the number in the RAM text box</li>
-<li>Create a Virtual Hrd Disk (allocate <code>25-30 GB</code> minimum)<ul>
-<li>Choose VDI (VirtualBox Disk Image)</li>
-<li>Also select "dynamically allocated" to save space, and allows the VM to grow dynamically in storage size as you begin to add more things</li>
-</ul>
-</li>
-<li>After clicking done, tell it to create, but do NOT tell it to also start yet</li>
-<li>Click on your virtual machine, and then go to settings</li>
-<li>Then go to Storage, and click the empty disk icon</li>
-<li>This is where we "choose a disk file", and select the downloaded Kali ISO</li>
-<li>Then under System, enable PAE/NX if available to you. PAE is Physical Address Extension, and NX is No Execute. These allow for &gt; <code>4 GB</code> of RAM access and prevents non-executable code from being executed in memory segments. If you don't know what that means, just ignore this</li>
-<li>Under Display, increase video memory to <code>128 MB</code></li>
-<li>Finally, save and exit Settings, and click on Start to boot your VM</li>
-<li>Select "Graphical Install" (press Enter, navigate using arrow keys)</li>
-<li>Choose your language, location, keyboard (these can later be changed, doesn't really matter)</li>
-<li>You can set a hostname, or keep the default (kali)</li>
-</ul>
-<h3 id="important-username-is-kali-and-password-is-kali-by-default"><strong>IMPORTANT</strong>: username is <em>kali</em> and password is <em>kali</em> by default!</h3>
-<ul>
-<li>Choose "Guided - use entire disk" for your partitioning</li>
-<li>Then select "All files in one partition"</li>
-<li>Confirm and wait a while. Take a walk outside, take a short nap, whatever you want. Just wait 10-20 minutes and it'll be done</li>
-<li>Restart when prompted</li>
-<li>On first login, enter the username and password</li>
-<li>Then, click the <code>SUPER</code> key (<code>Win</code> key or <code>Cmd</code> key on mac) and type "terminal" or "console" into the search, and open the app</li>
-<li>In the terminal, you can type <code>sudo apt update &amp;&amp; sudo apt upgrade -y</code><ul>
-<li>This command just updates your system</li>
-<li>When prompted with a password, type in your password</li>
-</ul>
-</li>
-<li>Happy Linux!</li>
-</ul>
-<h2 id="method-2-hard-way-bare-metal-installation">Method 2: Hard way (bare metal installation)</h2>
-<p>Alright. You're ready for the real deal. No problem. </p>
-<p><code>WARNING! ⚠️⚠️</code>: This version of installation WILL take space on your disk! This means it will be physically installed, and it will NOT be installed as a VM! Just like Windows or macOS, it will be physically on your device. If you do this incorrectly, it may <strong>wipe your device completely</strong>. I'm not liable for if you mistakenly wipe your drive, it's up to you. Also, I personally do <strong>not recommend you install Kali Linux on a physical drive</strong>. If you want to use Linux for extra practice, install a distribution like <a href="https://www.debian.org/">Debian</a> or <a href="https://linuxmint.com/">Linux Mint</a>. You are risking data loss if done incorrectly, so proceed at your own risk.</p>
-<p>Important things to note are:</p>
-<ul>
-<li>If you install on bare metal, AKA on your physical device, your device may have incompatibility issues. I would recommend doing your own research before doing so</li>
-<li>You may want to install Linux on a secondary drive, since if you use your main one, you will have to create a special partition for Linux to use exclusively, which is more difficult</li>
-<li>You'll need a USB drive with preferably <code>8 GB</code> or more of storage</li>
-<li>You may need to adjust your BIOS (manufacturer specific, meaning it depends on what company made your computer and maybe even where you bought it from) to allow for other bootable devices, which can include removing Secure Boot</li>
-<li>There's some specifics for ARM64 machines like Apple Silicon that will be different!</li>
-<li>Overall, you are likely going to have to do your OWN research to make sure you don't mess anything up.</li>
-</ul>
-<p>Without further ado, these are some general instructions (not perfect):</p>
-<ol>
-<li>Create a bootable USB drive using an app like Balena Etcher or Rufus</li>
-<li>Make space on your hard drive by creating a disk partition of ~<code>30 GB</code> or more, or install on a secondary hard drive</li>
-<li>Boot from the USB drive from BIOS after restarting your computer and smashing the BIOS key as it boots up (typically <code>Esc</code>, <code>F11</code>, <code>F12</code>, or <code>Del</code> depending on the manufacturer)</li>
-<li>Follow the installation process, but make sure you select the right drive and if it's on the same disk as Windows or Mac, you install "alongside" it, not replace </li>
-<li>After going through the setup, you may re-enter the BIOS to change the boot order. What this means is move Linux above Windows so that on first boot you boot into Linux (optional)</li>
-</ol>
-<p>Some important extras:</p>
-<ul>
-<li>Make sure you regularly update your system at least weekly</li>
-<li>Make decent credentials or use a <a href="https://www.yubico.com/">physical key</a></li>
-<li>Never just copy/paste a command without understanding it, look it up at least (even from me!)</li>
-<li>Install packages wisely and preferably from trusted sources</li>
-</ul>
-<p>Happy Linux! :)</p>
+        <h1 id="how-data-travels-across-the-internet">How Data Travels Across the Internet</h1>
+<p>You understand what the internet is and know the protocols. Now let's trace exactly how data gets from point A to point B. Understanding this journey is crucial for security—attackers exploit every step along the way.</p>
+<h2 id="the-journey-of-a-packet">The Journey of a Packet</h2>
+<p>When you send data over the internet, it doesn't travel as one piece. It's broken into <strong>packets</strong>, each taking its own route to the destination.</p>
+<h3 id="packet-structure">Packet Structure</h3>
+<p>Think of a packet like a letter in an envelope within another envelope:</p>
+<pre><code>┌─────────────────────────────────────┐
+│  Frame Header (Ethernet)            │  ← Layer 2
+├─────────────────────────────────────┤
+│  IP Header (Source/Dest IP)         │  ← Layer 3
+├─────────────────────────────────────┤
+│  TCP/UDP Header (Ports, Sequence)   │  ← Layer 4
+├─────────────────────────────────────┤
+│  Application Data (HTTP, DNS, etc)  │  ← Layer 7
+├─────────────────────────────────────┤
+│  Frame Trailer (Checksum)           │  ← Layer 2
+└─────────────────────────────────────┘
+</code></pre>
+<p>Each layer adds its own header with information needed for that layer.</p>
+<h3 id="encapsulation-process">Encapsulation Process</h3>
+<p><strong>Step 1 - Application Layer:</strong>
+You type "example.com" in browser
+- Browser creates HTTP GET request</p>
+<p><strong>Step 2 - Transport Layer:</strong>
+TCP adds header
+- Source port: 54321 (random)
+- Destination port: 443 (HTTPS)
+- Sequence numbers
+- Flags (SYN, ACK, etc.)</p>
+<p><strong>Step 3 - Network Layer:</strong>
+IP adds header
+- Source IP: Your IP (e.g., 192.168.1.100)
+- Destination IP: example.com's IP (93.184.216.34)
+- TTL: 64 hops
+- Protocol: TCP</p>
+<p><strong>Step 4 - Data Link Layer:</strong>
+Ethernet adds header and trailer
+- Source MAC: Your computer's MAC
+- Destination MAC: Gateway's MAC (next hop)
+- Frame check sequence</p>
+<p>Now the packet is ready to travel!</p>
+<h2 id="local-network-to-gateway">Local Network to Gateway</h2>
+<h3 id="step-1-determining-the-route">Step 1: Determining the Route</h3>
+<p>Your computer knows it needs to send packet to 93.184.216.34.</p>
+<p><strong>Checks routing table:</strong></p>
+<pre><code class="language-bash">ip route show
+# Output:
+default via 192.168.1.1 dev eth0
+192.168.1.0/24 dev eth0 scope link
+</code></pre>
+<p>Translation: "For anything not on local network (192.168.1.x), send to gateway at 192.168.1.1"</p>
+<h3 id="step-2-arp-resolution">Step 2: ARP Resolution</h3>
+<p>Computer needs gateway's MAC address.</p>
+<p><strong>ARP Request (broadcast):</strong></p>
+<pre><code>Ethernet: ff:ff:ff:ff:ff:ff (broadcast)
+ARP: Who has 192.168.1.1? Tell 192.168.1.100
+</code></pre>
+<p><strong>Gateway responds:</strong></p>
+<pre><code>ARP: 192.168.1.1 is at aa:bb:cc:dd:ee:ff
+</code></pre>
+<p>Computer caches this in ARP table:</p>
+<pre><code class="language-bash">arp -a
+# 192.168.1.1 (192.168.1.1) at aa:bb:cc:dd:ee:ff [ether] on eth0
+</code></pre>
+<h3 id="step-3-sending-to-gateway">Step 3: Sending to Gateway</h3>
+<p>Packet sent with:
+- <strong>Destination MAC:</strong> Gateway (aa:bb:cc:dd:ee:ff)
+- <strong>Destination IP:</strong> example.com (93.184.216.34)</p>
+<p><strong>Important distinction:</strong>
+- MAC address changes at each hop (Layer 2)
+- IP address stays same throughout journey (Layer 3)</p>
+<h2 id="through-the-internet">Through the Internet</h2>
+<h3 id="isps-network">ISP's Network</h3>
+<p><strong>Gateway (your router) forwards to ISP:</strong>
+1. Receives packet from your computer
+2. Performs NAT (Network Address Translation)
+   - Replaces your private IP (192.168.1.100)
+   - With public IP assigned by ISP (e.g., 203.0.113.45)
+   - Tracks this in NAT table to forward responses back
+3. Forwards packet to ISP's network</p>
+<p><strong>Why NAT?</strong>
+- IPv4 address exhaustion
+- Private IPs can't be routed on internet
+- Allows many devices to share one public IP
+- Adds layer of security (hiding internal network)</p>
+<h3 id="internet-backbone">Internet Backbone</h3>
+<p><strong>Packet travels through multiple routers:</strong></p>
+<p>Each router:
+1. Receives packet
+2. Examines destination IP (93.184.216.34)
+3. Consults routing table
+4. Forwards to next hop
+5. Decrements TTL by 1</p>
+<p><strong>TTL (Time To Live):</strong>
+- Prevents packets from looping forever
+- Starts at 64 (typical)
+- Each router decrements by 1
+- If TTL reaches 0, packet dropped
+- Router sends ICMP "Time Exceeded" back to source</p>
+<p><strong>Routing decisions based on:</strong>
+- Shortest path (fewest hops)
+- Fastest path (lowest latency)
+- Available bandwidth
+- Cost (some routes more expensive)
+- Current network conditions</p>
+<h3 id="internet-exchange-points-ixps">Internet Exchange Points (IXPs)</h3>
+<p><strong>IXPs are where networks meet:</strong>
+- Physical locations
+- ISPs, content providers, and networks interconnect
+- Exchange traffic directly (peering)
+- Reduce latency and cost</p>
+<p><strong>Major IXPs:</strong>
+- DE-CIX (Frankfurt)
+- AMS-IX (Amsterdam)
+- LINX (London)
+- Various locations worldwide</p>
+<p><strong>Peering agreements:</strong>
+- <strong>Settlement-free:</strong> Exchange traffic at no cost
+- <strong>Paid peering:</strong> One party pays the other
+- <strong>Transit:</strong> Pay a larger network to reach rest of internet</p>
+<h2 id="reaching-the-destination">Reaching the Destination</h2>
+<h3 id="destination-network">Destination Network</h3>
+<p><strong>Packet arrives at example.com's network:</strong>
+1. Enters through border router
+2. Firewall examines packet
+   - Source IP allowed?
+   - Destination port 443 allowed?
+   - Packet looks legitimate?
+3. IDS/IPS monitors for threats
+4. Load balancer distributes traffic
+   - Multiple web servers behind load balancer
+   - Balancer picks one based on algorithm (round-robin, least connections)</p>
+<h3 id="final-destination-server">Final Destination Server</h3>
+<p><strong>Packet reaches web server:</strong>
+1. Network interface receives packet
+2. De-encapsulation process (reverse of encapsulation)
+   - Remove Ethernet header
+   - Remove IP header
+   - Remove TCP header
+   - Extract HTTP request
+3. Web server processes request
+4. Generates HTTP response
+5. Sends back to source (your computer)</p>
+<h2 id="the-return-journey">The Return Journey</h2>
+<p><strong>Response takes reverse path:</strong>
+1. Web server sends to its gateway
+2. Through destination's network
+3. Through internet backbone
+4. Through IXPs
+5. To your ISP
+6. To your gateway
+7. Gateway performs reverse NAT
+   - Looks up original internal IP (192.168.1.100)
+   - Replaces destination IP
+8. Forwards to your computer</p>
+<p><strong>Asymmetric routing:</strong>
+- Outbound and inbound paths may differ
+- Internet routing is dynamic
+- Different paths can have different characteristics</p>
+<h2 id="packet-loss-and-reliability">Packet Loss and Reliability</h2>
+<h3 id="why-packets-get-lost">Why Packets Get Lost</h3>
+<p><strong>Common causes:</strong>
+- Network congestion (buffers full)
+- Transmission errors (noise, interference)
+- Routing loops (rare, but possible)
+- TTL expiration
+- Firewall drops
+- Router failures</p>
+<h3 id="tcp-reliability">TCP Reliability</h3>
+<p><strong>TCP ensures delivery:</strong></p>
+<p><strong>Sequence numbers:</strong></p>
+<pre><code>Client sends:
+  Seq: 1000, Data: &quot;GET / HTTP/1.1&quot; (15 bytes)
+
+Server acknowledges:
+  Ack: 1015 (expecting byte 1015 next)
+</code></pre>
+<p><strong>Retransmission:</strong>
+If no ACK received within timeout:
+1. TCP assumes packet lost
+2. Retransmits same data
+3. Exponential backoff (wait longer each retry)</p>
+<p><strong>Flow control:</strong>
+- Window size in TCP header
+- Receiver tells sender how much buffer space available
+- Prevents sender from overwhelming receiver</p>
+<p><strong>Congestion control:</strong>
+- Sender detects network congestion (packet loss)
+- Slows transmission rate
+- Gradually increases if packets successfully delivered</p>
+<h3 id="udp-no-reliability">UDP - No Reliability</h3>
+<p><strong>UDP doesn't care:</strong>
+- No acknowledgments
+- No retransmissions
+- Application handles reliability if needed</p>
+<p><strong>DNS example:</strong>
+- Send query via UDP
+- If no response, application resends
+- Simple and fast</p>
+<h2 id="latency-and-performance">Latency and Performance</h2>
+<h3 id="round-trip-time-rtt">Round-Trip Time (RTT)</h3>
+<p><strong>RTT:</strong> Time for packet to destination and back</p>
+<p><strong>Measured by ping:</strong></p>
+<pre><code class="language-bash">ping example.com
+# 64 bytes from example.com: icmp_seq=1 ttl=56 time=15.2 ms
+</code></pre>
+<p><strong>Factors affecting RTT:</strong>
+- Physical distance (speed of light limit)
+- Number of hops (each router adds delay)
+- Network congestion
+- Processing at each hop</p>
+<p><strong>Typical RTTs:</strong>
+- Local network: &lt;1 ms
+- Same city: 1-10 ms
+- Same country: 10-50 ms
+- Different continents: 100-300 ms
+- Satellite: 500-700 ms</p>
+<h3 id="bandwidth-vs-latency">Bandwidth vs. Latency</h3>
+<p><strong>Bandwidth:</strong> How much data can be sent (highway width)
+<strong>Latency:</strong> How fast data travels (speed limit)</p>
+<p><strong>Analogy:</strong>
+- Bandwidth = pipe diameter
+- Latency = water pressure</p>
+<p><strong>You need both:</strong>
+- High bandwidth, high latency: Large pipes, slow water (satellite)
+- Low bandwidth, low latency: Small pipes, fast water (local network)</p>
+<h3 id="traceroute-analysis">Traceroute Analysis</h3>
+<p><strong>Traceroute shows the path:</strong></p>
+<pre><code class="language-bash">traceroute example.com
+
+ 1  192.168.1.1 (192.168.1.1)  1.234 ms
+ 2  10.0.0.1 (10.0.0.1)  5.678 ms
+ 3  isp-router.net (203.0.113.1)  10.123 ms
+ 4  backbone.net (198.51.100.1)  15.456 ms
+ 5  ix-router.net (198.51.100.2)  20.789 ms
+ 6  dest-network.com (93.184.216.34)  25.012 ms
+</code></pre>
+<p><strong>Each line shows:</strong>
+- Hop number
+- Router hostname/IP
+- Round-trip time</p>
+<p><strong>Security note:</strong> Traceroute reveals network topology
+- Attackers use it for reconnaissance
+- Some networks block ICMP to prevent this</p>
+<h2 id="content-delivery-networks-cdns">Content Delivery Networks (CDNs)</h2>
+<h3 id="the-problem">The Problem</h3>
+<p><strong>Example:</strong> 
+- User in Tokyo visits website hosted in New York
+- RTT: ~200 ms
+- Every resource (HTML, CSS, JS, images) requires round trips
+- Page load: slow</p>
+<h3 id="the-solution-cdns">The Solution: CDNs</h3>
+<p><strong>CDN caching:</strong>
+1. Content replicated to edge servers worldwide
+2. User's request routed to nearest edge server
+3. Edge server returns cached content
+4. Much lower latency</p>
+<p><strong>How it works:</strong></p>
+<pre><code class="language-bash"># Without CDN
+User (Tokyo) → New York server (200 ms RTT)
+
+# With CDN
+User (Tokyo) → Tokyo edge server (5 ms RTT)
+</code></pre>
+<p><strong>Major CDNs:</strong>
+- Cloudflare
+- Akamai
+- Amazon CloudFront
+- Fastly
+- Google Cloud CDN</p>
+<p><strong>CDN benefits:</strong>
+- Reduced latency
+- Reduced origin server load
+- DDoS protection
+- Geographic availability</p>
+<p><strong>Security implications:</strong>
+- CDN sees all your traffic
+- Trust model changes
+- SSL/TLS termination at CDN
+- Additional attack surface</p>
+<h2 id="quality-of-service-qos">Quality of Service (QoS)</h2>
+<h3 id="prioritizing-traffic">Prioritizing Traffic</h3>
+<p><strong>Not all traffic is equal:</strong>
+- Video call: needs low latency
+- File download: needs high bandwidth
+- Web browsing: needs both
+- Email: neither critical</p>
+<p><strong>QoS mechanisms:</strong></p>
+<p><strong>Traffic classification:</strong></p>
+<pre><code>VoIP packets → High priority queue
+Streaming video → Medium priority queue
+File transfer → Low priority queue
+</code></pre>
+<p><strong>Implementation:</strong>
+- Routers examine packets
+- Classify by port, protocol, or application
+- Queue accordingly
+- Process high-priority first</p>
+<p><strong>DSCP (Differentiated Services Code Point):</strong>
+- Field in IP header
+- Marks packet priority
+- Routers respect marking</p>
+<h2 id="multicast-and-broadcast">Multicast and Broadcast</h2>
+<h3 id="unicast-normal">Unicast (Normal)</h3>
+<p><strong>One sender, one receiver:</strong></p>
+<pre><code>Client → Server
+</code></pre>
+<h3 id="broadcast">Broadcast</h3>
+<p><strong>One sender, all receivers on network:</strong></p>
+<pre><code>Sender → Everyone on 192.168.1.0/24
+</code></pre>
+<p><strong>Example:</strong> ARP requests
+<strong>Address:</strong> 255.255.255.255
+<strong>Problem:</strong> Doesn't scale, creates noise</p>
+<h3 id="multicast">Multicast</h3>
+<p><strong>One sender, multiple interested receivers:</strong></p>
+<pre><code>Video stream → Subscribers only
+</code></pre>
+<p><strong>Example:</strong> Live video streaming
+<strong>Addresses:</strong> 224.0.0.0 to 239.255.255.255
+<strong>Protocol:</strong> IGMP (Internet Group Management Protocol)</p>
+<p><strong>Efficiency:</strong>
+- Send once, received by many
+- Saves bandwidth
+- Used for streaming, conferencing</p>
+<h2 id="security-implications">Security Implications</h2>
+<h3 id="packet-sniffing">Packet Sniffing</h3>
+<p><strong>Any device on network segment can capture packets:</strong>
+- Promiscuous mode
+- See all unencrypted traffic
+- Passwords, cookies, data</p>
+<p><strong>Protection:</strong> Encryption (HTTPS, VPN)</p>
+<h3 id="man-in-the-middle">Man-in-the-Middle</h3>
+<p><strong>Attacker intercepts traffic:</strong>
+1. ARP spoofing (become gateway)
+2. Route traffic through attacker
+3. Forward to real destination
+4. Victim and server unaware</p>
+<p><strong>Protection:</strong> 
+- ARP inspection
+- HTTPS (attacker can't decrypt)
+- Certificate pinning</p>
+<h3 id="route-hijacking-bgp-hijacking">Route Hijacking (BGP Hijacking)</h3>
+<p><strong>Attacker announces false routes:</strong>
+- BGP (Border Gateway Protocol) controls internet routing
+- Malicious announcements redirect traffic
+- Traffic flows through attacker
+- Hard to detect</p>
+<p><strong>Examples:</strong>
+- 2008: Pakistan Telecom hijacked YouTube
+- 2018: Amazon Route 53 DNS hijacked
+- Ongoing nation-state attacks</p>
+<p><strong>Protection:</strong> 
+- RPKI (Resource Public Key Infrastructure)
+- Monitoring BGP announcements
+- Redundant paths</p>
+<h3 id="ddos-amplification">DDoS Amplification</h3>
+<p><strong>Attacker amplifies traffic:</strong>
+1. Sends small requests with spoofed source (victim's IP)
+2. Servers send large responses to victim
+3. Victim overwhelmed</p>
+<p><strong>Protocols vulnerable:</strong>
+- DNS (50x amplification)
+- NTP (200x amplification)
+- SSDP (30x amplification)
+- Memcached (10,000x+ amplification)</p>
+<p><strong>Protection:</strong>
+- Rate limiting
+- Source validation
+- Filtering spoofed packets
+- DDoS mitigation services</p>
+<h2 id="practical-exercises">Practical Exercises</h2>
+<h3 id="1-trace-your-traffic">1. Trace Your Traffic</h3>
+<pre><code class="language-bash"># Capture packets
+sudo tcpdump -i eth0 -w capture.pcap
+
+# Visit a website
+curl http://example.com
+
+# Stop capture (Ctrl+C)
+# Analyze with Wireshark
+wireshark capture.pcap
+</code></pre>
+<p><strong>Observe:</strong>
+- DNS query and response
+- TCP three-way handshake
+- HTTP request and response
+- TCP teardown</p>
+<h3 id="2-measure-latency">2. Measure Latency</h3>
+<pre><code class="language-bash"># Ping local gateway
+ping 192.168.1.1
+
+# Ping Google DNS
+ping 8.8.8.8
+
+# Ping international server
+ping example.com
+
+# Compare RTTs
+</code></pre>
+<h3 id="3-trace-route">3. Trace Route</h3>
+<pre><code class="language-bash">traceroute example.com
+
+# Count hops
+# Identify ISP transitions
+# Note latency increases
+</code></pre>
+<h3 id="4-monitor-your-traffic">4. Monitor Your Traffic</h3>
+<pre><code class="language-bash"># Install iftop
+sudo apt install iftop
+
+# Monitor bandwidth usage
+sudo iftop -i eth0
+</code></pre>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<p><strong>Data travels as packets:</strong>
+- Broken into small pieces
+- Each routed independently
+- Reassembled at destination</p>
+<p><strong>Each layer adds headers:</strong>
+- Encapsulation going out
+- De-encapsulation coming in</p>
+<p><strong>Internet routing is dynamic:</strong>
+- Multiple paths possible
+- Routers make decisions hop-by-hop
+- BGP controls large-scale routing</p>
+<p><strong>Security at every hop:</strong>
+- Local network (ARP spoofing)
+- Transit (packet sniffing)
+- Routing (BGP hijacking)
+- Destination (DDoS)</p>
+<p><strong>Performance factors:</strong>
+- Physical distance
+- Number of hops
+- Network congestion
+- CDNs and caching</p>
+<p>Understanding this journey helps you:
+- Diagnose network issues
+- Identify attack points
+- Design secure systems
+- Optimize performance</p>
+<p>Every cybersecurity professional needs to understand how data flows—it's the foundation for everything else we do.</p>
         
 
         <!-- Lesson Navigation (only show on non-homepage pages) -->
         
         <div class="lesson-nav">
             
-            <a href="../lesson1-6/" class="lesson-nav-button">
+            <a href="../lesson2-2/" class="lesson-nav-button">
                 <span class="arrow">←</span>
-                <span>Previous: Lesson 1.6</span>
+                <span>Previous: Lesson 2.2</span>
             </a>
             
 
             <div class="lesson-nav-info">
                 <div class="current-lesson">Current Lesson</div>
-                <div class="lesson-title">Linux Installation Process</div>
+                <div class="lesson-title">Lesson 2.3</div>
             </div>
 
             
-            <a href="../../unit2/lesson2-1/" class="lesson-nav-button">
-                <span>Next: Lesson 2.1</span>
+            <a href="../../unit3/lesson3-1/" class="lesson-nav-button">
+                <span>Next: Lesson 3.1</span>
                 <span class="arrow">→</span>
             </a>
             
@@ -1158,43 +1484,43 @@
                                 
                                 {
                                     title: "Lesson 1.1",
-                                    url: '../lesson1-1/',
+                                    url: '../../unit1/lesson1-1/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.2",
-                                    url: '../lesson1-2/',
+                                    url: '../../unit1/lesson1-2/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.3",
-                                    url: '../lesson1-3/',
+                                    url: '../../unit1/lesson1-3/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.4",
-                                    url: '../lesson1-4/',
+                                    url: '../../unit1/lesson1-4/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.5",
-                                    url: '../lesson1-5/',
+                                    url: '../../unit1/lesson1-5/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.6",
-                                    url: '../lesson1-6/',
+                                    url: '../../unit1/lesson1-6/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Linux Installation Process",
-                                    url: './',
+                                    url: '../../unit1/installation-process/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
@@ -1204,19 +1530,19 @@
                                 
                                 {
                                     title: "Lesson 2.1",
-                                    url: '../../unit2/lesson2-1/',
+                                    url: '../lesson2-1/',
                                     path: 'Curriculum > Unit 2'
                                 },
                                 
                                 {
                                     title: "Lesson 2.2",
-                                    url: '../../unit2/lesson2-2/',
+                                    url: '../lesson2-2/',
                                     path: 'Curriculum > Unit 2'
                                 },
                                 
                                 {
                                     title: "Lesson 2.3",
-                                    url: '../../unit2/lesson2-3/',
+                                    url: './',
                                     path: 'Curriculum > Unit 2'
                                 },
                                 

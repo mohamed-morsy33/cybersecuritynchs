@@ -11,7 +11,6 @@
     
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
     
-    <!-- Google Analytics -->
     
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DRPQMPQQS6"></script>
     <script>
@@ -157,6 +156,45 @@
         }
 
         .nav-links .dropdown-content .nested {
+            padding-left: 0;
+        }
+
+        .nav-links .dropdown-content .nested > strong {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .nav-links .dropdown-content .nested > strong:hover {
+            background: rgba(0, 255, 65, 0.1);
+        }
+
+        .nav-links .dropdown-content .nested > strong::after {
+            content: '▼';
+            font-size: 0.8em;
+            transition: transform 0.3s ease;
+            color: var(--text-primary);
+        }
+
+        .nav-links .dropdown-content .nested.collapsed > strong::after {
+            transform: rotate(-90deg);
+        }
+
+        .nav-links .dropdown-content .nested .unit-lessons {
+            max-height: 500px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .nav-links .dropdown-content .nested.collapsed .unit-lessons {
+            max-height: 0;
+        }
+
+        .nav-links .dropdown-content .nested .unit-lessons li {
             padding-left: 20px;
         }
 
@@ -655,41 +693,245 @@
                         <ul class="dropdown-content">
                             
                                 
-                                    <li class="nested">
-                                        <strong style="color: var(--text-primary); padding: 10px 20px; display: block;">Unit 1</strong>
-                                        
-                                        <li class="nested">
-                                            <a href="../unit1/">Overview</a>
-                                        </li>
-                                        
-                                        <li class="nested">
-                                            <a href="../LECTURES/unit1/lesson1-1/">Lesson 1.1</a>
-                                        </li>
-                                        
-                                        <li class="nested">
-                                            <a href="../LECTURES/unit1/lesson1-2/">Lesson 1.2</a>
-                                        </li>
-                                        
-                                        <li class="nested">
-                                            <a href="../LECTURES/unit1/lesson1-3/">Lesson 1.3</a>
-                                        </li>
-                                        
-                                        <li class="nested">
-                                            <a href="../LECTURES/unit1/installation-process/">Linux Installation Process</a>
-                                        </li>
-                                        
+                                    <li class="nested collapsed">
+                                        <strong>Unit 1</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../LECTURES/unit1/lesson1-1/">Lesson 1.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../LECTURES/unit1/lesson1-2/">Lesson 1.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../LECTURES/unit1/lesson1-3/">Lesson 1.3</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../LECTURES/unit1/lesson1-4/">Lesson 1.4</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../LECTURES/unit1/lesson1-5/">Lesson 1.5</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../LECTURES/unit1/lesson1-6/">Lesson 1.6</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../LECTURES/unit1/installation-process/">Linux Installation Process</a>
+                                            </li>
+                                            
+                                        </ul>
                                     </li>
                                 
                             
                                 
-                                    <li>
-                                        <a href="../unit2/">Unit 2</a>
+                                    <li class="nested collapsed">
+                                        <strong>Unit 2</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../LECTURES/unit2/lesson2-1/">Lesson 2.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../LECTURES/unit2/lesson2-2/">Lesson 2.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../LECTURES/unit2/lesson2-3/">Lesson 2.3</a>
+                                            </li>
+                                            
+                                        </ul>
                                     </li>
                                 
                             
                                 
-                                    <li>
-                                        <a href="../unit3/">Unit 3</a>
+                                    <li class="nested collapsed">
+                                        <strong>Unit 3</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../LECTURES/unit3/lesson3-1/">Lesson 3.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../LECTURES/unit3/lesson3-2/">Lesson 3.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../LECTURES/unit3/lesson3-3/">Lesson 3.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 4</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../LECTURES/unit4/lesson4-1/">Lesson 4.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../LECTURES/unit4/lesson4-2/">Lesson 4.2</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 5</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../LECTURES/unit5/lesson5-1/">Lesson 5.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../LECTURES/unit5/lesson5-2/">Lesson 5.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../LECTURES/unit5/lesson5-3/">Lesson 5.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 6</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../LECTURES/unit6/lesson6-1/">Lesson 6.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../LECTURES/unit6/lesson6-2/">Lesson 6.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../LECTURES/unit6/lesson6-3/">Lesson 6.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 7</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../LECTURES/unit7/lesson7-1/">Lesson 7.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../LECTURES/unit7/lesson7-2/">Lesson 7.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../LECTURES/unit7/lesson7-3/">Lesson 7.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 8</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../LECTURES/unit8/lesson8-1/">Lesson 8.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../LECTURES/unit8/lesson8-2/">Lesson 8.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../LECTURES/unit8/lesson8-3/">Lesson 8.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 9</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../LECTURES/unit9/lesson9-1/">Lesson 9.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../LECTURES/unit9/lesson9-2/">Lesson 9.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../LECTURES/unit9/lesson9-3/">Lesson 9.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 10</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../LECTURES/unit10/lesson10-1/">Lesson 10.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../LECTURES/unit10/lesson10-2/">Lesson 10.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../LECTURES/unit10/lesson10-3/">Lesson 10.3</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                
+                            
+                                
+                                    <li class="nested collapsed">
+                                        <strong>Unit 11</strong>
+                                        <ul class="unit-lessons">
+                                            
+                                            <li>
+                                                <a href="../LECTURES/unit11/lesson11-1/">Lesson 11.1</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../LECTURES/unit11/lesson11-2/">Lesson 11.2</a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="../LECTURES/unit11/lesson11-3/">Lesson 11.3</a>
+                                            </li>
+                                            
+                                        </ul>
                                     </li>
                                 
                             
@@ -1531,9 +1773,9 @@
         
         <div class="lesson-nav">
             
-            <a href="../unit3/" class="lesson-nav-button">
+            <a href="../LECTURES/unit11/lesson11-3/" class="lesson-nav-button">
                 <span class="arrow">←</span>
-                <span>Previous: Unit 3</span>
+                <span>Previous: Lesson 11.3</span>
             </a>
             
 
@@ -1559,11 +1801,9 @@
         
     </footer>
 
-    <!-- Xterm.js for terminal -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@5.3.0/css/xterm.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.min.js"></script>
     
-    <!-- Search index - embedded in theme -->
     <script src="../search_index.js"></script>
     
     <script>
@@ -1572,7 +1812,18 @@
             navLinks.classList.toggle('active');
         }
 
-        // Content-based search with fallback
+        document.addEventListener('DOMContentLoaded', function() {
+            const unitHeaders = document.querySelectorAll('.nav-links .nested > strong');
+            
+            unitHeaders.forEach(header => {
+                header.addEventListener('click', function(e) {
+                    e.stopPropagation(); 
+                    const parent = this.parentElement;
+                    parent.classList.toggle('collapsed');
+                });
+            });
+        });
+
         document.addEventListener('DOMContentLoaded', function() {
             const searchInput = document.getElementById('searchInput');
             const searchResults = document.getElementById('searchResults');
@@ -1584,7 +1835,6 @@
             let searchIndex = null;
             let useSimpleSearch = false;
             
-            // Simple search index built from navigation (fallback)
             const simpleIndex = [
                 
                     
@@ -1592,12 +1842,6 @@
                     
                         
                             
-                                
-                                {
-                                    title: "Overview",
-                                    url: '../unit1/',
-                                    path: 'Curriculum > Unit 1'
-                                },
                                 
                                 {
                                     title: "Lesson 1.1",
@@ -1618,6 +1862,24 @@
                                 },
                                 
                                 {
+                                    title: "Lesson 1.4",
+                                    url: '../LECTURES/unit1/lesson1-4/',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                                {
+                                    title: "Lesson 1.5",
+                                    url: '../LECTURES/unit1/lesson1-5/',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                                {
+                                    title: "Lesson 1.6",
+                                    url: '../LECTURES/unit1/lesson1-6/',
+                                    path: 'Curriculum > Unit 1'
+                                },
+                                
+                                {
                                     title: "Linux Installation Process",
                                     url: '../LECTURES/unit1/installation-process/',
                                     path: 'Curriculum > Unit 1'
@@ -1626,19 +1888,217 @@
                             
                         
                             
+                                
                                 {
-                                    title: "Unit 2",
-                                    url: '../unit2/',
-                                    path: 'Curriculum'
+                                    title: "Lesson 2.1",
+                                    url: '../LECTURES/unit2/lesson2-1/',
+                                    path: 'Curriculum > Unit 2'
                                 },
+                                
+                                {
+                                    title: "Lesson 2.2",
+                                    url: '../LECTURES/unit2/lesson2-2/',
+                                    path: 'Curriculum > Unit 2'
+                                },
+                                
+                                {
+                                    title: "Lesson 2.3",
+                                    url: '../LECTURES/unit2/lesson2-3/',
+                                    path: 'Curriculum > Unit 2'
+                                },
+                                
                             
                         
                             
+                                
                                 {
-                                    title: "Unit 3",
-                                    url: '../unit3/',
-                                    path: 'Curriculum'
+                                    title: "Lesson 3.1",
+                                    url: '../LECTURES/unit3/lesson3-1/',
+                                    path: 'Curriculum > Unit 3'
                                 },
+                                
+                                {
+                                    title: "Lesson 3.2",
+                                    url: '../LECTURES/unit3/lesson3-2/',
+                                    path: 'Curriculum > Unit 3'
+                                },
+                                
+                                {
+                                    title: "Lesson 3.3",
+                                    url: '../LECTURES/unit3/lesson3-3/',
+                                    path: 'Curriculum > Unit 3'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 4.1",
+                                    url: '../LECTURES/unit4/lesson4-1/',
+                                    path: 'Curriculum > Unit 4'
+                                },
+                                
+                                {
+                                    title: "Lesson 4.2",
+                                    url: '../LECTURES/unit4/lesson4-2/',
+                                    path: 'Curriculum > Unit 4'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 5.1",
+                                    url: '../LECTURES/unit5/lesson5-1/',
+                                    path: 'Curriculum > Unit 5'
+                                },
+                                
+                                {
+                                    title: "Lesson 5.2",
+                                    url: '../LECTURES/unit5/lesson5-2/',
+                                    path: 'Curriculum > Unit 5'
+                                },
+                                
+                                {
+                                    title: "Lesson 5.3",
+                                    url: '../LECTURES/unit5/lesson5-3/',
+                                    path: 'Curriculum > Unit 5'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 6.1",
+                                    url: '../LECTURES/unit6/lesson6-1/',
+                                    path: 'Curriculum > Unit 6'
+                                },
+                                
+                                {
+                                    title: "Lesson 6.2",
+                                    url: '../LECTURES/unit6/lesson6-2/',
+                                    path: 'Curriculum > Unit 6'
+                                },
+                                
+                                {
+                                    title: "Lesson 6.3",
+                                    url: '../LECTURES/unit6/lesson6-3/',
+                                    path: 'Curriculum > Unit 6'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 7.1",
+                                    url: '../LECTURES/unit7/lesson7-1/',
+                                    path: 'Curriculum > Unit 7'
+                                },
+                                
+                                {
+                                    title: "Lesson 7.2",
+                                    url: '../LECTURES/unit7/lesson7-2/',
+                                    path: 'Curriculum > Unit 7'
+                                },
+                                
+                                {
+                                    title: "Lesson 7.3",
+                                    url: '../LECTURES/unit7/lesson7-3/',
+                                    path: 'Curriculum > Unit 7'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 8.1",
+                                    url: '../LECTURES/unit8/lesson8-1/',
+                                    path: 'Curriculum > Unit 8'
+                                },
+                                
+                                {
+                                    title: "Lesson 8.2",
+                                    url: '../LECTURES/unit8/lesson8-2/',
+                                    path: 'Curriculum > Unit 8'
+                                },
+                                
+                                {
+                                    title: "Lesson 8.3",
+                                    url: '../LECTURES/unit8/lesson8-3/',
+                                    path: 'Curriculum > Unit 8'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 9.1",
+                                    url: '../LECTURES/unit9/lesson9-1/',
+                                    path: 'Curriculum > Unit 9'
+                                },
+                                
+                                {
+                                    title: "Lesson 9.2",
+                                    url: '../LECTURES/unit9/lesson9-2/',
+                                    path: 'Curriculum > Unit 9'
+                                },
+                                
+                                {
+                                    title: "Lesson 9.3",
+                                    url: '../LECTURES/unit9/lesson9-3/',
+                                    path: 'Curriculum > Unit 9'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 10.1",
+                                    url: '../LECTURES/unit10/lesson10-1/',
+                                    path: 'Curriculum > Unit 10'
+                                },
+                                
+                                {
+                                    title: "Lesson 10.2",
+                                    url: '../LECTURES/unit10/lesson10-2/',
+                                    path: 'Curriculum > Unit 10'
+                                },
+                                
+                                {
+                                    title: "Lesson 10.3",
+                                    url: '../LECTURES/unit10/lesson10-3/',
+                                    path: 'Curriculum > Unit 10'
+                                },
+                                
+                            
+                        
+                            
+                                
+                                {
+                                    title: "Lesson 11.1",
+                                    url: '../LECTURES/unit11/lesson11-1/',
+                                    path: 'Curriculum > Unit 11'
+                                },
+                                
+                                {
+                                    title: "Lesson 11.2",
+                                    url: '../LECTURES/unit11/lesson11-2/',
+                                    path: 'Curriculum > Unit 11'
+                                },
+                                
+                                {
+                                    title: "Lesson 11.3",
+                                    url: '../LECTURES/unit11/lesson11-3/',
+                                    path: 'Curriculum > Unit 11'
+                                },
+                                
                             
                         
                     
@@ -1653,18 +2113,16 @@
                 
             ];
             
-            // Check if we have embedded search data
             if (typeof window.searchIndex !== 'undefined') {
                 searchIndex = window.searchIndex;
                 useSimpleSearch = false;
                 console.log('✓ Using embedded search index:', searchIndex.docs.length, 'documents');
             } else {
-                // Try to load from JSON
                 const base_url = document.querySelector('base')?.getAttribute('href') || '/';
                 fetch(base_url + 'search_data.js')
                     .then(response => response.text())
                     .then(data => {
-                        eval(data);  // This loads window.searchIndex
+                        eval(data);  
                         if (window.searchIndex) {
                             searchIndex = window.searchIndex;
                             useSimpleSearch = false;
@@ -1676,7 +2134,7 @@
                         useSimpleSearch = true;
                     });
                 
-                useSimpleSearch = true; // Start with simple until loaded
+                useSimpleSearch = true; 
             }
             
             function performSearch(query) {
@@ -1772,18 +2230,12 @@
                     return;
                 }
                 
-                // Detect base path from current URL
-                // If we're at /cybersecuritynchs/unit1/, the base is /cybersecuritynchs/
                 const pathname = window.location.pathname;
                 let basePath = '/';
                 
-                // Extract base path (everything before the last meaningful segment)
-                // For /cybersecuritynchs/LECTURES/unit1/lesson1-1/ -> /cybersecuritynchs/
                 const pathParts = pathname.split('/').filter(p => p);
                 
-                // Check if we have a subdirectory (common patterns: /reponame/, /docs/, etc)
                 if (pathParts.length > 0 && !pathParts[0].endsWith('.html')) {
-                    // If first part looks like a repo name (not a file), use it as base
                     const firstPart = pathParts[0];
                     if (firstPart !== 'index' && firstPart !== 'search') {
                         basePath = '/' + firstPart + '/';
@@ -1800,12 +2252,10 @@
                     let path = result.location.replace(/^\//, '').replace(/\.html$/, '').replace(/\//g, ' > ');
                     if (!path) path = 'Home';
                     
-                    // Construct URL with base path
                     let url;
                     if (basePath === '/') {
                         url = result.location;
                     } else {
-                        // Remove leading slash from result.location and prepend basePath
                         const cleanLocation = result.location.startsWith('/') ? result.location.substring(1) : result.location;
                         url = basePath + cleanLocation;
                     }
@@ -1872,11 +2322,9 @@
             });
         });
 
-        // Highlight.js integration if enabled
         
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('pre code').forEach((block) => {
-                // Add terminal-like styling
                 block.parentElement.style.position = 'relative';
             });
         });

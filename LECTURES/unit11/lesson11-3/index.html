@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linux Installation Process - NCHS Cybersecurity</title>
+    <title>Lesson 11.3 - NCHS Cybersecurity</title>
     
     
     <link rel="icon" href="../../../img/logo.png">
@@ -698,31 +698,31 @@
                                         <ul class="unit-lessons">
                                             
                                             <li>
-                                                <a href="../lesson1-1/">Lesson 1.1</a>
+                                                <a href="../../unit1/lesson1-1/">Lesson 1.1</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-2/">Lesson 1.2</a>
+                                                <a href="../../unit1/lesson1-2/">Lesson 1.2</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-3/">Lesson 1.3</a>
+                                                <a href="../../unit1/lesson1-3/">Lesson 1.3</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-4/">Lesson 1.4</a>
+                                                <a href="../../unit1/lesson1-4/">Lesson 1.4</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-5/">Lesson 1.5</a>
+                                                <a href="../../unit1/lesson1-5/">Lesson 1.5</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-6/">Lesson 1.6</a>
+                                                <a href="../../unit1/lesson1-6/">Lesson 1.6</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="./">Linux Installation Process</a>
+                                                <a href="../../unit1/installation-process/">Linux Installation Process</a>
                                             </li>
                                             
                                         </ul>
@@ -920,15 +920,15 @@
                                         <ul class="unit-lessons">
                                             
                                             <li>
-                                                <a href="../../unit11/lesson11-1/">Lesson 11.1</a>
+                                                <a href="../lesson11-1/">Lesson 11.1</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../../unit11/lesson11-2/">Lesson 11.2</a>
+                                                <a href="../lesson11-2/">Lesson 11.2</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../../unit11/lesson11-3/">Lesson 11.3</a>
+                                                <a href="./">Lesson 11.3</a>
                                             </li>
                                             
                                         </ul>
@@ -964,142 +964,592 @@
 
     <div class="container">
         
-        <h2 id="what-is-it"><em>What</em> is it?</h2>
-<p>Kali is an operating system that was made <strong><em>specially</em></strong> for cybersecurity work (and hacking as well). It has a large toolkit of useful programs that we're going to learn about, including Hydra, Nmap, Wireshark, Tcpdump, MacChanger, Chisel, Aircrack-ng, etc.</p>
-<h2 id="some-vocab">Some Vocab:</h2>
-<p>As much as we know vocabulary might not be that interesting, it's important to know for the future, since there's a LOT of acronyms and words in cybersecurity that you're going to be hearing and using, so it's best to get used to it.</p>
-<ul>
-<li><strong>Operating System (OS)</strong>: The main software that runs your computer, like Windows, macOS, iOS, GNU/Linux, etc.</li>
-<li><strong>Virtual Machine (VM)</strong>: It's basically a computer <em>inside</em> another computer. You can run your regular OS, like Windows, and still have Kali Linux inside of it</li>
-<li><strong>ISO File (International Organization for Standardization File)</strong>: Sounds fancy, but really it's just a full copy of an OS within one tiny file</li>
-<li><strong>Hypervisor</strong>: Software that creates and manages VMs. Examples are VirtualBox and VMWare Workstation. There's also QEMU, but mostly Linux users use that, and you're likely running on Windows or mac</li>
-<li><strong>Bootable USB</strong>: Just a USB drive (which you hopefully already know about) that can start up a computer and install an OS (we don't need this yet)</li>
-<li><strong>Partitioning</strong>: A more advanced topic, but it's dividing up your drive into sections called <em>partitions</em>, which are like walls for a room. We don't need this yet, but it is good to know</li>
-</ul>
-<p>Now, let's get into the nitty-gritty:</p>
-<h2 id="method-1-easy-way">Method 1: Easy way :)</h2>
-<h3 id="minimum-requirements">Minimum Requirements*:</h3>
-<ol>
-<li><code>8 GB</code> of RAM</li>
-<li><code>20-30 GB</code> of free hard drive space</li>
-<li>A decently fast CPU (you probably have this)</li>
-</ol>
-<p>*But, how do I know if I meet them? Well, you can press <em><code>Ctrl+Shift+Esc</code></em> on Windows and click on <strong>"Performance"</strong> inside of Task Manager, and it'll give you a spec (specifications) sheet. On mac, you can click on <strong>"About"</strong> in the top menu bar of your computer. On Linux, you can type <strong><code>uname -a</code></strong>, or use a custom program like <code>fastfetch</code></p>
-<h2 id="big-disclaimer-for-windows-users">BIG DISCLAIMER FOR WINDOWS USERS:</h2>
-<ul>
-<li>You NEED to DISABLE something called Hyper-V. If you don't know what that is, for Windows users, Hyper-V will conflict with Virtualbox, making it run poorly and crash often</li>
-<li>To check if you hve Hyper-V, press <code>Win+R</code>, and type <code>optionalfeatures</code>, then press <code>Enter</code></li>
-<li>Look for a "Hyper-V" in the list of shown items. If it's checked, then it's enabled. Uncheck it.<ul>
-<li>Alternative method: go to cmd (Command Prompt), and right click and "Run as Administrator". Then use the following command: <code>bcdedit /set hypervisorlaunchtype off</code></li>
-</ul>
-</li>
-<li>Finally, restart your computer</li>
-</ul>
-<h2 id="big-disclaimer-for-macos-users">BIG DISCLAIMER FOR MACOS USERS:</h2>
-<ul>
-<li>You need to check if you're using an Intel-based Mac or Apple Silicon machine. If your device is M1, M2, M*, then it's <strong>Apple Silicon</strong></li>
-<li>If this is the case, you will need to use a different software for virtualization. You have some options, like <a href="https://getutm.app">UTM</a> or <a href="https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion">VMware Fusion</a>. </li>
-<li>Also, you will have to install Kali Linux using the 
-<em><strong>ARM64 version! Not x86-64!</strong></em></li>
-</ul>
-<hr />
-<p>Now, go to <a href="https://virtualbox.org">virtualbox.org</a></p>
-<p>Click on the download for your OS, and install the program by following the instruction wizard.</p>
-<p><img alt="Virtual Box" src="../../../img/virtual_box.png" /></p>
-<ul>
-<li>Now, go to the <a href="https://kali.org/get-kali">Kali Linux website</a>.</li>
-<li>Download the "Installer" ISO file (<code>~ 4 GB</code> in size)</li>
-<li>Then choose the 64-bit version for modern computers.</li>
-<li>If your computer is old, it could be 32-bit. If so, you may need to check your system specifications as explained above. However, it probably isn't.</li>
-</ul>
-<p><img alt="Kali Installation" src="../../../img/kali_img.png" /></p>
-<blockquote>
-<p>Remember, Apple Silicon machines will install the ARM64 version of Kali Linux instead!</p>
-</blockquote>
-<ul>
-<li>Finally, make your Virtual Machine. Open up VirtualBox and click "New"</li>
-<li>Name it whatever, I'd call it "Kali Linux", or "Kali Machine".</li>
-<li>Type: Linux, Version: Debian (64-bit)</li>
-<li>Allocate at least <code>4 GB</code> of RAM, AKA <code>4096 MB</code>, by dragging the slider or typing in the number in the RAM text box</li>
-<li>Create a Virtual Hrd Disk (allocate <code>25-30 GB</code> minimum)<ul>
-<li>Choose VDI (VirtualBox Disk Image)</li>
-<li>Also select "dynamically allocated" to save space, and allows the VM to grow dynamically in storage size as you begin to add more things</li>
-</ul>
-</li>
-<li>After clicking done, tell it to create, but do NOT tell it to also start yet</li>
-<li>Click on your virtual machine, and then go to settings</li>
-<li>Then go to Storage, and click the empty disk icon</li>
-<li>This is where we "choose a disk file", and select the downloaded Kali ISO</li>
-<li>Then under System, enable PAE/NX if available to you. PAE is Physical Address Extension, and NX is No Execute. These allow for &gt; <code>4 GB</code> of RAM access and prevents non-executable code from being executed in memory segments. If you don't know what that means, just ignore this</li>
-<li>Under Display, increase video memory to <code>128 MB</code></li>
-<li>Finally, save and exit Settings, and click on Start to boot your VM</li>
-<li>Select "Graphical Install" (press Enter, navigate using arrow keys)</li>
-<li>Choose your language, location, keyboard (these can later be changed, doesn't really matter)</li>
-<li>You can set a hostname, or keep the default (kali)</li>
-</ul>
-<h3 id="important-username-is-kali-and-password-is-kali-by-default"><strong>IMPORTANT</strong>: username is <em>kali</em> and password is <em>kali</em> by default!</h3>
-<ul>
-<li>Choose "Guided - use entire disk" for your partitioning</li>
-<li>Then select "All files in one partition"</li>
-<li>Confirm and wait a while. Take a walk outside, take a short nap, whatever you want. Just wait 10-20 minutes and it'll be done</li>
-<li>Restart when prompted</li>
-<li>On first login, enter the username and password</li>
-<li>Then, click the <code>SUPER</code> key (<code>Win</code> key or <code>Cmd</code> key on mac) and type "terminal" or "console" into the search, and open the app</li>
-<li>In the terminal, you can type <code>sudo apt update &amp;&amp; sudo apt upgrade -y</code><ul>
-<li>This command just updates your system</li>
-<li>When prompted with a password, type in your password</li>
-</ul>
-</li>
-<li>Happy Linux!</li>
-</ul>
-<h2 id="method-2-hard-way-bare-metal-installation">Method 2: Hard way (bare metal installation)</h2>
-<p>Alright. You're ready for the real deal. No problem. </p>
-<p><code>WARNING! ⚠️⚠️</code>: This version of installation WILL take space on your disk! This means it will be physically installed, and it will NOT be installed as a VM! Just like Windows or macOS, it will be physically on your device. If you do this incorrectly, it may <strong>wipe your device completely</strong>. I'm not liable for if you mistakenly wipe your drive, it's up to you. Also, I personally do <strong>not recommend you install Kali Linux on a physical drive</strong>. If you want to use Linux for extra practice, install a distribution like <a href="https://www.debian.org/">Debian</a> or <a href="https://linuxmint.com/">Linux Mint</a>. You are risking data loss if done incorrectly, so proceed at your own risk.</p>
-<p>Important things to note are:</p>
-<ul>
-<li>If you install on bare metal, AKA on your physical device, your device may have incompatibility issues. I would recommend doing your own research before doing so</li>
-<li>You may want to install Linux on a secondary drive, since if you use your main one, you will have to create a special partition for Linux to use exclusively, which is more difficult</li>
-<li>You'll need a USB drive with preferably <code>8 GB</code> or more of storage</li>
-<li>You may need to adjust your BIOS (manufacturer specific, meaning it depends on what company made your computer and maybe even where you bought it from) to allow for other bootable devices, which can include removing Secure Boot</li>
-<li>There's some specifics for ARM64 machines like Apple Silicon that will be different!</li>
-<li>Overall, you are likely going to have to do your OWN research to make sure you don't mess anything up.</li>
-</ul>
-<p>Without further ado, these are some general instructions (not perfect):</p>
-<ol>
-<li>Create a bootable USB drive using an app like Balena Etcher or Rufus</li>
-<li>Make space on your hard drive by creating a disk partition of ~<code>30 GB</code> or more, or install on a secondary hard drive</li>
-<li>Boot from the USB drive from BIOS after restarting your computer and smashing the BIOS key as it boots up (typically <code>Esc</code>, <code>F11</code>, <code>F12</code>, or <code>Del</code> depending on the manufacturer)</li>
-<li>Follow the installation process, but make sure you select the right drive and if it's on the same disk as Windows or Mac, you install "alongside" it, not replace </li>
-<li>After going through the setup, you may re-enter the BIOS to change the boot order. What this means is move Linux above Windows so that on first boot you boot into Linux (optional)</li>
-</ol>
-<p>Some important extras:</p>
-<ul>
-<li>Make sure you regularly update your system at least weekly</li>
-<li>Make decent credentials or use a <a href="https://www.yubico.com/">physical key</a></li>
-<li>Never just copy/paste a command without understanding it, look it up at least (even from me!)</li>
-<li>Install packages wisely and preferably from trusted sources</li>
-</ul>
-<p>Happy Linux! :)</p>
+        <h1 id="secure-communication-protocols-and-end-to-end-encryption">Secure Communication Protocols and End-to-End Encryption</h1>
+<p>Beyond VPNs and TLS, modern applications need end-to-end encryption, secure messaging, and privacy-preserving technologies. This lesson covers Signal Protocol, encrypted email, secure file transfer, and emerging privacy technologies.</p>
+<h2 id="end-to-end-encryption-e2ee">End-to-End Encryption (E2EE)</h2>
+<h3 id="what-is-e2ee">What is E2EE?</h3>
+<p><strong>End-to-end encryption ensures only sender and recipient can read messages.</strong></p>
+<p><strong>Traditional encryption:</strong></p>
+<pre><code>Alice → [Encrypted] → Server [Decrypts, Re-encrypts] → Bob
+         Server can read messages
+</code></pre>
+<p><strong>End-to-end encryption:</strong></p>
+<pre><code>Alice → [Encrypted] ────────────────────→ Bob
+         Server cannot read messages
+</code></pre>
+<p><strong>Properties:</strong>
+- Only endpoints have keys
+- Server can't decrypt
+- Protects against compromised servers
+- Protects against government surveillance</p>
+<h3 id="perfect-forward-secrecy-pfs">Perfect Forward Secrecy (PFS)</h3>
+<p><strong>Ensures past messages stay secure even if long-term keys compromised.</strong></p>
+<p><strong>How it works:</strong>
+- Generate new ephemeral keys for each session
+- Delete keys after use
+- Compromise of current key doesn't affect past messages</p>
+<p><strong>Without PFS:</strong></p>
+<pre><code>If attacker gets private key + has recorded traffic
+  → Can decrypt all past communications
+</code></pre>
+<p><strong>With PFS:</strong></p>
+<pre><code>If attacker gets private key + has recorded traffic
+  → Can only decrypt current session
+  → Past sessions remain secure
+</code></pre>
+<h2 id="signal-protocol">Signal Protocol</h2>
+<h3 id="the-gold-standard-of-e2ee">The Gold Standard of E2EE</h3>
+<p><strong>Used by:</strong>
+- Signal Messenger
+- WhatsApp
+- Facebook Messenger (Secret Conversations)
+- Google Messages (RCS)
+- Skype (Private Conversations)</p>
+<p><strong>Security properties:</strong>
+- End-to-end encryption
+- Perfect forward secrecy
+- Post-compromise security (future secrecy)
+- Deniability
+- Asynchronous messaging</p>
+<h3 id="double-ratchet-algorithm">Double Ratchet Algorithm</h3>
+<p><strong>Core of Signal Protocol</strong></p>
+<p><strong>Two ratchets:</strong></p>
+<p><strong>1. Diffie-Hellman Ratchet:</strong>
+- New key agreement with each message
+- Provides forward secrecy
+- Updates shared secrets</p>
+<p><strong>2. Symmetric Key Ratchet:</strong>
+- Derives new keys from previous keys
+- Used between DH ratchet updates
+- Fast and efficient</p>
+<p><strong>Key hierarchy:</strong></p>
+<pre><code>Root Key
+   ↓
+Chain Keys (sending and receiving)
+   ↓
+Message Keys (one per message)
+</code></pre>
+<p><strong>How it works:</strong></p>
+<pre><code>Alice                           Bob
+------                          -----
+Generate DH keypair
+Send DH public key  ────────→
+                              Receive Alice's DH public key
+                              Perform DH key agreement
+                              Derive chain keys
+                    ←────────  Send encrypted message
+Receive message
+Derive message key
+Decrypt message
+Generate new DH keypair
+Send encrypted message ─────→
+                              Perform new DH key agreement
+                              Derive new chain keys
+                              ...
+</code></pre>
+<p><strong>Each message:</strong>
+1. Derives unique message key
+2. Deletes key after encryption/decryption
+3. Can't be decrypted again</p>
+<h3 id="x3dh-extended-triple-diffie-hellman">X3DH (Extended Triple Diffie-Hellman)</h3>
+<p><strong>Initial key agreement for asynchronous messaging</strong></p>
+<p><strong>Allows:</strong>
+- Encrypted messages to offline recipients
+- No real-time interaction needed
+- Immediate forward secrecy</p>
+<p><strong>Keys involved:</strong>
+- Identity key (long-term)
+- Signed prekey (medium-term)
+- One-time prekeys (single-use)
+- Ephemeral key (session-specific)</p>
+<p><strong>Process:</strong></p>
+<pre><code>Bob (offline) publishes to server:
+  - Identity public key (IKb)
+  - Signed prekey (SPKb)
+  - Multiple one-time prekeys (OPKb)
+
+Alice wants to message Bob:
+  1. Fetch Bob's keys from server
+  2. Generate ephemeral key (EKa)
+  3. Perform 3 or 4 DH operations:
+     - DH(IKa, SPKb)
+     - DH(EKa, IKb)
+     - DH(EKa, SPKb)
+     - DH(EKa, OPKb)  [if one-time prekey available]
+  4. Combine DH results into shared secret
+  5. Send initial message with EKa
+
+Bob comes online:
+  1. Receives message with Alice's EKa
+  2. Performs same DH operations
+  3. Derives same shared secret
+  4. Decrypts message
+  5. Deletes one-time prekey
+</code></pre>
+<h3 id="implementing-signal-like-encryption">Implementing Signal-like Encryption</h3>
+<p><strong>Simple example (not production-ready):</strong></p>
+<pre><code class="language-python">from cryptography.hazmat.primitives.asymmetric import x25519
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.kdf.hkdf import HKDF
+from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+import os
+
+class SignalLikeEncryption:
+    def __init__(self):
+        # Long-term identity key
+        self.identity_private = x25519.X25519PrivateKey.generate()
+        self.identity_public = self.identity_private.public_key()
+
+        # Current ratchet keys
+        self.ratchet_private = None
+        self.ratchet_public = None
+
+        # Chain keys
+        self.sending_chain_key = None
+        self.receiving_chain_key = None
+
+    def kdf(self, input_key_material, salt=None):
+        &quot;&quot;&quot;Key derivation function&quot;&quot;&quot;
+        if salt is None:
+            salt = b'\x00' * 32
+
+        kdf = HKDF(
+            algorithm=hashes.SHA256(),
+            length=32,
+            salt=salt,
+            info=b'Signal Protocol'
+        )
+        return kdf.derive(input_key_material)
+
+    def dh(self, private_key, public_key):
+        &quot;&quot;&quot;Diffie-Hellman exchange&quot;&quot;&quot;
+        return private_key.exchange(public_key)
+
+    def ratchet_step(self, their_public_key):
+        &quot;&quot;&quot;Perform DH ratchet step&quot;&quot;&quot;
+        # Generate new ratchet keypair
+        self.ratchet_private = x25519.X25519PrivateKey.generate()
+        self.ratchet_public = self.ratchet_private.public_key()
+
+        # Perform DH
+        dh_output = self.dh(self.ratchet_private, their_public_key)
+
+        # Derive new chain keys
+        root_key = self.kdf(dh_output)
+        self.sending_chain_key = self.kdf(root_key, b'sending')
+        self.receiving_chain_key = self.kdf(root_key, b'receiving')
+
+        return self.ratchet_public
+
+    def encrypt_message(self, plaintext):
+        &quot;&quot;&quot;Encrypt a message&quot;&quot;&quot;
+        # Derive message key from chain key
+        message_key = self.kdf(self.sending_chain_key)
+
+        # Update chain key for next message
+        self.sending_chain_key = self.kdf(self.sending_chain_key)
+
+        # Encrypt
+        iv = os.urandom(16)
+        cipher = Cipher(
+            algorithms.AES(message_key),
+            modes.CTR(iv)
+        )
+        encryptor = cipher.encryptor()
+        ciphertext = encryptor.update(plaintext.encode()) + encryptor.finalize()
+
+        return iv + ciphertext
+
+    def decrypt_message(self, encrypted_data):
+        &quot;&quot;&quot;Decrypt a message&quot;&quot;&quot;
+        # Extract IV and ciphertext
+        iv = encrypted_data[:16]
+        ciphertext = encrypted_data[16:]
+
+        # Derive message key from chain key
+        message_key = self.kdf(self.receiving_chain_key)
+
+        # Update chain key for next message
+        self.receiving_chain_key = self.kdf(self.receiving_chain_key)
+
+        # Decrypt
+        cipher = Cipher(
+            algorithms.AES(message_key),
+            modes.CTR(iv)
+        )
+        decryptor = cipher.decryptor()
+        plaintext = decryptor.update(ciphertext) + decryptor.finalize()
+
+        return plaintext.decode()
+
+# Usage (simplified)
+alice = SignalLikeEncryption()
+bob = SignalLikeEncryption()
+
+# Initial key exchange
+bob_ratchet_public = bob.ratchet_step(alice.identity_public)
+alice.ratchet_step(bob_ratchet_public)
+
+# Alice sends message
+encrypted = alice.encrypt_message(&quot;Hello Bob!&quot;)
+print(f&quot;Encrypted: {encrypted.hex()}&quot;)
+
+# Bob receives and decrypts
+decrypted = bob.decrypt_message(encrypted)
+print(f&quot;Decrypted: {decrypted}&quot;)
+</code></pre>
+<h2 id="encrypted-email">Encrypted Email</h2>
+<h3 id="pgpgpg">PGP/GPG</h3>
+<p><strong>Pretty Good Privacy - Email encryption standard</strong></p>
+<p><strong>Key management:</strong></p>
+<pre><code class="language-bash"># Generate key
+gpg --full-generate-key
+
+# List keys
+gpg --list-keys
+gpg --list-secret-keys
+
+# Export public key
+gpg --armor --export your@email.com &gt; public_key.asc
+
+# Import someone's public key
+gpg --import their_public_key.asc
+
+# Sign someone's key (trust)
+gpg --sign-key their@email.com
+</code></pre>
+<p><strong>Encrypt email:</strong></p>
+<pre><code class="language-bash"># Encrypt message
+gpg --encrypt --armor --recipient recipient@email.com message.txt
+
+# Encrypt and sign
+gpg --encrypt --sign --armor --recipient recipient@email.com message.txt
+
+# Decrypt
+gpg --decrypt encrypted_message.txt.asc
+</code></pre>
+<p><strong>Using with email client:</strong></p>
+<p><strong>Thunderbird + Enigmail:</strong>
+- Install Enigmail addon
+- Generate or import key
+- Compose → Encrypt message
+- Automatic encryption when recipient's key available</p>
+<p><strong>Web of Trust:</strong></p>
+<pre><code>You sign Alice's key (you trust Alice is Alice)
+Alice signs Bob's key (Alice trusts Bob is Bob)
+You can trust Bob's key through Alice (transitive trust)
+</code></pre>
+<h3 id="smime">S/MIME</h3>
+<p><strong>Secure/Multipurpose Internet Mail Extensions</strong></p>
+<p><strong>Differences from PGP:</strong>
+- Uses X.509 certificates
+- Requires Certificate Authority
+- Better enterprise support
+- Native support in email clients
+- Hierarchical trust model</p>
+<p><strong>Get certificate:</strong>
+1. Purchase from CA (or use free from organizations)
+2. Generate CSR
+3. Submit to CA
+4. Receive certificate
+5. Install in email client</p>
+<p><strong>Outlook S/MIME:</strong>
+- File → Options → Trust Center → Email Security
+- Import certificate
+- "Encrypt contents and attachments"
+- "Add digital signature"</p>
+<h2 id="secure-file-transfer">Secure File Transfer</h2>
+<h3 id="scp-secure-copy-protocol">SCP (Secure Copy Protocol)</h3>
+<p><strong>Copy files over SSH:</strong></p>
+<pre><code class="language-bash"># Upload file
+scp local_file.txt user@remote:/path/
+
+# Download file
+scp user@remote:/path/file.txt local_directory/
+
+# Copy directory
+scp -r local_directory/ user@remote:/path/
+
+# Specify port
+scp -P 2222 file.txt user@remote:/path/
+
+# Preserve file attributes
+scp -p file.txt user@remote:/path/
+</code></pre>
+<h3 id="sftp-ssh-file-transfer-protocol">SFTP (SSH File Transfer Protocol)</h3>
+<p><strong>Interactive file transfer:</strong></p>
+<pre><code class="language-bash"># Connect
+sftp user@remote
+
+# Navigate
+pwd                 # Print working directory
+lpwd                # Print local working directory
+ls                  # List remote files
+lls                 # List local files
+cd directory        # Change remote directory
+lcd directory       # Change local directory
+
+# Transfer
+put local_file.txt  # Upload
+get remote_file.txt # Download
+put -r directory/   # Upload directory
+get -r directory/   # Download directory
+
+# Exit
+exit
+</code></pre>
+<h3 id="rsync-over-ssh">rsync over SSH</h3>
+<p><strong>Efficient file synchronization:</strong></p>
+<pre><code class="language-bash"># Sync directory
+rsync -avz -e ssh local_dir/ user@remote:/path/
+
+# Options explained:
+# -a: archive mode (preserve permissions, timestamps)
+# -v: verbose
+# -z: compress during transfer
+# -e ssh: use SSH
+
+# Sync with delete (mirror)
+rsync -avz --delete -e ssh local_dir/ user@remote:/path/
+
+# Dry run (test without changes)
+rsync -avzn -e ssh local_dir/ user@remote:/path/
+
+# Show progress
+rsync -avz --progress -e ssh local_dir/ user@remote:/path/
+
+# Exclude files
+rsync -avz --exclude='*.log' -e ssh local_dir/ user@remote:/path/
+</code></pre>
+<h3 id="magic-wormhole">Magic Wormhole</h3>
+<p><strong>Simple encrypted file transfer:</strong></p>
+<pre><code class="language-bash"># Install
+pip install magic-wormhole
+
+# Send file
+wormhole send file.txt
+# Outputs code: 7-crossword-ventilate
+
+# Receive (on other machine)
+wormhole receive 7-crossword-ventilate
+
+# Send directory
+wormhole send --code 5-example-code directory/
+
+# The code is used for key exchange
+# End-to-end encrypted
+# Works through NAT/firewalls
+</code></pre>
+<h2 id="encrypted-messaging-applications">Encrypted Messaging Applications</h2>
+<h3 id="signal">Signal</h3>
+<p><strong>Architecture:</strong>
+- Open source
+- Centralized servers (but can't read messages)
+- Phone number as identifier
+- Desktop and mobile apps
+- Voice and video calls</p>
+<p><strong>Security features:</strong>
+- End-to-end encryption (Signal Protocol)
+- Perfect forward secrecy
+- Sealed sender (hide metadata)
+- Disappearing messages
+- Screen security (screenshot protection)
+- Registration lock
+- Safety numbers (verify identity)</p>
+<h3 id="matrixelement">Matrix/Element</h3>
+<p><strong>Architecture:</strong>
+- Open source
+- Decentralized (federated servers)
+- Self-hostable
+- Username as identifier
+- Voice and video calls</p>
+<p><strong>Security features:</strong>
+- End-to-end encryption (Olm/Megolm)
+- Device verification
+- Cross-signing
+- Encrypted attachments
+- Federated identity</p>
+<h3 id="wire">Wire</h3>
+<p><strong>Architecture:</strong>
+- Open source
+- End-to-end encrypted
+- Supports teams/business
+- No phone number required</p>
+<p><strong>Security features:</strong>
+- Signal Protocol
+- Encrypted audio/video
+- Encrypted file sharing
+- External audit</p>
+<h2 id="privacy-enhancing-technologies">Privacy-Enhancing Technologies</h2>
+<h3 id="tor-the-onion-router">Tor (The Onion Router)</h3>
+<p><strong>Anonymous communication:</strong></p>
+<pre><code class="language-bash"># Install Tor
+sudo apt install tor
+
+# Configure as SOCKS proxy
+# In /etc/tor/torrc:
+SocksPort 9050
+
+# Start Tor
+sudo systemctl start tor
+
+# Use with applications
+curl --socks5-hostname localhost:9050 https://check.torproject.org/
+
+# Use Tor Browser (recommended)
+# Download from torproject.org
+</code></pre>
+<p><strong>How Tor works:</strong></p>
+<pre><code>You → Entry node → Middle node → Exit node → Destination
+
+Each hop only knows previous and next hop
+Destination doesn't know your IP
+You don't know full path
+Encrypted in layers (like onion)
+</code></pre>
+<h3 id="i2p-invisible-internet-project">I2P (Invisible Internet Project)</h3>
+<p><strong>Anonymous network layer:</strong></p>
+<pre><code class="language-bash"># Install I2P
+sudo apt install i2p
+
+# Access web interface
+# http://127.0.0.1:7657
+
+# I2P provides:
+# - Anonymous hosting
+# - Encrypted communication
+# - Distributed network
+# - Hidden services
+</code></pre>
+<h3 id="mixnets">Mixnets</h3>
+<p><strong>Anonymize metadata through mixing:</strong></p>
+<p><strong>Examples:</strong>
+- Nym Network
+- Katzenpost
+- Loopix</p>
+<p><strong>How it works:</strong></p>
+<pre><code>1. Batch messages from multiple senders
+2. Mix (reorder) messages
+3. Add delays
+4. Forward to next mix node
+5. Repeat multiple hops
+6. Deliver to recipients
+
+Result: Hard to trace which output came from which input
+</code></pre>
+<h2 id="zero-knowledge-proofs">Zero-Knowledge Proofs</h2>
+<p><strong>Prove you know something without revealing it</strong></p>
+<p><strong>Example: Proving age without revealing birthdate</strong></p>
+<pre><code class="language-python"># Simplified concept (not real ZKP)
+def prove_over_18(birthdate, current_date):
+    &quot;&quot;&quot;Prove age &gt; 18 without revealing exact age&quot;&quot;&quot;
+    age = current_date.year - birthdate.year
+
+    # Create commitment
+    commitment = hash(birthdate + random_salt)
+
+    # Prove age &gt; 18 without revealing birthdate
+    proof = {
+        'commitment': commitment,
+        'is_over_18': age &gt;= 18,
+        'verification_data': generate_zkp(age &gt;= 18)
+    }
+
+    return proof
+
+# Verifier can confirm age &gt; 18
+# But learns nothing else about birthdate
+</code></pre>
+<p><strong>Real-world applications:</strong>
+- Anonymous credentials
+- Private voting
+- Blockchain privacy (Zcash)
+- Private authentication</p>
+<h2 id="secure-communication-best-practices">Secure Communication Best Practices</h2>
+<h3 id="operational-security">Operational Security</h3>
+<p><strong>Communication security:</strong>
+- Use E2EE for sensitive conversations
+- Verify contacts (safety numbers)
+- Enable disappearing messages for sensitive topics
+- Be aware of metadata leakage
+- Use secure devices</p>
+<p><strong>Key management:</strong>
+- Generate strong keys
+- Backup keys securely
+- Rotate keys regularly
+- Revoke compromised keys
+- Verify key fingerprints</p>
+<p><strong>Platform selection:</strong>
+- Open source preferred
+- Audited by security researchers
+- Active maintenance
+- Clear threat model
+- Strong encryption defaults</p>
+<h3 id="threat-modeling">Threat Modeling</h3>
+<p><strong>Ask yourself:</strong></p>
+<p><strong>What are you protecting?</strong>
+- Messages
+- Metadata (who talks to whom)
+- Files
+- Identity</p>
+<p><strong>Who are you protecting against?</strong>
+- Casual snoopers
+- Criminals
+- Corporations
+- Governments
+- Nation states</p>
+<p><strong>Choose tools accordingly:</strong>
+- Casual privacy: Signal, Wire
+- High anonymity: Tor, I2P
+- Maximum security: Air-gapped systems</p>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<p><strong>End-to-end encryption:</strong>
+- Only sender and recipient can read
+- Server compromise doesn't expose messages
+- Signal Protocol is gold standard
+- Requires proper key management</p>
+<p><strong>Email security:</strong>
+- PGP/GPG for decentralized encryption
+- S/MIME for enterprise
+- Both require key/certificate management
+- Metadata still exposed</p>
+<p><strong>File transfer:</strong>
+- SCP/SFTP for regular use
+- rsync for synchronization
+- Magic Wormhole for simplicity
+- Always verify recipients</p>
+<p><strong>Privacy technologies:</strong>
+- Tor for anonymity
+- I2P for hidden services
+- Mixnets for metadata protection
+- Zero-knowledge proofs for selective disclosure</p>
+<p><strong>Remember:</strong>
+- Encryption protects content, not metadata
+- Perfect forward secrecy is important
+- Verify keys/identities
+- Choose tools for your threat model
+- Security vs. convenience tradeoff</p>
+<p>Secure communication is more than just encryption—it's about protecting privacy, ensuring authenticity, and defending against diverse threats. Understanding these technologies helps you choose the right tools and use them correctly.</p>
         
 
         <!-- Lesson Navigation (only show on non-homepage pages) -->
         
         <div class="lesson-nav">
             
-            <a href="../lesson1-6/" class="lesson-nav-button">
+            <a href="../lesson11-2/" class="lesson-nav-button">
                 <span class="arrow">←</span>
-                <span>Previous: Lesson 1.6</span>
+                <span>Previous: Lesson 11.2</span>
             </a>
             
 
             <div class="lesson-nav-info">
                 <div class="current-lesson">Current Lesson</div>
-                <div class="lesson-title">Linux Installation Process</div>
+                <div class="lesson-title">Lesson 11.3</div>
             </div>
 
             
-            <a href="../../unit2/lesson2-1/" class="lesson-nav-button">
-                <span>Next: Lesson 2.1</span>
+            <a href="../../../test/" class="lesson-nav-button">
+                <span>Next: Terminal</span>
                 <span class="arrow">→</span>
             </a>
             
@@ -1158,43 +1608,43 @@
                                 
                                 {
                                     title: "Lesson 1.1",
-                                    url: '../lesson1-1/',
+                                    url: '../../unit1/lesson1-1/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.2",
-                                    url: '../lesson1-2/',
+                                    url: '../../unit1/lesson1-2/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.3",
-                                    url: '../lesson1-3/',
+                                    url: '../../unit1/lesson1-3/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.4",
-                                    url: '../lesson1-4/',
+                                    url: '../../unit1/lesson1-4/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.5",
-                                    url: '../lesson1-5/',
+                                    url: '../../unit1/lesson1-5/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.6",
-                                    url: '../lesson1-6/',
+                                    url: '../../unit1/lesson1-6/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Linux Installation Process",
-                                    url: './',
+                                    url: '../../unit1/installation-process/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
@@ -1396,19 +1846,19 @@
                                 
                                 {
                                     title: "Lesson 11.1",
-                                    url: '../../unit11/lesson11-1/',
+                                    url: '../lesson11-1/',
                                     path: 'Curriculum > Unit 11'
                                 },
                                 
                                 {
                                     title: "Lesson 11.2",
-                                    url: '../../unit11/lesson11-2/',
+                                    url: '../lesson11-2/',
                                     path: 'Curriculum > Unit 11'
                                 },
                                 
                                 {
                                     title: "Lesson 11.3",
-                                    url: '../../unit11/lesson11-3/',
+                                    url: './',
                                     path: 'Curriculum > Unit 11'
                                 },
                                 

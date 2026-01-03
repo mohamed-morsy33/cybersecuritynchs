@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linux Installation Process - NCHS Cybersecurity</title>
+    <title>Lesson 1.5 - NCHS Cybersecurity</title>
     
     
     <link rel="icon" href="../../../img/logo.png">
@@ -714,7 +714,7 @@
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-5/">Lesson 1.5</a>
+                                                <a href="./">Lesson 1.5</a>
                                             </li>
                                             
                                             <li>
@@ -722,7 +722,7 @@
                                             </li>
                                             
                                             <li>
-                                                <a href="./">Linux Installation Process</a>
+                                                <a href="../installation-process/">Linux Installation Process</a>
                                             </li>
                                             
                                         </ul>
@@ -964,142 +964,601 @@
 
     <div class="container">
         
-        <h2 id="what-is-it"><em>What</em> is it?</h2>
-<p>Kali is an operating system that was made <strong><em>specially</em></strong> for cybersecurity work (and hacking as well). It has a large toolkit of useful programs that we're going to learn about, including Hydra, Nmap, Wireshark, Tcpdump, MacChanger, Chisel, Aircrack-ng, etc.</p>
-<h2 id="some-vocab">Some Vocab:</h2>
-<p>As much as we know vocabulary might not be that interesting, it's important to know for the future, since there's a LOT of acronyms and words in cybersecurity that you're going to be hearing and using, so it's best to get used to it.</p>
+        <h1 id="basic-linux-commands">Basic Linux Commands</h1>
+<p>Now that you understand why Linux matters for cybersecurity, it's time to actually use it. The command line interface (CLI) is where you'll spend most of your time, so getting comfortable with basic commands is essential.</p>
+<h2 id="the-terminal">The Terminal</h2>
+<p>The <strong>terminal</strong> (also called shell or command line) is your interface to Linux. Unlike graphical interfaces where you click icons, here you type commands. It might feel awkward at first, but it's far more powerful and precise.</p>
+<p>When you open a terminal, you'll see a <strong>prompt</strong> that looks something like:</p>
+<pre><code>user@hostname:~$
+</code></pre>
+<p>Breaking this down:
+- <code>user</code>: Your username
+- <code>hostname</code>: The computer's name
+- <code>~</code>: Current directory (~ means home directory)
+- <code>$</code>: Regular user (if you see <code>#</code>, you're root)</p>
+<h2 id="navigation-commands">Navigation Commands</h2>
+<h3 id="pwd-print-working-directory">pwd - Print Working Directory</h3>
+<p>Shows where you currently are in the file system.</p>
+<pre><code class="language-bash">pwd
+# Output: /home/user
+</code></pre>
+<h3 id="ls-list-directory-contents">ls - List Directory Contents</h3>
+<p>Shows files and folders in current directory.</p>
+<pre><code class="language-bash"># Basic listing
+ls
+
+# Long format (detailed)
+ls -l
+
+# Show hidden files (start with .)
+ls -a
+
+# Combine flags
+ls -la
+
+# Human-readable file sizes
+ls -lh
+
+# Sort by modification time
+ls -lt
+</code></pre>
+<h3 id="cd-change-directory">cd - Change Directory</h3>
+<p>Move between directories.</p>
+<pre><code class="language-bash"># Go to home directory
+cd
+cd ~
+
+# Go to specific directory
+cd /etc
+
+# Go up one level
+cd ..
+
+# Go up two levels
+cd ../..
+
+# Go to previous directory
+cd -
+
+# Relative path (from current location)
+cd Documents
+
+# Absolute path (from root)
+cd /var/log
+</code></pre>
+<p><strong>Pro tip</strong>: Use Tab for autocomplete. Start typing a directory name and hit Tab.</p>
+<h2 id="file-manipulation">File Manipulation</h2>
+<h3 id="cat-concatenate-and-display-files">cat - Concatenate and Display Files</h3>
+<p>Display file contents.</p>
+<pre><code class="language-bash">cat file.txt
+
+# Display multiple files
+cat file1.txt file2.txt
+
+# Number lines
+cat -n file.txt
+</code></pre>
+<h3 id="less-view-files-page-by-page">less - View Files Page by Page</h3>
+<p>Better for large files.</p>
+<pre><code class="language-bash">less largefile.txt
+# Use arrow keys to scroll
+# Press 'q' to quit
+# Press '/' to search
+# Press 'n' for next search result
+</code></pre>
+<h3 id="head-and-tail-view-file-beginningsends">head and tail - View File Beginnings/Ends</h3>
+<pre><code class="language-bash"># First 10 lines
+head file.txt
+
+# First 20 lines
+head -n 20 file.txt
+
+# Last 10 lines
+tail file.txt
+
+# Last 20 lines
+tail -n 20 file.txt
+
+# Follow file (watch new lines appear)
+tail -f /var/log/syslog
+</code></pre>
+<h3 id="touch-create-empty-files">touch - Create Empty Files</h3>
+<pre><code class="language-bash">touch newfile.txt
+
+# Create multiple files
+touch file1.txt file2.txt file3.txt
+
+# Update timestamp of existing file
+touch existingfile.txt
+</code></pre>
+<h3 id="mkdir-make-directory">mkdir - Make Directory</h3>
+<pre><code class="language-bash">mkdir newfolder
+
+# Create nested directories
+mkdir -p parent/child/grandchild
+
+# Create multiple directories
+mkdir dir1 dir2 dir3
+</code></pre>
+<h3 id="cp-copy-filesdirectories">cp - Copy Files/Directories</h3>
+<pre><code class="language-bash"># Copy file
+cp source.txt destination.txt
+
+# Copy to directory
+cp file.txt /home/user/Documents/
+
+# Copy directory recursively
+cp -r sourcedir/ destdir/
+
+# Copy with verbose output
+cp -v file.txt copy.txt
+
+# Preserve permissions and timestamps
+cp -p file.txt copy.txt
+</code></pre>
+<h3 id="mv-moverename-files">mv - Move/Rename Files</h3>
+<pre><code class="language-bash"># Rename file
+mv oldname.txt newname.txt
+
+# Move file to directory
+mv file.txt /home/user/Documents/
+
+# Move multiple files
+mv file1.txt file2.txt /home/user/Documents/
+
+# Move directory
+mv olddir/ newdir/
+</code></pre>
+<h3 id="rm-remove-filesdirectories">rm - Remove Files/Directories</h3>
+<p><strong>WARNING: No recycle bin in Linux! Deleted = gone forever.</strong></p>
+<pre><code class="language-bash"># Remove file
+rm file.txt
+
+# Remove multiple files
+rm file1.txt file2.txt
+
+# Remove directory and contents
+rm -r directory/
+
+# Force removal (no confirmation)
+rm -f file.txt
+
+# Interactive (ask before each deletion)
+rm -i file.txt
+
+# Remove directory (force and recursive)
+rm -rf directory/
+</code></pre>
+<p><strong>NEVER run</strong>: <code>rm -rf /</code> or <code>rm -rf /*</code> - this deletes everything!</p>
+<h2 id="viewing-and-searching">Viewing and Searching</h2>
+<h3 id="grep-search-text">grep - Search Text</h3>
+<p>Find lines containing specific text.</p>
+<pre><code class="language-bash"># Search for word in file
+grep &quot;password&quot; file.txt
+
+# Case-insensitive search
+grep -i &quot;password&quot; file.txt
+
+# Show line numbers
+grep -n &quot;error&quot; logfile.txt
+
+# Recursive search in directory
+grep -r &quot;TODO&quot; /home/user/code/
+
+# Invert match (show lines NOT containing text)
+grep -v &quot;success&quot; logfile.txt
+
+# Count matches
+grep -c &quot;error&quot; logfile.txt
+</code></pre>
+<h3 id="find-find-files-and-directories">find - Find Files and Directories</h3>
+<pre><code class="language-bash"># Find files by name
+find /home -name &quot;*.txt&quot;
+
+# Find directories
+find /home -type d -name &quot;Documents&quot;
+
+# Find files modified in last 7 days
+find /home -mtime -7
+
+# Find files larger than 100MB
+find /home -size +100M
+
+# Find and delete
+find /tmp -name &quot;*.tmp&quot; -delete
+
+# Find with specific permissions
+find /home -perm 777
+</code></pre>
+<h3 id="locate-quick-file-search">locate - Quick File Search</h3>
+<p>Uses database, faster than find but less current.</p>
+<pre><code class="language-bash"># Update database first
+sudo updatedb
+
+# Find files
+locate password.txt
+
+# Case-insensitive
+locate -i PASSWORD.TXT
+</code></pre>
+<h2 id="file-permissions">File Permissions</h2>
+<p>Every file has permissions for owner, group, and others.</p>
+<h3 id="understanding-permissions">Understanding Permissions</h3>
+<pre><code class="language-bash">ls -l file.txt
+# Output: -rw-r--r-- 1 user group 1234 Jan 1 12:00 file.txt
+</code></pre>
+<p>Breaking down <code>-rw-r--r--</code>:
+- First character: File type (<code>-</code> = file, <code>d</code> = directory, <code>l</code> = link)
+- Next 3: Owner permissions (<code>rw-</code> = read, write, no execute)
+- Next 3: Group permissions (<code>r--</code> = read only)
+- Last 3: Other permissions (<code>r--</code> = read only)</p>
+<p>Permissions in numeric form:
+- <code>r</code> (read) = 4
+- <code>w</code> (write) = 2
+- <code>x</code> (execute) = 1</p>
+<p>So <code>rwx</code> = 4+2+1 = 7, <code>rw-</code> = 4+2 = 6, <code>r--</code> = 4</p>
+<h3 id="chmod-change-permissions">chmod - Change Permissions</h3>
+<pre><code class="language-bash"># Give owner execute permission
+chmod u+x script.sh
+
+# Remove write permission from group
+chmod g-w file.txt
+
+# Set specific permissions (numeric)
+chmod 755 script.sh  # rwxr-xr-x
+chmod 644 file.txt   # rw-r--r--
+
+# Recursive
+chmod -R 755 directory/
+</code></pre>
+<p>Common permission sets:
+- <code>777</code>: Everyone can do everything (usually bad idea)
+- <code>755</code>: Owner full access, others read/execute (typical for directories)
+- <code>644</code>: Owner read/write, others read (typical for files)
+- <code>600</code>: Owner read/write only (private files)</p>
+<h3 id="chown-change-owner">chown - Change Owner</h3>
+<pre><code class="language-bash"># Change owner
+sudo chown newowner file.txt
+
+# Change owner and group
+sudo chown newowner:newgroup file.txt
+
+# Recursive
+sudo chown -R newowner directory/
+</code></pre>
+<h2 id="system-information">System Information</h2>
+<h3 id="whoami-current-user">whoami - Current User</h3>
+<pre><code class="language-bash">whoami
+# Output: user
+</code></pre>
+<h3 id="hostname-computer-name">hostname - Computer Name</h3>
+<pre><code class="language-bash">hostname
+# Output: kali-linux
+</code></pre>
+<h3 id="uname-system-information">uname - System Information</h3>
+<pre><code class="language-bash"># Basic info
+uname
+
+# All information
+uname -a
+
+# Kernel version
+uname -r
+</code></pre>
+<h3 id="df-disk-space">df - Disk Space</h3>
+<pre><code class="language-bash"># Show disk usage
+df
+
+# Human-readable
+df -h
+
+# Specific filesystem
+df -h /home
+</code></pre>
+<h3 id="du-directory-size">du - Directory Size</h3>
+<pre><code class="language-bash"># Size of directory
+du -sh /home/user
+
+# Size of all items in directory
+du -h /home/user
+
+# Show total only
+du -s /home/user
+</code></pre>
+<h3 id="free-memory-usage">free - Memory Usage</h3>
+<pre><code class="language-bash"># Show memory
+free
+
+# Human-readable
+free -h
+</code></pre>
+<h3 id="top-process-monitor">top - Process Monitor</h3>
+<p>Real-time view of running processes.</p>
+<pre><code class="language-bash">top
+# Press 'q' to quit
+# Press 'k' to kill a process
+# Press 'M' to sort by memory
+# Press 'P' to sort by CPU
+</code></pre>
+<p>Better alternative: <code>htop</code> (if installed)</p>
+<pre><code class="language-bash">htop
+</code></pre>
+<h3 id="ps-process-status">ps - Process Status</h3>
+<pre><code class="language-bash"># Current user's processes
+ps
+
+# All processes
+ps aux
+
+# Search for specific process
+ps aux | grep firefox
+</code></pre>
+<h2 id="process-management">Process Management</h2>
+<h3 id="running-commands-in-background">Running Commands in Background</h3>
+<pre><code class="language-bash"># Run in background
+command &amp;
+
+# Example
+python3 script.py &amp;
+</code></pre>
+<h3 id="jobs-list-background-jobs">jobs - List Background Jobs</h3>
+<pre><code class="language-bash">jobs
+</code></pre>
+<h3 id="fg-bring-to-foreground">fg - Bring to Foreground</h3>
+<pre><code class="language-bash"># Bring last job to foreground
+fg
+
+# Bring specific job
+fg %1
+</code></pre>
+<h3 id="kill-terminate-process">kill - Terminate Process</h3>
+<pre><code class="language-bash"># Kill by PID
+kill 1234
+
+# Force kill
+kill -9 1234
+
+# Kill by name
+killall firefox
+</code></pre>
+<h2 id="redirection-and-pipes">Redirection and Pipes</h2>
+<h3 id="output-redirection">Output Redirection</h3>
+<pre><code class="language-bash"># Write to file (overwrite)
+echo &quot;Hello&quot; &gt; file.txt
+
+# Append to file
+echo &quot;World&quot; &gt;&gt; file.txt
+
+# Redirect errors
+command 2&gt; error.log
+
+# Redirect both output and errors
+command &gt; output.log 2&gt;&amp;1
+</code></pre>
+<h3 id="pipes">Pipes</h3>
+<p>Send output of one command as input to another.</p>
+<pre><code class="language-bash"># Count lines
+cat file.txt | wc -l
+
+# Search in output
+ps aux | grep python
+
+# Chain multiple commands
+cat file.txt | grep &quot;error&quot; | wc -l
+
+# Sort and unique
+cat file.txt | sort | uniq
+</code></pre>
+<h2 id="text-processing">Text Processing</h2>
+<h3 id="wc-word-count">wc - Word Count</h3>
+<pre><code class="language-bash"># Count lines, words, characters
+wc file.txt
+
+# Just lines
+wc -l file.txt
+
+# Just words
+wc -w file.txt
+</code></pre>
+<h3 id="sort-sort-lines">sort - Sort Lines</h3>
+<pre><code class="language-bash"># Sort alphabetically
+sort file.txt
+
+# Sort numerically
+sort -n numbers.txt
+
+# Reverse sort
+sort -r file.txt
+
+# Sort and remove duplicates
+sort -u file.txt
+</code></pre>
+<h3 id="uniq-remove-duplicates">uniq - Remove Duplicates</h3>
+<p>Must be sorted first!</p>
+<pre><code class="language-bash"># Remove adjacent duplicates
+sort file.txt | uniq
+
+# Count occurrences
+sort file.txt | uniq -c
+
+# Show only duplicates
+sort file.txt | uniq -d
+</code></pre>
+<h2 id="archives-and-compression">Archives and Compression</h2>
+<h3 id="tar-archive-files">tar - Archive Files</h3>
+<pre><code class="language-bash"># Create archive
+tar -cvf archive.tar directory/
+
+# Extract archive
+tar -xvf archive.tar
+
+# Create compressed archive (gzip)
+tar -czvf archive.tar.gz directory/
+
+# Extract compressed archive
+tar -xzvf archive.tar.gz
+
+# List contents without extracting
+tar -tvf archive.tar
+</code></pre>
+<p>Flags explained:
+- <code>c</code>: create
+- <code>x</code>: extract
+- <code>v</code>: verbose
+- <code>f</code>: file
+- <code>z</code>: gzip compression
+- <code>j</code>: bzip2 compression</p>
+<h3 id="zipunzip-zip-archives">zip/unzip - Zip Archives</h3>
+<pre><code class="language-bash"># Create zip
+zip archive.zip file1 file2
+
+# Create zip of directory
+zip -r archive.zip directory/
+
+# Extract zip
+unzip archive.zip
+
+# List contents
+unzip -l archive.zip
+</code></pre>
+<h2 id="network-commands">Network Commands</h2>
+<h3 id="ping-test-connectivity">ping - Test Connectivity</h3>
+<pre><code class="language-bash"># Ping host
+ping google.com
+
+# Ping 4 times only
+ping -c 4 google.com
+</code></pre>
+<h3 id="wget-download-files">wget - Download Files</h3>
+<pre><code class="language-bash"># Download file
+wget https://example.com/file.txt
+
+# Download with different name
+wget -O newname.txt https://example.com/file.txt
+
+# Download in background
+wget -b https://example.com/largefile.zip
+</code></pre>
+<h3 id="curl-transfer-data">curl - Transfer Data</h3>
+<pre><code class="language-bash"># Download file
+curl -O https://example.com/file.txt
+
+# Save with different name
+curl -o newname.txt https://example.com/file.txt
+
+# Follow redirects
+curl -L https://example.com
+
+# Show headers only
+curl -I https://example.com
+</code></pre>
+<h3 id="ifconfig-ip-network-configuration">ifconfig / ip - Network Configuration</h3>
+<pre><code class="language-bash"># Show network interfaces (older)
+ifconfig
+
+# Show network interfaces (modern)
+ip addr show
+
+# Show routing table
+ip route show
+</code></pre>
+<h2 id="command-tips-and-tricks">Command Tips and Tricks</h2>
+<h3 id="command-history">Command History</h3>
+<pre><code class="language-bash"># Show history
+history
+
+# Run previous command
+!!
+
+# Run command from history
+!123
+
+# Search history
+Ctrl+R (then start typing)
+
+# Clear history
+history -c
+</code></pre>
+<h3 id="tab-completion">Tab Completion</h3>
 <ul>
-<li><strong>Operating System (OS)</strong>: The main software that runs your computer, like Windows, macOS, iOS, GNU/Linux, etc.</li>
-<li><strong>Virtual Machine (VM)</strong>: It's basically a computer <em>inside</em> another computer. You can run your regular OS, like Windows, and still have Kali Linux inside of it</li>
-<li><strong>ISO File (International Organization for Standardization File)</strong>: Sounds fancy, but really it's just a full copy of an OS within one tiny file</li>
-<li><strong>Hypervisor</strong>: Software that creates and manages VMs. Examples are VirtualBox and VMWare Workstation. There's also QEMU, but mostly Linux users use that, and you're likely running on Windows or mac</li>
-<li><strong>Bootable USB</strong>: Just a USB drive (which you hopefully already know about) that can start up a computer and install an OS (we don't need this yet)</li>
-<li><strong>Partitioning</strong>: A more advanced topic, but it's dividing up your drive into sections called <em>partitions</em>, which are like walls for a room. We don't need this yet, but it is good to know</li>
+<li>Press Tab once: Complete if unique</li>
+<li>Press Tab twice: Show all possibilities</li>
 </ul>
-<p>Now, let's get into the nitty-gritty:</p>
-<h2 id="method-1-easy-way">Method 1: Easy way :)</h2>
-<h3 id="minimum-requirements">Minimum Requirements*:</h3>
-<ol>
-<li><code>8 GB</code> of RAM</li>
-<li><code>20-30 GB</code> of free hard drive space</li>
-<li>A decently fast CPU (you probably have this)</li>
-</ol>
-<p>*But, how do I know if I meet them? Well, you can press <em><code>Ctrl+Shift+Esc</code></em> on Windows and click on <strong>"Performance"</strong> inside of Task Manager, and it'll give you a spec (specifications) sheet. On mac, you can click on <strong>"About"</strong> in the top menu bar of your computer. On Linux, you can type <strong><code>uname -a</code></strong>, or use a custom program like <code>fastfetch</code></p>
-<h2 id="big-disclaimer-for-windows-users">BIG DISCLAIMER FOR WINDOWS USERS:</h2>
+<h3 id="keyboard-shortcuts">Keyboard Shortcuts</h3>
 <ul>
-<li>You NEED to DISABLE something called Hyper-V. If you don't know what that is, for Windows users, Hyper-V will conflict with Virtualbox, making it run poorly and crash often</li>
-<li>To check if you hve Hyper-V, press <code>Win+R</code>, and type <code>optionalfeatures</code>, then press <code>Enter</code></li>
-<li>Look for a "Hyper-V" in the list of shown items. If it's checked, then it's enabled. Uncheck it.<ul>
-<li>Alternative method: go to cmd (Command Prompt), and right click and "Run as Administrator". Then use the following command: <code>bcdedit /set hypervisorlaunchtype off</code></li>
+<li><code>Ctrl+C</code>: Cancel current command</li>
+<li><code>Ctrl+Z</code>: Suspend current command</li>
+<li><code>Ctrl+D</code>: Exit terminal / End of input</li>
+<li><code>Ctrl+L</code>: Clear screen (same as <code>clear</code>)</li>
+<li><code>Ctrl+A</code>: Move to beginning of line</li>
+<li><code>Ctrl+E</code>: Move to end of line</li>
+<li><code>Ctrl+U</code>: Delete from cursor to beginning</li>
+<li><code>Ctrl+K</code>: Delete from cursor to end</li>
 </ul>
-</li>
-<li>Finally, restart your computer</li>
-</ul>
-<h2 id="big-disclaimer-for-macos-users">BIG DISCLAIMER FOR MACOS USERS:</h2>
-<ul>
-<li>You need to check if you're using an Intel-based Mac or Apple Silicon machine. If your device is M1, M2, M*, then it's <strong>Apple Silicon</strong></li>
-<li>If this is the case, you will need to use a different software for virtualization. You have some options, like <a href="https://getutm.app">UTM</a> or <a href="https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion">VMware Fusion</a>. </li>
-<li>Also, you will have to install Kali Linux using the 
-<em><strong>ARM64 version! Not x86-64!</strong></em></li>
-</ul>
-<hr />
-<p>Now, go to <a href="https://virtualbox.org">virtualbox.org</a></p>
-<p>Click on the download for your OS, and install the program by following the instruction wizard.</p>
-<p><img alt="Virtual Box" src="../../../img/virtual_box.png" /></p>
-<ul>
-<li>Now, go to the <a href="https://kali.org/get-kali">Kali Linux website</a>.</li>
-<li>Download the "Installer" ISO file (<code>~ 4 GB</code> in size)</li>
-<li>Then choose the 64-bit version for modern computers.</li>
-<li>If your computer is old, it could be 32-bit. If so, you may need to check your system specifications as explained above. However, it probably isn't.</li>
-</ul>
-<p><img alt="Kali Installation" src="../../../img/kali_img.png" /></p>
-<blockquote>
-<p>Remember, Apple Silicon machines will install the ARM64 version of Kali Linux instead!</p>
-</blockquote>
-<ul>
-<li>Finally, make your Virtual Machine. Open up VirtualBox and click "New"</li>
-<li>Name it whatever, I'd call it "Kali Linux", or "Kali Machine".</li>
-<li>Type: Linux, Version: Debian (64-bit)</li>
-<li>Allocate at least <code>4 GB</code> of RAM, AKA <code>4096 MB</code>, by dragging the slider or typing in the number in the RAM text box</li>
-<li>Create a Virtual Hrd Disk (allocate <code>25-30 GB</code> minimum)<ul>
-<li>Choose VDI (VirtualBox Disk Image)</li>
-<li>Also select "dynamically allocated" to save space, and allows the VM to grow dynamically in storage size as you begin to add more things</li>
-</ul>
-</li>
-<li>After clicking done, tell it to create, but do NOT tell it to also start yet</li>
-<li>Click on your virtual machine, and then go to settings</li>
-<li>Then go to Storage, and click the empty disk icon</li>
-<li>This is where we "choose a disk file", and select the downloaded Kali ISO</li>
-<li>Then under System, enable PAE/NX if available to you. PAE is Physical Address Extension, and NX is No Execute. These allow for &gt; <code>4 GB</code> of RAM access and prevents non-executable code from being executed in memory segments. If you don't know what that means, just ignore this</li>
-<li>Under Display, increase video memory to <code>128 MB</code></li>
-<li>Finally, save and exit Settings, and click on Start to boot your VM</li>
-<li>Select "Graphical Install" (press Enter, navigate using arrow keys)</li>
-<li>Choose your language, location, keyboard (these can later be changed, doesn't really matter)</li>
-<li>You can set a hostname, or keep the default (kali)</li>
-</ul>
-<h3 id="important-username-is-kali-and-password-is-kali-by-default"><strong>IMPORTANT</strong>: username is <em>kali</em> and password is <em>kali</em> by default!</h3>
-<ul>
-<li>Choose "Guided - use entire disk" for your partitioning</li>
-<li>Then select "All files in one partition"</li>
-<li>Confirm and wait a while. Take a walk outside, take a short nap, whatever you want. Just wait 10-20 minutes and it'll be done</li>
-<li>Restart when prompted</li>
-<li>On first login, enter the username and password</li>
-<li>Then, click the <code>SUPER</code> key (<code>Win</code> key or <code>Cmd</code> key on mac) and type "terminal" or "console" into the search, and open the app</li>
-<li>In the terminal, you can type <code>sudo apt update &amp;&amp; sudo apt upgrade -y</code><ul>
-<li>This command just updates your system</li>
-<li>When prompted with a password, type in your password</li>
-</ul>
-</li>
-<li>Happy Linux!</li>
-</ul>
-<h2 id="method-2-hard-way-bare-metal-installation">Method 2: Hard way (bare metal installation)</h2>
-<p>Alright. You're ready for the real deal. No problem. </p>
-<p><code>WARNING! ⚠️⚠️</code>: This version of installation WILL take space on your disk! This means it will be physically installed, and it will NOT be installed as a VM! Just like Windows or macOS, it will be physically on your device. If you do this incorrectly, it may <strong>wipe your device completely</strong>. I'm not liable for if you mistakenly wipe your drive, it's up to you. Also, I personally do <strong>not recommend you install Kali Linux on a physical drive</strong>. If you want to use Linux for extra practice, install a distribution like <a href="https://www.debian.org/">Debian</a> or <a href="https://linuxmint.com/">Linux Mint</a>. You are risking data loss if done incorrectly, so proceed at your own risk.</p>
-<p>Important things to note are:</p>
-<ul>
-<li>If you install on bare metal, AKA on your physical device, your device may have incompatibility issues. I would recommend doing your own research before doing so</li>
-<li>You may want to install Linux on a secondary drive, since if you use your main one, you will have to create a special partition for Linux to use exclusively, which is more difficult</li>
-<li>You'll need a USB drive with preferably <code>8 GB</code> or more of storage</li>
-<li>You may need to adjust your BIOS (manufacturer specific, meaning it depends on what company made your computer and maybe even where you bought it from) to allow for other bootable devices, which can include removing Secure Boot</li>
-<li>There's some specifics for ARM64 machines like Apple Silicon that will be different!</li>
-<li>Overall, you are likely going to have to do your OWN research to make sure you don't mess anything up.</li>
-</ul>
-<p>Without further ado, these are some general instructions (not perfect):</p>
-<ol>
-<li>Create a bootable USB drive using an app like Balena Etcher or Rufus</li>
-<li>Make space on your hard drive by creating a disk partition of ~<code>30 GB</code> or more, or install on a secondary hard drive</li>
-<li>Boot from the USB drive from BIOS after restarting your computer and smashing the BIOS key as it boots up (typically <code>Esc</code>, <code>F11</code>, <code>F12</code>, or <code>Del</code> depending on the manufacturer)</li>
-<li>Follow the installation process, but make sure you select the right drive and if it's on the same disk as Windows or Mac, you install "alongside" it, not replace </li>
-<li>After going through the setup, you may re-enter the BIOS to change the boot order. What this means is move Linux above Windows so that on first boot you boot into Linux (optional)</li>
-</ol>
-<p>Some important extras:</p>
-<ul>
-<li>Make sure you regularly update your system at least weekly</li>
-<li>Make decent credentials or use a <a href="https://www.yubico.com/">physical key</a></li>
-<li>Never just copy/paste a command without understanding it, look it up at least (even from me!)</li>
-<li>Install packages wisely and preferably from trusted sources</li>
-</ul>
-<p>Happy Linux! :)</p>
+<h3 id="getting-help">Getting Help</h3>
+<pre><code class="language-bash"># Manual pages
+man command
+
+# Example
+man ls
+
+# Quick help
+command --help
+
+# Example
+ls --help
+</code></pre>
+<h2 id="practical-examples">Practical Examples</h2>
+<h3 id="find-all-txt-files-in-home-directory">Find all .txt files in home directory</h3>
+<pre><code class="language-bash">find ~ -name &quot;*.txt&quot;
+</code></pre>
+<h3 id="search-for-password-in-all-files">Search for "password" in all files</h3>
+<pre><code class="language-bash">grep -r &quot;password&quot; /home/user/
+</code></pre>
+<h3 id="find-largest-files-in-directory">Find largest files in directory</h3>
+<pre><code class="language-bash">du -ah /home/user | sort -rh | head -10
+</code></pre>
+<h3 id="count-how-many-times-ip-appears-in-log">Count how many times IP appears in log</h3>
+<pre><code class="language-bash">grep &quot;192.168.1.100&quot; /var/log/apache2/access.log | wc -l
+</code></pre>
+<h3 id="find-all-running-python-processes">Find all running Python processes</h3>
+<pre><code class="language-bash">ps aux | grep python
+</code></pre>
+<h3 id="monitor-log-file-in-real-time">Monitor log file in real-time</h3>
+<pre><code class="language-bash">tail -f /var/log/syslog
+</code></pre>
+<h3 id="create-directory-structure">Create directory structure</h3>
+<pre><code class="language-bash">mkdir -p project/{src,docs,tests}
+</code></pre>
+<h2 id="next-steps">Next Steps</h2>
+<p>Practice these commands! The only way to get comfortable is repetition. Try:
+1. Navigate your file system using only terminal
+2. Create, move, and delete files
+3. Search for specific content in files
+4. Monitor system processes
+5. Combine commands with pipes</p>
+<p>In the next lesson, we'll cover more advanced Linux topics including package management, user administration, and system services.</p>
+<p>Remember: Google is your friend. If you forget a command or need to know options, search for it or use <code>man</code>. Every security professional regularly looks up commands—it's not about memorization, it's about knowing what's possible and where to find information.</p>
         
 
         <!-- Lesson Navigation (only show on non-homepage pages) -->
         
         <div class="lesson-nav">
             
-            <a href="../lesson1-6/" class="lesson-nav-button">
+            <a href="../lesson1-4/" class="lesson-nav-button">
                 <span class="arrow">←</span>
-                <span>Previous: Lesson 1.6</span>
+                <span>Previous: Lesson 1.4</span>
             </a>
             
 
             <div class="lesson-nav-info">
                 <div class="current-lesson">Current Lesson</div>
-                <div class="lesson-title">Linux Installation Process</div>
+                <div class="lesson-title">Lesson 1.5</div>
             </div>
 
             
-            <a href="../../unit2/lesson2-1/" class="lesson-nav-button">
-                <span>Next: Lesson 2.1</span>
+            <a href="../lesson1-6/" class="lesson-nav-button">
+                <span>Next: Lesson 1.6</span>
                 <span class="arrow">→</span>
             </a>
             
@@ -1182,7 +1641,7 @@
                                 
                                 {
                                     title: "Lesson 1.5",
-                                    url: '../lesson1-5/',
+                                    url: './',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
@@ -1194,7 +1653,7 @@
                                 
                                 {
                                     title: "Linux Installation Process",
-                                    url: './',
+                                    url: '../installation-process/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 

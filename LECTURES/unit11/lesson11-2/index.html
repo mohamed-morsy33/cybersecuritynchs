@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linux Installation Process - NCHS Cybersecurity</title>
+    <title>Lesson 11.2 - NCHS Cybersecurity</title>
     
     
     <link rel="icon" href="../../../img/logo.png">
@@ -698,31 +698,31 @@
                                         <ul class="unit-lessons">
                                             
                                             <li>
-                                                <a href="../lesson1-1/">Lesson 1.1</a>
+                                                <a href="../../unit1/lesson1-1/">Lesson 1.1</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-2/">Lesson 1.2</a>
+                                                <a href="../../unit1/lesson1-2/">Lesson 1.2</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-3/">Lesson 1.3</a>
+                                                <a href="../../unit1/lesson1-3/">Lesson 1.3</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-4/">Lesson 1.4</a>
+                                                <a href="../../unit1/lesson1-4/">Lesson 1.4</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-5/">Lesson 1.5</a>
+                                                <a href="../../unit1/lesson1-5/">Lesson 1.5</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-6/">Lesson 1.6</a>
+                                                <a href="../../unit1/lesson1-6/">Lesson 1.6</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="./">Linux Installation Process</a>
+                                                <a href="../../unit1/installation-process/">Linux Installation Process</a>
                                             </li>
                                             
                                         </ul>
@@ -920,15 +920,15 @@
                                         <ul class="unit-lessons">
                                             
                                             <li>
-                                                <a href="../../unit11/lesson11-1/">Lesson 11.1</a>
+                                                <a href="../lesson11-1/">Lesson 11.1</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../../unit11/lesson11-2/">Lesson 11.2</a>
+                                                <a href="./">Lesson 11.2</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../../unit11/lesson11-3/">Lesson 11.3</a>
+                                                <a href="../lesson11-3/">Lesson 11.3</a>
                                             </li>
                                             
                                         </ul>
@@ -964,142 +964,582 @@
 
     <div class="container">
         
-        <h2 id="what-is-it"><em>What</em> is it?</h2>
-<p>Kali is an operating system that was made <strong><em>specially</em></strong> for cybersecurity work (and hacking as well). It has a large toolkit of useful programs that we're going to learn about, including Hydra, Nmap, Wireshark, Tcpdump, MacChanger, Chisel, Aircrack-ng, etc.</p>
-<h2 id="some-vocab">Some Vocab:</h2>
-<p>As much as we know vocabulary might not be that interesting, it's important to know for the future, since there's a LOT of acronyms and words in cybersecurity that you're going to be hearing and using, so it's best to get used to it.</p>
-<ul>
-<li><strong>Operating System (OS)</strong>: The main software that runs your computer, like Windows, macOS, iOS, GNU/Linux, etc.</li>
-<li><strong>Virtual Machine (VM)</strong>: It's basically a computer <em>inside</em> another computer. You can run your regular OS, like Windows, and still have Kali Linux inside of it</li>
-<li><strong>ISO File (International Organization for Standardization File)</strong>: Sounds fancy, but really it's just a full copy of an OS within one tiny file</li>
-<li><strong>Hypervisor</strong>: Software that creates and manages VMs. Examples are VirtualBox and VMWare Workstation. There's also QEMU, but mostly Linux users use that, and you're likely running on Windows or mac</li>
-<li><strong>Bootable USB</strong>: Just a USB drive (which you hopefully already know about) that can start up a computer and install an OS (we don't need this yet)</li>
-<li><strong>Partitioning</strong>: A more advanced topic, but it's dividing up your drive into sections called <em>partitions</em>, which are like walls for a room. We don't need this yet, but it is good to know</li>
-</ul>
-<p>Now, let's get into the nitty-gritty:</p>
-<h2 id="method-1-easy-way">Method 1: Easy way :)</h2>
-<h3 id="minimum-requirements">Minimum Requirements*:</h3>
-<ol>
-<li><code>8 GB</code> of RAM</li>
-<li><code>20-30 GB</code> of free hard drive space</li>
-<li>A decently fast CPU (you probably have this)</li>
-</ol>
-<p>*But, how do I know if I meet them? Well, you can press <em><code>Ctrl+Shift+Esc</code></em> on Windows and click on <strong>"Performance"</strong> inside of Task Manager, and it'll give you a spec (specifications) sheet. On mac, you can click on <strong>"About"</strong> in the top menu bar of your computer. On Linux, you can type <strong><code>uname -a</code></strong>, or use a custom program like <code>fastfetch</code></p>
-<h2 id="big-disclaimer-for-windows-users">BIG DISCLAIMER FOR WINDOWS USERS:</h2>
-<ul>
-<li>You NEED to DISABLE something called Hyper-V. If you don't know what that is, for Windows users, Hyper-V will conflict with Virtualbox, making it run poorly and crash often</li>
-<li>To check if you hve Hyper-V, press <code>Win+R</code>, and type <code>optionalfeatures</code>, then press <code>Enter</code></li>
-<li>Look for a "Hyper-V" in the list of shown items. If it's checked, then it's enabled. Uncheck it.<ul>
-<li>Alternative method: go to cmd (Command Prompt), and right click and "Run as Administrator". Then use the following command: <code>bcdedit /set hypervisorlaunchtype off</code></li>
-</ul>
-</li>
-<li>Finally, restart your computer</li>
-</ul>
-<h2 id="big-disclaimer-for-macos-users">BIG DISCLAIMER FOR MACOS USERS:</h2>
-<ul>
-<li>You need to check if you're using an Intel-based Mac or Apple Silicon machine. If your device is M1, M2, M*, then it's <strong>Apple Silicon</strong></li>
-<li>If this is the case, you will need to use a different software for virtualization. You have some options, like <a href="https://getutm.app">UTM</a> or <a href="https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion">VMware Fusion</a>. </li>
-<li>Also, you will have to install Kali Linux using the 
-<em><strong>ARM64 version! Not x86-64!</strong></em></li>
-</ul>
-<hr />
-<p>Now, go to <a href="https://virtualbox.org">virtualbox.org</a></p>
-<p>Click on the download for your OS, and install the program by following the instruction wizard.</p>
-<p><img alt="Virtual Box" src="../../../img/virtual_box.png" /></p>
-<ul>
-<li>Now, go to the <a href="https://kali.org/get-kali">Kali Linux website</a>.</li>
-<li>Download the "Installer" ISO file (<code>~ 4 GB</code> in size)</li>
-<li>Then choose the 64-bit version for modern computers.</li>
-<li>If your computer is old, it could be 32-bit. If so, you may need to check your system specifications as explained above. However, it probably isn't.</li>
-</ul>
-<p><img alt="Kali Installation" src="../../../img/kali_img.png" /></p>
-<blockquote>
-<p>Remember, Apple Silicon machines will install the ARM64 version of Kali Linux instead!</p>
-</blockquote>
-<ul>
-<li>Finally, make your Virtual Machine. Open up VirtualBox and click "New"</li>
-<li>Name it whatever, I'd call it "Kali Linux", or "Kali Machine".</li>
-<li>Type: Linux, Version: Debian (64-bit)</li>
-<li>Allocate at least <code>4 GB</code> of RAM, AKA <code>4096 MB</code>, by dragging the slider or typing in the number in the RAM text box</li>
-<li>Create a Virtual Hrd Disk (allocate <code>25-30 GB</code> minimum)<ul>
-<li>Choose VDI (VirtualBox Disk Image)</li>
-<li>Also select "dynamically allocated" to save space, and allows the VM to grow dynamically in storage size as you begin to add more things</li>
-</ul>
-</li>
-<li>After clicking done, tell it to create, but do NOT tell it to also start yet</li>
-<li>Click on your virtual machine, and then go to settings</li>
-<li>Then go to Storage, and click the empty disk icon</li>
-<li>This is where we "choose a disk file", and select the downloaded Kali ISO</li>
-<li>Then under System, enable PAE/NX if available to you. PAE is Physical Address Extension, and NX is No Execute. These allow for &gt; <code>4 GB</code> of RAM access and prevents non-executable code from being executed in memory segments. If you don't know what that means, just ignore this</li>
-<li>Under Display, increase video memory to <code>128 MB</code></li>
-<li>Finally, save and exit Settings, and click on Start to boot your VM</li>
-<li>Select "Graphical Install" (press Enter, navigate using arrow keys)</li>
-<li>Choose your language, location, keyboard (these can later be changed, doesn't really matter)</li>
-<li>You can set a hostname, or keep the default (kali)</li>
-</ul>
-<h3 id="important-username-is-kali-and-password-is-kali-by-default"><strong>IMPORTANT</strong>: username is <em>kali</em> and password is <em>kali</em> by default!</h3>
-<ul>
-<li>Choose "Guided - use entire disk" for your partitioning</li>
-<li>Then select "All files in one partition"</li>
-<li>Confirm and wait a while. Take a walk outside, take a short nap, whatever you want. Just wait 10-20 minutes and it'll be done</li>
-<li>Restart when prompted</li>
-<li>On first login, enter the username and password</li>
-<li>Then, click the <code>SUPER</code> key (<code>Win</code> key or <code>Cmd</code> key on mac) and type "terminal" or "console" into the search, and open the app</li>
-<li>In the terminal, you can type <code>sudo apt update &amp;&amp; sudo apt upgrade -y</code><ul>
-<li>This command just updates your system</li>
-<li>When prompted with a password, type in your password</li>
-</ul>
-</li>
-<li>Happy Linux!</li>
-</ul>
-<h2 id="method-2-hard-way-bare-metal-installation">Method 2: Hard way (bare metal installation)</h2>
-<p>Alright. You're ready for the real deal. No problem. </p>
-<p><code>WARNING! ⚠️⚠️</code>: This version of installation WILL take space on your disk! This means it will be physically installed, and it will NOT be installed as a VM! Just like Windows or macOS, it will be physically on your device. If you do this incorrectly, it may <strong>wipe your device completely</strong>. I'm not liable for if you mistakenly wipe your drive, it's up to you. Also, I personally do <strong>not recommend you install Kali Linux on a physical drive</strong>. If you want to use Linux for extra practice, install a distribution like <a href="https://www.debian.org/">Debian</a> or <a href="https://linuxmint.com/">Linux Mint</a>. You are risking data loss if done incorrectly, so proceed at your own risk.</p>
-<p>Important things to note are:</p>
-<ul>
-<li>If you install on bare metal, AKA on your physical device, your device may have incompatibility issues. I would recommend doing your own research before doing so</li>
-<li>You may want to install Linux on a secondary drive, since if you use your main one, you will have to create a special partition for Linux to use exclusively, which is more difficult</li>
-<li>You'll need a USB drive with preferably <code>8 GB</code> or more of storage</li>
-<li>You may need to adjust your BIOS (manufacturer specific, meaning it depends on what company made your computer and maybe even where you bought it from) to allow for other bootable devices, which can include removing Secure Boot</li>
-<li>There's some specifics for ARM64 machines like Apple Silicon that will be different!</li>
-<li>Overall, you are likely going to have to do your OWN research to make sure you don't mess anything up.</li>
-</ul>
-<p>Without further ado, these are some general instructions (not perfect):</p>
-<ol>
-<li>Create a bootable USB drive using an app like Balena Etcher or Rufus</li>
-<li>Make space on your hard drive by creating a disk partition of ~<code>30 GB</code> or more, or install on a secondary hard drive</li>
-<li>Boot from the USB drive from BIOS after restarting your computer and smashing the BIOS key as it boots up (typically <code>Esc</code>, <code>F11</code>, <code>F12</code>, or <code>Del</code> depending on the manufacturer)</li>
-<li>Follow the installation process, but make sure you select the right drive and if it's on the same disk as Windows or Mac, you install "alongside" it, not replace </li>
-<li>After going through the setup, you may re-enter the BIOS to change the boot order. What this means is move Linux above Windows so that on first boot you boot into Linux (optional)</li>
-</ol>
-<p>Some important extras:</p>
-<ul>
-<li>Make sure you regularly update your system at least weekly</li>
-<li>Make decent credentials or use a <a href="https://www.yubico.com/">physical key</a></li>
-<li>Never just copy/paste a command without understanding it, look it up at least (even from me!)</li>
-<li>Install packages wisely and preferably from trusted sources</li>
-</ul>
-<p>Happy Linux! :)</p>
+        <h1 id="vpn-technologies-and-implementation">VPN Technologies and Implementation</h1>
+<p>Virtual Private Networks (VPNs) create secure tunnels over untrusted networks. This lesson covers VPN protocols, architectures, and practical implementation for both site-to-site and remote access scenarios.</p>
+<h2 id="vpn-fundamentals">VPN Fundamentals</h2>
+<h3 id="what-vpns-provide">What VPNs Provide</h3>
+<p><strong>Security services:</strong>
+- <strong>Confidentiality</strong> - Encryption protects data in transit
+- <strong>Integrity</strong> - Detects tampering
+- <strong>Authentication</strong> - Verifies identity of endpoints
+- <strong>Access Control</strong> - Restricts who can connect</p>
+<p><strong>Use cases:</strong>
+- Remote worker access
+- Site-to-site connectivity
+- Privacy protection
+- Bypass geo-restrictions
+- Secure public Wi-Fi usage</p>
+<h3 id="vpn-types">VPN Types</h3>
+<p><strong>Remote Access VPN:</strong>
+- Individual user connects to corporate network
+- Client software on user device
+- Examples: OpenVPN, WireGuard, Cisco AnyConnect</p>
+<p><strong>Site-to-Site VPN:</strong>
+- Connect entire networks together
+- Router-to-router connection
+- Transparent to end users
+- Examples: IPsec tunnels</p>
+<p><strong>SSL/TLS VPN:</strong>
+- Browser-based access
+- No client software needed
+- Limited functionality
+- Examples: Cisco SSL VPN, Fortinet</p>
+<h2 id="ipsec-vpn">IPsec VPN</h2>
+<h3 id="ipsec-components">IPsec Components</h3>
+<p><strong>Security Associations (SA):</strong>
+- Defines security parameters
+- One-way (need two for bidirectional)
+- Identified by SPI (Security Parameter Index)</p>
+<p><strong>Protocols:</strong></p>
+<p><strong>AH (Authentication Header):</strong>
+- Provides authentication and integrity
+- No encryption
+- Protects IP header
+- Rarely used alone</p>
+<p><strong>ESP (Encapsulating Security Payload):</strong>
+- Provides encryption, authentication, integrity
+- Most common
+- Doesn't protect outer IP header</p>
+<p><strong>Modes:</strong></p>
+<p><strong>Transport Mode:</strong>
+- Encrypts only payload
+- Original IP header preserved
+- Used for end-to-end communication
+- More efficient</p>
+<p><strong>Tunnel Mode:</strong>
+- Encrypts entire IP packet
+- New IP header added
+- Used for site-to-site VPNs
+- More secure</p>
+<h3 id="ipsec-configuration">IPsec Configuration</h3>
+<p><strong>Phase 1 (IKE Phase 1) - ISAKMP SA:</strong></p>
+<p>Establishes secure channel for negotiation.</p>
+<p><strong>Main Mode (6 messages):</strong></p>
+<pre><code>Initiator → Responder: SA proposal
+Responder → Initiator: SA acceptance
+Initiator → Responder: Key exchange
+Responder → Initiator: Key exchange
+Initiator → Responder: Authentication
+Responder → Initiator: Authentication
+</code></pre>
+<p><strong>Aggressive Mode (3 messages):</strong>
+- Faster but less secure
+- Identity sent in clear
+- Used when IP address changes</p>
+<p><strong>Phase 1 parameters:</strong>
+- Encryption: AES-256, AES-128, 3DES
+- Hash: SHA-256, SHA-1, MD5
+- Authentication: Pre-shared key, certificates
+- DH Group: 2, 5, 14, 15, 16, 19, 20
+- Lifetime: 86400 seconds (24 hours)</p>
+<p><strong>Phase 2 (IKE Phase 2) - IPsec SA:</strong></p>
+<p>Negotiates parameters for actual data encryption.</p>
+<p><strong>Quick Mode:</strong>
+- Uses Phase 1 channel
+- Negotiates IPsec parameters
+- Can create multiple Phase 2 SAs</p>
+<p><strong>Phase 2 parameters:</strong>
+- Protocol: ESP or AH
+- Encryption: AES-256, AES-128
+- Authentication: SHA-256, SHA-1
+- PFS (Perfect Forward Secrecy): DH group
+- Lifetime: 3600 seconds (1 hour)</p>
+<h3 id="strongswan-ipsec-configuration">StrongSwan IPsec Configuration</h3>
+<p><strong>Install StrongSwan:</strong></p>
+<pre><code class="language-bash">sudo apt update
+sudo apt install strongswan strongswan-pki
+</code></pre>
+<p><strong>Generate certificates:</strong></p>
+<pre><code class="language-bash"># Generate CA key
+ipsec pki --gen --type rsa --size 4096 --outform pem &gt; ca.key.pem
+
+# Generate CA certificate
+ipsec pki --self --ca --lifetime 3650 \
+  --in ca.key.pem --type rsa \
+  --dn &quot;CN=VPN CA&quot; \
+  --outform pem &gt; ca.cert.pem
+
+# Generate server key
+ipsec pki --gen --type rsa --size 4096 --outform pem &gt; server.key.pem
+
+# Generate server certificate
+ipsec pki --pub --in server.key.pem --type rsa | \
+  ipsec pki --issue --lifetime 1825 \
+  --cacert ca.cert.pem --cakey ca.key.pem \
+  --dn &quot;CN=vpn.example.com&quot; --san vpn.example.com \
+  --flag serverAuth --flag ikeIntermediate \
+  --outform pem &gt; server.cert.pem
+
+# Copy to system
+sudo cp ca.cert.pem /etc/ipsec.d/cacerts/
+sudo cp server.cert.pem /etc/ipsec.d/certs/
+sudo cp server.key.pem /etc/ipsec.d/private/
+</code></pre>
+<p><strong>Configure /etc/ipsec.conf:</strong></p>
+<pre><code>config setup
+    charondebug=&quot;ike 2, knl 2, cfg 2, net 2, esp 2, dmn 2, mgr 2&quot;
+    strictcrlpolicy=no
+    uniqueids=yes
+
+conn ikev2-vpn
+    auto=add
+    compress=no
+    type=tunnel
+    keyexchange=ikev2
+    fragmentation=yes
+    forceencaps=yes
+
+    # IKE Phase 1
+    ike=aes256-sha256-modp2048,aes256-sha1-modp2048!
+
+    # IKE Phase 2
+    esp=aes256-sha256,aes256-sha1!
+
+    # Dead Peer Detection
+    dpdaction=clear
+    dpddelay=300s
+    dpdtimeout=600s
+
+    # Server side
+    left=%any
+    leftid=@vpn.example.com
+    leftcert=server.cert.pem
+    leftsendcert=always
+    leftsubnet=0.0.0.0/0
+
+    # Client side
+    right=%any
+    rightid=%any
+    rightauth=eap-mschapv2
+    rightsourceip=10.10.10.0/24
+    rightdns=8.8.8.8,8.8.4.4
+    rightsendcert=never
+
+    # Automatic key renegotiation
+    rekey=yes
+    ikelifetime=24h
+    lifetime=8h
+</code></pre>
+<p><strong>Configure /etc/ipsec.secrets:</strong></p>
+<pre><code>: RSA server.key.pem
+username : EAP &quot;password&quot;
+</code></pre>
+<p><strong>Enable IP forwarding:</strong></p>
+<pre><code class="language-bash">echo &quot;net.ipv4.ip_forward=1&quot; | sudo tee -a /etc/sysctl.conf
+sudo sysctl -p
+</code></pre>
+<p><strong>Configure firewall:</strong></p>
+<pre><code class="language-bash"># Allow IPsec
+sudo ufw allow 500/udp
+sudo ufw allow 4500/udp
+
+# NAT for VPN clients
+sudo iptables -t nat -A POSTROUTING -s 10.10.10.0/24 -o eth0 -j MASQUERADE
+sudo iptables -A FORWARD -s 10.10.10.0/24 -j ACCEPT
+sudo iptables -A FORWARD -d 10.10.10.0/24 -j ACCEPT
+</code></pre>
+<p><strong>Start service:</strong></p>
+<pre><code class="language-bash">sudo systemctl restart strongswan-starter
+sudo systemctl enable strongswan-starter
+</code></pre>
+<h2 id="openvpn">OpenVPN</h2>
+<h3 id="openvpn-architecture">OpenVPN Architecture</h3>
+<p><strong>Advantages:</strong>
+- Works over TCP or UDP
+- Highly configurable
+- Strong encryption
+- Cross-platform
+- Can traverse NAT easily</p>
+<p><strong>Disadvantages:</strong>
+- Slower than WireGuard
+- More complex configuration
+- Larger codebase</p>
+<h3 id="openvpn-server-setup">OpenVPN Server Setup</h3>
+<p><strong>Install OpenVPN:</strong></p>
+<pre><code class="language-bash">sudo apt update
+sudo apt install openvpn easy-rsa
+</code></pre>
+<p><strong>Set up PKI:</strong></p>
+<pre><code class="language-bash"># Copy easy-rsa
+make-cadir ~/openvpn-ca
+cd ~/openvpn-ca
+
+# Edit vars file
+nano vars
+# Set KEY_COUNTRY, KEY_PROVINCE, KEY_CITY, KEY_ORG, KEY_EMAIL
+
+# Source vars
+source vars
+
+# Clean and build CA
+./clean-all
+./build-ca
+
+# Generate server certificate
+./build-key-server server
+
+# Generate Diffie-Hellman parameters
+./build-dh
+
+# Generate HMAC signature
+openvpn --genkey --secret keys/ta.key
+
+# Copy keys to OpenVPN directory
+sudo cp keys/{ca.crt,server.crt,server.key,dh2048.pem,ta.key} /etc/openvpn/
+</code></pre>
+<p><strong>Configure /etc/openvpn/server.conf:</strong></p>
+<pre><code># Network settings
+port 1194
+proto udp
+dev tun
+
+# Certificates and keys
+ca ca.crt
+cert server.crt
+key server.key
+dh dh2048.pem
+
+# Network topology
+server 10.8.0.0 255.255.255.0
+topology subnet
+
+# Push routes to clients
+push &quot;redirect-gateway def1 bypass-dhcp&quot;
+push &quot;dhcp-option DNS 8.8.8.8&quot;
+push &quot;dhcp-option DNS 8.8.4.4&quot;
+
+# Client configuration
+client-to-client
+keepalive 10 120
+cipher AES-256-GCM
+auth SHA256
+
+# TLS security
+tls-auth ta.key 0
+tls-version-min 1.2
+
+# Privileges
+user nobody
+group nogroup
+
+# Persistence
+persist-key
+persist-tun
+
+# Logging
+status /var/log/openvpn-status.log
+log-append /var/log/openvpn.log
+verb 3
+
+# Optional: compression
+comp-lzo
+</code></pre>
+<p><strong>Enable IP forwarding and NAT:</strong></p>
+<pre><code class="language-bash"># Enable forwarding
+sudo sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/' /etc/sysctl.conf
+sudo sysctl -p
+
+# Configure firewall
+sudo ufw allow 1194/udp
+sudo ufw allow OpenSSH
+
+# NAT for VPN clients
+sudo iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE
+</code></pre>
+<p><strong>Start OpenVPN:</strong></p>
+<pre><code class="language-bash">sudo systemctl start openvpn@server
+sudo systemctl enable openvpn@server
+</code></pre>
+<h3 id="openvpn-client-configuration">OpenVPN Client Configuration</h3>
+<p><strong>Generate client certificate:</strong></p>
+<pre><code class="language-bash">cd ~/openvpn-ca
+source vars
+./build-key client1
+</code></pre>
+<p><strong>Create client config file (client1.ovpn):</strong></p>
+<pre><code>client
+dev tun
+proto udp
+remote vpn.example.com 1194
+
+resolv-retry infinite
+nobind
+
+user nobody
+group nogroup
+
+persist-key
+persist-tun
+
+remote-cert-tls server
+cipher AES-256-GCM
+auth SHA256
+
+comp-lzo
+
+verb 3
+
+# Inline certificates
+&lt;ca&gt;
+[paste contents of ca.crt]
+&lt;/ca&gt;
+
+&lt;cert&gt;
+[paste contents of client1.crt]
+&lt;/cert&gt;
+
+&lt;key&gt;
+[paste contents of client1.key]
+&lt;/key&gt;
+
+&lt;tls-auth&gt;
+[paste contents of ta.key]
+&lt;/tls-auth&gt;
+key-direction 1
+</code></pre>
+<p><strong>Connect client:</strong></p>
+<pre><code class="language-bash">sudo openvpn --config client1.ovpn
+</code></pre>
+<h2 id="wireguard">WireGuard</h2>
+<h3 id="wireguard-advantages">WireGuard Advantages</h3>
+<p><strong>Why WireGuard is gaining popularity:</strong>
+- Extremely fast (faster than IPsec and OpenVPN)
+- Simple configuration
+- Modern cryptography (no cipher negotiation)
+- Small codebase (~4,000 lines vs OpenVPN's 100,000+)
+- Built into Linux kernel (5.6+)
+- Cross-platform</p>
+<p><strong>Cryptography:</strong>
+- ChaCha20 for encryption
+- Poly1305 for authentication
+- Curve25519 for key exchange
+- BLAKE2s for hashing
+- No cipher negotiation - uses best practices only</p>
+<h3 id="wireguard-server-setup">WireGuard Server Setup</h3>
+<p><strong>Install WireGuard:</strong></p>
+<pre><code class="language-bash">sudo apt update
+sudo apt install wireguard
+</code></pre>
+<p><strong>Generate keys:</strong></p>
+<pre><code class="language-bash"># Generate server keys
+wg genkey | sudo tee /etc/wireguard/server_private.key
+sudo chmod 600 /etc/wireguard/server_private.key
+sudo cat /etc/wireguard/server_private.key | wg pubkey | sudo tee /etc/wireguard/server_public.key
+
+# Generate client keys
+wg genkey | tee client_private.key
+cat client_private.key | wg pubkey &gt; client_public.key
+</code></pre>
+<p><strong>Configure /etc/wireguard/wg0.conf:</strong></p>
+<pre><code class="language-ini">[Interface]
+Address = 10.0.0.1/24
+ListenPort = 51820
+PrivateKey = [server_private_key]
+
+# IP forwarding
+PostUp = iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
+
+# Client 1
+[Peer]
+PublicKey = [client1_public_key]
+AllowedIPs = 10.0.0.2/32
+
+# Client 2
+[Peer]
+PublicKey = [client2_public_key]
+AllowedIPs = 10.0.0.3/32
+</code></pre>
+<p><strong>Enable IP forwarding:</strong></p>
+<pre><code class="language-bash">sudo sysctl -w net.ipv4.ip_forward=1
+echo &quot;net.ipv4.ip_forward=1&quot; | sudo tee -a /etc/sysctl.conf
+</code></pre>
+<p><strong>Open firewall:</strong></p>
+<pre><code class="language-bash">sudo ufw allow 51820/udp
+</code></pre>
+<p><strong>Start WireGuard:</strong></p>
+<pre><code class="language-bash">sudo wg-quick up wg0
+sudo systemctl enable wg-quick@wg0
+</code></pre>
+<h3 id="wireguard-client-configuration">WireGuard Client Configuration</h3>
+<p><strong>Client config file (wg0-client.conf):</strong></p>
+<pre><code class="language-ini">[Interface]
+Address = 10.0.0.2/24
+PrivateKey = [client_private_key]
+DNS = 8.8.8.8
+
+[Peer]
+PublicKey = [server_public_key]
+Endpoint = vpn.example.com:51820
+AllowedIPs = 0.0.0.0/0
+PersistentKeepalive = 25
+</code></pre>
+<p><strong>Connect:</strong></p>
+<pre><code class="language-bash">sudo wg-quick up wg0-client
+</code></pre>
+<p><strong>Check status:</strong></p>
+<pre><code class="language-bash">sudo wg show
+</code></pre>
+<h2 id="vpn-performance-optimization">VPN Performance Optimization</h2>
+<h3 id="wireguard-performance">WireGuard Performance</h3>
+<p><strong>Typical throughput:</strong>
+- WireGuard: 1000+ Mbps
+- OpenVPN: 100-300 Mbps<br />
+- IPsec: 400-600 Mbps</p>
+<p><strong>Optimization tips:</strong>
+- Use UDP (not TCP)
+- Enable MTU optimization
+- Use modern hardware with AES-NI
+- Minimize latency to VPN server</p>
+<h3 id="openvpn-optimization">OpenVPN Optimization</h3>
+<p><strong>Optimize /etc/openvpn/server.conf:</strong></p>
+<pre><code># Use UDP
+proto udp
+
+# Optimize buffer sizes
+sndbuf 393216
+rcvbuf 393216
+push &quot;sndbuf 393216&quot;
+push &quot;rcvbuf 393216&quot;
+
+# Use faster cipher
+cipher AES-128-GCM
+
+# Compression (can help or hurt depending on data)
+comp-lzo adaptive
+
+# Faster TLS
+tls-cipher TLS-ECDHE-RSA-WITH-AES-128-GCM-SHA256
+
+# Optimize TCP settings
+tcp-nodelay
+</code></pre>
+<h2 id="vpn-security-best-practices">VPN Security Best Practices</h2>
+<h3 id="authentication">Authentication</h3>
+<p><strong>Use strong authentication:</strong>
+- Certificate-based (best)
+- Multi-factor authentication
+- Avoid pre-shared keys for remote access
+- Rotate credentials regularly</p>
+<h3 id="encryption">Encryption</h3>
+<p><strong>Use modern ciphers:</strong>
+- AES-256-GCM
+- ChaCha20-Poly1305
+- Avoid: DES, 3DES, MD5, SHA1</p>
+<h3 id="access-control">Access Control</h3>
+<p><strong>Implement least privilege:</strong>
+- Limit which networks clients can access
+- Use split-tunnel when appropriate
+- Implement network segmentation
+- Log all connections</p>
+<h3 id="monitoring">Monitoring</h3>
+<p><strong>Monitor VPN usage:</strong></p>
+<pre><code class="language-bash"># OpenVPN status
+sudo systemctl status openvpn@server
+cat /var/log/openvpn-status.log
+
+# WireGuard status
+sudo wg show
+
+# Check connected clients
+sudo wg show wg0 peers
+</code></pre>
+<h2 id="troubleshooting-vpns">Troubleshooting VPNs</h2>
+<h3 id="common-issues">Common Issues</h3>
+<p><strong>Cannot connect:</strong></p>
+<pre><code class="language-bash"># Check service running
+sudo systemctl status openvpn@server
+sudo systemctl status wg-quick@wg0
+
+# Check firewall
+sudo ufw status
+sudo iptables -L -n
+
+# Check ports
+sudo netstat -tulpn | grep -E '1194|51820'
+
+# Check logs
+sudo tail -f /var/log/openvpn.log
+sudo journalctl -u wg-quick@wg0 -f
+</code></pre>
+<p><strong>Connected but no internet:</strong></p>
+<pre><code class="language-bash"># Check IP forwarding
+sysctl net.ipv4.ip_forward
+
+# Check NAT rules
+sudo iptables -t nat -L -n
+
+# Test DNS
+dig @8.8.8.8 google.com
+
+# Check routing
+ip route
+</code></pre>
+<p><strong>Slow performance:</strong></p>
+<pre><code class="language-bash"># Test bandwidth
+iperf3 -s  # On server
+iperf3 -c vpn_server_ip  # On client
+
+# Check MTU
+ping -M do -s 1472 vpn_server_ip  # Find optimal MTU
+
+# Monitor connections
+sudo tcpdump -i wg0
+</code></pre>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<p><strong>VPN protocols:</strong>
+- IPsec: Industry standard, complex, good performance
+- OpenVPN: Flexible, widely supported, moderate performance
+- WireGuard: Modern, simple, best performance</p>
+<p><strong>Implementation:</strong>
+- Plan architecture (site-to-site vs remote access)
+- Generate proper certificates
+- Configure encryption properly
+- Enable IP forwarding and NAT
+- Test thoroughly</p>
+<p><strong>Security:</strong>
+- Use certificate-based authentication
+- Modern encryption algorithms
+- Implement access controls
+- Monitor and log connections
+- Regular updates and patches</p>
+<p><strong>Remember:</strong>
+- VPNs protect data in transit only
+- Still need endpoint security
+- Performance varies by protocol
+- Proper configuration is critical
+- Test failover scenarios</p>
+<p>VPNs are fundamental to modern network security. Whether connecting remote workers or linking office locations, understanding VPN technologies lets you implement secure, reliable connectivity for your organization.</p>
         
 
         <!-- Lesson Navigation (only show on non-homepage pages) -->
         
         <div class="lesson-nav">
             
-            <a href="../lesson1-6/" class="lesson-nav-button">
+            <a href="../lesson11-1/" class="lesson-nav-button">
                 <span class="arrow">←</span>
-                <span>Previous: Lesson 1.6</span>
+                <span>Previous: Lesson 11.1</span>
             </a>
             
 
             <div class="lesson-nav-info">
                 <div class="current-lesson">Current Lesson</div>
-                <div class="lesson-title">Linux Installation Process</div>
+                <div class="lesson-title">Lesson 11.2</div>
             </div>
 
             
-            <a href="../../unit2/lesson2-1/" class="lesson-nav-button">
-                <span>Next: Lesson 2.1</span>
+            <a href="../lesson11-3/" class="lesson-nav-button">
+                <span>Next: Lesson 11.3</span>
                 <span class="arrow">→</span>
             </a>
             
@@ -1158,43 +1598,43 @@
                                 
                                 {
                                     title: "Lesson 1.1",
-                                    url: '../lesson1-1/',
+                                    url: '../../unit1/lesson1-1/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.2",
-                                    url: '../lesson1-2/',
+                                    url: '../../unit1/lesson1-2/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.3",
-                                    url: '../lesson1-3/',
+                                    url: '../../unit1/lesson1-3/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.4",
-                                    url: '../lesson1-4/',
+                                    url: '../../unit1/lesson1-4/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.5",
-                                    url: '../lesson1-5/',
+                                    url: '../../unit1/lesson1-5/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.6",
-                                    url: '../lesson1-6/',
+                                    url: '../../unit1/lesson1-6/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Linux Installation Process",
-                                    url: './',
+                                    url: '../../unit1/installation-process/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
@@ -1396,19 +1836,19 @@
                                 
                                 {
                                     title: "Lesson 11.1",
-                                    url: '../../unit11/lesson11-1/',
+                                    url: '../lesson11-1/',
                                     path: 'Curriculum > Unit 11'
                                 },
                                 
                                 {
                                     title: "Lesson 11.2",
-                                    url: '../../unit11/lesson11-2/',
+                                    url: './',
                                     path: 'Curriculum > Unit 11'
                                 },
                                 
                                 {
                                     title: "Lesson 11.3",
-                                    url: '../../unit11/lesson11-3/',
+                                    url: '../lesson11-3/',
                                     path: 'Curriculum > Unit 11'
                                 },
                                 

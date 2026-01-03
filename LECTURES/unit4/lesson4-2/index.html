@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linux Installation Process - NCHS Cybersecurity</title>
+    <title>Lesson 4.2 - NCHS Cybersecurity</title>
     
     
     <link rel="icon" href="../../../img/logo.png">
@@ -698,31 +698,31 @@
                                         <ul class="unit-lessons">
                                             
                                             <li>
-                                                <a href="../lesson1-1/">Lesson 1.1</a>
+                                                <a href="../../unit1/lesson1-1/">Lesson 1.1</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-2/">Lesson 1.2</a>
+                                                <a href="../../unit1/lesson1-2/">Lesson 1.2</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-3/">Lesson 1.3</a>
+                                                <a href="../../unit1/lesson1-3/">Lesson 1.3</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-4/">Lesson 1.4</a>
+                                                <a href="../../unit1/lesson1-4/">Lesson 1.4</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-5/">Lesson 1.5</a>
+                                                <a href="../../unit1/lesson1-5/">Lesson 1.5</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-6/">Lesson 1.6</a>
+                                                <a href="../../unit1/lesson1-6/">Lesson 1.6</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="./">Linux Installation Process</a>
+                                                <a href="../../unit1/installation-process/">Linux Installation Process</a>
                                             </li>
                                             
                                         </ul>
@@ -777,11 +777,11 @@
                                         <ul class="unit-lessons">
                                             
                                             <li>
-                                                <a href="../../unit4/lesson4-1/">Lesson 4.1</a>
+                                                <a href="../lesson4-1/">Lesson 4.1</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../../unit4/lesson4-2/">Lesson 4.2</a>
+                                                <a href="./">Lesson 4.2</a>
                                             </li>
                                             
                                         </ul>
@@ -964,142 +964,584 @@
 
     <div class="container">
         
-        <h2 id="what-is-it"><em>What</em> is it?</h2>
-<p>Kali is an operating system that was made <strong><em>specially</em></strong> for cybersecurity work (and hacking as well). It has a large toolkit of useful programs that we're going to learn about, including Hydra, Nmap, Wireshark, Tcpdump, MacChanger, Chisel, Aircrack-ng, etc.</p>
-<h2 id="some-vocab">Some Vocab:</h2>
-<p>As much as we know vocabulary might not be that interesting, it's important to know for the future, since there's a LOT of acronyms and words in cybersecurity that you're going to be hearing and using, so it's best to get used to it.</p>
-<ul>
-<li><strong>Operating System (OS)</strong>: The main software that runs your computer, like Windows, macOS, iOS, GNU/Linux, etc.</li>
-<li><strong>Virtual Machine (VM)</strong>: It's basically a computer <em>inside</em> another computer. You can run your regular OS, like Windows, and still have Kali Linux inside of it</li>
-<li><strong>ISO File (International Organization for Standardization File)</strong>: Sounds fancy, but really it's just a full copy of an OS within one tiny file</li>
-<li><strong>Hypervisor</strong>: Software that creates and manages VMs. Examples are VirtualBox and VMWare Workstation. There's also QEMU, but mostly Linux users use that, and you're likely running on Windows or mac</li>
-<li><strong>Bootable USB</strong>: Just a USB drive (which you hopefully already know about) that can start up a computer and install an OS (we don't need this yet)</li>
-<li><strong>Partitioning</strong>: A more advanced topic, but it's dividing up your drive into sections called <em>partitions</em>, which are like walls for a room. We don't need this yet, but it is good to know</li>
-</ul>
-<p>Now, let's get into the nitty-gritty:</p>
-<h2 id="method-1-easy-way">Method 1: Easy way :)</h2>
-<h3 id="minimum-requirements">Minimum Requirements*:</h3>
-<ol>
-<li><code>8 GB</code> of RAM</li>
-<li><code>20-30 GB</code> of free hard drive space</li>
-<li>A decently fast CPU (you probably have this)</li>
-</ol>
-<p>*But, how do I know if I meet them? Well, you can press <em><code>Ctrl+Shift+Esc</code></em> on Windows and click on <strong>"Performance"</strong> inside of Task Manager, and it'll give you a spec (specifications) sheet. On mac, you can click on <strong>"About"</strong> in the top menu bar of your computer. On Linux, you can type <strong><code>uname -a</code></strong>, or use a custom program like <code>fastfetch</code></p>
-<h2 id="big-disclaimer-for-windows-users">BIG DISCLAIMER FOR WINDOWS USERS:</h2>
-<ul>
-<li>You NEED to DISABLE something called Hyper-V. If you don't know what that is, for Windows users, Hyper-V will conflict with Virtualbox, making it run poorly and crash often</li>
-<li>To check if you hve Hyper-V, press <code>Win+R</code>, and type <code>optionalfeatures</code>, then press <code>Enter</code></li>
-<li>Look for a "Hyper-V" in the list of shown items. If it's checked, then it's enabled. Uncheck it.<ul>
-<li>Alternative method: go to cmd (Command Prompt), and right click and "Run as Administrator". Then use the following command: <code>bcdedit /set hypervisorlaunchtype off</code></li>
-</ul>
-</li>
-<li>Finally, restart your computer</li>
-</ul>
-<h2 id="big-disclaimer-for-macos-users">BIG DISCLAIMER FOR MACOS USERS:</h2>
-<ul>
-<li>You need to check if you're using an Intel-based Mac or Apple Silicon machine. If your device is M1, M2, M*, then it's <strong>Apple Silicon</strong></li>
-<li>If this is the case, you will need to use a different software for virtualization. You have some options, like <a href="https://getutm.app">UTM</a> or <a href="https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion">VMware Fusion</a>. </li>
-<li>Also, you will have to install Kali Linux using the 
-<em><strong>ARM64 version! Not x86-64!</strong></em></li>
-</ul>
-<hr />
-<p>Now, go to <a href="https://virtualbox.org">virtualbox.org</a></p>
-<p>Click on the download for your OS, and install the program by following the instruction wizard.</p>
-<p><img alt="Virtual Box" src="../../../img/virtual_box.png" /></p>
-<ul>
-<li>Now, go to the <a href="https://kali.org/get-kali">Kali Linux website</a>.</li>
-<li>Download the "Installer" ISO file (<code>~ 4 GB</code> in size)</li>
-<li>Then choose the 64-bit version for modern computers.</li>
-<li>If your computer is old, it could be 32-bit. If so, you may need to check your system specifications as explained above. However, it probably isn't.</li>
-</ul>
-<p><img alt="Kali Installation" src="../../../img/kali_img.png" /></p>
-<blockquote>
-<p>Remember, Apple Silicon machines will install the ARM64 version of Kali Linux instead!</p>
-</blockquote>
-<ul>
-<li>Finally, make your Virtual Machine. Open up VirtualBox and click "New"</li>
-<li>Name it whatever, I'd call it "Kali Linux", or "Kali Machine".</li>
-<li>Type: Linux, Version: Debian (64-bit)</li>
-<li>Allocate at least <code>4 GB</code> of RAM, AKA <code>4096 MB</code>, by dragging the slider or typing in the number in the RAM text box</li>
-<li>Create a Virtual Hrd Disk (allocate <code>25-30 GB</code> minimum)<ul>
-<li>Choose VDI (VirtualBox Disk Image)</li>
-<li>Also select "dynamically allocated" to save space, and allows the VM to grow dynamically in storage size as you begin to add more things</li>
-</ul>
-</li>
-<li>After clicking done, tell it to create, but do NOT tell it to also start yet</li>
-<li>Click on your virtual machine, and then go to settings</li>
-<li>Then go to Storage, and click the empty disk icon</li>
-<li>This is where we "choose a disk file", and select the downloaded Kali ISO</li>
-<li>Then under System, enable PAE/NX if available to you. PAE is Physical Address Extension, and NX is No Execute. These allow for &gt; <code>4 GB</code> of RAM access and prevents non-executable code from being executed in memory segments. If you don't know what that means, just ignore this</li>
-<li>Under Display, increase video memory to <code>128 MB</code></li>
-<li>Finally, save and exit Settings, and click on Start to boot your VM</li>
-<li>Select "Graphical Install" (press Enter, navigate using arrow keys)</li>
-<li>Choose your language, location, keyboard (these can later be changed, doesn't really matter)</li>
-<li>You can set a hostname, or keep the default (kali)</li>
-</ul>
-<h3 id="important-username-is-kali-and-password-is-kali-by-default"><strong>IMPORTANT</strong>: username is <em>kali</em> and password is <em>kali</em> by default!</h3>
-<ul>
-<li>Choose "Guided - use entire disk" for your partitioning</li>
-<li>Then select "All files in one partition"</li>
-<li>Confirm and wait a while. Take a walk outside, take a short nap, whatever you want. Just wait 10-20 minutes and it'll be done</li>
-<li>Restart when prompted</li>
-<li>On first login, enter the username and password</li>
-<li>Then, click the <code>SUPER</code> key (<code>Win</code> key or <code>Cmd</code> key on mac) and type "terminal" or "console" into the search, and open the app</li>
-<li>In the terminal, you can type <code>sudo apt update &amp;&amp; sudo apt upgrade -y</code><ul>
-<li>This command just updates your system</li>
-<li>When prompted with a password, type in your password</li>
-</ul>
-</li>
-<li>Happy Linux!</li>
-</ul>
-<h2 id="method-2-hard-way-bare-metal-installation">Method 2: Hard way (bare metal installation)</h2>
-<p>Alright. You're ready for the real deal. No problem. </p>
-<p><code>WARNING! ⚠️⚠️</code>: This version of installation WILL take space on your disk! This means it will be physically installed, and it will NOT be installed as a VM! Just like Windows or macOS, it will be physically on your device. If you do this incorrectly, it may <strong>wipe your device completely</strong>. I'm not liable for if you mistakenly wipe your drive, it's up to you. Also, I personally do <strong>not recommend you install Kali Linux on a physical drive</strong>. If you want to use Linux for extra practice, install a distribution like <a href="https://www.debian.org/">Debian</a> or <a href="https://linuxmint.com/">Linux Mint</a>. You are risking data loss if done incorrectly, so proceed at your own risk.</p>
-<p>Important things to note are:</p>
-<ul>
-<li>If you install on bare metal, AKA on your physical device, your device may have incompatibility issues. I would recommend doing your own research before doing so</li>
-<li>You may want to install Linux on a secondary drive, since if you use your main one, you will have to create a special partition for Linux to use exclusively, which is more difficult</li>
-<li>You'll need a USB drive with preferably <code>8 GB</code> or more of storage</li>
-<li>You may need to adjust your BIOS (manufacturer specific, meaning it depends on what company made your computer and maybe even where you bought it from) to allow for other bootable devices, which can include removing Secure Boot</li>
-<li>There's some specifics for ARM64 machines like Apple Silicon that will be different!</li>
-<li>Overall, you are likely going to have to do your OWN research to make sure you don't mess anything up.</li>
-</ul>
-<p>Without further ado, these are some general instructions (not perfect):</p>
-<ol>
-<li>Create a bootable USB drive using an app like Balena Etcher or Rufus</li>
-<li>Make space on your hard drive by creating a disk partition of ~<code>30 GB</code> or more, or install on a secondary hard drive</li>
-<li>Boot from the USB drive from BIOS after restarting your computer and smashing the BIOS key as it boots up (typically <code>Esc</code>, <code>F11</code>, <code>F12</code>, or <code>Del</code> depending on the manufacturer)</li>
-<li>Follow the installation process, but make sure you select the right drive and if it's on the same disk as Windows or Mac, you install "alongside" it, not replace </li>
-<li>After going through the setup, you may re-enter the BIOS to change the boot order. What this means is move Linux above Windows so that on first boot you boot into Linux (optional)</li>
-</ol>
-<p>Some important extras:</p>
-<ul>
-<li>Make sure you regularly update your system at least weekly</li>
-<li>Make decent credentials or use a <a href="https://www.yubico.com/">physical key</a></li>
-<li>Never just copy/paste a command without understanding it, look it up at least (even from me!)</li>
-<li>Install packages wisely and preferably from trusted sources</li>
-</ul>
-<p>Happy Linux! :)</p>
+        <h1 id="implementing-network-security-controls">Implementing Network Security Controls</h1>
+<p>Theory is one thing—implementation is another. This lesson focuses on actually setting up and configuring security controls. These are hands-on skills you'll use daily as a security professional.</p>
+<h2 id="configuring-firewalls">Configuring Firewalls</h2>
+<h3 id="linux-iptables">Linux iptables</h3>
+<p><strong>iptables</strong> is the traditional Linux firewall.</p>
+<h4 id="basic-concepts">Basic Concepts</h4>
+<p><strong>Tables:</strong>
+- <strong>filter</strong>: Default, for packet filtering
+- <strong>nat</strong>: Network address translation
+- <strong>mangle</strong>: Packet alteration
+- <strong>raw</strong>: Connection tracking exemptions</p>
+<p><strong>Chains:</strong>
+- <strong>INPUT</strong>: Packets destined for this system
+- <strong>OUTPUT</strong>: Packets originating from this system
+- <strong>FORWARD</strong>: Packets passing through this system</p>
+<p><strong>Targets:</strong>
+- <strong>ACCEPT</strong>: Allow the packet
+- <strong>DROP</strong>: Silently discard
+- <strong>REJECT</strong>: Discard and send error
+- <strong>LOG</strong>: Log the packet</p>
+<h4 id="common-iptables-commands">Common iptables Commands</h4>
+<pre><code class="language-bash"># View current rules
+sudo iptables -L -v -n
+
+# View with line numbers
+sudo iptables -L --line-numbers
+
+# Flush all rules (dangerous!)
+sudo iptables -F
+
+# Set default policies
+sudo iptables -P INPUT DROP
+sudo iptables -P FORWARD DROP
+sudo iptables -P OUTPUT ACCEPT
+</code></pre>
+<h4 id="building-a-basic-firewall">Building a Basic Firewall</h4>
+<pre><code class="language-bash"># Allow loopback
+sudo iptables -A INPUT -i lo -j ACCEPT
+
+# Allow established connections
+sudo iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+
+# Allow SSH (port 22)
+sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+
+# Allow HTTP and HTTPS
+sudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+sudo iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+
+# Allow ping
+sudo iptables -A INPUT -p icmp --icmp-type echo-request -j ACCEPT
+
+# Log and drop everything else
+sudo iptables -A INPUT -j LOG --log-prefix &quot;IPTables-Dropped: &quot;
+sudo iptables -A INPUT -j DROP
+</code></pre>
+<h4 id="rate-limiting-anti-ddos">Rate Limiting (Anti-DDoS)</h4>
+<pre><code class="language-bash"># Limit SSH connections
+sudo iptables -A INPUT -p tcp --dport 22 -m conntrack --ctstate NEW -m recent --set
+sudo iptables -A INPUT -p tcp --dport 22 -m conntrack --ctstate NEW -m recent --update --seconds 60 --hitcount 4 -j DROP
+
+# Limit ping
+sudo iptables -A INPUT -p icmp --icmp-type echo-request -m limit --limit 1/s --limit-burst 3 -j ACCEPT
+sudo iptables -A INPUT -p icmp --icmp-type echo-request -j DROP
+</code></pre>
+<h4 id="port-knocking">Port Knocking</h4>
+<p><strong>Hidden SSH access:</strong></p>
+<pre><code class="language-bash"># Close SSH by default
+sudo iptables -A INPUT -p tcp --dport 22 -j DROP
+
+# Knock sequence: 7000, 8000, 9000
+sudo iptables -A INPUT -p tcp --dport 7000 -m recent --name SSH0 --set -j DROP
+sudo iptables -A INPUT -p tcp --dport 8000 -m recent --name SSH0 --rcheck -m recent --name SSH1 --set -j DROP
+sudo iptables -A INPUT -p tcp --dport 9000 -m recent --name SSH1 --rcheck -m recent --name SSH2 --set -j DROP
+sudo iptables -A INPUT -p tcp --dport 22 -m recent --name SSH2 --rcheck -j ACCEPT
+</code></pre>
+<h4 id="saving-rules">Saving Rules</h4>
+<pre><code class="language-bash"># Debian/Ubuntu
+sudo iptables-save &gt; /etc/iptables/rules.v4
+sudo ip6tables-save &gt; /etc/iptables/rules.v6
+
+# Or use iptables-persistent
+sudo apt install iptables-persistent
+sudo netfilter-persistent save
+</code></pre>
+<h3 id="ufw-uncomplicated-firewall">UFW (Uncomplicated Firewall)</h3>
+<p><strong>Easier iptables frontend:</strong></p>
+<h4 id="basic-ufw-usage">Basic UFW Usage</h4>
+<pre><code class="language-bash"># Enable UFW
+sudo ufw enable
+
+# Check status
+sudo ufw status verbose
+
+# Default policies
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+
+# Allow services
+sudo ufw allow ssh
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+
+# Allow from specific IP
+sudo ufw allow from 192.168.1.100
+
+# Allow specific IP to specific port
+sudo ufw allow from 192.168.1.100 to any port 22
+
+# Deny port
+sudo ufw deny 23
+
+# Delete rule
+sudo ufw delete allow 80
+
+# Reset all rules
+sudo ufw reset
+</code></pre>
+<h4 id="application-profiles">Application Profiles</h4>
+<pre><code class="language-bash"># List application profiles
+sudo ufw app list
+
+# Allow application
+sudo ufw allow 'Apache Full'
+sudo ufw allow 'OpenSSH'
+
+# View application info
+sudo ufw app info 'Apache Full'
+</code></pre>
+<h4 id="rate-limiting">Rate Limiting</h4>
+<pre><code class="language-bash"># Limit SSH connections (6 connections in 30 seconds)
+sudo ufw limit ssh
+</code></pre>
+<h2 id="setting-up-vpns">Setting Up VPNs</h2>
+<h3 id="openvpn-server">OpenVPN Server</h3>
+<h4 id="installation">Installation</h4>
+<pre><code class="language-bash"># Install OpenVPN and Easy-RSA
+sudo apt install openvpn easy-rsa
+
+# Set up CA directory
+make-cadir ~/openvpn-ca
+cd ~/openvpn-ca
+</code></pre>
+<h4 id="configure-pki">Configure PKI</h4>
+<pre><code class="language-bash"># Edit vars file
+nano vars
+
+# Set these:
+export KEY_COUNTRY=&quot;US&quot;
+export KEY_PROVINCE=&quot;CA&quot;
+export KEY_CITY=&quot;SanFrancisco&quot;
+export KEY_ORG=&quot;MyOrg&quot;
+export KEY_EMAIL=&quot;admin@myorg.com&quot;
+export KEY_OU=&quot;MyOrgUnit&quot;
+
+# Source vars
+source vars
+
+# Clean and build CA
+./clean-all
+./build-ca
+</code></pre>
+<h4 id="generate-certificates">Generate Certificates</h4>
+<pre><code class="language-bash"># Server certificate
+./build-key-server server
+
+# Client certificate
+./build-key client1
+
+# Diffie-Hellman parameters
+./build-dh
+
+# HMAC signature
+openvpn --genkey --secret keys/ta.key
+</code></pre>
+<h4 id="server-configuration">Server Configuration</h4>
+<pre><code class="language-bash"># Create server config
+sudo nano /etc/openvpn/server.conf
+</code></pre>
+<pre><code>port 1194
+proto udp
+dev tun
+
+ca ca.crt
+cert server.crt
+key server.key
+dh dh2048.pem
+tls-auth ta.key 0
+
+server 10.8.0.0 255.255.255.0
+ifconfig-pool-persist ipp.txt
+
+push &quot;redirect-gateway def1 bypass-dhcp&quot;
+push &quot;dhcp-option DNS 8.8.8.8&quot;
+push &quot;dhcp-option DNS 8.8.4.4&quot;
+
+keepalive 10 120
+cipher AES-256-CBC
+auth SHA256
+user nobody
+group nogroup
+persist-key
+persist-tun
+
+status openvpn-status.log
+log-append /var/log/openvpn.log
+verb 3
+</code></pre>
+<h4 id="enable-ip-forwarding">Enable IP Forwarding</h4>
+<pre><code class="language-bash"># Temporarily
+sudo sysctl -w net.ipv4.ip_forward=1
+
+# Permanently
+sudo nano /etc/sysctl.conf
+# Uncomment: net.ipv4.ip_forward=1
+sudo sysctl -p
+</code></pre>
+<h4 id="nat-for-vpn-clients">NAT for VPN Clients</h4>
+<pre><code class="language-bash"># Add iptables NAT rule
+sudo iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE
+
+# Save rule
+sudo netfilter-persistent save
+</code></pre>
+<h4 id="start-openvpn">Start OpenVPN</h4>
+<pre><code class="language-bash">sudo systemctl start openvpn@server
+sudo systemctl enable openvpn@server
+</code></pre>
+<h4 id="client-configuration">Client Configuration</h4>
+<pre><code>client
+dev tun
+proto udp
+remote vpn-server.com 1194
+
+resolv-retry infinite
+nobind
+persist-key
+persist-tun
+
+ca ca.crt
+cert client1.crt
+key client1.key
+tls-auth ta.key 1
+
+cipher AES-256-CBC
+auth SHA256
+
+verb 3
+</code></pre>
+<h3 id="wireguard-modern-alternative">WireGuard (Modern Alternative)</h3>
+<h4 id="installation_1">Installation</h4>
+<pre><code class="language-bash">sudo apt install wireguard
+</code></pre>
+<h4 id="generate-keys">Generate Keys</h4>
+<pre><code class="language-bash"># Server keys
+wg genkey | sudo tee /etc/wireguard/privatekey | wg pubkey | sudo tee /etc/wireguard/publickey
+
+# Client keys (do this on client)
+wg genkey | tee privatekey | wg pubkey &gt; publickey
+</code></pre>
+<h4 id="server-configuration_1">Server Configuration</h4>
+<pre><code class="language-bash">sudo nano /etc/wireguard/wg0.conf
+</code></pre>
+<pre><code>[Interface]
+Address = 10.0.0.1/24
+ListenPort = 51820
+PrivateKey = &lt;server-private-key&gt;
+PostUp = iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
+
+[Peer]
+PublicKey = &lt;client-public-key&gt;
+AllowedIPs = 10.0.0.2/32
+</code></pre>
+<h4 id="start-wireguard">Start WireGuard</h4>
+<pre><code class="language-bash">sudo wg-quick up wg0
+sudo systemctl enable wg-quick@wg0
+</code></pre>
+<h4 id="client-configuration_1">Client Configuration</h4>
+<pre><code>[Interface]
+PrivateKey = &lt;client-private-key&gt;
+Address = 10.0.0.2/24
+DNS = 8.8.8.8
+
+[Peer]
+PublicKey = &lt;server-public-key&gt;
+Endpoint = vpn-server.com:51820
+AllowedIPs = 0.0.0.0/0
+PersistentKeepalive = 25
+</code></pre>
+<h2 id="intrusion-detection-systems">Intrusion Detection Systems</h2>
+<h3 id="snort-installation-and-configuration">Snort Installation and Configuration</h3>
+<h4 id="install-snort">Install Snort</h4>
+<pre><code class="language-bash">sudo apt install snort
+</code></pre>
+<h4 id="configuration">Configuration</h4>
+<pre><code class="language-bash">sudo nano /etc/snort/snort.conf
+</code></pre>
+<pre><code># Set home network
+var HOME_NET 192.168.1.0/24
+var EXTERNAL_NET !$HOME_NET
+
+# Set rule paths
+var RULE_PATH /etc/snort/rules
+var SO_RULE_PATH /etc/snort/so_rules
+var PREPROC_RULE_PATH /etc/snort/preproc_rules
+
+# Output
+output alert_fast: alert
+output log_tcpdump: tcpdump.log
+</code></pre>
+<h4 id="writing-snort-rules">Writing Snort Rules</h4>
+<p><strong>Rule structure:</strong></p>
+<pre><code>action protocol src_ip src_port direction dest_ip dest_port (options)
+</code></pre>
+<p><strong>Examples:</strong></p>
+<pre><code># Alert on ICMP ping
+alert icmp any any -&gt; $HOME_NET any (msg:&quot;ICMP Ping Detected&quot;; sid:1000001;)
+
+# Alert on SSH brute force
+alert tcp any any -&gt; $HOME_NET 22 (msg:&quot;Possible SSH Brute Force&quot;; flags: S; threshold: type both, track by_src, count 5, seconds 60; sid:1000002;)
+
+# Alert on SQL injection attempt
+alert tcp any any -&gt; $HOME_NET 80 (msg:&quot;SQL Injection Attempt&quot;; content:&quot;' OR 1=1&quot;; nocase; sid:1000003;)
+
+# Alert on nmap scan
+alert tcp any any -&gt; $HOME_NET any (msg:&quot;Nmap Scan Detected&quot;; flags:S; detection_filter: track by_src, count 20, seconds 60; sid:1000004;)
+</code></pre>
+<p><strong>Rule options:</strong>
+- <strong>msg</strong>: Alert message
+- <strong>sid</strong>: Signature ID (unique)
+- <strong>content</strong>: Look for specific content
+- <strong>nocase</strong>: Case-insensitive
+- <strong>flags</strong>: TCP flags (S=SYN, A=ACK, F=FIN, R=RST)
+- <strong>threshold</strong>: Rate limiting
+- <strong>detection_filter</strong>: Advanced rate limiting</p>
+<h4 id="running-snort">Running Snort</h4>
+<pre><code class="language-bash"># Test configuration
+sudo snort -T -c /etc/snort/snort.conf
+
+# Run in IDS mode
+sudo snort -A console -q -c /etc/snort/snort.conf -i eth0
+
+# Run in IPS mode (inline)
+sudo snort -Q --daq afpacket -i eth0:eth1 -c /etc/snort/snort.conf
+</code></pre>
+<h3 id="suricata-modern-alternative">Suricata (Modern Alternative)</h3>
+<pre><code class="language-bash"># Install
+sudo apt install suricata
+
+# Update rules
+sudo suricata-update
+
+# Run Suricata
+sudo suricata -c /etc/suricata/suricata.yaml -i eth0
+
+# View alerts
+tail -f /var/log/suricata/fast.log
+</code></pre>
+<h2 id="network-access-control-nac">Network Access Control (NAC)</h2>
+<h3 id="packetfence-setup">PacketFence Setup</h3>
+<p><strong>Open-source NAC solution:</strong></p>
+<h4 id="installation_2">Installation</h4>
+<pre><code class="language-bash"># Add repository
+echo &quot;deb http://inverse.ca/downloads/PacketFence/debian/ buster buster&quot; | sudo tee /etc/apt/sources.list.d/packetfence.list
+wget -O - https://inverse.ca/downloads/GPG_PUBLIC_KEY | sudo apt-key add -
+
+# Install
+sudo apt update
+sudo apt install packetfence
+</code></pre>
+<h4 id="configuration_1">Configuration</h4>
+<p><strong>Web interface:</strong> http://server-ip:1443</p>
+<p><strong>Configure:</strong>
+1. Network interfaces (management, registration, isolation)
+2. Switch configuration
+3. Authentication sources (AD, RADIUS, LDAP)
+4. Violation policies
+5. Provisioners (MDM integration)</p>
+<h4 id="8021x-configuration">802.1X Configuration</h4>
+<p><strong>On switch (Cisco example):</strong></p>
+<pre><code>aaa new-model
+aaa authentication dot1x default group radius
+aaa authorization network default group radius
+
+dot1x system-auth-control
+
+interface GigabitEthernet1/0/1
+ switchport mode access
+ authentication port-control auto
+ dot1x pae authenticator
+</code></pre>
+<p><strong>RADIUS server (FreeRADIUS):</strong></p>
+<pre><code class="language-bash"># Install
+sudo apt install freeradius
+
+# Configure client (switch)
+sudo nano /etc/freeradius/3.0/clients.conf
+</code></pre>
+<pre><code>client switch1 {
+    ipaddr = 192.168.1.10
+    secret = shared-secret
+    shortname = switch1
+}
+</code></pre>
+<h2 id="web-application-firewall-waf">Web Application Firewall (WAF)</h2>
+<h3 id="modsecurity-with-apache">ModSecurity with Apache</h3>
+<h4 id="installation_3">Installation</h4>
+<pre><code class="language-bash">sudo apt install libapache2-mod-security2
+
+# Enable
+sudo a2enmod security2
+sudo systemctl restart apache2
+</code></pre>
+<h4 id="configuration_2">Configuration</h4>
+<pre><code class="language-bash"># Copy recommended config
+sudo cp /etc/modsecurity/modsecurity.conf-recommended /etc/modsecurity/modsecurity.conf
+
+# Edit config
+sudo nano /etc/modsecurity/modsecurity.conf
+</code></pre>
+<pre><code># Enable ModSecurity
+SecRuleEngine On
+
+# Set detection only (for testing)
+# SecRuleEngine DetectionOnly
+
+# Audit logging
+SecAuditEngine RelevantOnly
+SecAuditLog /var/log/apache2/modsec_audit.log
+</code></pre>
+<h4 id="owasp-core-rule-set">OWASP Core Rule Set</h4>
+<pre><code class="language-bash"># Install CRS
+cd /etc/modsecurity
+sudo git clone https://github.com/coreruleset/coreruleset.git
+cd coreruleset
+sudo mv crs-setup.conf.example crs-setup.conf
+
+# Include in Apache
+sudo nano /etc/apache2/mods-enabled/security2.conf
+</code></pre>
+<pre><code>IncludeOptional /etc/modsecurity/*.conf
+IncludeOptional /etc/modsecurity/coreruleset/crs-setup.conf
+IncludeOptional /etc/modsecurity/coreruleset/rules/*.conf
+</code></pre>
+<pre><code class="language-bash">sudo systemctl restart apache2
+</code></pre>
+<h4 id="custom-rules">Custom Rules</h4>
+<pre><code class="language-bash">sudo nano /etc/modsecurity/modsecurity_custom.conf
+</code></pre>
+<pre><code># Block SQL injection
+SecRule ARGS &quot;@detectSQLi&quot; &quot;id:1001,phase:2,deny,status:403,msg:'SQL Injection Attempt'&quot;
+
+# Block XSS
+SecRule ARGS &quot;@detectXSS&quot; &quot;id:1002,phase:2,deny,status:403,msg:'XSS Attempt'&quot;
+
+# Block directory traversal
+SecRule ARGS &quot;@contains ../&quot; &quot;id:1003,phase:2,deny,status:403,msg:'Directory Traversal Attempt'&quot;
+
+# Rate limiting
+SecAction &quot;id:1004,phase:1,nolog,pass,initcol:ip=%{REMOTE_ADDR}&quot;
+SecRule IP:REQUEST_COUNT &quot;@gt 100&quot; &quot;id:1005,phase:2,deny,status:429,msg:'Rate Limit Exceeded',setvar:ip.request_count=+1&quot;
+</code></pre>
+<h2 id="security-monitoring">Security Monitoring</h2>
+<h3 id="centralized-logging-with-elk-stack">Centralized Logging with ELK Stack</h3>
+<h4 id="elasticsearch-installation">Elasticsearch Installation</h4>
+<pre><code class="language-bash"># Add repository
+wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+echo &quot;deb https://artifacts.elastic.co/packages/7.x/apt stable main&quot; | sudo tee /etc/apt/sources.list.d/elastic-7.x.list
+
+# Install
+sudo apt update
+sudo apt install elasticsearch
+
+# Configure
+sudo nano /etc/elasticsearch/elasticsearch.yml
+</code></pre>
+<pre><code>network.host: localhost
+http.port: 9200
+</code></pre>
+<pre><code class="language-bash"># Start
+sudo systemctl start elasticsearch
+sudo systemctl enable elasticsearch
+</code></pre>
+<h4 id="logstash-installation">Logstash Installation</h4>
+<pre><code class="language-bash">sudo apt install logstash
+
+# Create configuration
+sudo nano /etc/logstash/conf.d/syslog.conf
+</code></pre>
+<pre><code>input {
+  syslog {
+    port =&gt; 5514
+  }
+}
+
+filter {
+  if [program] == &quot;sshd&quot; {
+    grok {
+      match =&gt; { &quot;message&quot; =&gt; &quot;%{DATA:auth_method} %{DATA:auth_result} for %{DATA:user} from %{IP:src_ip}&quot; }
+    }
+  }
+}
+
+output {
+  elasticsearch {
+    hosts =&gt; [&quot;localhost:9200&quot;]
+    index =&gt; &quot;syslog-%{+YYYY.MM.dd}&quot;
+  }
+}
+</code></pre>
+<pre><code class="language-bash"># Start
+sudo systemctl start logstash
+sudo systemctl enable logstash
+</code></pre>
+<h4 id="kibana-installation">Kibana Installation</h4>
+<pre><code class="language-bash">sudo apt install kibana
+
+# Configure
+sudo nano /etc/kibana/kibana.yml
+</code></pre>
+<pre><code>server.host: &quot;localhost&quot;
+elasticsearch.hosts: [&quot;http://localhost:9200&quot;]
+</code></pre>
+<pre><code class="language-bash"># Start
+sudo systemctl start kibana
+sudo systemctl enable kibana
+</code></pre>
+<p><strong>Access Kibana:</strong> http://localhost:5601</p>
+<h3 id="siem-rules">SIEM Rules</h3>
+<p><strong>Failed login detection:</strong></p>
+<pre><code># In Kibana, create alert:
+Index: syslog-*
+Query: program:&quot;sshd&quot; AND message:&quot;Failed password&quot;
+Threshold: &gt; 5 in 5 minutes
+Action: Email alert
+</code></pre>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<p><strong>Hands-on skills covered:</strong>
+- Firewall configuration (iptables, UFW)
+- VPN setup (OpenVPN, WireGuard)
+- IDS implementation (Snort, Suricata)
+- NAC deployment (802.1X)
+- WAF configuration (ModSecurity)
+- Centralized logging (ELK Stack)</p>
+<p><strong>Best practices:</strong>
+- Test in lab before production
+- Document all configurations
+- Monitor logs for alerts
+- Regular rule updates
+- Performance testing
+- Backup configurations</p>
+<p><strong>Remember:</strong>
+- Security controls must be maintained
+- Rules need constant tuning
+- False positives are normal (at first)
+- Defense in depth—use multiple controls</p>
+<p>These are real-world skills. Practice them in virtual machines, build a home lab, and experiment. Reading about security is good; doing security is better.</p>
         
 
         <!-- Lesson Navigation (only show on non-homepage pages) -->
         
         <div class="lesson-nav">
             
-            <a href="../lesson1-6/" class="lesson-nav-button">
+            <a href="../lesson4-1/" class="lesson-nav-button">
                 <span class="arrow">←</span>
-                <span>Previous: Lesson 1.6</span>
+                <span>Previous: Lesson 4.1</span>
             </a>
             
 
             <div class="lesson-nav-info">
                 <div class="current-lesson">Current Lesson</div>
-                <div class="lesson-title">Linux Installation Process</div>
+                <div class="lesson-title">Lesson 4.2</div>
             </div>
 
             
-            <a href="../../unit2/lesson2-1/" class="lesson-nav-button">
-                <span>Next: Lesson 2.1</span>
+            <a href="../../unit5/lesson5-1/" class="lesson-nav-button">
+                <span>Next: Lesson 5.1</span>
                 <span class="arrow">→</span>
             </a>
             
@@ -1158,43 +1600,43 @@
                                 
                                 {
                                     title: "Lesson 1.1",
-                                    url: '../lesson1-1/',
+                                    url: '../../unit1/lesson1-1/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.2",
-                                    url: '../lesson1-2/',
+                                    url: '../../unit1/lesson1-2/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.3",
-                                    url: '../lesson1-3/',
+                                    url: '../../unit1/lesson1-3/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.4",
-                                    url: '../lesson1-4/',
+                                    url: '../../unit1/lesson1-4/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.5",
-                                    url: '../lesson1-5/',
+                                    url: '../../unit1/lesson1-5/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.6",
-                                    url: '../lesson1-6/',
+                                    url: '../../unit1/lesson1-6/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Linux Installation Process",
-                                    url: './',
+                                    url: '../../unit1/installation-process/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
@@ -1248,13 +1690,13 @@
                                 
                                 {
                                     title: "Lesson 4.1",
-                                    url: '../../unit4/lesson4-1/',
+                                    url: '../lesson4-1/',
                                     path: 'Curriculum > Unit 4'
                                 },
                                 
                                 {
                                     title: "Lesson 4.2",
-                                    url: '../../unit4/lesson4-2/',
+                                    url: './',
                                     path: 'Curriculum > Unit 4'
                                 },
                                 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linux Installation Process - NCHS Cybersecurity</title>
+    <title>Lesson 2.2 - NCHS Cybersecurity</title>
     
     
     <link rel="icon" href="../../../img/logo.png">
@@ -698,31 +698,31 @@
                                         <ul class="unit-lessons">
                                             
                                             <li>
-                                                <a href="../lesson1-1/">Lesson 1.1</a>
+                                                <a href="../../unit1/lesson1-1/">Lesson 1.1</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-2/">Lesson 1.2</a>
+                                                <a href="../../unit1/lesson1-2/">Lesson 1.2</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-3/">Lesson 1.3</a>
+                                                <a href="../../unit1/lesson1-3/">Lesson 1.3</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-4/">Lesson 1.4</a>
+                                                <a href="../../unit1/lesson1-4/">Lesson 1.4</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-5/">Lesson 1.5</a>
+                                                <a href="../../unit1/lesson1-5/">Lesson 1.5</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-6/">Lesson 1.6</a>
+                                                <a href="../../unit1/lesson1-6/">Lesson 1.6</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="./">Linux Installation Process</a>
+                                                <a href="../../unit1/installation-process/">Linux Installation Process</a>
                                             </li>
                                             
                                         </ul>
@@ -735,15 +735,15 @@
                                         <ul class="unit-lessons">
                                             
                                             <li>
-                                                <a href="../../unit2/lesson2-1/">Lesson 2.1</a>
+                                                <a href="../lesson2-1/">Lesson 2.1</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../../unit2/lesson2-2/">Lesson 2.2</a>
+                                                <a href="./">Lesson 2.2</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../../unit2/lesson2-3/">Lesson 2.3</a>
+                                                <a href="../lesson2-3/">Lesson 2.3</a>
                                             </li>
                                             
                                         </ul>
@@ -964,142 +964,522 @@
 
     <div class="container">
         
-        <h2 id="what-is-it"><em>What</em> is it?</h2>
-<p>Kali is an operating system that was made <strong><em>specially</em></strong> for cybersecurity work (and hacking as well). It has a large toolkit of useful programs that we're going to learn about, including Hydra, Nmap, Wireshark, Tcpdump, MacChanger, Chisel, Aircrack-ng, etc.</p>
-<h2 id="some-vocab">Some Vocab:</h2>
-<p>As much as we know vocabulary might not be that interesting, it's important to know for the future, since there's a LOT of acronyms and words in cybersecurity that you're going to be hearing and using, so it's best to get used to it.</p>
-<ul>
-<li><strong>Operating System (OS)</strong>: The main software that runs your computer, like Windows, macOS, iOS, GNU/Linux, etc.</li>
-<li><strong>Virtual Machine (VM)</strong>: It's basically a computer <em>inside</em> another computer. You can run your regular OS, like Windows, and still have Kali Linux inside of it</li>
-<li><strong>ISO File (International Organization for Standardization File)</strong>: Sounds fancy, but really it's just a full copy of an OS within one tiny file</li>
-<li><strong>Hypervisor</strong>: Software that creates and manages VMs. Examples are VirtualBox and VMWare Workstation. There's also QEMU, but mostly Linux users use that, and you're likely running on Windows or mac</li>
-<li><strong>Bootable USB</strong>: Just a USB drive (which you hopefully already know about) that can start up a computer and install an OS (we don't need this yet)</li>
-<li><strong>Partitioning</strong>: A more advanced topic, but it's dividing up your drive into sections called <em>partitions</em>, which are like walls for a room. We don't need this yet, but it is good to know</li>
-</ul>
-<p>Now, let's get into the nitty-gritty:</p>
-<h2 id="method-1-easy-way">Method 1: Easy way :)</h2>
-<h3 id="minimum-requirements">Minimum Requirements*:</h3>
+        <h1 id="internet-protocols-deep-dive">Internet Protocols Deep Dive</h1>
+<p>You know what the internet is and how it works at a high level. Now let's dive deeper into the protocols that make communication possible. Understanding these protocols is essential for security—many attacks exploit protocol weaknesses or misconfigurations.</p>
+<h2 id="the-protocol-stack">The Protocol Stack</h2>
+<p>Think of network communication as layers, each handling specific tasks. We'll examine the key protocols at each layer.</p>
+<h2 id="application-layer-protocols">Application Layer Protocols</h2>
+<p>These are the protocols you interact with directly.</p>
+<h3 id="http-hypertext-transfer-protocol">HTTP (HyperText Transfer Protocol)</h3>
+<p><strong>HTTP</strong> is how web browsers communicate with web servers.</p>
+<h4 id="http-request-structure">HTTP Request Structure</h4>
+<pre><code class="language-http">GET /index.html HTTP/1.1
+Host: www.example.com
+User-Agent: Mozilla/5.0
+Accept: text/html
+Accept-Language: en-US
+Connection: keep-alive
+</code></pre>
+<p><strong>Components:</strong>
+- <strong>Method</strong>: GET, POST, PUT, DELETE, etc.
+- <strong>Path</strong>: Resource being requested
+- <strong>Version</strong>: HTTP/1.1, HTTP/2, HTTP/3
+- <strong>Headers</strong>: Metadata about the request</p>
+<h4 id="http-methods">HTTP Methods</h4>
+<p><strong>GET</strong>: Retrieve data</p>
+<pre><code class="language-http">GET /users/123 HTTP/1.1
+</code></pre>
+<p><strong>POST</strong>: Submit data</p>
+<pre><code class="language-http">POST /users HTTP/1.1
+Content-Type: application/json
+
+{&quot;name&quot;: &quot;John&quot;, &quot;email&quot;: &quot;john@example.com&quot;}
+</code></pre>
+<p><strong>PUT</strong>: Update/replace resource</p>
+<pre><code class="language-http">PUT /users/123 HTTP/1.1
+Content-Type: application/json
+
+{&quot;name&quot;: &quot;John Updated&quot;}
+</code></pre>
+<p><strong>DELETE</strong>: Remove resource</p>
+<pre><code class="language-http">DELETE /users/123 HTTP/1.1
+</code></pre>
+<p><strong>HEAD</strong>: Like GET but only returns headers
+<strong>OPTIONS</strong>: Describe communication options
+<strong>PATCH</strong>: Partial update</p>
+<h4 id="http-response-structure">HTTP Response Structure</h4>
+<pre><code class="language-http">HTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length: 1234
+Server: Apache/2.4.41
+Set-Cookie: sessionid=abc123
+
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+...
+</code></pre>
+<p><strong>Status codes:</strong>
+- <strong>1xx</strong>: Informational
+- <strong>2xx</strong>: Success
+  - 200: OK
+  - 201: Created
+  - 204: No Content
+- <strong>3xx</strong>: Redirection
+  - 301: Moved Permanently
+  - 302: Found (temporary redirect)
+  - 304: Not Modified
+- <strong>4xx</strong>: Client errors
+  - 400: Bad Request
+  - 401: Unauthorized
+  - 403: Forbidden
+  - 404: Not Found
+- <strong>5xx</strong>: Server errors
+  - 500: Internal Server Error
+  - 502: Bad Gateway
+  - 503: Service Unavailable</p>
+<h4 id="http-security-issues">HTTP Security Issues</h4>
+<p><strong>Unencrypted</strong>: All data visible to anyone monitoring network
+<strong>Session hijacking</strong>: Steal cookies to impersonate users
+<strong>Man-in-the-middle</strong>: Intercept and modify traffic
+<strong>Replay attacks</strong>: Capture and replay requests</p>
+<p><strong>This is why HTTPS exists.</strong></p>
+<h3 id="https-http-secure">HTTPS (HTTP Secure)</h3>
+<p>HTTPS = HTTP + TLS encryption</p>
+<p><strong>What it protects:</strong>
+- Confidentiality: Data encrypted
+- Integrity: Detect if data modified
+- Authentication: Verify you're talking to the right server</p>
+<p><strong>What it doesn't protect:</strong>
+- Endpoint security: If server is compromised, HTTPS can't help
+- Metadata: Can still see which sites you visit (not content)
+- User actions: If user clicks malicious link, HTTPS doesn't stop it</p>
+<p><strong>Key concepts:</strong>
+- Requires valid SSL/TLS certificate
+- Browser verifies certificate before trusting connection
+- All traffic encrypted after handshake
+- Uses port 443 (HTTP uses port 80)</p>
+<h3 id="dns-domain-name-system">DNS (Domain Name System)</h3>
+<p><strong>DNS</strong> translates domain names to IP addresses.</p>
+<h4 id="dns-record-types">DNS Record Types</h4>
+<p><strong>A record</strong>: IPv4 address</p>
+<pre><code>example.com.  IN  A  93.184.216.34
+</code></pre>
+<p><strong>AAAA record</strong>: IPv6 address</p>
+<pre><code>example.com.  IN  AAAA  2606:2800:220:1:248:1893:25c8:1946
+</code></pre>
+<p><strong>CNAME record</strong>: Alias to another domain</p>
+<pre><code>www.example.com.  IN  CNAME  example.com.
+</code></pre>
+<p><strong>MX record</strong>: Mail servers</p>
+<pre><code>example.com.  IN  MX  10 mail.example.com.
+</code></pre>
+<p><strong>NS record</strong>: Name servers</p>
+<pre><code>example.com.  IN  NS  ns1.example.com.
+</code></pre>
+<p><strong>TXT record</strong>: Arbitrary text (used for SPF, DKIM, verification)</p>
+<pre><code>example.com.  IN  TXT  &quot;v=spf1 mx ~all&quot;
+</code></pre>
+<p><strong>PTR record</strong>: Reverse DNS (IP to domain)</p>
+<h4 id="dns-query-process">DNS Query Process</h4>
 <ol>
-<li><code>8 GB</code> of RAM</li>
-<li><code>20-30 GB</code> of free hard drive space</li>
-<li>A decently fast CPU (you probably have this)</li>
+<li>User types <code>www.example.com</code> in browser</li>
+<li>Computer checks local DNS cache</li>
+<li>If not cached, queries configured DNS server (usually ISP's)</li>
+<li>DNS server checks its cache</li>
+<li>If not cached, queries root DNS servers</li>
+<li>Root server responds with TLD (Top-Level Domain) server for <code>.com</code></li>
+<li>TLD server responds with authoritative name server for <code>example.com</code></li>
+<li>Authoritative server responds with IP address</li>
+<li>Response cached at each level</li>
+<li>Browser connects to IP address</li>
 </ol>
-<p>*But, how do I know if I meet them? Well, you can press <em><code>Ctrl+Shift+Esc</code></em> on Windows and click on <strong>"Performance"</strong> inside of Task Manager, and it'll give you a spec (specifications) sheet. On mac, you can click on <strong>"About"</strong> in the top menu bar of your computer. On Linux, you can type <strong><code>uname -a</code></strong>, or use a custom program like <code>fastfetch</code></p>
-<h2 id="big-disclaimer-for-windows-users">BIG DISCLAIMER FOR WINDOWS USERS:</h2>
-<ul>
-<li>You NEED to DISABLE something called Hyper-V. If you don't know what that is, for Windows users, Hyper-V will conflict with Virtualbox, making it run poorly and crash often</li>
-<li>To check if you hve Hyper-V, press <code>Win+R</code>, and type <code>optionalfeatures</code>, then press <code>Enter</code></li>
-<li>Look for a "Hyper-V" in the list of shown items. If it's checked, then it's enabled. Uncheck it.<ul>
-<li>Alternative method: go to cmd (Command Prompt), and right click and "Run as Administrator". Then use the following command: <code>bcdedit /set hypervisorlaunchtype off</code></li>
-</ul>
-</li>
-<li>Finally, restart your computer</li>
-</ul>
-<h2 id="big-disclaimer-for-macos-users">BIG DISCLAIMER FOR MACOS USERS:</h2>
-<ul>
-<li>You need to check if you're using an Intel-based Mac or Apple Silicon machine. If your device is M1, M2, M*, then it's <strong>Apple Silicon</strong></li>
-<li>If this is the case, you will need to use a different software for virtualization. You have some options, like <a href="https://getutm.app">UTM</a> or <a href="https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion">VMware Fusion</a>. </li>
-<li>Also, you will have to install Kali Linux using the 
-<em><strong>ARM64 version! Not x86-64!</strong></em></li>
-</ul>
-<hr />
-<p>Now, go to <a href="https://virtualbox.org">virtualbox.org</a></p>
-<p>Click on the download for your OS, and install the program by following the instruction wizard.</p>
-<p><img alt="Virtual Box" src="../../../img/virtual_box.png" /></p>
-<ul>
-<li>Now, go to the <a href="https://kali.org/get-kali">Kali Linux website</a>.</li>
-<li>Download the "Installer" ISO file (<code>~ 4 GB</code> in size)</li>
-<li>Then choose the 64-bit version for modern computers.</li>
-<li>If your computer is old, it could be 32-bit. If so, you may need to check your system specifications as explained above. However, it probably isn't.</li>
-</ul>
-<p><img alt="Kali Installation" src="../../../img/kali_img.png" /></p>
-<blockquote>
-<p>Remember, Apple Silicon machines will install the ARM64 version of Kali Linux instead!</p>
-</blockquote>
-<ul>
-<li>Finally, make your Virtual Machine. Open up VirtualBox and click "New"</li>
-<li>Name it whatever, I'd call it "Kali Linux", or "Kali Machine".</li>
-<li>Type: Linux, Version: Debian (64-bit)</li>
-<li>Allocate at least <code>4 GB</code> of RAM, AKA <code>4096 MB</code>, by dragging the slider or typing in the number in the RAM text box</li>
-<li>Create a Virtual Hrd Disk (allocate <code>25-30 GB</code> minimum)<ul>
-<li>Choose VDI (VirtualBox Disk Image)</li>
-<li>Also select "dynamically allocated" to save space, and allows the VM to grow dynamically in storage size as you begin to add more things</li>
-</ul>
-</li>
-<li>After clicking done, tell it to create, but do NOT tell it to also start yet</li>
-<li>Click on your virtual machine, and then go to settings</li>
-<li>Then go to Storage, and click the empty disk icon</li>
-<li>This is where we "choose a disk file", and select the downloaded Kali ISO</li>
-<li>Then under System, enable PAE/NX if available to you. PAE is Physical Address Extension, and NX is No Execute. These allow for &gt; <code>4 GB</code> of RAM access and prevents non-executable code from being executed in memory segments. If you don't know what that means, just ignore this</li>
-<li>Under Display, increase video memory to <code>128 MB</code></li>
-<li>Finally, save and exit Settings, and click on Start to boot your VM</li>
-<li>Select "Graphical Install" (press Enter, navigate using arrow keys)</li>
-<li>Choose your language, location, keyboard (these can later be changed, doesn't really matter)</li>
-<li>You can set a hostname, or keep the default (kali)</li>
-</ul>
-<h3 id="important-username-is-kali-and-password-is-kali-by-default"><strong>IMPORTANT</strong>: username is <em>kali</em> and password is <em>kali</em> by default!</h3>
-<ul>
-<li>Choose "Guided - use entire disk" for your partitioning</li>
-<li>Then select "All files in one partition"</li>
-<li>Confirm and wait a while. Take a walk outside, take a short nap, whatever you want. Just wait 10-20 minutes and it'll be done</li>
-<li>Restart when prompted</li>
-<li>On first login, enter the username and password</li>
-<li>Then, click the <code>SUPER</code> key (<code>Win</code> key or <code>Cmd</code> key on mac) and type "terminal" or "console" into the search, and open the app</li>
-<li>In the terminal, you can type <code>sudo apt update &amp;&amp; sudo apt upgrade -y</code><ul>
-<li>This command just updates your system</li>
-<li>When prompted with a password, type in your password</li>
-</ul>
-</li>
-<li>Happy Linux!</li>
-</ul>
-<h2 id="method-2-hard-way-bare-metal-installation">Method 2: Hard way (bare metal installation)</h2>
-<p>Alright. You're ready for the real deal. No problem. </p>
-<p><code>WARNING! ⚠️⚠️</code>: This version of installation WILL take space on your disk! This means it will be physically installed, and it will NOT be installed as a VM! Just like Windows or macOS, it will be physically on your device. If you do this incorrectly, it may <strong>wipe your device completely</strong>. I'm not liable for if you mistakenly wipe your drive, it's up to you. Also, I personally do <strong>not recommend you install Kali Linux on a physical drive</strong>. If you want to use Linux for extra practice, install a distribution like <a href="https://www.debian.org/">Debian</a> or <a href="https://linuxmint.com/">Linux Mint</a>. You are risking data loss if done incorrectly, so proceed at your own risk.</p>
-<p>Important things to note are:</p>
-<ul>
-<li>If you install on bare metal, AKA on your physical device, your device may have incompatibility issues. I would recommend doing your own research before doing so</li>
-<li>You may want to install Linux on a secondary drive, since if you use your main one, you will have to create a special partition for Linux to use exclusively, which is more difficult</li>
-<li>You'll need a USB drive with preferably <code>8 GB</code> or more of storage</li>
-<li>You may need to adjust your BIOS (manufacturer specific, meaning it depends on what company made your computer and maybe even where you bought it from) to allow for other bootable devices, which can include removing Secure Boot</li>
-<li>There's some specifics for ARM64 machines like Apple Silicon that will be different!</li>
-<li>Overall, you are likely going to have to do your OWN research to make sure you don't mess anything up.</li>
-</ul>
-<p>Without further ado, these are some general instructions (not perfect):</p>
+<h4 id="dns-security-issues">DNS Security Issues</h4>
+<p><strong>DNS Spoofing/Poisoning</strong>: Provide false DNS responses
+- Attacker redirects traffic to malicious server
+- User thinks they're on legitimate site</p>
+<p><strong>DNS Cache Poisoning</strong>: Corrupt DNS cache with false entries</p>
+<p><strong>DNS Tunneling</strong>: Exfiltrate data through DNS queries
+- Encode data in subdomain names
+- Bypasses many security controls</p>
+<p><strong>DDoS via DNS Amplification</strong>: Small queries → large responses
+- Attacker spoofs victim's IP
+- Sends queries to many DNS servers
+- Servers send large responses to victim</p>
+<p><strong>DNSSEC</strong>: Digital signatures to verify DNS responses
+- Prevents spoofing
+- Not widely adopted yet</p>
+<h3 id="ftp-file-transfer-protocol">FTP (File Transfer Protocol)</h3>
+<p><strong>FTP</strong> transfers files between client and server.</p>
+<h4 id="how-ftp-works">How FTP Works</h4>
+<p><strong>Two channels:</strong>
+1. <strong>Control channel</strong> (port 21): Commands and responses
+2. <strong>Data channel</strong> (port 20 or random): Actual file transfer</p>
+<p><strong>Active vs. Passive mode:</strong>
+- <strong>Active</strong>: Server initiates data connection to client (firewall issues)
+- <strong>Passive</strong>: Client initiates both connections (firewall-friendly)</p>
+<h4 id="ftp-commands">FTP Commands</h4>
+<pre><code>USER username        # Provide username
+PASS password        # Provide password
+LIST                 # List files
+RETR filename        # Download file
+STOR filename        # Upload file
+DELE filename        # Delete file
+MKD directory        # Create directory
+CWD directory        # Change directory
+QUIT                 # Disconnect
+</code></pre>
+<h4 id="ftp-security-issues">FTP Security Issues</h4>
+<p><strong>Major problem: Everything in plaintext</strong>
+- Username and password visible
+- File contents visible
+- Commands visible</p>
+<p><strong>Solutions:</strong>
+- <strong>FTPS</strong>: FTP over TLS (explicit or implicit)
+- <strong>SFTP</strong>: SSH File Transfer Protocol (different protocol, runs over SSH)</p>
+<p><strong>Example SFTP:</strong></p>
+<pre><code class="language-bash">sftp user@server
+sftp&gt; ls
+sftp&gt; get file.txt
+sftp&gt; put local.txt
+sftp&gt; quit
+</code></pre>
+<h3 id="smtp-simple-mail-transfer-protocol">SMTP (Simple Mail Transfer Protocol)</h3>
+<p><strong>SMTP</strong> sends email between servers.</p>
+<h4 id="email-sending-process">Email Sending Process</h4>
 <ol>
-<li>Create a bootable USB drive using an app like Balena Etcher or Rufus</li>
-<li>Make space on your hard drive by creating a disk partition of ~<code>30 GB</code> or more, or install on a secondary hard drive</li>
-<li>Boot from the USB drive from BIOS after restarting your computer and smashing the BIOS key as it boots up (typically <code>Esc</code>, <code>F11</code>, <code>F12</code>, or <code>Del</code> depending on the manufacturer)</li>
-<li>Follow the installation process, but make sure you select the right drive and if it's on the same disk as Windows or Mac, you install "alongside" it, not replace </li>
-<li>After going through the setup, you may re-enter the BIOS to change the boot order. What this means is move Linux above Windows so that on first boot you boot into Linux (optional)</li>
+<li>User composes email in client (Gmail, Outlook)</li>
+<li>Client sends to SMTP server (port 25, 587, or 465)</li>
+<li>SMTP server looks up recipient's mail server (MX record)</li>
+<li>Sends email to recipient's SMTP server</li>
+<li>Recipient's server stores email</li>
+<li>Recipient downloads via POP3/IMAP</li>
 </ol>
-<p>Some important extras:</p>
-<ul>
-<li>Make sure you regularly update your system at least weekly</li>
-<li>Make decent credentials or use a <a href="https://www.yubico.com/">physical key</a></li>
-<li>Never just copy/paste a command without understanding it, look it up at least (even from me!)</li>
-<li>Install packages wisely and preferably from trusted sources</li>
-</ul>
-<p>Happy Linux! :)</p>
+<h4 id="smtp-commands">SMTP Commands</h4>
+<pre><code>HELO/EHLO            # Identify sender
+MAIL FROM:           # Sender address
+RCPT TO:             # Recipient address
+DATA                 # Start message content
+.                    # End message
+QUIT                 # Disconnect
+</code></pre>
+<h4 id="email-security-issues">Email Security Issues</h4>
+<p><strong>SPF (Sender Policy Framework)</strong>: TXT record lists authorized sending servers</p>
+<pre><code>v=spf1 mx ip4:192.0.2.0/24 ~all
+</code></pre>
+<p><strong>DKIM (DomainKeys Identified Mail)</strong>: Digital signature
+- Signs outgoing emails
+- Recipients verify signature</p>
+<p><strong>DMARC (Domain-based Message Authentication)</strong>: Policy for SPF/DKIM failures</p>
+<pre><code>v=DMARC1; p=reject; rua=mailto:dmarc@example.com
+</code></pre>
+<p><strong>Phishing</strong>: Spoofed sender addresses
+<strong>Spam</strong>: Unsolicited email
+<strong>Email harvesting</strong>: Collecting addresses for spam
+<strong>Malware attachments</strong>: Malicious files</p>
+<h2 id="transport-layer-protocols">Transport Layer Protocols</h2>
+<h3 id="tcp-transmission-control-protocol">TCP (Transmission Control Protocol)</h3>
+<p><strong>TCP</strong> provides reliable, ordered delivery.</p>
+<h4 id="three-way-handshake">Three-Way Handshake</h4>
+<p><strong>Connection establishment:</strong></p>
+<pre><code>1. Client → Server: SYN (sequence = 1000)
+2. Server → Client: SYN-ACK (sequence = 5000, ack = 1001)
+3. Client → Server: ACK (sequence = 1001, ack = 5001)
+
+Connection established!
+</code></pre>
+<h4 id="tcp-header">TCP Header</h4>
+<p>Key fields:
+- <strong>Source port</strong> (16 bits)
+- <strong>Destination port</strong> (16 bits)
+- <strong>Sequence number</strong> (32 bits): Track bytes sent
+- <strong>Acknowledgment number</strong> (32 bits): Track bytes received
+- <strong>Flags</strong>: SYN, ACK, FIN, RST, PSH, URG
+- <strong>Window size</strong>: Flow control
+- <strong>Checksum</strong>: Error detection</p>
+<h4 id="tcp-flags">TCP Flags</h4>
+<p><strong>SYN</strong>: Synchronize, start connection
+<strong>ACK</strong>: Acknowledge received data
+<strong>FIN</strong>: Finish, close connection gracefully
+<strong>RST</strong>: Reset, abrupt close (error)
+<strong>PSH</strong>: Push, send data immediately
+<strong>URG</strong>: Urgent, prioritize this data</p>
+<h4 id="connection-termination">Connection Termination</h4>
+<p>Four-way handshake:</p>
+<pre><code>1. Client → Server: FIN
+2. Server → Client: ACK
+3. Server → Client: FIN
+4. Client → Server: ACK
+
+Connection closed!
+</code></pre>
+<h4 id="tcp-security">TCP Security</h4>
+<p><strong>SYN Flood attack</strong>: Send many SYN packets, never complete handshake
+- Exhausts server's connection table
+- Prevention: SYN cookies, rate limiting</p>
+<p><strong>TCP hijacking</strong>: Inject packets with correct sequence numbers
+- Man-in-the-middle attack
+- Prevention: Encryption (TLS)</p>
+<p><strong>Reset attacks</strong>: Send RST packets to terminate connections
+- Prevention: Encryption</p>
+<h3 id="udp-user-datagram-protocol">UDP (User Datagram Protocol)</h3>
+<p><strong>UDP</strong> is connectionless and unreliable (by design).</p>
+<h4 id="udp-header">UDP Header</h4>
+<p>Simpler than TCP:
+- Source port (16 bits)
+- Destination port (16 bits)
+- Length (16 bits)
+- Checksum (16 bits)</p>
+<p><strong>No sequence numbers, acknowledgments, or retransmissions.</strong></p>
+<h4 id="when-to-use-udp">When to Use UDP</h4>
+<p><strong>Use cases:</strong>
+- DNS queries (single packet request/response)
+- Video streaming (dropped frames tolerable)
+- Online gaming (low latency critical)
+- VoIP (voice calls, some packet loss acceptable)
+- DHCP (network configuration)
+- SNMP (network monitoring)</p>
+<p><strong>Advantages:</strong>
+- Lower overhead
+- Faster (no handshake)
+- Better for real-time applications</p>
+<p><strong>Disadvantages:</strong>
+- No reliability guarantee
+- No flow control
+- No congestion control</p>
+<h4 id="udp-security">UDP Security</h4>
+<p><strong>UDP Flood</strong>: Send massive amounts of UDP packets
+- DDoS attack
+- Prevention: Rate limiting, firewall rules</p>
+<p><strong>Amplification attacks</strong>: Small UDP query → large response
+- DNS amplification (50x)
+- NTP amplification (200x)
+- Prevention: Configure servers to not respond to spoofed sources</p>
+<h2 id="network-layer-protocols">Network Layer Protocols</h2>
+<h3 id="ip-internet-protocol">IP (Internet Protocol)</h3>
+<p><strong>IP</strong> handles addressing and routing.</p>
+<h4 id="ipv4-packet-structure">IPv4 Packet Structure</h4>
+<p><strong>Header fields:</strong>
+- <strong>Version</strong>: 4 for IPv4
+- <strong>Header length</strong>: Usually 20 bytes
+- <strong>TTL</strong> (Time To Live): Decrements at each hop, prevents loops
+- <strong>Protocol</strong>: TCP (6), UDP (17), ICMP (1)
+- <strong>Source IP</strong>: 32-bit address
+- <strong>Destination IP</strong>: 32-bit address
+- <strong>Checksum</strong>: Header integrity</p>
+<h4 id="ipv4-address-classes-historical">IPv4 Address Classes (Historical)</h4>
+<p><strong>Class A</strong>: 0.0.0.0 to 127.255.255.255 (large networks)
+<strong>Class B</strong>: 128.0.0.0 to 191.255.255.255 (medium networks)
+<strong>Class C</strong>: 192.0.0.0 to 223.255.255.255 (small networks)</p>
+<p><strong>Private ranges:</strong>
+- 10.0.0.0/8 (Class A)
+- 172.16.0.0/12 (Class B)
+- 192.168.0.0/16 (Class C)</p>
+<p><strong>Special addresses:</strong>
+- 127.0.0.1: Loopback (localhost)
+- 0.0.0.0: Default route
+- 255.255.255.255: Broadcast</p>
+<h4 id="ipv6">IPv6</h4>
+<p><strong>Address format</strong>: Eight groups of four hexadecimal digits</p>
+<pre><code>2001:0db8:85a3:0000:0000:8a2e:0370:7334
+</code></pre>
+<p><strong>Abbreviation rules:</strong>
+- Leading zeros can be omitted: <code>2001:db8:85a3:0:0:8a2e:370:7334</code>
+- Consecutive zeros can be replaced with <code>::</code> (once only): <code>2001:db8:85a3::8a2e:370:7334</code></p>
+<p><strong>Special addresses:</strong>
+- <code>::1</code> - Loopback
+- <code>::</code> - Unspecified
+- <code>fe80::/10</code> - Link-local
+- <code>ff00::/8</code> - Multicast</p>
+<p><strong>Why IPv6?</strong>
+- IPv4 exhaustion (4.3 billion addresses not enough)
+- IPv6 provides 340 undecillion addresses
+- Better security (IPsec built-in)
+- Simplified header
+- No NAT needed</p>
+<h3 id="icmp-internet-control-message-protocol">ICMP (Internet Control Message Protocol)</h3>
+<p><strong>ICMP</strong> sends error messages and diagnostic information.</p>
+<h4 id="common-icmp-types">Common ICMP Types</h4>
+<p><strong>Echo Request (Type 8)</strong>: Ping request
+<strong>Echo Reply (Type 0)</strong>: Ping response
+<strong>Destination Unreachable (Type 3)</strong>: Can't reach destination
+<strong>Time Exceeded (Type 11)</strong>: TTL expired (used by traceroute)
+<strong>Redirect (Type 5)</strong>: Better route available</p>
+<h4 id="ping">Ping</h4>
+<pre><code class="language-bash">ping example.com
+
+# Sends Echo Request
+# Receives Echo Reply
+# Shows round-trip time (RTT)
+</code></pre>
+<p><strong>Security implications:</strong>
+- Network reconnaissance
+- ICMP tunneling (covert channel)
+- ICMP flooding (DoS)
+- Some networks block ICMP</p>
+<h4 id="traceroute">Traceroute</h4>
+<pre><code class="language-bash">traceroute example.com
+
+# Sends packets with increasing TTL
+# Each router decrements TTL
+# When TTL=0, router sends ICMP Time Exceeded
+# Shows path to destination
+</code></pre>
+<h3 id="arp-address-resolution-protocol">ARP (Address Resolution Protocol)</h3>
+<p><strong>ARP</strong> maps IP addresses to MAC addresses on local network.</p>
+<h4 id="how-arp-works">How ARP Works</h4>
+<ol>
+<li>Computer wants to send packet to 192.168.1.100</li>
+<li>Checks ARP cache (known IP→MAC mappings)</li>
+<li>If not cached, broadcasts ARP request:
+   <code>"Who has 192.168.1.100? Tell 192.168.1.50"</code></li>
+<li>Device with 192.168.1.100 responds:
+   <code>"192.168.1.100 is at MAC aa:bb:cc:dd:ee:ff"</code></li>
+<li>Requester caches this mapping</li>
+<li>Uses MAC address for actual communication</li>
+</ol>
+<h4 id="arp-commands">ARP Commands</h4>
+<pre><code class="language-bash"># Show ARP cache
+arp -a
+ip neigh show
+
+# Delete ARP entry
+sudo arp -d 192.168.1.100
+
+# Add static ARP entry
+sudo arp -s 192.168.1.100 aa:bb:cc:dd:ee:ff
+</code></pre>
+<h4 id="arp-spoofingpoisoning">ARP Spoofing/Poisoning</h4>
+<p><strong>Attack:</strong>
+1. Attacker sends fake ARP responses
+2. Claims attacker's MAC is gateway's IP
+3. Victim sends traffic to attacker instead of gateway
+4. Attacker forwards traffic (man-in-the-middle)</p>
+<p><strong>Detection:</strong>
+- Duplicate IP addresses
+- Unexpected ARP replies
+- Changing MAC addresses for same IP</p>
+<p><strong>Prevention:</strong>
+- Static ARP entries (impractical)
+- ARP inspection on switches
+- Network monitoring</p>
+<h2 id="putting-it-all-together">Putting It All Together</h2>
+<h3 id="example-loading-a-web-page">Example: Loading a Web Page</h3>
+<p>Let's trace what happens when you visit <code>https://example.com</code>:</p>
+<ol>
+<li><strong>DNS Resolution</strong></li>
+<li>Query DNS server: "What's the IP for example.com?"</li>
+<li>
+<p>Response: "93.184.216.34"</p>
+</li>
+<li>
+<p><strong>ARP</strong> (if needed)</p>
+</li>
+<li>"What's the MAC address of my gateway?"</li>
+<li>
+<p>Gateway responds with its MAC</p>
+</li>
+<li>
+<p><strong>TCP Handshake</strong></p>
+</li>
+<li>SYN to 93.184.216.34:443</li>
+<li>SYN-ACK from server</li>
+<li>
+<p>ACK from client</p>
+</li>
+<li>
+<p><strong>TLS Handshake</strong></p>
+</li>
+<li>Client Hello (supported ciphers)</li>
+<li>Server Hello (chosen cipher, certificate)</li>
+<li>Key exchange</li>
+<li>
+<p>Encrypted connection established</p>
+</li>
+<li>
+<p><strong>HTTP Request</strong></p>
+</li>
+<li>GET / HTTP/1.1</li>
+<li>
+<p>Host: example.com</p>
+</li>
+<li>
+<p><strong>HTTP Response</strong></p>
+</li>
+<li>200 OK</li>
+<li>Content-Type: text/html</li>
+<li>
+<p>HTML content</p>
+</li>
+<li>
+<p><strong>Additional Resources</strong></p>
+</li>
+<li>Browser parses HTML</li>
+<li>Requests CSS, JavaScript, images</li>
+<li>
+<p>Each resource: separate TCP connection (HTTP/1.1) or multiplexed (HTTP/2)</p>
+</li>
+<li>
+<p><strong>Connection Close</strong></p>
+</li>
+<li>FIN/ACK exchange</li>
+<li>Or keep-alive for reuse</li>
+</ol>
+<h3 id="security-at-each-layer">Security at Each Layer</h3>
+<p><strong>Application Layer:</strong>
+- Input validation
+- Authentication
+- Encryption (HTTPS)</p>
+<p><strong>Transport Layer:</strong>
+- Port filtering
+- SYN cookies
+- Rate limiting</p>
+<p><strong>Network Layer:</strong>
+- IP filtering
+- Route filtering
+- Spoofing prevention</p>
+<p><strong>Link Layer:</strong>
+- MAC filtering
+- ARP inspection
+- VLAN segmentation</p>
+<p><strong>Defense in depth: Protect at multiple layers.</strong></p>
+<h2 id="protocol-analysis-practice">Protocol Analysis Practice</h2>
+<p>To understand protocols deeply:
+1. Capture traffic with Wireshark
+2. Examine packet structure
+3. Follow protocol flows
+4. Identify anomalies</p>
+<p><strong>Suggested exercises:</strong>
+- Capture and analyze HTTP traffic
+- Observe TCP three-way handshake
+- Watch DNS resolution
+- Monitor ARP requests
+- Trace full web page load</p>
+<p>Understanding protocols is fundamental to:
+- Detecting attacks
+- Analyzing malware communication
+- Troubleshooting network issues
+- Designing secure systems</p>
+<p>In the next lessons, we'll apply this knowledge to identify and exploit protocol weaknesses, and then learn how to defend against those attacks.</p>
         
 
         <!-- Lesson Navigation (only show on non-homepage pages) -->
         
         <div class="lesson-nav">
             
-            <a href="../lesson1-6/" class="lesson-nav-button">
+            <a href="../lesson2-1/" class="lesson-nav-button">
                 <span class="arrow">←</span>
-                <span>Previous: Lesson 1.6</span>
+                <span>Previous: Lesson 2.1</span>
             </a>
             
 
             <div class="lesson-nav-info">
                 <div class="current-lesson">Current Lesson</div>
-                <div class="lesson-title">Linux Installation Process</div>
+                <div class="lesson-title">Lesson 2.2</div>
             </div>
 
             
-            <a href="../../unit2/lesson2-1/" class="lesson-nav-button">
-                <span>Next: Lesson 2.1</span>
+            <a href="../lesson2-3/" class="lesson-nav-button">
+                <span>Next: Lesson 2.3</span>
                 <span class="arrow">→</span>
             </a>
             
@@ -1158,43 +1538,43 @@
                                 
                                 {
                                     title: "Lesson 1.1",
-                                    url: '../lesson1-1/',
+                                    url: '../../unit1/lesson1-1/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.2",
-                                    url: '../lesson1-2/',
+                                    url: '../../unit1/lesson1-2/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.3",
-                                    url: '../lesson1-3/',
+                                    url: '../../unit1/lesson1-3/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.4",
-                                    url: '../lesson1-4/',
+                                    url: '../../unit1/lesson1-4/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.5",
-                                    url: '../lesson1-5/',
+                                    url: '../../unit1/lesson1-5/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.6",
-                                    url: '../lesson1-6/',
+                                    url: '../../unit1/lesson1-6/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Linux Installation Process",
-                                    url: './',
+                                    url: '../../unit1/installation-process/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
@@ -1204,19 +1584,19 @@
                                 
                                 {
                                     title: "Lesson 2.1",
-                                    url: '../../unit2/lesson2-1/',
+                                    url: '../lesson2-1/',
                                     path: 'Curriculum > Unit 2'
                                 },
                                 
                                 {
                                     title: "Lesson 2.2",
-                                    url: '../../unit2/lesson2-2/',
+                                    url: './',
                                     path: 'Curriculum > Unit 2'
                                 },
                                 
                                 {
                                     title: "Lesson 2.3",
-                                    url: '../../unit2/lesson2-3/',
+                                    url: '../lesson2-3/',
                                     path: 'Curriculum > Unit 2'
                                 },
                                 

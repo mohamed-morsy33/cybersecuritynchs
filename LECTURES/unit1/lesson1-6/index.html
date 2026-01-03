@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linux Installation Process - NCHS Cybersecurity</title>
+    <title>Lesson 1.6 - NCHS Cybersecurity</title>
     
     
     <link rel="icon" href="../../../img/logo.png">
@@ -718,11 +718,11 @@
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-6/">Lesson 1.6</a>
+                                                <a href="./">Lesson 1.6</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="./">Linux Installation Process</a>
+                                                <a href="../installation-process/">Linux Installation Process</a>
                                             </li>
                                             
                                         </ul>
@@ -964,142 +964,666 @@
 
     <div class="container">
         
-        <h2 id="what-is-it"><em>What</em> is it?</h2>
-<p>Kali is an operating system that was made <strong><em>specially</em></strong> for cybersecurity work (and hacking as well). It has a large toolkit of useful programs that we're going to learn about, including Hydra, Nmap, Wireshark, Tcpdump, MacChanger, Chisel, Aircrack-ng, etc.</p>
-<h2 id="some-vocab">Some Vocab:</h2>
-<p>As much as we know vocabulary might not be that interesting, it's important to know for the future, since there's a LOT of acronyms and words in cybersecurity that you're going to be hearing and using, so it's best to get used to it.</p>
-<ul>
-<li><strong>Operating System (OS)</strong>: The main software that runs your computer, like Windows, macOS, iOS, GNU/Linux, etc.</li>
-<li><strong>Virtual Machine (VM)</strong>: It's basically a computer <em>inside</em> another computer. You can run your regular OS, like Windows, and still have Kali Linux inside of it</li>
-<li><strong>ISO File (International Organization for Standardization File)</strong>: Sounds fancy, but really it's just a full copy of an OS within one tiny file</li>
-<li><strong>Hypervisor</strong>: Software that creates and manages VMs. Examples are VirtualBox and VMWare Workstation. There's also QEMU, but mostly Linux users use that, and you're likely running on Windows or mac</li>
-<li><strong>Bootable USB</strong>: Just a USB drive (which you hopefully already know about) that can start up a computer and install an OS (we don't need this yet)</li>
-<li><strong>Partitioning</strong>: A more advanced topic, but it's dividing up your drive into sections called <em>partitions</em>, which are like walls for a room. We don't need this yet, but it is good to know</li>
-</ul>
-<p>Now, let's get into the nitty-gritty:</p>
-<h2 id="method-1-easy-way">Method 1: Easy way :)</h2>
-<h3 id="minimum-requirements">Minimum Requirements*:</h3>
-<ol>
-<li><code>8 GB</code> of RAM</li>
-<li><code>20-30 GB</code> of free hard drive space</li>
-<li>A decently fast CPU (you probably have this)</li>
-</ol>
-<p>*But, how do I know if I meet them? Well, you can press <em><code>Ctrl+Shift+Esc</code></em> on Windows and click on <strong>"Performance"</strong> inside of Task Manager, and it'll give you a spec (specifications) sheet. On mac, you can click on <strong>"About"</strong> in the top menu bar of your computer. On Linux, you can type <strong><code>uname -a</code></strong>, or use a custom program like <code>fastfetch</code></p>
-<h2 id="big-disclaimer-for-windows-users">BIG DISCLAIMER FOR WINDOWS USERS:</h2>
-<ul>
-<li>You NEED to DISABLE something called Hyper-V. If you don't know what that is, for Windows users, Hyper-V will conflict with Virtualbox, making it run poorly and crash often</li>
-<li>To check if you hve Hyper-V, press <code>Win+R</code>, and type <code>optionalfeatures</code>, then press <code>Enter</code></li>
-<li>Look for a "Hyper-V" in the list of shown items. If it's checked, then it's enabled. Uncheck it.<ul>
-<li>Alternative method: go to cmd (Command Prompt), and right click and "Run as Administrator". Then use the following command: <code>bcdedit /set hypervisorlaunchtype off</code></li>
-</ul>
-</li>
-<li>Finally, restart your computer</li>
-</ul>
-<h2 id="big-disclaimer-for-macos-users">BIG DISCLAIMER FOR MACOS USERS:</h2>
-<ul>
-<li>You need to check if you're using an Intel-based Mac or Apple Silicon machine. If your device is M1, M2, M*, then it's <strong>Apple Silicon</strong></li>
-<li>If this is the case, you will need to use a different software for virtualization. You have some options, like <a href="https://getutm.app">UTM</a> or <a href="https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion">VMware Fusion</a>. </li>
-<li>Also, you will have to install Kali Linux using the 
-<em><strong>ARM64 version! Not x86-64!</strong></em></li>
-</ul>
-<hr />
-<p>Now, go to <a href="https://virtualbox.org">virtualbox.org</a></p>
-<p>Click on the download for your OS, and install the program by following the instruction wizard.</p>
-<p><img alt="Virtual Box" src="../../../img/virtual_box.png" /></p>
-<ul>
-<li>Now, go to the <a href="https://kali.org/get-kali">Kali Linux website</a>.</li>
-<li>Download the "Installer" ISO file (<code>~ 4 GB</code> in size)</li>
-<li>Then choose the 64-bit version for modern computers.</li>
-<li>If your computer is old, it could be 32-bit. If so, you may need to check your system specifications as explained above. However, it probably isn't.</li>
-</ul>
-<p><img alt="Kali Installation" src="../../../img/kali_img.png" /></p>
-<blockquote>
-<p>Remember, Apple Silicon machines will install the ARM64 version of Kali Linux instead!</p>
-</blockquote>
-<ul>
-<li>Finally, make your Virtual Machine. Open up VirtualBox and click "New"</li>
-<li>Name it whatever, I'd call it "Kali Linux", or "Kali Machine".</li>
-<li>Type: Linux, Version: Debian (64-bit)</li>
-<li>Allocate at least <code>4 GB</code> of RAM, AKA <code>4096 MB</code>, by dragging the slider or typing in the number in the RAM text box</li>
-<li>Create a Virtual Hrd Disk (allocate <code>25-30 GB</code> minimum)<ul>
-<li>Choose VDI (VirtualBox Disk Image)</li>
-<li>Also select "dynamically allocated" to save space, and allows the VM to grow dynamically in storage size as you begin to add more things</li>
-</ul>
-</li>
-<li>After clicking done, tell it to create, but do NOT tell it to also start yet</li>
-<li>Click on your virtual machine, and then go to settings</li>
-<li>Then go to Storage, and click the empty disk icon</li>
-<li>This is where we "choose a disk file", and select the downloaded Kali ISO</li>
-<li>Then under System, enable PAE/NX if available to you. PAE is Physical Address Extension, and NX is No Execute. These allow for &gt; <code>4 GB</code> of RAM access and prevents non-executable code from being executed in memory segments. If you don't know what that means, just ignore this</li>
-<li>Under Display, increase video memory to <code>128 MB</code></li>
-<li>Finally, save and exit Settings, and click on Start to boot your VM</li>
-<li>Select "Graphical Install" (press Enter, navigate using arrow keys)</li>
-<li>Choose your language, location, keyboard (these can later be changed, doesn't really matter)</li>
-<li>You can set a hostname, or keep the default (kali)</li>
-</ul>
-<h3 id="important-username-is-kali-and-password-is-kali-by-default"><strong>IMPORTANT</strong>: username is <em>kali</em> and password is <em>kali</em> by default!</h3>
-<ul>
-<li>Choose "Guided - use entire disk" for your partitioning</li>
-<li>Then select "All files in one partition"</li>
-<li>Confirm and wait a while. Take a walk outside, take a short nap, whatever you want. Just wait 10-20 minutes and it'll be done</li>
-<li>Restart when prompted</li>
-<li>On first login, enter the username and password</li>
-<li>Then, click the <code>SUPER</code> key (<code>Win</code> key or <code>Cmd</code> key on mac) and type "terminal" or "console" into the search, and open the app</li>
-<li>In the terminal, you can type <code>sudo apt update &amp;&amp; sudo apt upgrade -y</code><ul>
-<li>This command just updates your system</li>
-<li>When prompted with a password, type in your password</li>
-</ul>
-</li>
-<li>Happy Linux!</li>
-</ul>
-<h2 id="method-2-hard-way-bare-metal-installation">Method 2: Hard way (bare metal installation)</h2>
-<p>Alright. You're ready for the real deal. No problem. </p>
-<p><code>WARNING! ⚠️⚠️</code>: This version of installation WILL take space on your disk! This means it will be physically installed, and it will NOT be installed as a VM! Just like Windows or macOS, it will be physically on your device. If you do this incorrectly, it may <strong>wipe your device completely</strong>. I'm not liable for if you mistakenly wipe your drive, it's up to you. Also, I personally do <strong>not recommend you install Kali Linux on a physical drive</strong>. If you want to use Linux for extra practice, install a distribution like <a href="https://www.debian.org/">Debian</a> or <a href="https://linuxmint.com/">Linux Mint</a>. You are risking data loss if done incorrectly, so proceed at your own risk.</p>
-<p>Important things to note are:</p>
-<ul>
-<li>If you install on bare metal, AKA on your physical device, your device may have incompatibility issues. I would recommend doing your own research before doing so</li>
-<li>You may want to install Linux on a secondary drive, since if you use your main one, you will have to create a special partition for Linux to use exclusively, which is more difficult</li>
-<li>You'll need a USB drive with preferably <code>8 GB</code> or more of storage</li>
-<li>You may need to adjust your BIOS (manufacturer specific, meaning it depends on what company made your computer and maybe even where you bought it from) to allow for other bootable devices, which can include removing Secure Boot</li>
-<li>There's some specifics for ARM64 machines like Apple Silicon that will be different!</li>
-<li>Overall, you are likely going to have to do your OWN research to make sure you don't mess anything up.</li>
-</ul>
-<p>Without further ado, these are some general instructions (not perfect):</p>
-<ol>
-<li>Create a bootable USB drive using an app like Balena Etcher or Rufus</li>
-<li>Make space on your hard drive by creating a disk partition of ~<code>30 GB</code> or more, or install on a secondary hard drive</li>
-<li>Boot from the USB drive from BIOS after restarting your computer and smashing the BIOS key as it boots up (typically <code>Esc</code>, <code>F11</code>, <code>F12</code>, or <code>Del</code> depending on the manufacturer)</li>
-<li>Follow the installation process, but make sure you select the right drive and if it's on the same disk as Windows or Mac, you install "alongside" it, not replace </li>
-<li>After going through the setup, you may re-enter the BIOS to change the boot order. What this means is move Linux above Windows so that on first boot you boot into Linux (optional)</li>
-</ol>
-<p>Some important extras:</p>
-<ul>
-<li>Make sure you regularly update your system at least weekly</li>
-<li>Make decent credentials or use a <a href="https://www.yubico.com/">physical key</a></li>
-<li>Never just copy/paste a command without understanding it, look it up at least (even from me!)</li>
-<li>Install packages wisely and preferably from trusted sources</li>
-</ul>
-<p>Happy Linux! :)</p>
+        <h1 id="package-management-and-system-administration">Package Management and System Administration</h1>
+<p>Linux systems need software installation, updates, and maintenance. As a security professional, you'll constantly be installing tools, updating systems, and managing services. This lesson covers the essential system administration tasks.</p>
+<h2 id="package-management">Package Management</h2>
+<p><strong>Package managers</strong> handle software installation, updates, and removal. Different Linux distributions use different package managers.</p>
+<h3 id="apt-debianubuntukali">APT (Debian/Ubuntu/Kali)</h3>
+<p><strong>APT</strong> (Advanced Package Tool) is used on Debian-based systems like Ubuntu and Kali Linux.</p>
+<h4 id="updating-package-lists">Updating Package Lists</h4>
+<pre><code class="language-bash"># Update package index
+sudo apt update
+
+# Always do this before installing new software!
+</code></pre>
+<h4 id="upgrading-packages">Upgrading Packages</h4>
+<pre><code class="language-bash"># Upgrade all installed packages
+sudo apt upgrade
+
+# Upgrade with automatic handling of dependencies
+sudo apt full-upgrade
+
+# Upgrade specific package
+sudo apt upgrade package-name
+</code></pre>
+<h4 id="installing-packages">Installing Packages</h4>
+<pre><code class="language-bash"># Install package
+sudo apt install nmap
+
+# Install multiple packages
+sudo apt install nmap wireshark metasploit-framework
+
+# Install without confirmation
+sudo apt install -y nmap
+
+# Reinstall package
+sudo apt install --reinstall nmap
+</code></pre>
+<h4 id="removing-packages">Removing Packages</h4>
+<pre><code class="language-bash"># Remove package (keep configuration files)
+sudo apt remove nmap
+
+# Remove package and configuration files
+sudo apt purge nmap
+
+# Remove unused dependencies
+sudo apt autoremove
+
+# Clean up downloaded package files
+sudo apt clean
+</code></pre>
+<h4 id="searching-for-packages">Searching for Packages</h4>
+<pre><code class="language-bash"># Search for package
+apt search nmap
+
+# Show package information
+apt show nmap
+
+# List installed packages
+apt list --installed
+
+# List upgradeable packages
+apt list --upgradeable
+</code></pre>
+<h3 id="yumdnf-red-hatfedoracentos">YUM/DNF (Red Hat/Fedora/CentOS)</h3>
+<p>Used on Red Hat-based systems.</p>
+<pre><code class="language-bash"># Update package lists
+sudo yum update  # or sudo dnf update
+
+# Install package
+sudo yum install nmap
+
+# Remove package
+sudo yum remove nmap
+
+# Search for package
+yum search nmap
+
+# Show package info
+yum info nmap
+</code></pre>
+<h3 id="installing-from-source">Installing from Source</h3>
+<p>Sometimes you need to compile software from source code.</p>
+<pre><code class="language-bash"># 1. Download source code
+wget https://example.com/software.tar.gz
+
+# 2. Extract
+tar -xzvf software.tar.gz
+cd software/
+
+# 3. Configure
+./configure
+
+# 4. Compile
+make
+
+# 5. Install
+sudo make install
+
+# 6. Uninstall (if needed)
+sudo make uninstall
+</code></pre>
+<p><strong>Common compilation dependencies:</strong></p>
+<pre><code class="language-bash">sudo apt install build-essential
+sudo apt install gcc g++ make
+</code></pre>
+<h2 id="user-management">User Management</h2>
+<h3 id="creating-users">Creating Users</h3>
+<pre><code class="language-bash"># Create new user
+sudo useradd john
+
+# Create user with home directory
+sudo useradd -m john
+
+# Create user with specific shell
+sudo useradd -m -s /bin/bash john
+
+# Set password
+sudo passwd john
+</code></pre>
+<h3 id="modifying-users">Modifying Users</h3>
+<pre><code class="language-bash"># Change user's shell
+sudo usermod -s /bin/zsh john
+
+# Add user to group
+sudo usermod -aG sudo john    # Add to sudo group
+sudo usermod -aG docker john  # Add to docker group
+
+# Change home directory
+sudo usermod -d /home/newjohn john
+
+# Lock user account
+sudo usermod -L john
+
+# Unlock user account
+sudo usermod -U john
+</code></pre>
+<h3 id="deleting-users">Deleting Users</h3>
+<pre><code class="language-bash"># Delete user (keep home directory)
+sudo userdel john
+
+# Delete user and home directory
+sudo userdel -r john
+</code></pre>
+<h3 id="user-information">User Information</h3>
+<pre><code class="language-bash"># Show current user
+whoami
+
+# Show all users
+cat /etc/passwd
+
+# Show logged in users
+who
+
+# Show what users are doing
+w
+
+# Last logins
+last
+
+# Show user's groups
+groups username
+
+# Show user ID and group ID
+id username
+</code></pre>
+<h3 id="switching-users">Switching Users</h3>
+<pre><code class="language-bash"># Switch to another user
+su - john
+
+# Switch to root
+su -
+
+# Run command as another user
+sudo -u john command
+
+# Open shell as root
+sudo -i
+
+# Run command as root
+sudo command
+</code></pre>
+<h2 id="group-management">Group Management</h2>
+<h3 id="creating-groups">Creating Groups</h3>
+<pre><code class="language-bash"># Create group
+sudo groupadd developers
+
+# Create group with specific GID
+sudo groupadd -g 1001 developers
+</code></pre>
+<h3 id="managing-groups">Managing Groups</h3>
+<pre><code class="language-bash"># Add user to group
+sudo usermod -aG developers john
+
+# Remove user from group
+sudo gpasswd -d john developers
+
+# Delete group
+sudo groupdel developers
+
+# Show all groups
+cat /etc/group
+</code></pre>
+<h2 id="file-system-management">File System Management</h2>
+<h3 id="mounting-and-unmounting">Mounting and Unmounting</h3>
+<pre><code class="language-bash"># Mount a device
+sudo mount /dev/sdb1 /mnt/usb
+
+# Unmount
+sudo umount /mnt/usb
+
+# Mount with specific filesystem type
+sudo mount -t ntfs /dev/sdb1 /mnt/windows
+
+# Show mounted filesystems
+mount
+
+# Show disk usage
+df -h
+</code></pre>
+<h3 id="etcfstab-automatic-mounting">/etc/fstab - Automatic Mounting</h3>
+<p>Edit <code>/etc/fstab</code> to automatically mount filesystems at boot:</p>
+<pre><code class="language-bash">sudo nano /etc/fstab
+</code></pre>
+<p>Example entry:</p>
+<pre><code>/dev/sdb1  /mnt/data  ext4  defaults  0  2
+</code></pre>
+<h3 id="checking-disk-health">Checking Disk Health</h3>
+<pre><code class="language-bash"># Check filesystem
+sudo fsck /dev/sdb1
+
+# Check and repair
+sudo fsck -y /dev/sdb1
+
+# SMART status (if installed)
+sudo smartctl -a /dev/sda
+</code></pre>
+<h2 id="service-management-systemd">Service Management (systemd)</h2>
+<p>Modern Linux uses <strong>systemd</strong> to manage services.</p>
+<h3 id="managing-services">Managing Services</h3>
+<pre><code class="language-bash"># Start service
+sudo systemctl start apache2
+
+# Stop service
+sudo systemctl stop apache2
+
+# Restart service
+sudo systemctl restart apache2
+
+# Reload configuration
+sudo systemctl reload apache2
+
+# Enable service (start at boot)
+sudo systemctl enable apache2
+
+# Disable service (don't start at boot)
+sudo systemctl disable apache2
+
+# Check service status
+sudo systemctl status apache2
+
+# Show if service is active
+systemctl is-active apache2
+
+# Show if service is enabled
+systemctl is-enabled apache2
+</code></pre>
+<h3 id="viewing-services">Viewing Services</h3>
+<pre><code class="language-bash"># List all services
+systemctl list-units --type=service
+
+# List enabled services
+systemctl list-unit-files --type=service --state=enabled
+
+# List failed services
+systemctl --failed
+</code></pre>
+<h3 id="viewing-logs">Viewing Logs</h3>
+<pre><code class="language-bash"># View service logs
+sudo journalctl -u apache2
+
+# Follow logs (real-time)
+sudo journalctl -u apache2 -f
+
+# View logs since boot
+sudo journalctl -b
+
+# View recent logs
+sudo journalctl -n 50
+
+# View logs for specific time
+sudo journalctl --since &quot;2024-01-01&quot; --until &quot;2024-01-02&quot;
+</code></pre>
+<h2 id="system-logs">System Logs</h2>
+<h3 id="log-locations">Log Locations</h3>
+<pre><code class="language-bash">/var/log/syslog        # General system log
+/var/log/auth.log      # Authentication log
+/var/log/kern.log      # Kernel log
+/var/log/apache2/      # Apache logs
+/var/log/mysql/        # MySQL logs
+</code></pre>
+<h3 id="viewing-logs_1">Viewing Logs</h3>
+<pre><code class="language-bash"># View recent system log
+tail -f /var/log/syslog
+
+# View authentication attempts
+sudo tail -f /var/log/auth.log
+
+# Search for failed logins
+sudo grep &quot;Failed password&quot; /var/log/auth.log
+
+# Count failed login attempts
+sudo grep &quot;Failed password&quot; /var/log/auth.log | wc -l
+</code></pre>
+<h2 id="scheduled-tasks-cron">Scheduled Tasks (Cron)</h2>
+<p><strong>Cron</strong> runs commands on a schedule.</p>
+<h3 id="crontab-syntax">Crontab Syntax</h3>
+<pre><code>* * * * * command
+│ │ │ │ │
+│ │ │ │ └─── Day of week (0-7, Sunday = 0 or 7)
+│ │ │ └───── Month (1-12)
+│ │ └─────── Day of month (1-31)
+│ └───────── Hour (0-23)
+└─────────── Minute (0-59)
+</code></pre>
+<h3 id="managing-crontab">Managing Crontab</h3>
+<pre><code class="language-bash"># Edit current user's crontab
+crontab -e
+
+# List crontab
+crontab -l
+
+# Remove crontab
+crontab -r
+
+# Edit another user's crontab
+sudo crontab -u john -e
+</code></pre>
+<h3 id="examples">Examples</h3>
+<pre><code class="language-bash"># Run every day at 2 AM
+0 2 * * * /path/to/backup.sh
+
+# Run every hour
+0 * * * * /path/to/check.sh
+
+# Run every 15 minutes
+*/15 * * * * /path/to/script.sh
+
+# Run every Monday at 3 PM
+0 15 * * 1 /path/to/weekly.sh
+
+# Run at reboot
+@reboot /path/to/startup.sh
+
+# Run daily
+@daily /path/to/daily.sh
+</code></pre>
+<h3 id="system-wide-cron">System-wide Cron</h3>
+<pre><code class="language-bash"># Edit system crontabs
+sudo vim /etc/crontab
+
+# Or place scripts in:
+/etc/cron.daily/      # Runs daily
+/etc/cron.hourly/     # Runs hourly
+/etc/cron.weekly/     # Runs weekly
+/etc/cron.monthly/    # Runs monthly
+</code></pre>
+<h2 id="system-monitoring">System Monitoring</h2>
+<h3 id="resource-monitoring">Resource Monitoring</h3>
+<pre><code class="language-bash"># Real-time process monitor
+top
+
+# Better alternative (if installed)
+htop
+
+# Disk I/O statistics
+iostat
+
+# Virtual memory statistics
+vmstat
+
+# Network statistics
+netstat -tuln    # Listening ports
+netstat -plant   # All connections
+
+# Modern alternative to netstat
+ss -tuln         # Listening ports
+ss -plant        # All connections
+</code></pre>
+<h3 id="system-information">System Information</h3>
+<pre><code class="language-bash"># CPU information
+lscpu
+cat /proc/cpuinfo
+
+# Memory information
+free -h
+cat /proc/meminfo
+
+# Disk information
+lsblk
+fdisk -l
+
+# PCI devices
+lspci
+
+# USB devices
+lsusb
+
+# Kernel version
+uname -r
+
+# Distribution information
+cat /etc/os-release
+lsb_release -a
+</code></pre>
+<h2 id="network-configuration">Network Configuration</h2>
+<h3 id="network-interfaces">Network Interfaces</h3>
+<pre><code class="language-bash"># Show interfaces (old)
+ifconfig
+
+# Show interfaces (modern)
+ip addr show
+ip a
+
+# Bring interface up
+sudo ip link set eth0 up
+
+# Bring interface down
+sudo ip link set eth0 down
+
+# Set IP address
+sudo ip addr add 192.168.1.100/24 dev eth0
+
+# Delete IP address
+sudo ip addr del 192.168.1.100/24 dev eth0
+</code></pre>
+<h3 id="network-configuration-files">Network Configuration Files</h3>
+<h4 id="etcnetworkinterfaces-debian">/etc/network/interfaces (Debian)</h4>
+<pre><code class="language-bash">sudo nano /etc/network/interfaces
+</code></pre>
+<p>Static IP example:</p>
+<pre><code>auto eth0
+iface eth0 inet static
+    address 192.168.1.100
+    netmask 255.255.255.0
+    gateway 192.168.1.1
+    dns-nameservers 8.8.8.8 8.8.4.4
+</code></pre>
+<p>DHCP example:</p>
+<pre><code>auto eth0
+iface eth0 inet dhcp
+</code></pre>
+<h4 id="netplan-ubuntu-1804">netplan (Ubuntu 18.04+)</h4>
+<pre><code class="language-bash">sudo nano /etc/netplan/01-netcfg.yaml
+</code></pre>
+<p>Example:</p>
+<pre><code class="language-yaml">network:
+  version: 2
+  ethernets:
+    eth0:
+      dhcp4: false
+      addresses: [192.168.1.100/24]
+      gateway4: 192.168.1.1
+      nameservers:
+        addresses: [8.8.8.8, 8.8.4.4]
+</code></pre>
+<p>Apply changes:</p>
+<pre><code class="language-bash">sudo netplan apply
+</code></pre>
+<h3 id="dns-configuration">DNS Configuration</h3>
+<pre><code class="language-bash"># Edit DNS servers
+sudo nano /etc/resolv.conf
+</code></pre>
+<p>Example:</p>
+<pre><code>nameserver 8.8.8.8
+nameserver 8.8.4.4
+</code></pre>
+<h3 id="hostname">Hostname</h3>
+<pre><code class="language-bash"># Show hostname
+hostname
+
+# Change hostname temporarily
+sudo hostname newhostname
+
+# Change hostname permanently
+sudo hostnamectl set-hostname newhostname
+
+# Edit hosts file
+sudo nano /etc/hosts
+</code></pre>
+<h2 id="firewall-iptablesufw">Firewall (iptables/ufw)</h2>
+<h3 id="ufw-uncomplicated-firewall">UFW (Uncomplicated Firewall)</h3>
+<p>Easier to use than raw iptables.</p>
+<pre><code class="language-bash"># Enable firewall
+sudo ufw enable
+
+# Disable firewall
+sudo ufw disable
+
+# Show status
+sudo ufw status
+
+# Verbose status
+sudo ufw status verbose
+
+# Allow port
+sudo ufw allow 22
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+
+# Allow from specific IP
+sudo ufw allow from 192.168.1.100
+
+# Allow specific IP to specific port
+sudo ufw allow from 192.168.1.100 to any port 22
+
+# Deny port
+sudo ufw deny 23
+
+# Delete rule
+sudo ufw delete allow 80
+
+# Reset firewall (remove all rules)
+sudo ufw reset
+
+# Set default policies
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+</code></pre>
+<h3 id="iptables-advanced">iptables (Advanced)</h3>
+<p>Lower-level firewall control.</p>
+<pre><code class="language-bash"># List rules
+sudo iptables -L
+
+# List with line numbers
+sudo iptables -L --line-numbers
+
+# Allow incoming SSH
+sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+
+# Allow established connections
+sudo iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+# Drop all other incoming
+sudo iptables -A INPUT -j DROP
+
+# Save rules (Debian/Ubuntu)
+sudo iptables-save &gt; /etc/iptables/rules.v4
+
+# Restore rules
+sudo iptables-restore &lt; /etc/iptables/rules.v4
+
+# Flush all rules
+sudo iptables -F
+</code></pre>
+<h2 id="system-updates-and-security">System Updates and Security</h2>
+<h3 id="keeping-system-updated">Keeping System Updated</h3>
+<pre><code class="language-bash"># Update and upgrade (Debian/Ubuntu)
+sudo apt update &amp;&amp; sudo apt upgrade -y
+
+# Security updates only
+sudo apt update &amp;&amp; sudo apt upgrade -y --only-upgrade
+
+# Automatic updates (install package)
+sudo apt install unattended-upgrades
+
+# Configure automatic updates
+sudo dpkg-reconfigure unattended-upgrades
+</code></pre>
+<h3 id="security-hardening-basics">Security Hardening Basics</h3>
+<pre><code class="language-bash"># Disable root login via SSH
+sudo nano /etc/ssh/sshd_config
+# Set: PermitRootLogin no
+sudo systemctl restart sshd
+
+# Change SSH port (security through obscurity)
+# In /etc/ssh/sshd_config: Port 2222
+
+# Disable password authentication (use keys only)
+# In /etc/ssh/sshd_config: PasswordAuthentication no
+
+# Install fail2ban (blocks repeated failed logins)
+sudo apt install fail2ban
+sudo systemctl enable fail2ban
+sudo systemctl start fail2ban
+</code></pre>
+<h2 id="backups">Backups</h2>
+<h3 id="using-tar-for-backups">Using tar for Backups</h3>
+<pre><code class="language-bash"># Backup home directory
+sudo tar -czvf /backup/home-$(date +%Y%m%d).tar.gz /home
+
+# Restore from backup
+sudo tar -xzvf /backup/home-20240101.tar.gz -C /
+</code></pre>
+<h3 id="using-rsync-for-backups">Using rsync for Backups</h3>
+<pre><code class="language-bash"># Backup to another location
+sudo rsync -avz /home /backup/
+
+# Backup over network
+sudo rsync -avz /home user@remote:/backup/
+
+# Exclude certain files
+sudo rsync -avz --exclude='*.tmp' /home /backup/
+</code></pre>
+<h2 id="practical-security-examples">Practical Security Examples</h2>
+<h3 id="check-for-failed-login-attempts">Check for Failed Login Attempts</h3>
+<pre><code class="language-bash">sudo grep &quot;Failed password&quot; /var/log/auth.log | tail -20
+</code></pre>
+<h3 id="find-recently-modified-files">Find Recently Modified Files</h3>
+<pre><code class="language-bash">find /etc -mtime -1  # Modified in last 24 hours
+</code></pre>
+<h3 id="check-listening-ports">Check Listening Ports</h3>
+<pre><code class="language-bash">sudo ss -tuln
+sudo netstat -tuln
+</code></pre>
+<h3 id="see-active-connections">See Active Connections</h3>
+<pre><code class="language-bash">sudo ss -plant
+sudo netstat -plant
+</code></pre>
+<h3 id="check-for-unusual-processes">Check for Unusual Processes</h3>
+<pre><code class="language-bash">ps aux | grep -v &quot;\[&quot; | grep -v &quot;root&quot; | sort -k 3 -r | head
+</code></pre>
+<h3 id="monitor-system-logs-in-real-time">Monitor System Logs in Real-Time</h3>
+<pre><code class="language-bash">sudo tail -f /var/log/syslog | grep -i error
+</code></pre>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<p>System administration skills you now have:
+- Package management (installing/removing software)
+- User and group management
+- Service management (starting/stopping/enabling services)
+- Log viewing and monitoring
+- Scheduled tasks (cron)
+- Network configuration
+- Basic firewall rules
+- System security hardening</p>
+<p>These are fundamental skills every security professional needs. You'll use these daily whether you're:
+- Setting up security tools
+- Investigating incidents
+- Hardening systems
+- Monitoring for threats
+- Analyzing logs</p>
+<p>Practice these commands regularly. Set up a virtual machine and experiment. Break things (in your VM!) and fix them. That's how you truly learn system administration.</p>
+<p>In the next lessons, we'll move beyond Linux basics and start applying these skills to security-specific scenarios.</p>
         
 
         <!-- Lesson Navigation (only show on non-homepage pages) -->
         
         <div class="lesson-nav">
             
-            <a href="../lesson1-6/" class="lesson-nav-button">
+            <a href="../lesson1-5/" class="lesson-nav-button">
                 <span class="arrow">←</span>
-                <span>Previous: Lesson 1.6</span>
+                <span>Previous: Lesson 1.5</span>
             </a>
             
 
             <div class="lesson-nav-info">
                 <div class="current-lesson">Current Lesson</div>
-                <div class="lesson-title">Linux Installation Process</div>
+                <div class="lesson-title">Lesson 1.6</div>
             </div>
 
             
-            <a href="../../unit2/lesson2-1/" class="lesson-nav-button">
-                <span>Next: Lesson 2.1</span>
+            <a href="../installation-process/" class="lesson-nav-button">
+                <span>Next: Linux Installation Process</span>
                 <span class="arrow">→</span>
             </a>
             
@@ -1188,13 +1712,13 @@
                                 
                                 {
                                     title: "Lesson 1.6",
-                                    url: '../lesson1-6/',
+                                    url: './',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Linux Installation Process",
-                                    url: './',
+                                    url: '../installation-process/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 

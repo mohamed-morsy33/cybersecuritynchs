@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linux Installation Process - NCHS Cybersecurity</title>
+    <title>Lesson 4.1 - NCHS Cybersecurity</title>
     
     
     <link rel="icon" href="../../../img/logo.png">
@@ -698,31 +698,31 @@
                                         <ul class="unit-lessons">
                                             
                                             <li>
-                                                <a href="../lesson1-1/">Lesson 1.1</a>
+                                                <a href="../../unit1/lesson1-1/">Lesson 1.1</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-2/">Lesson 1.2</a>
+                                                <a href="../../unit1/lesson1-2/">Lesson 1.2</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-3/">Lesson 1.3</a>
+                                                <a href="../../unit1/lesson1-3/">Lesson 1.3</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-4/">Lesson 1.4</a>
+                                                <a href="../../unit1/lesson1-4/">Lesson 1.4</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-5/">Lesson 1.5</a>
+                                                <a href="../../unit1/lesson1-5/">Lesson 1.5</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-6/">Lesson 1.6</a>
+                                                <a href="../../unit1/lesson1-6/">Lesson 1.6</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="./">Linux Installation Process</a>
+                                                <a href="../../unit1/installation-process/">Linux Installation Process</a>
                                             </li>
                                             
                                         </ul>
@@ -777,11 +777,11 @@
                                         <ul class="unit-lessons">
                                             
                                             <li>
-                                                <a href="../../unit4/lesson4-1/">Lesson 4.1</a>
+                                                <a href="./">Lesson 4.1</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../../unit4/lesson4-2/">Lesson 4.2</a>
+                                                <a href="../lesson4-2/">Lesson 4.2</a>
                                             </li>
                                             
                                         </ul>
@@ -964,142 +964,288 @@
 
     <div class="container">
         
-        <h2 id="what-is-it"><em>What</em> is it?</h2>
-<p>Kali is an operating system that was made <strong><em>specially</em></strong> for cybersecurity work (and hacking as well). It has a large toolkit of useful programs that we're going to learn about, including Hydra, Nmap, Wireshark, Tcpdump, MacChanger, Chisel, Aircrack-ng, etc.</p>
-<h2 id="some-vocab">Some Vocab:</h2>
-<p>As much as we know vocabulary might not be that interesting, it's important to know for the future, since there's a LOT of acronyms and words in cybersecurity that you're going to be hearing and using, so it's best to get used to it.</p>
+        <h1 id="real-life-applications-and-methods-of-network-security">Real Life Applications and Methods of Network Security</h1>
+<p>Theory is important, but let's talk about how network security actually works in the real world. What do security professionals do day-to-day? What technologies do they use? How do organizations actually protect their networks?</p>
+<h2 id="the-security-operations-center-soc">The Security Operations Center (SOC)</h2>
+<p>In most medium to large organizations, network security is monitored from a <strong>Security Operations Center (SOC)</strong>—a centralized unit that monitors, detects, analyzes, and responds to security incidents.</p>
+<p>A typical SOC includes:
+- <strong>Security analysts</strong> monitoring dashboards showing network traffic, alerts, and system logs
+- <strong>Incident responders</strong> who investigate and mitigate active security events
+- <strong>Threat hunters</strong> who proactively search for signs of compromise
+- <strong>Security engineers</strong> who design and implement security controls</p>
+<p>The SOC operates 24/7 because cyber attacks don't follow business hours. Analysts work in shifts, watching for anomalies that might indicate an attack.</p>
+<h2 id="defense-in-depth-layered-security">Defense in Depth: Layered Security</h2>
+<p>No single security control is perfect. The principle of <strong>defense in depth</strong> means implementing multiple layers of security so that if one layer fails, others still protect the network.</p>
+<p>Think of it like protecting a castle:
+- <strong>Outer walls</strong> (perimeter firewall)
+- <strong>Guards at the gate</strong> (intrusion detection systems)
+- <strong>Locks on doors</strong> (access controls)
+- <strong>Guards inside</strong> (endpoint protection)
+- <strong>Vault for treasures</strong> (data encryption)
+- <strong>Alarm system</strong> (logging and monitoring)</p>
+<p>An attacker would have to breach multiple layers to succeed. This is the foundation of modern network security.</p>
+<h2 id="perimeter-security">Perimeter Security</h2>
+<p>The <strong>network perimeter</strong> is the boundary between your internal network and the outside world (usually the internet). Perimeter security is your first line of defense.</p>
+<h3 id="firewalls-the-network-gatekeeper">Firewalls: The Network Gatekeeper</h3>
+<p><strong>Firewalls</strong> are devices or software that filter network traffic based on security rules. They're like bouncers at a club—checking credentials and only letting in approved traffic.</p>
+<p><strong>Types of firewalls:</strong></p>
+<p><strong>Packet-Filtering Firewalls</strong> (Layer 3-4):
+- Examine individual packets
+- Check source/destination IP, ports, and protocols
+- Fast but limited—can't see application content
+- Example rule: "Block all traffic from IP 10.0.0.50"</p>
+<p><strong>Stateful Firewalls</strong>:
+- Track the state of connections (established, new, related)
+- More secure than packet filtering
+- Know if traffic is part of an existing legitimate connection
+- Most common type in use today</p>
+<p><strong>Application-Layer Firewalls</strong> (Layer 7):
+- Inspect actual application data
+- Can block specific URLs, detect malware, filter content
+- Also called <strong>Web Application Firewalls (WAF)</strong> when protecting web apps
+- More processing intensive but much more capable</p>
+<p><strong>Next-Generation Firewalls (NGFW)</strong>:
+- Combine traditional firewall functions with:
+  - Deep packet inspection
+  - Intrusion prevention
+  - Application awareness
+  - Malware detection
+  - SSL/TLS inspection
+- Industry standard for enterprise networks</p>
+<h3 id="dmz-the-demilitarized-zone">DMZ: The Demilitarized Zone</h3>
+<p>A <strong>DMZ</strong> is a separate network segment that sits between your internal network and the internet. It hosts public-facing services like web servers, email servers, and FTP servers.</p>
+<p>Why use a DMZ?
+- External users can access public services without reaching your internal network
+- If a DMZ server is compromised, attackers still can't easily reach internal systems
+- Allows you to apply different, stricter security rules to the DMZ</p>
+<p>Architecture typically looks like:</p>
+<pre><code>Internet → Firewall 1 → DMZ (web servers, email) → Firewall 2 → Internal Network
+</code></pre>
+<p>Both firewalls filter traffic, creating two barriers an attacker must breach.</p>
+<h2 id="intrusion-detection-and-prevention">Intrusion Detection and Prevention</h2>
+<p>Firewalls allow or block traffic based on rules, but what about legitimate traffic that contains malicious content? That's where IDS and IPS come in.</p>
+<h3 id="ids-intrusion-detection-system">IDS (Intrusion Detection System)</h3>
+<p>An <strong>IDS</strong> monitors network traffic for suspicious activity and generates alerts. It's like a security camera—it watches and warns you, but doesn't actively stop threats.</p>
+<p><strong>How it works:</strong>
+- <strong>Signature-based detection</strong>: Looks for known attack patterns (like antivirus signatures)
+- <strong>Anomaly-based detection</strong>: Establishes a baseline of normal behavior and alerts on deviations
+- <strong>Behavioral-based detection</strong>: Looks for behavior patterns associated with attacks</p>
+<p><strong>Placement</strong>:
+- Network-based IDS (NIDS): Monitors network traffic
+- Host-based IDS (HIDS): Monitors individual systems</p>
+<p><strong>Pros</strong>: No risk of blocking legitimate traffic
+<strong>Cons</strong>: Doesn't stop attacks, requires human response</p>
+<h3 id="ips-intrusion-prevention-system">IPS (Intrusion Prevention System)</h3>
+<p>An <strong>IPS</strong> is like an IDS that can actively block threats. It sits inline with network traffic and can drop malicious packets or block suspicious connections.</p>
+<p><strong>How it differs from IDS:</strong>
+- Can automatically block attacks
+- Sits inline (traffic flows through it)
+- Must be extremely accurate to avoid blocking legitimate traffic</p>
+<p><strong>Challenges:</strong>
+- <strong>False positives</strong>: Blocking legitimate traffic by mistake
+- <strong>Performance</strong>: Inline inspection adds latency
+- <strong>Bypass risk</strong>: If the IPS fails, should traffic flow or stop?</p>
+<p>Most organizations use both: IPS for known threats and critical systems, IDS for monitoring and detecting new threats.</p>
+<h2 id="network-segmentation">Network Segmentation</h2>
+<p><strong>Network segmentation</strong> divides a network into multiple smaller networks or zones. This is one of the most effective security controls because it limits the damage from a breach.</p>
+<h3 id="why-segment">Why Segment?</h3>
+<p>If your entire network is flat (all devices can talk to all other devices), a single compromised device gives an attacker access to everything. This is called <strong>lateral movement</strong>—moving from one compromised system to others.</p>
+<p>Segmentation prevents this by:
+- Isolating critical systems
+- Limiting blast radius of a breach
+- Enforcing different security policies for different segments
+- Improving network performance by reducing broadcast domains</p>
+<h3 id="common-segmentation-strategies">Common Segmentation Strategies</h3>
+<p><strong>By Function:</strong>
+- Corporate network (employee computers)
+- Guest network (visitors)
+- Server network (databases, applications)
+- Management network (for administering other networks)
+- IoT network (printers, cameras, smart devices)</p>
+<p><strong>By Security Level:</strong>
+- Public zone (DMZ)
+- Internal zone (standard security)
+- Restricted zone (sensitive data, high security)
+- Critical zone (payment systems, highest security)</p>
+<p><strong>By Department:</strong>
+- Engineering network
+- HR network (handles sensitive employee data)
+- Finance network (handles financial data)
+- Sales network</p>
+<h3 id="implementation-methods">Implementation Methods</h3>
+<p><strong>VLANs</strong> (Virtual Local Area Networks):
+- Logical segmentation on the same physical switches
+- Devices in different VLANs can't communicate without a router
+- Configured through software, not physical cables
+- Cost-effective for most organizations</p>
+<p><strong>Physical Segmentation</strong>:
+- Completely separate networks with separate hardware
+- Most secure but expensive
+- Used for highly sensitive environments</p>
+<p><strong>Software-Defined Networking (SDN)</strong>:
+- Centrally managed virtual networks
+- Dynamic, programmable segmentation
+- Growing in popularity for cloud and data center environments</p>
+<h2 id="vpn-secure-remote-access">VPN: Secure Remote Access</h2>
+<p><strong>Virtual Private Networks (VPNs)</strong> create encrypted tunnels through public networks, allowing secure remote access.</p>
+<h3 id="types-of-vpns">Types of VPNs</h3>
+<p><strong>Site-to-Site VPN:</strong>
+- Connects entire networks (like connecting branch offices)
+- Always-on connection
+- Transparent to end users</p>
+<p><strong>Remote Access VPN:</strong>
+- Individual users connect from outside the network
+- User must authenticate
+- Common for work-from-home employees</p>
+<p><strong>SSL/TLS VPN:</strong>
+- Browser-based access
+- No special client software required
+- Often used for limited access to specific applications</p>
+<p><strong>IPsec VPN:</strong>
+- Protocol suite for securing IP communications
+- More complex but very secure
+- Industry standard for site-to-site VPNs</p>
+<h3 id="vpn-security-considerations">VPN Security Considerations</h3>
+<p><strong>Benefits:</strong>
+- Encrypts traffic over untrusted networks
+- Hides user's actual IP address
+- Bypasses geographic restrictions</p>
+<p><strong>Risks:</strong>
+- VPN endpoints are high-value targets
+- Poorly configured VPNs can be exploited
+- Compromised VPN credentials give attackers direct network access
+- VPN traffic can be difficult to inspect for threats</p>
+<h2 id="network-access-control-nac">Network Access Control (NAC)</h2>
+<p><strong>NAC</strong> systems control which devices can connect to your network and what they can access once connected.</p>
+<h3 id="how-nac-works">How NAC Works</h3>
+<p>Before a device connects:
+1. Device attempts to connect
+2. NAC system challenges it (authenticate yourself)
+3. NAC checks device compliance (is antivirus updated? OS patched? Authorized device?)
+4. Based on results, NAC either allows full access, quarantines the device, or blocks it entirely</p>
+<h3 id="use-cases">Use Cases</h3>
 <ul>
-<li><strong>Operating System (OS)</strong>: The main software that runs your computer, like Windows, macOS, iOS, GNU/Linux, etc.</li>
-<li><strong>Virtual Machine (VM)</strong>: It's basically a computer <em>inside</em> another computer. You can run your regular OS, like Windows, and still have Kali Linux inside of it</li>
-<li><strong>ISO File (International Organization for Standardization File)</strong>: Sounds fancy, but really it's just a full copy of an OS within one tiny file</li>
-<li><strong>Hypervisor</strong>: Software that creates and manages VMs. Examples are VirtualBox and VMWare Workstation. There's also QEMU, but mostly Linux users use that, and you're likely running on Windows or mac</li>
-<li><strong>Bootable USB</strong>: Just a USB drive (which you hopefully already know about) that can start up a computer and install an OS (we don't need this yet)</li>
-<li><strong>Partitioning</strong>: A more advanced topic, but it's dividing up your drive into sections called <em>partitions</em>, which are like walls for a room. We don't need this yet, but it is good to know</li>
+<li><strong>BYOD (Bring Your Own Device) environments</strong>: Personal laptops and phones connecting to corporate networks</li>
+<li><strong>Guest access</strong>: Give visitors internet access without internal network access</li>
+<li><strong>Compliance enforcement</strong>: Ensure all devices meet security standards before connecting</li>
+<li><strong>Quarantine networks</strong>: Isolate infected devices until they're cleaned</li>
 </ul>
-<p>Now, let's get into the nitty-gritty:</p>
-<h2 id="method-1-easy-way">Method 1: Easy way :)</h2>
-<h3 id="minimum-requirements">Minimum Requirements*:</h3>
+<h2 id="zero-trust-architecture">Zero Trust Architecture</h2>
+<p>The traditional security model assumed "inside the network" = trusted and "outside" = untrusted. But modern threats (insider threats, compromised devices, remote work) make this obsolete.</p>
+<p><strong>Zero Trust</strong> assumes:
+- Never trust, always verify
+- No device or user is trusted by default
+- Verify explicitly for every access request
+- Minimize user access (principle of least privilege)
+- Assume breach (design for damage containment)</p>
+<h3 id="zero-trust-implementation">Zero Trust Implementation</h3>
+<p><strong>Identity and Access Management (IAM):</strong>
+- Multi-factor authentication (MFA) for all users
+- Continuous authentication
+- Risk-based access (different access levels based on context)</p>
+<p><strong>Micro-segmentation:</strong>
+- Granular network segments, sometimes per-application
+- Strict controls between segments
+- Limits lateral movement to nearly zero</p>
+<p><strong>Continuous Monitoring:</strong>
+- Log everything
+- Analyze behavior constantly
+- Detect and respond to anomalies in real-time</p>
+<p><strong>Least Privilege Access:</strong>
+- Users only get the minimum access needed
+- Time-limited access for administrative tasks
+- Just-in-time access provisioning</p>
+<p>Zero Trust is the future of network security, especially as networks become more distributed with cloud services and remote work.</p>
+<h2 id="cloud-network-security">Cloud Network Security</h2>
+<p>As organizations move to cloud platforms (AWS, Azure, Google Cloud), network security changes but remains critical.</p>
+<h3 id="cloud-specific-challenges">Cloud-Specific Challenges</h3>
+<ul>
+<li><strong>Shared responsibility model</strong>: Cloud provider secures the infrastructure; you secure your applications and data</li>
+<li><strong>Virtual networks</strong>: Everything is software-defined</li>
+<li><strong>Multi-tenancy</strong>: Your workloads share physical infrastructure with other customers</li>
+<li><strong>API-driven</strong>: Configuration happens through APIs, creating new attack vectors</li>
+</ul>
+<h3 id="cloud-security-tools">Cloud Security Tools</h3>
+<p><strong>Security Groups</strong>: Virtual firewalls for cloud instances
+<strong>Network ACLs</strong>: Subnet-level filtering
+<strong>VPC (Virtual Private Cloud)</strong>: Isolated network environments in the cloud
+<strong>Cloud Access Security Brokers (CASB)</strong>: Monitor and secure cloud service usage</p>
+<h2 id="real-world-scenarios">Real-World Scenarios</h2>
+<p>Let's look at how these technologies work together in practice:</p>
+<h3 id="scenario-1-remote-worker-connecting">Scenario 1: Remote Worker Connecting</h3>
 <ol>
-<li><code>8 GB</code> of RAM</li>
-<li><code>20-30 GB</code> of free hard drive space</li>
-<li>A decently fast CPU (you probably have this)</li>
+<li>Employee's laptop connects to company VPN</li>
+<li>NAC system checks: is device authorized? Is software updated?</li>
+<li>VPN authenticates user with username, password, and MFA token</li>
+<li>VPN creates encrypted tunnel</li>
+<li>User placed in appropriate network segment based on role</li>
+<li>Firewall rules allow access only to needed resources</li>
+<li>IPS monitors traffic for suspicious behavior</li>
+<li>All activity logged for security analysis</li>
 </ol>
-<p>*But, how do I know if I meet them? Well, you can press <em><code>Ctrl+Shift+Esc</code></em> on Windows and click on <strong>"Performance"</strong> inside of Task Manager, and it'll give you a spec (specifications) sheet. On mac, you can click on <strong>"About"</strong> in the top menu bar of your computer. On Linux, you can type <strong><code>uname -a</code></strong>, or use a custom program like <code>fastfetch</code></p>
-<h2 id="big-disclaimer-for-windows-users">BIG DISCLAIMER FOR WINDOWS USERS:</h2>
-<ul>
-<li>You NEED to DISABLE something called Hyper-V. If you don't know what that is, for Windows users, Hyper-V will conflict with Virtualbox, making it run poorly and crash often</li>
-<li>To check if you hve Hyper-V, press <code>Win+R</code>, and type <code>optionalfeatures</code>, then press <code>Enter</code></li>
-<li>Look for a "Hyper-V" in the list of shown items. If it's checked, then it's enabled. Uncheck it.<ul>
-<li>Alternative method: go to cmd (Command Prompt), and right click and "Run as Administrator". Then use the following command: <code>bcdedit /set hypervisorlaunchtype off</code></li>
-</ul>
-</li>
-<li>Finally, restart your computer</li>
-</ul>
-<h2 id="big-disclaimer-for-macos-users">BIG DISCLAIMER FOR MACOS USERS:</h2>
-<ul>
-<li>You need to check if you're using an Intel-based Mac or Apple Silicon machine. If your device is M1, M2, M*, then it's <strong>Apple Silicon</strong></li>
-<li>If this is the case, you will need to use a different software for virtualization. You have some options, like <a href="https://getutm.app">UTM</a> or <a href="https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion">VMware Fusion</a>. </li>
-<li>Also, you will have to install Kali Linux using the 
-<em><strong>ARM64 version! Not x86-64!</strong></em></li>
-</ul>
-<hr />
-<p>Now, go to <a href="https://virtualbox.org">virtualbox.org</a></p>
-<p>Click on the download for your OS, and install the program by following the instruction wizard.</p>
-<p><img alt="Virtual Box" src="../../../img/virtual_box.png" /></p>
-<ul>
-<li>Now, go to the <a href="https://kali.org/get-kali">Kali Linux website</a>.</li>
-<li>Download the "Installer" ISO file (<code>~ 4 GB</code> in size)</li>
-<li>Then choose the 64-bit version for modern computers.</li>
-<li>If your computer is old, it could be 32-bit. If so, you may need to check your system specifications as explained above. However, it probably isn't.</li>
-</ul>
-<p><img alt="Kali Installation" src="../../../img/kali_img.png" /></p>
-<blockquote>
-<p>Remember, Apple Silicon machines will install the ARM64 version of Kali Linux instead!</p>
-</blockquote>
-<ul>
-<li>Finally, make your Virtual Machine. Open up VirtualBox and click "New"</li>
-<li>Name it whatever, I'd call it "Kali Linux", or "Kali Machine".</li>
-<li>Type: Linux, Version: Debian (64-bit)</li>
-<li>Allocate at least <code>4 GB</code> of RAM, AKA <code>4096 MB</code>, by dragging the slider or typing in the number in the RAM text box</li>
-<li>Create a Virtual Hrd Disk (allocate <code>25-30 GB</code> minimum)<ul>
-<li>Choose VDI (VirtualBox Disk Image)</li>
-<li>Also select "dynamically allocated" to save space, and allows the VM to grow dynamically in storage size as you begin to add more things</li>
-</ul>
-</li>
-<li>After clicking done, tell it to create, but do NOT tell it to also start yet</li>
-<li>Click on your virtual machine, and then go to settings</li>
-<li>Then go to Storage, and click the empty disk icon</li>
-<li>This is where we "choose a disk file", and select the downloaded Kali ISO</li>
-<li>Then under System, enable PAE/NX if available to you. PAE is Physical Address Extension, and NX is No Execute. These allow for &gt; <code>4 GB</code> of RAM access and prevents non-executable code from being executed in memory segments. If you don't know what that means, just ignore this</li>
-<li>Under Display, increase video memory to <code>128 MB</code></li>
-<li>Finally, save and exit Settings, and click on Start to boot your VM</li>
-<li>Select "Graphical Install" (press Enter, navigate using arrow keys)</li>
-<li>Choose your language, location, keyboard (these can later be changed, doesn't really matter)</li>
-<li>You can set a hostname, or keep the default (kali)</li>
-</ul>
-<h3 id="important-username-is-kali-and-password-is-kali-by-default"><strong>IMPORTANT</strong>: username is <em>kali</em> and password is <em>kali</em> by default!</h3>
-<ul>
-<li>Choose "Guided - use entire disk" for your partitioning</li>
-<li>Then select "All files in one partition"</li>
-<li>Confirm and wait a while. Take a walk outside, take a short nap, whatever you want. Just wait 10-20 minutes and it'll be done</li>
-<li>Restart when prompted</li>
-<li>On first login, enter the username and password</li>
-<li>Then, click the <code>SUPER</code> key (<code>Win</code> key or <code>Cmd</code> key on mac) and type "terminal" or "console" into the search, and open the app</li>
-<li>In the terminal, you can type <code>sudo apt update &amp;&amp; sudo apt upgrade -y</code><ul>
-<li>This command just updates your system</li>
-<li>When prompted with a password, type in your password</li>
-</ul>
-</li>
-<li>Happy Linux!</li>
-</ul>
-<h2 id="method-2-hard-way-bare-metal-installation">Method 2: Hard way (bare metal installation)</h2>
-<p>Alright. You're ready for the real deal. No problem. </p>
-<p><code>WARNING! ⚠️⚠️</code>: This version of installation WILL take space on your disk! This means it will be physically installed, and it will NOT be installed as a VM! Just like Windows or macOS, it will be physically on your device. If you do this incorrectly, it may <strong>wipe your device completely</strong>. I'm not liable for if you mistakenly wipe your drive, it's up to you. Also, I personally do <strong>not recommend you install Kali Linux on a physical drive</strong>. If you want to use Linux for extra practice, install a distribution like <a href="https://www.debian.org/">Debian</a> or <a href="https://linuxmint.com/">Linux Mint</a>. You are risking data loss if done incorrectly, so proceed at your own risk.</p>
-<p>Important things to note are:</p>
-<ul>
-<li>If you install on bare metal, AKA on your physical device, your device may have incompatibility issues. I would recommend doing your own research before doing so</li>
-<li>You may want to install Linux on a secondary drive, since if you use your main one, you will have to create a special partition for Linux to use exclusively, which is more difficult</li>
-<li>You'll need a USB drive with preferably <code>8 GB</code> or more of storage</li>
-<li>You may need to adjust your BIOS (manufacturer specific, meaning it depends on what company made your computer and maybe even where you bought it from) to allow for other bootable devices, which can include removing Secure Boot</li>
-<li>There's some specifics for ARM64 machines like Apple Silicon that will be different!</li>
-<li>Overall, you are likely going to have to do your OWN research to make sure you don't mess anything up.</li>
-</ul>
-<p>Without further ado, these are some general instructions (not perfect):</p>
+<h3 id="scenario-2-public-web-application">Scenario 2: Public Web Application</h3>
 <ol>
-<li>Create a bootable USB drive using an app like Balena Etcher or Rufus</li>
-<li>Make space on your hard drive by creating a disk partition of ~<code>30 GB</code> or more, or install on a secondary hard drive</li>
-<li>Boot from the USB drive from BIOS after restarting your computer and smashing the BIOS key as it boots up (typically <code>Esc</code>, <code>F11</code>, <code>F12</code>, or <code>Del</code> depending on the manufacturer)</li>
-<li>Follow the installation process, but make sure you select the right drive and if it's on the same disk as Windows or Mac, you install "alongside" it, not replace </li>
-<li>After going through the setup, you may re-enter the BIOS to change the boot order. What this means is move Linux above Windows so that on first boot you boot into Linux (optional)</li>
+<li>User visits company website</li>
+<li>Traffic hits web application firewall (WAF)</li>
+<li>WAF inspects request for SQL injection, XSS, etc.</li>
+<li>Clean request passes to load balancer</li>
+<li>Web server in DMZ handles request</li>
+<li>Web server queries database in internal network</li>
+<li>Firewall between DMZ and internal network only allows specific database queries</li>
+<li>Response travels back through same path</li>
+<li>All stages logged and monitored</li>
 </ol>
-<p>Some important extras:</p>
-<ul>
-<li>Make sure you regularly update your system at least weekly</li>
-<li>Make decent credentials or use a <a href="https://www.yubico.com/">physical key</a></li>
-<li>Never just copy/paste a command without understanding it, look it up at least (even from me!)</li>
-<li>Install packages wisely and preferably from trusted sources</li>
-</ul>
-<p>Happy Linux! :)</p>
+<h3 id="scenario-3-suspected-breach">Scenario 3: Suspected Breach</h3>
+<ol>
+<li>IDS detects unusual outbound connection from internal server</li>
+<li>Alert goes to SOC</li>
+<li>Analyst investigates: server is compromised</li>
+<li>Firewall immediately blocks server's network access (quarantine)</li>
+<li>Incident response team examines server</li>
+<li>Network logs reviewed to determine scope</li>
+<li>Other systems in same segment scanned for compromise</li>
+<li>After cleanup, server returns to production with enhanced monitoring</li>
+</ol>
+<h2 id="practical-tools">Practical Tools</h2>
+<p>Here are tools you'll actually use in network security:</p>
+<p><strong>Wireshark</strong>: Capture and analyze network packets
+<strong>Nmap</strong>: Network scanning and service discovery
+<strong>Snort</strong>: Open-source IDS/IPS
+<strong>pfSense</strong>: Open-source firewall and router
+<strong>Zeek</strong> (formerly Bro): Network security monitoring
+<strong>tcpdump</strong>: Command-line packet capture
+<strong>iptables/nftables</strong>: Linux firewall configuration</p>
+<p>We'll dive deeper into many of these tools in upcoming lessons.</p>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<p>Network security in practice means:
+- Multiple layers of defense
+- Continuous monitoring and analysis
+- Segmentation to limit damage
+- Strong access controls
+- Regular updates and patching
+- Incident response preparedness</p>
+<p>No network is 100% secure, but with proper implementation of these technologies and strategies, you can make it extremely difficult for attackers to succeed.</p>
+<p>The goal isn't perfection—it's making your network harder to attack than your competitors' networks, and ensuring that when breaches do occur, you can detect and respond quickly.</p>
         
 
         <!-- Lesson Navigation (only show on non-homepage pages) -->
         
         <div class="lesson-nav">
             
-            <a href="../lesson1-6/" class="lesson-nav-button">
+            <a href="../../unit3/lesson3-3/" class="lesson-nav-button">
                 <span class="arrow">←</span>
-                <span>Previous: Lesson 1.6</span>
+                <span>Previous: Lesson 3.3</span>
             </a>
             
 
             <div class="lesson-nav-info">
                 <div class="current-lesson">Current Lesson</div>
-                <div class="lesson-title">Linux Installation Process</div>
+                <div class="lesson-title">Lesson 4.1</div>
             </div>
 
             
-            <a href="../../unit2/lesson2-1/" class="lesson-nav-button">
-                <span>Next: Lesson 2.1</span>
+            <a href="../lesson4-2/" class="lesson-nav-button">
+                <span>Next: Lesson 4.2</span>
                 <span class="arrow">→</span>
             </a>
             
@@ -1158,43 +1304,43 @@
                                 
                                 {
                                     title: "Lesson 1.1",
-                                    url: '../lesson1-1/',
+                                    url: '../../unit1/lesson1-1/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.2",
-                                    url: '../lesson1-2/',
+                                    url: '../../unit1/lesson1-2/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.3",
-                                    url: '../lesson1-3/',
+                                    url: '../../unit1/lesson1-3/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.4",
-                                    url: '../lesson1-4/',
+                                    url: '../../unit1/lesson1-4/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.5",
-                                    url: '../lesson1-5/',
+                                    url: '../../unit1/lesson1-5/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.6",
-                                    url: '../lesson1-6/',
+                                    url: '../../unit1/lesson1-6/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Linux Installation Process",
-                                    url: './',
+                                    url: '../../unit1/installation-process/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
@@ -1248,13 +1394,13 @@
                                 
                                 {
                                     title: "Lesson 4.1",
-                                    url: '../../unit4/lesson4-1/',
+                                    url: './',
                                     path: 'Curriculum > Unit 4'
                                 },
                                 
                                 {
                                     title: "Lesson 4.2",
-                                    url: '../../unit4/lesson4-2/',
+                                    url: '../lesson4-2/',
                                     path: 'Curriculum > Unit 4'
                                 },
                                 

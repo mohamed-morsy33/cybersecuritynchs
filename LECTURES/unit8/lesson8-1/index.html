@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linux Installation Process - NCHS Cybersecurity</title>
+    <title>Lesson 8.1 - NCHS Cybersecurity</title>
     
     
     <link rel="icon" href="../../../img/logo.png">
@@ -698,31 +698,31 @@
                                         <ul class="unit-lessons">
                                             
                                             <li>
-                                                <a href="../lesson1-1/">Lesson 1.1</a>
+                                                <a href="../../unit1/lesson1-1/">Lesson 1.1</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-2/">Lesson 1.2</a>
+                                                <a href="../../unit1/lesson1-2/">Lesson 1.2</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-3/">Lesson 1.3</a>
+                                                <a href="../../unit1/lesson1-3/">Lesson 1.3</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-4/">Lesson 1.4</a>
+                                                <a href="../../unit1/lesson1-4/">Lesson 1.4</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-5/">Lesson 1.5</a>
+                                                <a href="../../unit1/lesson1-5/">Lesson 1.5</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-6/">Lesson 1.6</a>
+                                                <a href="../../unit1/lesson1-6/">Lesson 1.6</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="./">Linux Installation Process</a>
+                                                <a href="../../unit1/installation-process/">Linux Installation Process</a>
                                             </li>
                                             
                                         </ul>
@@ -857,15 +857,15 @@
                                         <ul class="unit-lessons">
                                             
                                             <li>
-                                                <a href="../../unit8/lesson8-1/">Lesson 8.1</a>
+                                                <a href="./">Lesson 8.1</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../../unit8/lesson8-2/">Lesson 8.2</a>
+                                                <a href="../lesson8-2/">Lesson 8.2</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../../unit8/lesson8-3/">Lesson 8.3</a>
+                                                <a href="../lesson8-3/">Lesson 8.3</a>
                                             </li>
                                             
                                         </ul>
@@ -964,142 +964,395 @@
 
     <div class="container">
         
-        <h2 id="what-is-it"><em>What</em> is it?</h2>
-<p>Kali is an operating system that was made <strong><em>specially</em></strong> for cybersecurity work (and hacking as well). It has a large toolkit of useful programs that we're going to learn about, including Hydra, Nmap, Wireshark, Tcpdump, MacChanger, Chisel, Aircrack-ng, etc.</p>
-<h2 id="some-vocab">Some Vocab:</h2>
-<p>As much as we know vocabulary might not be that interesting, it's important to know for the future, since there's a LOT of acronyms and words in cybersecurity that you're going to be hearing and using, so it's best to get used to it.</p>
-<ul>
-<li><strong>Operating System (OS)</strong>: The main software that runs your computer, like Windows, macOS, iOS, GNU/Linux, etc.</li>
-<li><strong>Virtual Machine (VM)</strong>: It's basically a computer <em>inside</em> another computer. You can run your regular OS, like Windows, and still have Kali Linux inside of it</li>
-<li><strong>ISO File (International Organization for Standardization File)</strong>: Sounds fancy, but really it's just a full copy of an OS within one tiny file</li>
-<li><strong>Hypervisor</strong>: Software that creates and manages VMs. Examples are VirtualBox and VMWare Workstation. There's also QEMU, but mostly Linux users use that, and you're likely running on Windows or mac</li>
-<li><strong>Bootable USB</strong>: Just a USB drive (which you hopefully already know about) that can start up a computer and install an OS (we don't need this yet)</li>
-<li><strong>Partitioning</strong>: A more advanced topic, but it's dividing up your drive into sections called <em>partitions</em>, which are like walls for a room. We don't need this yet, but it is good to know</li>
-</ul>
-<p>Now, let's get into the nitty-gritty:</p>
-<h2 id="method-1-easy-way">Method 1: Easy way :)</h2>
-<h3 id="minimum-requirements">Minimum Requirements*:</h3>
+        <h1 id="the-ethical-side-of-cybersecurity">The Ethical Side of Cybersecurity</h1>
+<p>You now have significant knowledge that could be used for harm. You understand networks, can write scripts, know how to capture packets, and comprehend encryption. This lesson is about the responsibility that comes with that knowledge.</p>
+<h2 id="why-ethics-matter-in-cybersecurity">Why Ethics Matter in Cybersecurity</h2>
+<p>Cybersecurity skills are powerful. The same techniques used to defend systems can be used to attack them. The difference between a security professional and a criminal often comes down to permission, intent, and ethical boundaries.</p>
+<p>Consider:
+- The skills to test for SQL injection can also exploit vulnerable websites
+- The ability to capture network traffic can intercept private communications
+- Knowledge of malware can be used to create or stop it
+- Access control expertise can secure systems or bypass them</p>
+<p><strong>You will be tempted.</strong> You'll find vulnerabilities in systems. You'll have access to sensitive data. You'll have opportunities to abuse your skills. Your ethical foundation is what will guide your decisions when no one is watching.</p>
+<h2 id="core-ethical-principles">Core Ethical Principles</h2>
+<h3 id="1-do-no-harm">1. Do No Harm</h3>
+<p>The first rule: don't cause damage. This means:
+- Don't access systems without authorization
+- Don't modify data you're not supposed to
+- Don't disrupt services
+- Don't create malware for malicious purposes
+- Don't steal information
+- Don't facilitate harm to others</p>
+<p>Even if you could easily hack something, that doesn't make it right or legal.</p>
+<h3 id="2-respect-privacy">2. Respect Privacy</h3>
+<p>People have a right to privacy. As a security professional, you'll often have access to private information:
+- User credentials
+- Personal communications
+- Financial data
+- Medical records
+- Private photos and documents</p>
+<p><strong>You must protect this information</strong>, even if it's technically within your power to access or share it. Just because you <em>can</em> see someone's data doesn't mean you <em>should</em>.</p>
+<h3 id="3-get-permission-first">3. Get Permission First</h3>
+<p><strong>Never test security without explicit permission.</strong> This cannot be overstated.</p>
+<p><strong>Authorized testing:</strong>
+- Written permission from system owner
+- Clearly defined scope
+- Time boundaries
+- Rules of engagement
+- Point of contact</p>
+<p><strong>Unauthorized testing:</strong>
+- "But I was helping!" is not a legal defense
+- Can result in criminal charges
+- Can ruin your career
+- Can cause real damage</p>
+<p>If you find a vulnerability accidentally, report it responsibly—don't exploit it.</p>
+<h3 id="4-responsible-disclosure">4. Responsible Disclosure</h3>
+<p>When you discover a vulnerability:</p>
+<p><strong>Good approach (Responsible Disclosure):</strong>
+1. Document the vulnerability
+2. Contact the vendor/owner through proper channels
+3. Give them reasonable time to fix it (usually 90 days)
+4. Don't publicly disclose until patched
+5. May disclose after patch or deadline</p>
+<p><strong>Bad approaches:</strong>
+- <strong>Full disclosure</strong>: Immediately publicizing vulnerability before patch
+- <strong>Extortion</strong>: Demanding payment for vulnerability info
+- <strong>Weaponizing</strong>: Selling to criminals or nation-states
+- <strong>Silent exploitation</strong>: Using vulnerability without telling anyone</p>
+<p><strong>Coordinated disclosure</strong> is the industry standard—work with vendors to fix issues before they're exploited.</p>
+<h3 id="5-transparency-and-honesty">5. Transparency and Honesty</h3>
+<p>Be honest about:
+- Your findings in security assessments
+- Your capabilities and limitations
+- Conflicts of interest
+- When you make mistakes</p>
+<p>Don't:
+- Exaggerate threats to get business
+- Hide vulnerabilities you're supposed to report
+- Claim credit for others' work
+- Lie about credentials or experience</p>
+<p>Your reputation is built on trust. One act of dishonesty can destroy a career.</p>
+<h2 id="legal-frameworks">Legal Frameworks</h2>
+<p>Ethics and law overlap but aren't identical. Something can be unethical but legal, or ethical but illegal in certain jurisdictions. However, security professionals must understand the legal landscape.</p>
+<h3 id="computer-fraud-and-abuse-act-cfaa-usa">Computer Fraud and Abuse Act (CFAA) - USA</h3>
+<p>The primary US law governing computer crimes:
+- Accessing computers without authorization
+- Exceeding authorized access
+- Causing damage to computer systems
+- Trafficking in passwords
+- Threatening to damage computers (extortion)</p>
+<p><strong>Penalties</strong>: Fines and imprisonment, severity depends on damage and intent</p>
+<p><strong>Controversial aspects</strong>: Vague language has led to concerning prosecutions, including researchers testing security.</p>
+<h3 id="computer-misuse-act-uk">Computer Misuse Act - UK</h3>
+<p>Similar to CFAA:
+- Unauthorized access to computer material
+- Unauthorized access with intent to commit further offenses
+- Unauthorized modification of computer material
+- Making, supplying, or obtaining tools for computer misuse</p>
+<h3 id="other-relevant-laws">Other Relevant Laws</h3>
+<p><strong>GDPR (General Data Protection Regulation)</strong> - EU:
+- Strict data protection requirements
+- Heavy fines for breaches
+- Right to be forgotten
+- Data portability</p>
+<p><strong>HIPAA</strong> - USA healthcare data:
+- Protects medical information
+- Strict access controls required
+- Severe penalties for violations</p>
+<p><strong>COPPA</strong> - USA children's privacy:
+- Protects children under 13 online
+- Parental consent requirements</p>
+<p><strong>State/local laws</strong>: Many jurisdictions have additional computer crime laws</p>
+<h3 id="international-considerations">International Considerations</h3>
+<p>Cybersecurity is global, but laws are local:
+- Actions legal in your country may be illegal elsewhere
+- Accessing systems in another country can violate their laws
+- Extradition treaties may apply
+- Corporate espionage is illegal internationally</p>
+<p>Always understand the legal jurisdiction of systems you're working with.</p>
+<h2 id="professional-codes-of-conduct">Professional Codes of Conduct</h2>
+<p>Several organizations provide ethical frameworks for cybersecurity professionals:</p>
+<h3 id="isc2-code-of-ethics">(ISC)² Code of Ethics</h3>
+<p>For CISSP and other certifications:
+1. Protect society, the common good, necessary public trust and confidence, and the infrastructure
+2. Act honorably, honestly, justly, responsibly, and legally
+3. Provide diligent and competent service to principals
+4. Advance and protect the profession</p>
+<h3 id="ec-council-code-of-ethics">EC-Council Code of Ethics</h3>
+<p>For CEH (Certified Ethical Hacker):
+- Keep private information confidential
+- Not use hacking knowledge for personal gain
+- Not cause damage to clients' systems
+- Inform organizations of vulnerabilities
+- Not violate intellectual property rights</p>
+<h3 id="acm-code-of-ethics">ACM Code of Ethics</h3>
+<p>For computer professionals:
+- Contribute to society and human well-being
+- Avoid harm
+- Be honest and trustworthy
+- Be fair and take action not to discriminate
+- Respect privacy
+- Honor confidentiality</p>
+<p>These frameworks help guide decisions in gray areas.</p>
+<h2 id="ethical-dilemmas-in-cybersecurity">Ethical Dilemmas in Cybersecurity</h2>
+<p>Let's examine some realistic scenarios:</p>
+<h3 id="scenario-1-the-accidental-discovery">Scenario 1: The Accidental Discovery</h3>
+<p>You're browsing a company website and notice a URL parameter. Out of curiosity, you change it and discover you can access other users' account information. No one knows you found this.</p>
+<p><strong>Ethical considerations:</strong>
+- You didn't intend to find this, but now you have
+- Other malicious actors could find it too
+- Users' data is at risk
+- You've technically accessed unauthorized data</p>
+<p><strong>Right approach:</strong>
+1. Stop accessing the vulnerability immediately
+2. Document what you found (screenshots, URLs)
+3. Report to the company through security@company.com or responsible disclosure program
+4. Don't access further data or share the vulnerability
+5. Give them time to fix before any public disclosure</p>
+<p><strong>Wrong approaches:</strong>
+- "Testing" further to see how bad it is (unauthorized access)
+- Telling friends or posting on social media
+- Ignoring it (users remain at risk)
+- Demanding money to disclose it (extortion)</p>
+<h3 id="scenario-2-the-security-job-offer">Scenario 2: The Security Job Offer</h3>
+<p>A company offers you a job to test their competitor's security—without the competitor's knowledge.</p>
+<p><strong>Ethical considerations:</strong>
+- This is corporate espionage
+- It's illegal
+- It's unethical
+- Could destroy your career and lead to criminal charges</p>
+<p><strong>Right approach:</strong>
+Decline immediately. This is criminal activity, regardless of how it's framed.</p>
+<p><strong>Red flags:</strong>
+- Testing systems you don't own
+- No written authorization
+- Targeting competitors
+- Requests for "gray area" work</p>
+<h3 id="scenario-3-the-insecure-client">Scenario 3: The Insecure Client</h3>
+<p>During a penetration test, you find the client's CEO has terrible password hygiene and is accessing adult websites on company time.</p>
+<p><strong>Ethical considerations:</strong>
+- Your job is security testing, not morality policing
+- CEO's personal behavior isn't your business unless it's a security risk
+- You have a duty to report security issues
+- You shouldn't gossip or shame</p>
+<p><strong>Right approach:</strong>
+- Report weak passwords as security findings
+- If adult sites are malicious or violate policy, report the security risk
+- Don't mention personal details that aren't relevant to security
+- Maintain confidentiality</p>
+<h3 id="scenario-4-the-national-security-request">Scenario 4: The National Security Request</h3>
+<p>A government agency asks you to create a backdoor in your company's encryption software "for national security."</p>
+<p><strong>Ethical considerations:</strong>
+- Backdoors undermine security for everyone
+- You'd be compromising your users
+- May be legally required in some jurisdictions
+- May violate users' trust and privacy</p>
+<p><strong>Considerations:</strong>
+- Consult with company legal team
+- Understand legal obligations
+- Consider resigning if you can't ethically comply
+- Whistleblower protections may apply</p>
+<p>This is genuinely complex and depends on jurisdiction, laws, and personal values.</p>
+<h3 id="scenario-5-the-vulnerability-in-your-own-product">Scenario 5: The Vulnerability in Your Own Product</h3>
+<p>You discover a severe vulnerability in software your team shipped. Fixing it is expensive and time-consuming. Your manager wants to delay.</p>
+<p><strong>Ethical considerations:</strong>
+- Users are at risk
+- Disclosure could hurt company reputation
+- You have responsibility to both employer and users
+- Legal liability if breach occurs</p>
+<p><strong>Right approach:</strong>
+- Document the vulnerability
+- Advocate strongly for immediate fix
+- Escalate if manager refuses
+- Consider whistleblower options if company ignores serious risk
+- Never help cover up serious vulnerabilities</p>
+<h2 id="the-gray-areas">The Gray Areas</h2>
+<p>Not everything in cybersecurity is black and white:</p>
+<h3 id="security-research">Security Research</h3>
+<p>Is it ethical to:
+- Probe your own systems? (Yes, with permission)
+- Test open-source software for vulnerabilities? (Yes, responsibly)
+- Reverse engineer malware? (Yes, for defense)
+- Examine protocols and find flaws? (Yes, with responsible disclosure)
+- Buy zero-day vulnerabilities? (Complicated—depends on use)
+- Create proof-of-concept exploits? (Yes, if not weaponized)</p>
+<h3 id="offensive-security">Offensive Security</h3>
+<p>Can you ethically:
+- Perform penetration testing? (Yes, with authorization)
+- Develop exploit tools? (Yes, if used ethically)
+- Simulate attacks? (Yes, in controlled environments)
+- Teach exploitation techniques? (Yes, education is important)
+- Participate in red teaming? (Yes, with proper agreements)</p>
+<h3 id="privacy-vs-security">Privacy vs. Security</h3>
+<p>Sometimes these conflict:
+- Monitoring employee activity (security vs. privacy)
+- Encryption backdoors (security of some vs. privacy of all)
+- Data retention (incident investigation vs. data minimization)
+- Surveillance programs (national security vs. civil liberties)</p>
+<p>These require careful balancing and informed debate.</p>
+<h2 id="building-your-ethical-framework">Building Your Ethical Framework</h2>
+<p>How do you make ethical decisions?</p>
+<h3 id="the-four-way-test">The Four-Way Test</h3>
+<p>Ask yourself:
+1. <strong>Is it the truth?</strong> Am I being honest?
+2. <strong>Is it fair to all concerned?</strong> Am I treating everyone fairly?
+3. <strong>Will it build goodwill and better relationships?</strong> Am I helping or harming trust?
+4. <strong>Will it be beneficial to all concerned?</strong> Is this a net positive?</p>
+<h3 id="the-publicity-test">The Publicity Test</h3>
+<p>Would you be comfortable with your actions appearing on the front page of a newspaper with your name attached?</p>
+<h3 id="the-reversibility-test">The Reversibility Test</h3>
+<p>If someone did this to you or your organization, how would you feel?</p>
+<h3 id="the-professional-test">The Professional Test</h3>
+<p>Would respected professionals in your field approve of this action?</p>
+<h3 id="the-legal-test">The Legal Test</h3>
+<p>Is this legal in all relevant jurisdictions?</p>
+<p>If you're uncertain, err on the side of caution and seek advice.</p>
+<h2 id="ethical-decision-making-process">Ethical Decision-Making Process</h2>
+<p>When facing an ethical dilemma:</p>
 <ol>
-<li><code>8 GB</code> of RAM</li>
-<li><code>20-30 GB</code> of free hard drive space</li>
-<li>A decently fast CPU (you probably have this)</li>
+<li><strong>Identify the issue</strong>: What's the ethical question?</li>
+<li><strong>Gather information</strong>: What are the facts? What are the laws?</li>
+<li><strong>Identify stakeholders</strong>: Who is affected?</li>
+<li><strong>Consider alternatives</strong>: What are your options?</li>
+<li><strong>Evaluate consequences</strong>: What happens with each option?</li>
+<li><strong>Make a decision</strong>: Based on ethical principles and professional standards</li>
+<li><strong>Implement</strong>: Act on your decision</li>
+<li><strong>Reflect</strong>: Was it the right choice? What did you learn?</li>
 </ol>
-<p>*But, how do I know if I meet them? Well, you can press <em><code>Ctrl+Shift+Esc</code></em> on Windows and click on <strong>"Performance"</strong> inside of Task Manager, and it'll give you a spec (specifications) sheet. On mac, you can click on <strong>"About"</strong> in the top menu bar of your computer. On Linux, you can type <strong><code>uname -a</code></strong>, or use a custom program like <code>fastfetch</code></p>
-<h2 id="big-disclaimer-for-windows-users">BIG DISCLAIMER FOR WINDOWS USERS:</h2>
+<p>Document your reasoning. If questioned later, you can explain your thinking.</p>
+<h2 id="professional-responsibility">Professional Responsibility</h2>
+<p>As your skills grow, so does your responsibility:</p>
+<h3 id="duty-to-clientsemployers">Duty to Clients/Employers</h3>
 <ul>
-<li>You NEED to DISABLE something called Hyper-V. If you don't know what that is, for Windows users, Hyper-V will conflict with Virtualbox, making it run poorly and crash often</li>
-<li>To check if you hve Hyper-V, press <code>Win+R</code>, and type <code>optionalfeatures</code>, then press <code>Enter</code></li>
-<li>Look for a "Hyper-V" in the list of shown items. If it's checked, then it's enabled. Uncheck it.<ul>
-<li>Alternative method: go to cmd (Command Prompt), and right click and "Run as Administrator". Then use the following command: <code>bcdedit /set hypervisorlaunchtype off</code></li>
+<li>Perform work competently</li>
+<li>Maintain confidentiality</li>
+<li>Act in their best interest</li>
+<li>Report findings honestly</li>
+<li>Stay within scope of engagement</li>
 </ul>
-</li>
-<li>Finally, restart your computer</li>
-</ul>
-<h2 id="big-disclaimer-for-macos-users">BIG DISCLAIMER FOR MACOS USERS:</h2>
+<h3 id="duty-to-society">Duty to Society</h3>
 <ul>
-<li>You need to check if you're using an Intel-based Mac or Apple Silicon machine. If your device is M1, M2, M*, then it's <strong>Apple Silicon</strong></li>
-<li>If this is the case, you will need to use a different software for virtualization. You have some options, like <a href="https://getutm.app">UTM</a> or <a href="https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion">VMware Fusion</a>. </li>
-<li>Also, you will have to install Kali Linux using the 
-<em><strong>ARM64 version! Not x86-64!</strong></em></li>
+<li>Don't facilitate criminal activity</li>
+<li>Protect critical infrastructure</li>
+<li>Contribute to security knowledge</li>
+<li>Mentor others responsibly</li>
+<li>Advocate for better security practices</li>
 </ul>
-<hr />
-<p>Now, go to <a href="https://virtualbox.org">virtualbox.org</a></p>
-<p>Click on the download for your OS, and install the program by following the instruction wizard.</p>
-<p><img alt="Virtual Box" src="../../../img/virtual_box.png" /></p>
+<h3 id="duty-to-the-profession">Duty to the Profession</h3>
 <ul>
-<li>Now, go to the <a href="https://kali.org/get-kali">Kali Linux website</a>.</li>
-<li>Download the "Installer" ISO file (<code>~ 4 GB</code> in size)</li>
-<li>Then choose the 64-bit version for modern computers.</li>
-<li>If your computer is old, it could be 32-bit. If so, you may need to check your system specifications as explained above. However, it probably isn't.</li>
+<li>Uphold professional standards</li>
+<li>Report unethical behavior</li>
+<li>Continue learning and improving</li>
+<li>Share knowledge appropriately</li>
+<li>Don't undermine trust in the field</li>
 </ul>
-<p><img alt="Kali Installation" src="../../../img/kali_img.png" /></p>
-<blockquote>
-<p>Remember, Apple Silicon machines will install the ARM64 version of Kali Linux instead!</p>
-</blockquote>
+<h3 id="duty-to-yourself">Duty to Yourself</h3>
 <ul>
-<li>Finally, make your Virtual Machine. Open up VirtualBox and click "New"</li>
-<li>Name it whatever, I'd call it "Kali Linux", or "Kali Machine".</li>
-<li>Type: Linux, Version: Debian (64-bit)</li>
-<li>Allocate at least <code>4 GB</code> of RAM, AKA <code>4096 MB</code>, by dragging the slider or typing in the number in the RAM text box</li>
-<li>Create a Virtual Hrd Disk (allocate <code>25-30 GB</code> minimum)<ul>
-<li>Choose VDI (VirtualBox Disk Image)</li>
-<li>Also select "dynamically allocated" to save space, and allows the VM to grow dynamically in storage size as you begin to add more things</li>
+<li>Don't compromise your integrity</li>
+<li>Don't accept work you're not qualified for</li>
+<li>Maintain work-life balance</li>
+<li>Seek support when facing ethical dilemmas</li>
+<li>Know when to walk away</li>
 </ul>
-</li>
-<li>After clicking done, tell it to create, but do NOT tell it to also start yet</li>
-<li>Click on your virtual machine, and then go to settings</li>
-<li>Then go to Storage, and click the empty disk icon</li>
-<li>This is where we "choose a disk file", and select the downloaded Kali ISO</li>
-<li>Then under System, enable PAE/NX if available to you. PAE is Physical Address Extension, and NX is No Execute. These allow for &gt; <code>4 GB</code> of RAM access and prevents non-executable code from being executed in memory segments. If you don't know what that means, just ignore this</li>
-<li>Under Display, increase video memory to <code>128 MB</code></li>
-<li>Finally, save and exit Settings, and click on Start to boot your VM</li>
-<li>Select "Graphical Install" (press Enter, navigate using arrow keys)</li>
-<li>Choose your language, location, keyboard (these can later be changed, doesn't really matter)</li>
-<li>You can set a hostname, or keep the default (kali)</li>
-</ul>
-<h3 id="important-username-is-kali-and-password-is-kali-by-default"><strong>IMPORTANT</strong>: username is <em>kali</em> and password is <em>kali</em> by default!</h3>
-<ul>
-<li>Choose "Guided - use entire disk" for your partitioning</li>
-<li>Then select "All files in one partition"</li>
-<li>Confirm and wait a while. Take a walk outside, take a short nap, whatever you want. Just wait 10-20 minutes and it'll be done</li>
-<li>Restart when prompted</li>
-<li>On first login, enter the username and password</li>
-<li>Then, click the <code>SUPER</code> key (<code>Win</code> key or <code>Cmd</code> key on mac) and type "terminal" or "console" into the search, and open the app</li>
-<li>In the terminal, you can type <code>sudo apt update &amp;&amp; sudo apt upgrade -y</code><ul>
-<li>This command just updates your system</li>
-<li>When prompted with a password, type in your password</li>
-</ul>
-</li>
-<li>Happy Linux!</li>
-</ul>
-<h2 id="method-2-hard-way-bare-metal-installation">Method 2: Hard way (bare metal installation)</h2>
-<p>Alright. You're ready for the real deal. No problem. </p>
-<p><code>WARNING! ⚠️⚠️</code>: This version of installation WILL take space on your disk! This means it will be physically installed, and it will NOT be installed as a VM! Just like Windows or macOS, it will be physically on your device. If you do this incorrectly, it may <strong>wipe your device completely</strong>. I'm not liable for if you mistakenly wipe your drive, it's up to you. Also, I personally do <strong>not recommend you install Kali Linux on a physical drive</strong>. If you want to use Linux for extra practice, install a distribution like <a href="https://www.debian.org/">Debian</a> or <a href="https://linuxmint.com/">Linux Mint</a>. You are risking data loss if done incorrectly, so proceed at your own risk.</p>
-<p>Important things to note are:</p>
-<ul>
-<li>If you install on bare metal, AKA on your physical device, your device may have incompatibility issues. I would recommend doing your own research before doing so</li>
-<li>You may want to install Linux on a secondary drive, since if you use your main one, you will have to create a special partition for Linux to use exclusively, which is more difficult</li>
-<li>You'll need a USB drive with preferably <code>8 GB</code> or more of storage</li>
-<li>You may need to adjust your BIOS (manufacturer specific, meaning it depends on what company made your computer and maybe even where you bought it from) to allow for other bootable devices, which can include removing Secure Boot</li>
-<li>There's some specifics for ARM64 machines like Apple Silicon that will be different!</li>
-<li>Overall, you are likely going to have to do your OWN research to make sure you don't mess anything up.</li>
-</ul>
-<p>Without further ado, these are some general instructions (not perfect):</p>
+<h2 id="red-flags-and-warning-signs">Red Flags and Warning Signs</h2>
+<p>Situations that should concern you:</p>
+<p><strong>Requests that:</strong>
+- Violate laws or professional codes
+- Target systems without authorization
+- Ask you to lie or conceal information
+- Involve malicious intent
+- Lack proper documentation
+- Require secrecy from normal oversight
+- Pressure you to act without time to think</p>
+<p><strong>Trust your instincts.</strong> If something feels wrong, it probably is. Seek advice from mentors, legal counsel, or professional organizations.</p>
+<h2 id="career-implications">Career Implications</h2>
+<p>Ethics isn't just philosophical—it's practical:</p>
+<p><strong>Good ethics:</strong>
+- Build reputation and trust
+- Create career opportunities
+- Lead to referrals and recommendations
+- Provide job satisfaction
+- Enable you to sleep at night</p>
+<p><strong>Poor ethics:</strong>
+- Destroy careers permanently
+- Lead to criminal charges
+- Result in professional blacklisting
+- Cause personal and family hardship
+- Eliminate future opportunities</p>
+<p>The cybersecurity community is smaller than you think. Reputation matters.</p>
+<h2 id="ethical-hacking-vs-criminal-hacking">Ethical Hacking vs. Criminal Hacking</h2>
+<p>Let's be clear about the distinction:</p>
+<p><strong>Ethical Hacker (White Hat):</strong>
+- Has explicit permission
+- Works within defined scope
+- Reports findings to owners
+- Follows responsible disclosure
+- Aims to improve security
+- Respects privacy and laws</p>
+<p><strong>Criminal Hacker (Black Hat):</strong>
+- No permission
+- Targets for personal gain
+- Steals or damages data
+- Exploits vulnerabilities
+- Operates illegally
+- Causes harm</p>
+<p><strong>Gray Hat:</strong>
+- No permission but no malicious intent
+- Discovers vulnerabilities and reports them
+- Still illegal in most jurisdictions
+- Risky and not recommended</p>
+<p><strong>Your goal should always be to operate as a white hat professional.</strong></p>
+<h2 id="real-world-examples">Real-World Examples</h2>
+<p><strong>Aaron Swartz</strong>: Downloaded academic articles from JSTOR. Faced disproportionate criminal charges under CFAA. Tragic case that sparked debate about computer fraud laws.</p>
+<p><strong>Marcus Hutchins</strong>: Security researcher who stopped WannaCry ransomware. Later charged with creating malware years earlier. Eventually pleaded guilty but received no jail time. Complex case involving past mistakes and later redemption.</p>
+<p><strong>Weev</strong>: Found vulnerability in AT&amp;T website exposing iPad users' emails. Convicted under CFAA, conviction later overturned. Controversial case about what constitutes "unauthorized access."</p>
+<p>These cases show the complexity and serious consequences of operating in ethical gray areas.</p>
+<h2 id="moving-forward">Moving Forward</h2>
+<p>As you continue in cybersecurity:</p>
 <ol>
-<li>Create a bootable USB drive using an app like Balena Etcher or Rufus</li>
-<li>Make space on your hard drive by creating a disk partition of ~<code>30 GB</code> or more, or install on a secondary hard drive</li>
-<li>Boot from the USB drive from BIOS after restarting your computer and smashing the BIOS key as it boots up (typically <code>Esc</code>, <code>F11</code>, <code>F12</code>, or <code>Del</code> depending on the manufacturer)</li>
-<li>Follow the installation process, but make sure you select the right drive and if it's on the same disk as Windows or Mac, you install "alongside" it, not replace </li>
-<li>After going through the setup, you may re-enter the BIOS to change the boot order. What this means is move Linux above Windows so that on first boot you boot into Linux (optional)</li>
+<li><strong>Know the laws</strong> in your jurisdiction</li>
+<li><strong>Follow professional codes</strong> of conduct</li>
+<li><strong>Get everything in writing</strong> before testing systems</li>
+<li><strong>Think before you act</strong> - pause when facing ethical dilemmas</li>
+<li><strong>Seek mentorship</strong> from experienced ethical professionals</li>
+<li><strong>Stay informed</strong> about legal and ethical developments</li>
+<li><strong>Contribute positively</strong> to the security community</li>
+<li><strong>Speak up</strong> when you see unethical behavior</li>
+<li><strong>Document your decisions</strong> and reasoning</li>
+<li><strong>Never compromise</strong> your integrity</li>
 </ol>
-<p>Some important extras:</p>
-<ul>
-<li>Make sure you regularly update your system at least weekly</li>
-<li>Make decent credentials or use a <a href="https://www.yubico.com/">physical key</a></li>
-<li>Never just copy/paste a command without understanding it, look it up at least (even from me!)</li>
-<li>Install packages wisely and preferably from trusted sources</li>
-</ul>
-<p>Happy Linux! :)</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Ethics in cybersecurity isn't about following arbitrary rules. It's about:
+- Respecting people's rights and privacy
+- Using power responsibly
+- Building trust
+- Contributing to a safer digital world
+- Maintaining professional standards</p>
+<p>You have or will have significant power. Systems will be vulnerable to you. Private information will be accessible. Organizations will trust you. How you handle that power defines who you are as a professional.</p>
+<p>The skills you're learning are tools. Like any tool, they can build or destroy. Your ethical framework determines which.</p>
+<p>Choose wisely. Your decisions will affect not just your career, but the lives of others and the security of systems we all depend on.</p>
+<p><strong>Remember</strong>: The most important security control is human integrity. Technology is only as good as the people using it.</p>
+<p>In the next lessons, we'll examine specific cyber threats and attack techniques. Understanding these isn't about learning to attack—it's about learning to defend. Keep your ethical foundation in mind as we explore the darker side of cybersecurity.</p>
         
 
         <!-- Lesson Navigation (only show on non-homepage pages) -->
         
         <div class="lesson-nav">
             
-            <a href="../lesson1-6/" class="lesson-nav-button">
+            <a href="../../unit7/lesson7-3/" class="lesson-nav-button">
                 <span class="arrow">←</span>
-                <span>Previous: Lesson 1.6</span>
+                <span>Previous: Lesson 7.3</span>
             </a>
             
 
             <div class="lesson-nav-info">
                 <div class="current-lesson">Current Lesson</div>
-                <div class="lesson-title">Linux Installation Process</div>
+                <div class="lesson-title">Lesson 8.1</div>
             </div>
 
             
-            <a href="../../unit2/lesson2-1/" class="lesson-nav-button">
-                <span>Next: Lesson 2.1</span>
+            <a href="../lesson8-2/" class="lesson-nav-button">
+                <span>Next: Lesson 8.2</span>
                 <span class="arrow">→</span>
             </a>
             
@@ -1158,43 +1411,43 @@
                                 
                                 {
                                     title: "Lesson 1.1",
-                                    url: '../lesson1-1/',
+                                    url: '../../unit1/lesson1-1/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.2",
-                                    url: '../lesson1-2/',
+                                    url: '../../unit1/lesson1-2/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.3",
-                                    url: '../lesson1-3/',
+                                    url: '../../unit1/lesson1-3/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.4",
-                                    url: '../lesson1-4/',
+                                    url: '../../unit1/lesson1-4/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.5",
-                                    url: '../lesson1-5/',
+                                    url: '../../unit1/lesson1-5/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.6",
-                                    url: '../lesson1-6/',
+                                    url: '../../unit1/lesson1-6/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Linux Installation Process",
-                                    url: './',
+                                    url: '../../unit1/installation-process/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
@@ -1330,19 +1583,19 @@
                                 
                                 {
                                     title: "Lesson 8.1",
-                                    url: '../../unit8/lesson8-1/',
+                                    url: './',
                                     path: 'Curriculum > Unit 8'
                                 },
                                 
                                 {
                                     title: "Lesson 8.2",
-                                    url: '../../unit8/lesson8-2/',
+                                    url: '../lesson8-2/',
                                     path: 'Curriculum > Unit 8'
                                 },
                                 
                                 {
                                     title: "Lesson 8.3",
-                                    url: '../../unit8/lesson8-3/',
+                                    url: '../lesson8-3/',
                                     path: 'Curriculum > Unit 8'
                                 },
                                 

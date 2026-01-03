@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linux Installation Process - NCHS Cybersecurity</title>
+    <title>Lesson 10.2 - NCHS Cybersecurity</title>
     
     
     <link rel="icon" href="../../../img/logo.png">
@@ -698,31 +698,31 @@
                                         <ul class="unit-lessons">
                                             
                                             <li>
-                                                <a href="../lesson1-1/">Lesson 1.1</a>
+                                                <a href="../../unit1/lesson1-1/">Lesson 1.1</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-2/">Lesson 1.2</a>
+                                                <a href="../../unit1/lesson1-2/">Lesson 1.2</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-3/">Lesson 1.3</a>
+                                                <a href="../../unit1/lesson1-3/">Lesson 1.3</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-4/">Lesson 1.4</a>
+                                                <a href="../../unit1/lesson1-4/">Lesson 1.4</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-5/">Lesson 1.5</a>
+                                                <a href="../../unit1/lesson1-5/">Lesson 1.5</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-6/">Lesson 1.6</a>
+                                                <a href="../../unit1/lesson1-6/">Lesson 1.6</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="./">Linux Installation Process</a>
+                                                <a href="../../unit1/installation-process/">Linux Installation Process</a>
                                             </li>
                                             
                                         </ul>
@@ -899,15 +899,15 @@
                                         <ul class="unit-lessons">
                                             
                                             <li>
-                                                <a href="../../unit10/lesson10-1/">Lesson 10.1</a>
+                                                <a href="../lesson10-1/">Lesson 10.1</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../../unit10/lesson10-2/">Lesson 10.2</a>
+                                                <a href="./">Lesson 10.2</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../../unit10/lesson10-3/">Lesson 10.3</a>
+                                                <a href="../lesson10-3/">Lesson 10.3</a>
                                             </li>
                                             
                                         </ul>
@@ -964,142 +964,641 @@
 
     <div class="container">
         
-        <h2 id="what-is-it"><em>What</em> is it?</h2>
-<p>Kali is an operating system that was made <strong><em>specially</em></strong> for cybersecurity work (and hacking as well). It has a large toolkit of useful programs that we're going to learn about, including Hydra, Nmap, Wireshark, Tcpdump, MacChanger, Chisel, Aircrack-ng, etc.</p>
-<h2 id="some-vocab">Some Vocab:</h2>
-<p>As much as we know vocabulary might not be that interesting, it's important to know for the future, since there's a LOT of acronyms and words in cybersecurity that you're going to be hearing and using, so it's best to get used to it.</p>
-<ul>
-<li><strong>Operating System (OS)</strong>: The main software that runs your computer, like Windows, macOS, iOS, GNU/Linux, etc.</li>
-<li><strong>Virtual Machine (VM)</strong>: It's basically a computer <em>inside</em> another computer. You can run your regular OS, like Windows, and still have Kali Linux inside of it</li>
-<li><strong>ISO File (International Organization for Standardization File)</strong>: Sounds fancy, but really it's just a full copy of an OS within one tiny file</li>
-<li><strong>Hypervisor</strong>: Software that creates and manages VMs. Examples are VirtualBox and VMWare Workstation. There's also QEMU, but mostly Linux users use that, and you're likely running on Windows or mac</li>
-<li><strong>Bootable USB</strong>: Just a USB drive (which you hopefully already know about) that can start up a computer and install an OS (we don't need this yet)</li>
-<li><strong>Partitioning</strong>: A more advanced topic, but it's dividing up your drive into sections called <em>partitions</em>, which are like walls for a room. We don't need this yet, but it is good to know</li>
-</ul>
-<p>Now, let's get into the nitty-gritty:</p>
-<h2 id="method-1-easy-way">Method 1: Easy way :)</h2>
-<h3 id="minimum-requirements">Minimum Requirements*:</h3>
+        <h1 id="incident-response-and-digital-forensics">Incident Response and Digital Forensics</h1>
+<p>When prevention fails, incident response saves the day. This lesson covers how to detect, respond to, and recover from security incidents while preserving evidence for investigation and potential legal proceedings.</p>
+<h2 id="incident-response-framework">Incident Response Framework</h2>
+<h3 id="nist-incident-response-lifecycle">NIST Incident Response Lifecycle</h3>
+<p><strong>4 phases:</strong></p>
 <ol>
-<li><code>8 GB</code> of RAM</li>
-<li><code>20-30 GB</code> of free hard drive space</li>
-<li>A decently fast CPU (you probably have this)</li>
+<li><strong>Preparation</strong> - Build capability before incident occurs</li>
+<li><strong>Detection &amp; Analysis</strong> - Identify and understand incident</li>
+<li><strong>Containment, Eradication &amp; Recovery</strong> - Stop damage and restore</li>
+<li><strong>Post-Incident Activity</strong> - Learn and improve</li>
 </ol>
-<p>*But, how do I know if I meet them? Well, you can press <em><code>Ctrl+Shift+Esc</code></em> on Windows and click on <strong>"Performance"</strong> inside of Task Manager, and it'll give you a spec (specifications) sheet. On mac, you can click on <strong>"About"</strong> in the top menu bar of your computer. On Linux, you can type <strong><code>uname -a</code></strong>, or use a custom program like <code>fastfetch</code></p>
-<h2 id="big-disclaimer-for-windows-users">BIG DISCLAIMER FOR WINDOWS USERS:</h2>
-<ul>
-<li>You NEED to DISABLE something called Hyper-V. If you don't know what that is, for Windows users, Hyper-V will conflict with Virtualbox, making it run poorly and crash often</li>
-<li>To check if you hve Hyper-V, press <code>Win+R</code>, and type <code>optionalfeatures</code>, then press <code>Enter</code></li>
-<li>Look for a "Hyper-V" in the list of shown items. If it's checked, then it's enabled. Uncheck it.<ul>
-<li>Alternative method: go to cmd (Command Prompt), and right click and "Run as Administrator". Then use the following command: <code>bcdedit /set hypervisorlaunchtype off</code></li>
-</ul>
-</li>
-<li>Finally, restart your computer</li>
-</ul>
-<h2 id="big-disclaimer-for-macos-users">BIG DISCLAIMER FOR MACOS USERS:</h2>
-<ul>
-<li>You need to check if you're using an Intel-based Mac or Apple Silicon machine. If your device is M1, M2, M*, then it's <strong>Apple Silicon</strong></li>
-<li>If this is the case, you will need to use a different software for virtualization. You have some options, like <a href="https://getutm.app">UTM</a> or <a href="https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion">VMware Fusion</a>. </li>
-<li>Also, you will have to install Kali Linux using the 
-<em><strong>ARM64 version! Not x86-64!</strong></em></li>
-</ul>
-<hr />
-<p>Now, go to <a href="https://virtualbox.org">virtualbox.org</a></p>
-<p>Click on the download for your OS, and install the program by following the instruction wizard.</p>
-<p><img alt="Virtual Box" src="../../../img/virtual_box.png" /></p>
-<ul>
-<li>Now, go to the <a href="https://kali.org/get-kali">Kali Linux website</a>.</li>
-<li>Download the "Installer" ISO file (<code>~ 4 GB</code> in size)</li>
-<li>Then choose the 64-bit version for modern computers.</li>
-<li>If your computer is old, it could be 32-bit. If so, you may need to check your system specifications as explained above. However, it probably isn't.</li>
-</ul>
-<p><img alt="Kali Installation" src="../../../img/kali_img.png" /></p>
-<blockquote>
-<p>Remember, Apple Silicon machines will install the ARM64 version of Kali Linux instead!</p>
-</blockquote>
-<ul>
-<li>Finally, make your Virtual Machine. Open up VirtualBox and click "New"</li>
-<li>Name it whatever, I'd call it "Kali Linux", or "Kali Machine".</li>
-<li>Type: Linux, Version: Debian (64-bit)</li>
-<li>Allocate at least <code>4 GB</code> of RAM, AKA <code>4096 MB</code>, by dragging the slider or typing in the number in the RAM text box</li>
-<li>Create a Virtual Hrd Disk (allocate <code>25-30 GB</code> minimum)<ul>
-<li>Choose VDI (VirtualBox Disk Image)</li>
-<li>Also select "dynamically allocated" to save space, and allows the VM to grow dynamically in storage size as you begin to add more things</li>
-</ul>
-</li>
-<li>After clicking done, tell it to create, but do NOT tell it to also start yet</li>
-<li>Click on your virtual machine, and then go to settings</li>
-<li>Then go to Storage, and click the empty disk icon</li>
-<li>This is where we "choose a disk file", and select the downloaded Kali ISO</li>
-<li>Then under System, enable PAE/NX if available to you. PAE is Physical Address Extension, and NX is No Execute. These allow for &gt; <code>4 GB</code> of RAM access and prevents non-executable code from being executed in memory segments. If you don't know what that means, just ignore this</li>
-<li>Under Display, increase video memory to <code>128 MB</code></li>
-<li>Finally, save and exit Settings, and click on Start to boot your VM</li>
-<li>Select "Graphical Install" (press Enter, navigate using arrow keys)</li>
-<li>Choose your language, location, keyboard (these can later be changed, doesn't really matter)</li>
-<li>You can set a hostname, or keep the default (kali)</li>
-</ul>
-<h3 id="important-username-is-kali-and-password-is-kali-by-default"><strong>IMPORTANT</strong>: username is <em>kali</em> and password is <em>kali</em> by default!</h3>
-<ul>
-<li>Choose "Guided - use entire disk" for your partitioning</li>
-<li>Then select "All files in one partition"</li>
-<li>Confirm and wait a while. Take a walk outside, take a short nap, whatever you want. Just wait 10-20 minutes and it'll be done</li>
-<li>Restart when prompted</li>
-<li>On first login, enter the username and password</li>
-<li>Then, click the <code>SUPER</code> key (<code>Win</code> key or <code>Cmd</code> key on mac) and type "terminal" or "console" into the search, and open the app</li>
-<li>In the terminal, you can type <code>sudo apt update &amp;&amp; sudo apt upgrade -y</code><ul>
-<li>This command just updates your system</li>
-<li>When prompted with a password, type in your password</li>
-</ul>
-</li>
-<li>Happy Linux!</li>
-</ul>
-<h2 id="method-2-hard-way-bare-metal-installation">Method 2: Hard way (bare metal installation)</h2>
-<p>Alright. You're ready for the real deal. No problem. </p>
-<p><code>WARNING! ⚠️⚠️</code>: This version of installation WILL take space on your disk! This means it will be physically installed, and it will NOT be installed as a VM! Just like Windows or macOS, it will be physically on your device. If you do this incorrectly, it may <strong>wipe your device completely</strong>. I'm not liable for if you mistakenly wipe your drive, it's up to you. Also, I personally do <strong>not recommend you install Kali Linux on a physical drive</strong>. If you want to use Linux for extra practice, install a distribution like <a href="https://www.debian.org/">Debian</a> or <a href="https://linuxmint.com/">Linux Mint</a>. You are risking data loss if done incorrectly, so proceed at your own risk.</p>
-<p>Important things to note are:</p>
-<ul>
-<li>If you install on bare metal, AKA on your physical device, your device may have incompatibility issues. I would recommend doing your own research before doing so</li>
-<li>You may want to install Linux on a secondary drive, since if you use your main one, you will have to create a special partition for Linux to use exclusively, which is more difficult</li>
-<li>You'll need a USB drive with preferably <code>8 GB</code> or more of storage</li>
-<li>You may need to adjust your BIOS (manufacturer specific, meaning it depends on what company made your computer and maybe even where you bought it from) to allow for other bootable devices, which can include removing Secure Boot</li>
-<li>There's some specifics for ARM64 machines like Apple Silicon that will be different!</li>
-<li>Overall, you are likely going to have to do your OWN research to make sure you don't mess anything up.</li>
-</ul>
-<p>Without further ado, these are some general instructions (not perfect):</p>
+<h3 id="sans-incident-response-process">SANS Incident Response Process</h3>
+<p><strong>6 steps:</strong></p>
 <ol>
-<li>Create a bootable USB drive using an app like Balena Etcher or Rufus</li>
-<li>Make space on your hard drive by creating a disk partition of ~<code>30 GB</code> or more, or install on a secondary hard drive</li>
-<li>Boot from the USB drive from BIOS after restarting your computer and smashing the BIOS key as it boots up (typically <code>Esc</code>, <code>F11</code>, <code>F12</code>, or <code>Del</code> depending on the manufacturer)</li>
-<li>Follow the installation process, but make sure you select the right drive and if it's on the same disk as Windows or Mac, you install "alongside" it, not replace </li>
-<li>After going through the setup, you may re-enter the BIOS to change the boot order. What this means is move Linux above Windows so that on first boot you boot into Linux (optional)</li>
+<li><strong>Preparation</strong> - Tools, training, policies</li>
+<li><strong>Identification</strong> - Detect and verify incident</li>
+<li><strong>Containment</strong> - Limit damage</li>
+<li><strong>Eradication</strong> - Remove threat</li>
+<li><strong>Recovery</strong> - Restore systems</li>
+<li><strong>Lessons Learned</strong> - Document and improve</li>
 </ol>
-<p>Some important extras:</p>
+<h2 id="preparation-phase">Preparation Phase</h2>
+<h3 id="building-an-incident-response-team">Building an Incident Response Team</h3>
+<p><strong>Core roles:</strong></p>
+<p><strong>Incident Response Manager</strong>
+- Coordinates response
+- Makes critical decisions
+- Communicates with stakeholders
+- Manages resources</p>
+<p><strong>Security Analyst</strong>
+- Analyzes alerts and logs
+- Identifies indicators of compromise
+- Performs triage
+- Documents findings</p>
+<p><strong>Forensic Investigator</strong>
+- Preserves evidence
+- Analyzes systems
+- Reconstructs events
+- Prepares reports</p>
+<p><strong>System Administrator</strong>
+- Provides technical access
+- Implements containment
+- Restores systems
+- Maintains business operations</p>
+<p><strong>Legal Counsel</strong>
+- Advises on legal obligations
+- Manages law enforcement interaction
+- Protects attorney-client privilege
+- Handles disclosure requirements</p>
+<p><strong>Communications Lead</strong>
+- Internal communications
+- External communications
+- Media relations
+- Customer notifications</p>
+<h3 id="essential-tools">Essential Tools</h3>
+<p><strong>Network monitoring:</strong>
+- Wireshark / tcpdump
+- Zeek (Bro)
+- Security Onion
+- Suricata / Snort</p>
+<p><strong>Endpoint detection:</strong>
+- OSSEC / Wazuh
+- Sysmon
+- osquery
+- Velociraptor</p>
+<p><strong>Memory analysis:</strong>
+- Volatility
+- Rekall
+- WinDbg</p>
+<p><strong>Disk forensics:</strong>
+- Autopsy / Sleuth Kit
+- FTK Imager
+- EnCase
+- X-Ways Forensics</p>
+<p><strong>Log analysis:</strong>
+- ELK Stack (Elasticsearch, Logstash, Kibana)
+- Splunk
+- Graylog</p>
+<p><strong>Malware analysis:</strong>
+- Cuckoo Sandbox
+- REMnux
+- FLARE VM
+- IDA Pro / Ghidra</p>
+<h3 id="incident-response-plan">Incident Response Plan</h3>
+<p><strong>Key components:</strong></p>
+<pre><code>1. Contact Information
+   - Team members (phone, email, backup)
+   - Vendors (IT, security, legal)
+   - Law enforcement
+   - Insurance
+
+2. Roles and Responsibilities
+   - Who does what
+   - Decision authority
+   - Escalation paths
+
+3. Communication Plan
+   - Internal notifications
+   - External notifications
+   - Media statements
+   - Customer communications
+
+4. Detection and Analysis
+   - Alert sources
+   - Triage procedures
+   - Severity classification
+   - Documentation requirements
+
+5. Containment Strategies
+   - Network isolation procedures
+   - Account disabling
+   - System shutdown criteria
+
+6. Evidence Collection
+   - Chain of custody forms
+   - Collection procedures
+   - Storage requirements
+
+7. Eradication and Recovery
+   - Malware removal
+   - System rebuild
+   - Verification procedures
+
+8. Post-Incident
+   - Lessons learned template
+   - Improvement tracking
+</code></pre>
+<h2 id="detection-analysis">Detection &amp; Analysis</h2>
+<h3 id="indicators-of-compromise-iocs">Indicators of Compromise (IOCs)</h3>
+<p><strong>Network IOCs:</strong>
+- Suspicious IP addresses
+- Unusual DNS queries
+- C2 beacon patterns
+- Large data transfers
+- Connections to known bad domains</p>
+<p><strong>Host IOCs:</strong>
+- Unexpected processes
+- New user accounts
+- Modified system files
+- Suspicious registry keys
+- Scheduled tasks
+- Unknown services</p>
+<p><strong>Application IOCs:</strong>
+- Failed login attempts
+- Privilege escalation
+- Unusual access patterns
+- Error messages
+- Configuration changes</p>
+<h3 id="alert-triage">Alert Triage</h3>
+<p><strong>Priority classification:</strong></p>
+<p><strong>Critical (P1):</strong>
+- Active data exfiltration
+- Ransomware execution
+- System compromise with admin access
+- Critical infrastructure impact
+- Response time: Immediate</p>
+<p><strong>High (P2):</strong>
+- Malware detected
+- Privilege escalation attempt
+- Credential compromise
+- Response time: &lt; 1 hour</p>
+<p><strong>Medium (P3):</strong>
+- Policy violation
+- Suspicious activity
+- Reconnaissance detected
+- Response time: &lt; 4 hours</p>
+<p><strong>Low (P4):</strong>
+- Failed attack attempt
+- Scanner activity
+- False positive likely
+- Response time: &lt; 24 hours</p>
+<h3 id="initial-analysis">Initial Analysis</h3>
+<p><strong>Questions to answer:</strong></p>
+<ol>
+<li><strong>What happened?</strong></li>
+<li>Type of incident</li>
+<li>Attack vector</li>
+<li>
+<p>Malware involved</p>
+</li>
+<li>
+<p><strong>When did it start?</strong></p>
+</li>
+<li>First compromise</li>
+<li>Detection time</li>
+<li>
+<p>Dwell time</p>
+</li>
+<li>
+<p><strong>What systems affected?</strong></p>
+</li>
+<li>Compromised hosts</li>
+<li>Accessed data</li>
+<li>
+<p>Network segments</p>
+</li>
+<li>
+<p><strong>Who is the attacker?</strong></p>
+</li>
+<li>Internal/external</li>
+<li>Sophistication level</li>
+<li>
+<p>Possible attribution</p>
+</li>
+<li>
+<p><strong>What's the impact?</strong></p>
+</li>
+<li>Data loss</li>
+<li>System availability</li>
+<li>Business impact</li>
+</ol>
+<h2 id="containment">Containment</h2>
+<h3 id="short-term-containment">Short-term Containment</h3>
+<p><strong>Immediate actions to limit damage:</strong></p>
+<p><strong>Network isolation:</strong></p>
+<pre><code class="language-bash"># Isolate host using firewall
+iptables -I INPUT 1 -s &lt;attacker_ip&gt; -j DROP
+iptables -I OUTPUT 1 -d &lt;attacker_ip&gt; -j DROP
+
+# Or disconnect network entirely
+ifconfig eth0 down
+
+# On Windows
+netsh interface set interface &quot;Ethernet&quot; admin=disable
+</code></pre>
+<p><strong>Account suspension:</strong></p>
+<pre><code class="language-bash"># Disable compromised user (Linux)
+passwd -l username
+usermod -L username
+
+# Disable AD account (Windows)
+Disable-ADAccount -Identity username
+
+# Force password reset
+Set-ADAccountPassword -Identity username -Reset
+</code></pre>
+<p><strong>Block malicious IPs:</strong></p>
+<pre><code class="language-bash"># Firewall rules
+ufw deny from &lt;malicious_ip&gt;
+
+# At network level (contact network team)
+# Block at firewall/IDS
+</code></pre>
+<h3 id="long-term-containment">Long-term Containment</h3>
+<p><strong>Allows business to continue while preparing for eradication:</strong></p>
+<p><strong>Segment network:</strong>
+- Move affected systems to isolated VLAN
+- Restrict traffic flow
+- Monitor for lateral movement</p>
+<p><strong>Apply patches:</strong>
+- Patch exploited vulnerabilities
+- Update signatures
+- Harden configurations</p>
+<p><strong>Strengthen authentication:</strong>
+- Force password resets
+- Implement MFA
+- Review permissions</p>
+<h2 id="evidence-collection">Evidence Collection</h2>
+<h3 id="order-of-volatility">Order of Volatility</h3>
+<p><strong>Collect most volatile data first:</strong></p>
+<ol>
+<li><strong>Registers, cache</strong> - Nanoseconds</li>
+<li><strong>Memory (RAM)</strong> - Seconds to minutes</li>
+<li><strong>Network connections</strong> - Seconds</li>
+<li><strong>Running processes</strong> - Seconds</li>
+<li><strong>Open files</strong> - Minutes</li>
+<li><strong>Network configuration</strong> - Minutes</li>
+<li><strong>Disk contents</strong> - Hours to days</li>
+<li><strong>Logs</strong> - Days to months</li>
+<li><strong>Backups</strong> - Months to years</li>
+</ol>
+<h3 id="memory-acquisition">Memory Acquisition</h3>
+<p><strong>Linux:</strong></p>
+<pre><code class="language-bash"># Using LiME (Linux Memory Extractor)
+sudo insmod lime.ko &quot;path=/tmp/memory.dump format=lime&quot;
+
+# Or dump with dd (less reliable)
+sudo dd if=/dev/mem of=/tmp/memory.dump bs=1M
+</code></pre>
+<p><strong>Windows:</strong></p>
+<pre><code class="language-powershell"># Using WinPMEM
+winpmem.exe memory.dump
+
+# Using DumpIt
+DumpIt.exe
+
+# Using FTK Imager
+# GUI tool - select Capture Memory
+</code></pre>
+<p><strong>Memory analysis:</strong></p>
+<pre><code class="language-bash"># Volatility framework
+volatility -f memory.dump imageinfo
+
+# List processes
+volatility -f memory.dump --profile=Win10x64 pslist
+
+# Network connections
+volatility -f memory.dump --profile=Win10x64 netscan
+
+# List DLLs
+volatility -f memory.dump --profile=Win10x64 dlllist
+
+# Dump process
+volatility -f memory.dump --profile=Win10x64 procdump -p 1234 -D output/
+
+# Scan for malware
+volatility -f memory.dump --profile=Win10x64 malfind
+</code></pre>
+<h3 id="disk-acquisition">Disk Acquisition</h3>
+<p><strong>Create forensic image:</strong></p>
+<pre><code class="language-bash"># Using dd (forensic copy)
+sudo dd if=/dev/sda of=/mnt/evidence/disk.img bs=4M status=progress conv=noerror,sync
+
+# Calculate hash
+sha256sum /mnt/evidence/disk.img &gt; /mnt/evidence/disk.img.sha256
+
+# Using dcfldd (better for forensics)
+sudo dcfldd if=/dev/sda of=/mnt/evidence/disk.img hash=sha256 hashlog=/mnt/evidence/hash.log
+
+# Using FTK Imager (Windows GUI)
+# File → Create Disk Image → Select source → Create image
+</code></pre>
+<p><strong>Mount as read-only:</strong></p>
+<pre><code class="language-bash"># Mount forensic image
+sudo mount -o ro,loop disk.img /mnt/evidence
+
+# Or use write blocker hardware
+</code></pre>
+<h3 id="network-evidence">Network Evidence</h3>
+<p><strong>Capture live traffic:</strong></p>
+<pre><code class="language-bash"># Full packet capture
+sudo tcpdump -i eth0 -w incident.pcap
+
+# Capture specific host
+sudo tcpdump -i eth0 host 192.168.1.100 -w suspect.pcap
+
+# Capture for specific time
+timeout 3600 sudo tcpdump -i eth0 -w hourly.pcap
+</code></pre>
+<p><strong>Export NetFlow data:</strong></p>
+<pre><code class="language-bash"># Export flows from router/switch
+# Query flow collector for incident timeframe
+nfdump -R /data/flows -t 2024-01-15.14:00-2024-01-15.16:00 -o extended
+</code></pre>
+<h3 id="log-collection">Log Collection</h3>
+<p><strong>Centralized logging:</strong></p>
+<pre><code class="language-bash"># Linux system logs
+sudo cp -r /var/log /mnt/evidence/logs/
+
+# Windows Event logs
+wevtutil epl System C:\evidence\System.evtx
+wevtutil epl Security C:\evidence\Security.evtx
+wevtutil epl Application C:\evidence\Application.evtx
+
+# Web server logs
+sudo cp /var/log/apache2/access.log /mnt/evidence/
+sudo cp /var/log/apache2/error.log /mnt/evidence/
+</code></pre>
+<p><strong>Timeline creation:</strong></p>
+<pre><code class="language-bash"># Create timeline with log2timeline/plaso
+log2timeline.py timeline.plaso /mnt/evidence/
+
+# Generate timeline
+psort.py -o l2tcsv -w timeline.csv timeline.plaso
+
+# Filter timeline
+psort.py -o l2tcsv timeline.plaso &quot;date &gt; '2024-01-15 14:00:00'&quot;
+</code></pre>
+<h3 id="chain-of-custody">Chain of Custody</h3>
+<p><strong>Documentation required:</strong></p>
+<pre><code>Evidence Form
+
+Case Number: IR-2024-001
+Evidence Number: E-001
+Date/Time Collected: 2024-01-15 14:23:15 UTC
+Collected By: John Smith, Incident Responder
+Location: Server Room, Building A, Floor 3
+Description: Hard drive from compromised web server
+Make/Model: Seagate ST2000DM008 2TB
+Serial Number: ZDH12345
+Hash (SHA-256): abc123def456...
+
+Chain of Custody:
+Date/Time | Transferred From | Transferred To | Purpose | Signature
+----------------------------------------------------------------------
+2024-01-15 14:23 | John Smith | Evidence locker | Storage | J. Smith
+2024-01-15 16:45 | Evidence locker | Jane Doe | Analysis | J. Doe
+2024-01-16 10:00 | Jane Doe | Evidence locker | Storage | J. Doe
+</code></pre>
+<h2 id="analysis">Analysis</h2>
+<h3 id="timeline-reconstruction">Timeline Reconstruction</h3>
+<p><strong>Build event timeline:</strong></p>
+<pre><code>2024-01-15 13:45:22 - Phishing email received by user@company.com
+2024-01-15 13:47:15 - User clicks malicious link
+2024-01-15 13:47:23 - Malware downloaded (invoice.pdf.exe)
+2024-01-15 13:48:01 - Malware executed
+2024-01-15 13:48:15 - First C2 beacon to evil.com
+2024-01-15 14:15:33 - Credential dumping (mimikatz)
+2024-01-15 14:45:22 - Lateral movement to file server
+2024-01-15 15:23:11 - Large file transfer begins (data exfiltration)
+2024-01-15 16:30:44 - Ransomware deployment
+2024-01-15 16:31:00 - Files encrypted
+2024-01-15 16:35:12 - Ransom note displayed
+</code></pre>
+<h3 id="root-cause-analysis">Root Cause Analysis</h3>
+<p><strong>5 Whys technique:</strong></p>
+<pre><code>Problem: Ransomware encrypted critical files
+
+Why? Ransomware was executed on the network
+  Why? Attacker had access to deploy ransomware
+    Why? Attacker moved laterally from initial compromise
+      Why? User credentials were compromised
+        Why? User clicked phishing link and ran malware
+          Root cause: Insufficient user security awareness training
+                     No email filtering for malicious links
+</code></pre>
+<h3 id="indicators-of-compromise-extraction">Indicators of Compromise Extraction</h3>
+<p><strong>Create IOC list:</strong></p>
+<pre><code class="language-python">#!/usr/bin/env python3
+# extract_iocs.py
+
+import re
+import sys
+
+def extract_iocs(logfile):
+    &quot;&quot;&quot;Extract IOCs from logs&quot;&quot;&quot;
+    iocs = {
+        'ips': set(),
+        'domains': set(),
+        'urls': set(),
+        'hashes': set(),
+        'emails': set()
+    }
+
+    # Regex patterns
+    ip_pattern = r'\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b'
+    domain_pattern = r'\b(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]\b'
+    url_pattern = r'https?://[^\s&lt;&gt;&quot;{}|\\^`\[\]]+' 
+    hash_pattern = r'\b[a-f0-9]{32}\b|\b[a-f0-9]{40}\b|\b[a-f0-9]{64}\b'
+    email_pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+
+    with open(logfile, 'r', errors='ignore') as f:
+        content = f.read()
+
+        iocs['ips'].update(re.findall(ip_pattern, content))
+        iocs['domains'].update(re.findall(domain_pattern, content))
+        iocs['urls'].update(re.findall(url_pattern, content))
+        iocs['hashes'].update(re.findall(hash_pattern, content))
+        iocs['emails'].update(re.findall(email_pattern, content))
+
+    # Remove private/internal IPs
+    iocs['ips'] = {ip for ip in iocs['ips'] 
+                   if not ip.startswith(('10.', '192.168.', '172.'))}
+
+    return iocs
+
+# Usage
+if __name__ == '__main__':
+    iocs = extract_iocs(sys.argv[1])
+
+    print(&quot;=== Indicators of Compromise ===\n&quot;)
+    print(f&quot;IPs ({len(iocs['ips'])}):&quot;)
+    for ip in sorted(iocs['ips']):
+        print(f&quot;  {ip}&quot;)
+
+    print(f&quot;\nDomains ({len(iocs['domains'])}):&quot;)
+    for domain in sorted(iocs['domains']):
+        print(f&quot;  {domain}&quot;)
+
+    print(f&quot;\nFile Hashes ({len(iocs['hashes'])}):&quot;)
+    for hash_val in sorted(iocs['hashes']):
+        print(f&quot;  {hash_val}&quot;)
+</code></pre>
+<h2 id="eradication-recovery">Eradication &amp; Recovery</h2>
+<h3 id="malware-removal">Malware Removal</h3>
+<p><strong>Clean infected systems:</strong></p>
+<pre><code class="language-bash"># Identify malware
+ps aux | grep suspicious_process
+netstat -tulpn | grep suspicious_connection
+
+# Kill malicious processes
+sudo kill -9 &lt;pid&gt;
+
+# Remove malicious files
+sudo rm -f /tmp/malware.exe
+sudo rm -f /var/tmp/.hidden_backdoor
+
+# Remove persistence
+sudo crontab -e  # Remove malicious cron jobs
+sudo systemctl disable malicious.service
+sudo rm /etc/systemd/system/malicious.service
+
+# Check and remove from startup
+sudo nano /etc/rc.local
+</code></pre>
+<p><strong>Or rebuild from scratch:</strong>
+- Faster and more reliable
+- Ensures complete eradication
+- Restore from clean backup
+- Apply all patches before reconnecting</p>
+<h3 id="system-hardening">System Hardening</h3>
+<p><strong>Before bringing systems back online:</strong></p>
+<pre><code class="language-bash"># Update all software
+sudo apt update &amp;&amp; sudo apt upgrade -y
+
+# Remove unnecessary services
+sudo systemctl disable &lt;unused_service&gt;
+
+# Configure firewall
+sudo ufw enable
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow ssh
+
+# Harden SSH
+sudo nano /etc/ssh/sshd_config
+# PermitRootLogin no
+# PasswordAuthentication no
+# AllowUsers specific_user
+
+# Enable logging
+sudo systemctl enable rsyslog
+sudo systemctl enable auditd
+</code></pre>
+<h3 id="verification">Verification</h3>
+<p><strong>Confirm eradication:</strong></p>
+<pre><code class="language-bash"># Scan for malware
+sudo clamscan -r /
+sudo rkhunter --check
+
+# Check for suspicious processes
+ps aux | grep -E 'malware|suspicious'
+
+# Check network connections
+sudo netstat -tulpn | grep ESTABLISHED
+
+# Review startup items
+systemctl list-unit-files | grep enabled
+
+# Check for new users
+cat /etc/passwd | tail -10
+
+# Monitor for 72 hours before declaring success
+</code></pre>
+<h2 id="post-incident-activities">Post-Incident Activities</h2>
+<h3 id="lessons-learned-meeting">Lessons Learned Meeting</h3>
+<p><strong>Within 2 weeks of incident closure</strong></p>
+<p><strong>Agenda:</strong>
+1. What happened? (timeline)
+2. What went well?
+3. What could be improved?
+4. What will we do differently?
+5. Action items with owners and dates</p>
+<p><strong>Questions to answer:</strong></p>
 <ul>
-<li>Make sure you regularly update your system at least weekly</li>
-<li>Make decent credentials or use a <a href="https://www.yubico.com/">physical key</a></li>
-<li>Never just copy/paste a command without understanding it, look it up at least (even from me!)</li>
-<li>Install packages wisely and preferably from trusted sources</li>
+<li>How was the incident detected?</li>
+<li>Was detection timely?</li>
+<li>Were procedures followed?</li>
+<li>Were roles and responsibilities clear?</li>
+<li>Were tools adequate?</li>
+<li>Was communication effective?</li>
+<li>What's the estimated cost/impact?</li>
+<li>How can we prevent recurrence?</li>
 </ul>
-<p>Happy Linux! :)</p>
+<h3 id="incident-report">Incident Report</h3>
+<p><strong>Executive summary:</strong>
+- What happened (non-technical)
+- Impact on business
+- Actions taken
+- Current status
+- Next steps</p>
+<p><strong>Technical details:</strong>
+- Attack vector
+- Timeline of events
+- Systems affected
+- Indicators of compromise
+- Evidence collected
+- Analysis findings</p>
+<p><strong>Response effectiveness:</strong>
+- What worked well
+- What needs improvement
+- Resources used
+- Costs incurred</p>
+<p><strong>Recommendations:</strong>
+- Immediate actions
+- Short-term improvements (30 days)
+- Long-term improvements (90+ days)
+- Budget requirements</p>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<p><strong>Incident response success requires:</strong>
+- Preparation before incidents occur
+- Clear roles and responsibilities
+- Well-practiced procedures
+- Proper tools and training
+- Effective communication
+- Thorough documentation</p>
+<p><strong>Evidence handling:</strong>
+- Maintain chain of custody
+- Preserve original evidence
+- Work on copies
+- Document everything
+- Hash all evidence</p>
+<p><strong>Critical skills:</strong>
+- Quick decision-making under pressure
+- Technical analysis capability
+- Clear communication
+- Attention to detail
+- Staying calm</p>
+<p><strong>Remember:</strong>
+- Every incident is a learning opportunity
+- Speed matters but accuracy matters more
+- Documentation is crucial
+- Team coordination is essential
+- Practice makes perfect</p>
+<p>Incident response is high-pressure work that requires both technical skill and cool judgment. Regular training, tabletop exercises, and continuous improvement will prepare you to handle real incidents effectively.</p>
         
 
         <!-- Lesson Navigation (only show on non-homepage pages) -->
         
         <div class="lesson-nav">
             
-            <a href="../lesson1-6/" class="lesson-nav-button">
+            <a href="../lesson10-1/" class="lesson-nav-button">
                 <span class="arrow">←</span>
-                <span>Previous: Lesson 1.6</span>
+                <span>Previous: Lesson 10.1</span>
             </a>
             
 
             <div class="lesson-nav-info">
                 <div class="current-lesson">Current Lesson</div>
-                <div class="lesson-title">Linux Installation Process</div>
+                <div class="lesson-title">Lesson 10.2</div>
             </div>
 
             
-            <a href="../../unit2/lesson2-1/" class="lesson-nav-button">
-                <span>Next: Lesson 2.1</span>
+            <a href="../lesson10-3/" class="lesson-nav-button">
+                <span>Next: Lesson 10.3</span>
                 <span class="arrow">→</span>
             </a>
             
@@ -1158,43 +1657,43 @@
                                 
                                 {
                                     title: "Lesson 1.1",
-                                    url: '../lesson1-1/',
+                                    url: '../../unit1/lesson1-1/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.2",
-                                    url: '../lesson1-2/',
+                                    url: '../../unit1/lesson1-2/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.3",
-                                    url: '../lesson1-3/',
+                                    url: '../../unit1/lesson1-3/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.4",
-                                    url: '../lesson1-4/',
+                                    url: '../../unit1/lesson1-4/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.5",
-                                    url: '../lesson1-5/',
+                                    url: '../../unit1/lesson1-5/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.6",
-                                    url: '../lesson1-6/',
+                                    url: '../../unit1/lesson1-6/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Linux Installation Process",
-                                    url: './',
+                                    url: '../../unit1/installation-process/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
@@ -1374,19 +1873,19 @@
                                 
                                 {
                                     title: "Lesson 10.1",
-                                    url: '../../unit10/lesson10-1/',
+                                    url: '../lesson10-1/',
                                     path: 'Curriculum > Unit 10'
                                 },
                                 
                                 {
                                     title: "Lesson 10.2",
-                                    url: '../../unit10/lesson10-2/',
+                                    url: './',
                                     path: 'Curriculum > Unit 10'
                                 },
                                 
                                 {
                                     title: "Lesson 10.3",
-                                    url: '../../unit10/lesson10-3/',
+                                    url: '../lesson10-3/',
                                     path: 'Curriculum > Unit 10'
                                 },
                                 

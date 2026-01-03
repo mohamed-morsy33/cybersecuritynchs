@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linux Installation Process - NCHS Cybersecurity</title>
+    <title>Lesson 8.2 - NCHS Cybersecurity</title>
     
     
     <link rel="icon" href="../../../img/logo.png">
@@ -698,31 +698,31 @@
                                         <ul class="unit-lessons">
                                             
                                             <li>
-                                                <a href="../lesson1-1/">Lesson 1.1</a>
+                                                <a href="../../unit1/lesson1-1/">Lesson 1.1</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-2/">Lesson 1.2</a>
+                                                <a href="../../unit1/lesson1-2/">Lesson 1.2</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-3/">Lesson 1.3</a>
+                                                <a href="../../unit1/lesson1-3/">Lesson 1.3</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-4/">Lesson 1.4</a>
+                                                <a href="../../unit1/lesson1-4/">Lesson 1.4</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-5/">Lesson 1.5</a>
+                                                <a href="../../unit1/lesson1-5/">Lesson 1.5</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-6/">Lesson 1.6</a>
+                                                <a href="../../unit1/lesson1-6/">Lesson 1.6</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="./">Linux Installation Process</a>
+                                                <a href="../../unit1/installation-process/">Linux Installation Process</a>
                                             </li>
                                             
                                         </ul>
@@ -857,15 +857,15 @@
                                         <ul class="unit-lessons">
                                             
                                             <li>
-                                                <a href="../../unit8/lesson8-1/">Lesson 8.1</a>
+                                                <a href="../lesson8-1/">Lesson 8.1</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../../unit8/lesson8-2/">Lesson 8.2</a>
+                                                <a href="./">Lesson 8.2</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../../unit8/lesson8-3/">Lesson 8.3</a>
+                                                <a href="../lesson8-3/">Lesson 8.3</a>
                                             </li>
                                             
                                         </ul>
@@ -964,142 +964,482 @@
 
     <div class="container">
         
-        <h2 id="what-is-it"><em>What</em> is it?</h2>
-<p>Kali is an operating system that was made <strong><em>specially</em></strong> for cybersecurity work (and hacking as well). It has a large toolkit of useful programs that we're going to learn about, including Hydra, Nmap, Wireshark, Tcpdump, MacChanger, Chisel, Aircrack-ng, etc.</p>
-<h2 id="some-vocab">Some Vocab:</h2>
-<p>As much as we know vocabulary might not be that interesting, it's important to know for the future, since there's a LOT of acronyms and words in cybersecurity that you're going to be hearing and using, so it's best to get used to it.</p>
-<ul>
-<li><strong>Operating System (OS)</strong>: The main software that runs your computer, like Windows, macOS, iOS, GNU/Linux, etc.</li>
-<li><strong>Virtual Machine (VM)</strong>: It's basically a computer <em>inside</em> another computer. You can run your regular OS, like Windows, and still have Kali Linux inside of it</li>
-<li><strong>ISO File (International Organization for Standardization File)</strong>: Sounds fancy, but really it's just a full copy of an OS within one tiny file</li>
-<li><strong>Hypervisor</strong>: Software that creates and manages VMs. Examples are VirtualBox and VMWare Workstation. There's also QEMU, but mostly Linux users use that, and you're likely running on Windows or mac</li>
-<li><strong>Bootable USB</strong>: Just a USB drive (which you hopefully already know about) that can start up a computer and install an OS (we don't need this yet)</li>
-<li><strong>Partitioning</strong>: A more advanced topic, but it's dividing up your drive into sections called <em>partitions</em>, which are like walls for a room. We don't need this yet, but it is good to know</li>
-</ul>
-<p>Now, let's get into the nitty-gritty:</p>
-<h2 id="method-1-easy-way">Method 1: Easy way :)</h2>
-<h3 id="minimum-requirements">Minimum Requirements*:</h3>
-<ol>
-<li><code>8 GB</code> of RAM</li>
-<li><code>20-30 GB</code> of free hard drive space</li>
-<li>A decently fast CPU (you probably have this)</li>
-</ol>
-<p>*But, how do I know if I meet them? Well, you can press <em><code>Ctrl+Shift+Esc</code></em> on Windows and click on <strong>"Performance"</strong> inside of Task Manager, and it'll give you a spec (specifications) sheet. On mac, you can click on <strong>"About"</strong> in the top menu bar of your computer. On Linux, you can type <strong><code>uname -a</code></strong>, or use a custom program like <code>fastfetch</code></p>
-<h2 id="big-disclaimer-for-windows-users">BIG DISCLAIMER FOR WINDOWS USERS:</h2>
-<ul>
-<li>You NEED to DISABLE something called Hyper-V. If you don't know what that is, for Windows users, Hyper-V will conflict with Virtualbox, making it run poorly and crash often</li>
-<li>To check if you hve Hyper-V, press <code>Win+R</code>, and type <code>optionalfeatures</code>, then press <code>Enter</code></li>
-<li>Look for a "Hyper-V" in the list of shown items. If it's checked, then it's enabled. Uncheck it.<ul>
-<li>Alternative method: go to cmd (Command Prompt), and right click and "Run as Administrator". Then use the following command: <code>bcdedit /set hypervisorlaunchtype off</code></li>
-</ul>
-</li>
-<li>Finally, restart your computer</li>
-</ul>
-<h2 id="big-disclaimer-for-macos-users">BIG DISCLAIMER FOR MACOS USERS:</h2>
-<ul>
-<li>You need to check if you're using an Intel-based Mac or Apple Silicon machine. If your device is M1, M2, M*, then it's <strong>Apple Silicon</strong></li>
-<li>If this is the case, you will need to use a different software for virtualization. You have some options, like <a href="https://getutm.app">UTM</a> or <a href="https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion">VMware Fusion</a>. </li>
-<li>Also, you will have to install Kali Linux using the 
-<em><strong>ARM64 version! Not x86-64!</strong></em></li>
-</ul>
-<hr />
-<p>Now, go to <a href="https://virtualbox.org">virtualbox.org</a></p>
-<p>Click on the download for your OS, and install the program by following the instruction wizard.</p>
-<p><img alt="Virtual Box" src="../../../img/virtual_box.png" /></p>
-<ul>
-<li>Now, go to the <a href="https://kali.org/get-kali">Kali Linux website</a>.</li>
-<li>Download the "Installer" ISO file (<code>~ 4 GB</code> in size)</li>
-<li>Then choose the 64-bit version for modern computers.</li>
-<li>If your computer is old, it could be 32-bit. If so, you may need to check your system specifications as explained above. However, it probably isn't.</li>
-</ul>
-<p><img alt="Kali Installation" src="../../../img/kali_img.png" /></p>
-<blockquote>
-<p>Remember, Apple Silicon machines will install the ARM64 version of Kali Linux instead!</p>
-</blockquote>
-<ul>
-<li>Finally, make your Virtual Machine. Open up VirtualBox and click "New"</li>
-<li>Name it whatever, I'd call it "Kali Linux", or "Kali Machine".</li>
-<li>Type: Linux, Version: Debian (64-bit)</li>
-<li>Allocate at least <code>4 GB</code> of RAM, AKA <code>4096 MB</code>, by dragging the slider or typing in the number in the RAM text box</li>
-<li>Create a Virtual Hrd Disk (allocate <code>25-30 GB</code> minimum)<ul>
-<li>Choose VDI (VirtualBox Disk Image)</li>
-<li>Also select "dynamically allocated" to save space, and allows the VM to grow dynamically in storage size as you begin to add more things</li>
-</ul>
-</li>
-<li>After clicking done, tell it to create, but do NOT tell it to also start yet</li>
-<li>Click on your virtual machine, and then go to settings</li>
-<li>Then go to Storage, and click the empty disk icon</li>
-<li>This is where we "choose a disk file", and select the downloaded Kali ISO</li>
-<li>Then under System, enable PAE/NX if available to you. PAE is Physical Address Extension, and NX is No Execute. These allow for &gt; <code>4 GB</code> of RAM access and prevents non-executable code from being executed in memory segments. If you don't know what that means, just ignore this</li>
-<li>Under Display, increase video memory to <code>128 MB</code></li>
-<li>Finally, save and exit Settings, and click on Start to boot your VM</li>
-<li>Select "Graphical Install" (press Enter, navigate using arrow keys)</li>
-<li>Choose your language, location, keyboard (these can later be changed, doesn't really matter)</li>
-<li>You can set a hostname, or keep the default (kali)</li>
-</ul>
-<h3 id="important-username-is-kali-and-password-is-kali-by-default"><strong>IMPORTANT</strong>: username is <em>kali</em> and password is <em>kali</em> by default!</h3>
-<ul>
-<li>Choose "Guided - use entire disk" for your partitioning</li>
-<li>Then select "All files in one partition"</li>
-<li>Confirm and wait a while. Take a walk outside, take a short nap, whatever you want. Just wait 10-20 minutes and it'll be done</li>
-<li>Restart when prompted</li>
-<li>On first login, enter the username and password</li>
-<li>Then, click the <code>SUPER</code> key (<code>Win</code> key or <code>Cmd</code> key on mac) and type "terminal" or "console" into the search, and open the app</li>
-<li>In the terminal, you can type <code>sudo apt update &amp;&amp; sudo apt upgrade -y</code><ul>
-<li>This command just updates your system</li>
-<li>When prompted with a password, type in your password</li>
-</ul>
-</li>
-<li>Happy Linux!</li>
-</ul>
-<h2 id="method-2-hard-way-bare-metal-installation">Method 2: Hard way (bare metal installation)</h2>
-<p>Alright. You're ready for the real deal. No problem. </p>
-<p><code>WARNING! ⚠️⚠️</code>: This version of installation WILL take space on your disk! This means it will be physically installed, and it will NOT be installed as a VM! Just like Windows or macOS, it will be physically on your device. If you do this incorrectly, it may <strong>wipe your device completely</strong>. I'm not liable for if you mistakenly wipe your drive, it's up to you. Also, I personally do <strong>not recommend you install Kali Linux on a physical drive</strong>. If you want to use Linux for extra practice, install a distribution like <a href="https://www.debian.org/">Debian</a> or <a href="https://linuxmint.com/">Linux Mint</a>. You are risking data loss if done incorrectly, so proceed at your own risk.</p>
-<p>Important things to note are:</p>
-<ul>
-<li>If you install on bare metal, AKA on your physical device, your device may have incompatibility issues. I would recommend doing your own research before doing so</li>
-<li>You may want to install Linux on a secondary drive, since if you use your main one, you will have to create a special partition for Linux to use exclusively, which is more difficult</li>
-<li>You'll need a USB drive with preferably <code>8 GB</code> or more of storage</li>
-<li>You may need to adjust your BIOS (manufacturer specific, meaning it depends on what company made your computer and maybe even where you bought it from) to allow for other bootable devices, which can include removing Secure Boot</li>
-<li>There's some specifics for ARM64 machines like Apple Silicon that will be different!</li>
-<li>Overall, you are likely going to have to do your OWN research to make sure you don't mess anything up.</li>
-</ul>
-<p>Without further ado, these are some general instructions (not perfect):</p>
-<ol>
-<li>Create a bootable USB drive using an app like Balena Etcher or Rufus</li>
-<li>Make space on your hard drive by creating a disk partition of ~<code>30 GB</code> or more, or install on a secondary hard drive</li>
-<li>Boot from the USB drive from BIOS after restarting your computer and smashing the BIOS key as it boots up (typically <code>Esc</code>, <code>F11</code>, <code>F12</code>, or <code>Del</code> depending on the manufacturer)</li>
-<li>Follow the installation process, but make sure you select the right drive and if it's on the same disk as Windows or Mac, you install "alongside" it, not replace </li>
-<li>After going through the setup, you may re-enter the BIOS to change the boot order. What this means is move Linux above Windows so that on first boot you boot into Linux (optional)</li>
-</ol>
-<p>Some important extras:</p>
-<ul>
-<li>Make sure you regularly update your system at least weekly</li>
-<li>Make decent credentials or use a <a href="https://www.yubico.com/">physical key</a></li>
-<li>Never just copy/paste a command without understanding it, look it up at least (even from me!)</li>
-<li>Install packages wisely and preferably from trusted sources</li>
-</ul>
-<p>Happy Linux! :)</p>
+        <h1 id="legal-frameworks-and-compliance">Legal Frameworks and Compliance</h1>
+<p>Ethics guide your choices, but laws and regulations enforce them. This lesson covers the legal landscape of cybersecurity—what you must know to stay on the right side of the law and help organizations remain compliant.</p>
+<h2 id="criminal-laws">Criminal Laws</h2>
+<h3 id="computer-fraud-and-abuse-act-cfaa-united-states">Computer Fraud and Abuse Act (CFAA) - United States</h3>
+<p><strong>The CFAA makes it illegal to:</strong>
+- Access a computer without authorization
+- Exceed authorized access
+- Cause damage to protected computers
+- Obtain information through unauthorized access
+- Traffic in passwords
+- Threaten to cause damage</p>
+<p><strong>Key provisions:</strong></p>
+<pre><code>18 U.S.C. § 1030(a)(1) - Accessing classified information
+18 U.S.C. § 1030(a)(2) - Obtaining information from protected computers
+18 U.S.C. § 1030(a)(3) - Accessing government computers
+18 U.S.C. § 1030(a)(4) - Fraud via computer
+18 U.S.C. § 1030(a)(5) - Damaging protected computers
+18 U.S.C. § 1030(a)(6) - Trafficking in passwords
+18 U.S.C. § 1030(a)(7) - Extortion via computer
+</code></pre>
+<p><strong>"Protected computer"</strong> = any computer used in interstate commerce (basically all of them)</p>
+<p><strong>Penalties:</strong>
+- First offense: Up to 5 years
+- Second offense: Up to 10 years
+- Causing damage: Up to 10 years
+- With intent to extort: Up to 20 years</p>
+<p><strong>Controversial aspects:</strong>
+- Broad interpretation of "unauthorized access"
+- Terms of Service violations potentially criminal
+- Aaron Swartz case highlighted problems
+- Ongoing debates about reform</p>
+<h3 id="computer-misuse-act-1990-cma-united-kingdom">Computer Misuse Act 1990 (CMA) - United Kingdom</h3>
+<p><strong>Three main offenses:</strong></p>
+<p><strong>Section 1: Unauthorized access</strong>
+- Penalty: Up to 2 years imprisonment
+- Covers: Accessing any computer without permission</p>
+<p><strong>Section 2: Unauthorized access with intent</strong>
+- Penalty: Up to 5 years imprisonment
+- Covers: Accessing to commit further crimes</p>
+<p><strong>Section 3: Unauthorized modification</strong>
+- Penalty: Up to 10 years imprisonment
+- Covers: Modifying computer material (malware, defacement)</p>
+<p><strong>Section 3A: Making, supplying, or obtaining tools</strong>
+- Penalty: Up to 2 years (summary), 10 years (indictment)
+- Covers: Hacking tools, exploits</p>
+<h3 id="other-criminal-laws">Other Criminal Laws</h3>
+<p><strong>Electronic Communications Privacy Act (ECPA)</strong>
+- Prohibits interception of electronic communications
+- Covers email, phone calls, data transmissions
+- Stored Communications Act (SCA) is part of ECPA</p>
+<p><strong>Wire Fraud Statute (18 U.S.C. § 1343)</strong>
+- Using electronic communications for fraud
+- Applies to many cybercrimes</p>
+<p><strong>Identity Theft and Assumption Deterrence Act</strong>
+- Criminalizes identity theft
+- Federal crime to use another's identity</p>
+<p><strong>Economic Espionage Act</strong>
+- Protects trade secrets
+- Criminal penalties for theft</p>
+<h2 id="data-protection-and-privacy-laws">Data Protection and Privacy Laws</h2>
+<h3 id="general-data-protection-regulation-gdpr-eu">General Data Protection Regulation (GDPR) - EU</h3>
+<p><strong>Scope:</strong>
+- Applies to EU residents' data
+- Extraterritorial (applies to companies outside EU)
+- Covers personal data processing</p>
+<p><strong>Key principles:</strong>
+1. <strong>Lawfulness, fairness, transparency</strong>
+2. <strong>Purpose limitation</strong> (collect for specific purposes)
+3. <strong>Data minimization</strong> (only collect what's needed)
+4. <strong>Accuracy</strong> (keep data accurate and up to date)
+5. <strong>Storage limitation</strong> (don't keep longer than necessary)
+6. <strong>Integrity and confidentiality</strong> (security)
+7. <strong>Accountability</strong> (demonstrate compliance)</p>
+<p><strong>Data subject rights:</strong>
+- Right to access
+- Right to rectification
+- Right to erasure ("right to be forgotten")
+- Right to restrict processing
+- Right to data portability
+- Right to object
+- Rights related to automated decision-making</p>
+<p><strong>Security requirements:</strong>
+- Pseudonymization and encryption
+- Ability to ensure confidentiality, integrity, availability
+- Ability to restore availability after incident
+- Regular testing and evaluation</p>
+<p><strong>Breach notification:</strong>
+- Must notify supervisory authority within 72 hours
+- Must notify affected individuals if high risk
+- Document all breaches</p>
+<p><strong>Penalties:</strong>
+- Up to €20 million OR 4% of global annual revenue
+- Whichever is higher</p>
+<p><strong>Data Protection Officer (DPO):</strong>
+- Required for public authorities
+- Required for large-scale monitoring
+- Required for large-scale processing of sensitive data</p>
+<h3 id="california-consumer-privacy-act-ccpa-cpra">California Consumer Privacy Act (CCPA) / CPRA</h3>
+<p><strong>Consumer rights:</strong>
+- Know what personal information is collected
+- Know whether information is sold or disclosed
+- Say no to sale of information
+- Access personal information
+- Request deletion
+- Equal service and price</p>
+<p><strong>Business obligations:</strong>
+- Provide privacy notice
+- Respond to consumer requests
+- Don't discriminate against consumers exercising rights
+- Implement reasonable security</p>
+<p><strong>Penalties:</strong>
+- Up to $7,500 per intentional violation
+- Up to $2,500 per violation
+- Private right of action for data breaches</p>
+<h3 id="health-insurance-portability-and-accountability-act-hipaa">Health Insurance Portability and Accountability Act (HIPAA)</h3>
+<p><strong>Applies to:</strong>
+- Healthcare providers
+- Health plans
+- Healthcare clearinghouses
+- Business associates</p>
+<p><strong>Protected Health Information (PHI):</strong>
+- Any health information that can identify individual
+- Includes medical records, payment information, etc.</p>
+<p><strong>Privacy Rule:</strong>
+- Limits use and disclosure of PHI
+- Gives patients rights over their information
+- Requires written authorization for most uses</p>
+<p><strong>Security Rule:</strong>
+- Administrative safeguards
+- Physical safeguards
+- Technical safeguards
+- Requires risk assessments</p>
+<p><strong>Breach Notification Rule:</strong>
+- Notify affected individuals
+- Notify HHS (Department of Health and Human Services)
+- Media notification if &gt;500 people affected</p>
+<p><strong>Penalties:</strong>
+- Tier 1: $100-$50,000 per violation (unknowing)
+- Tier 2: $1,000-$50,000 (reasonable cause)
+- Tier 3: $10,000-$50,000 (willful neglect, corrected)
+- Tier 4: $50,000+ (willful neglect, not corrected)
+- Criminal penalties possible</p>
+<h3 id="payment-card-industry-data-security-standard-pci-dss">Payment Card Industry Data Security Standard (PCI DSS)</h3>
+<p><strong>Not a law, but contractually required by card companies</strong></p>
+<p><strong>12 requirements:</strong>
+1. Install and maintain firewall configuration
+2. Don't use vendor-supplied defaults
+3. Protect stored cardholder data
+4. Encrypt transmission of cardholder data
+5. Protect systems against malware
+6. Develop and maintain secure systems
+7. Restrict access to cardholder data
+8. Identify and authenticate access
+9. Restrict physical access to cardholder data
+10. Track and monitor network access
+11. Regularly test security systems
+12. Maintain information security policy</p>
+<p><strong>Compliance levels:</strong>
+- Level 1: 6+ million transactions/year (annual onsite audit)
+- Level 2: 1-6 million transactions/year (annual self-assessment)
+- Level 3: 20,000-1 million e-commerce (annual self-assessment)
+- Level 4: &lt;20,000 e-commerce or &lt;1 million (annual self-assessment)</p>
+<p><strong>Penalties:</strong>
+- Fines from card brands ($5,000-$100,000/month)
+- Increased transaction fees
+- Loss of ability to process cards</p>
+<h2 id="sector-specific-regulations">Sector-Specific Regulations</h2>
+<h3 id="financial-services">Financial Services</h3>
+<p><strong>Gramm-Leach-Bliley Act (GLBA)</strong>
+- Financial institutions must protect customer information
+- Privacy notices required
+- Opt-out for information sharing</p>
+<p><strong>Sarbanes-Oxley Act (SOX)</strong>
+- Internal controls over financial reporting
+- IT controls are part of this
+- Criminal penalties for executives</p>
+<p><strong>New York Department of Financial Services (NYDFS) Cybersecurity Regulation</strong>
+- Applies to financial institutions in NY
+- Requires cybersecurity program
+- Annual certification to superintendent
+- Incident response plan required</p>
+<h3 id="critical-infrastructure">Critical Infrastructure</h3>
+<p><strong>NERC CIP (North American Electric Reliability Corporation Critical Infrastructure Protection)</strong>
+- Standards for electric grid security
+- Mandatory for utilities
+- Covers physical and cyber security</p>
+<p><strong>Transportation Security Administration (TSA) Security Directives</strong>
+- Apply to pipelines, rail, aviation
+- Cybersecurity requirements
+- Incident reporting</p>
+<h2 id="international-laws">International Laws</h2>
+<h3 id="china-cybersecurity-law">China Cybersecurity Law</h3>
+<p><strong>Key provisions:</strong>
+- Data localization (critical data must stay in China)
+- Network security reviews
+- Real-name registration
+- Cooperation with authorities</p>
+<h3 id="australia-privacy-act">Australia Privacy Act</h3>
+<p><strong>Australian Privacy Principles (APPs)</strong>
+- 13 principles for handling personal information
+- Covers collection, use, disclosure, security
+- Notifiable Data Breaches scheme</p>
+<h3 id="brazil-lgpd-lei-geral-de-protecao-de-dados">Brazil LGPD (Lei Geral de Proteção de Dados)</h3>
+<p><strong>Similar to GDPR:</strong>
+- Data subject rights
+- Consent requirements
+- Security requirements
+- Breach notification</p>
+<h2 id="compliance-frameworks">Compliance Frameworks</h2>
+<h3 id="nist-cybersecurity-framework">NIST Cybersecurity Framework</h3>
+<p><strong>Five functions:</strong>
+1. <strong>Identify</strong> - Asset management, risk assessment
+2. <strong>Protect</strong> - Access control, training, data security
+3. <strong>Detect</strong> - Monitoring, detection processes
+4. <strong>Respond</strong> - Response planning, communications
+5. <strong>Recover</strong> - Recovery planning, improvements</p>
+<p><strong>Not mandatory but widely adopted</strong>
+- Referenced by regulations
+- Used for assessments
+- Industry standard</p>
+<h3 id="iso-2700127002">ISO 27001/27002</h3>
+<p><strong>ISO 27001:</strong> Information Security Management System (ISMS)
+- Certification available
+- Requires risk assessment
+- Continuous improvement</p>
+<p><strong>ISO 27002:</strong> Code of practice
+- Detailed controls
+- Implementation guidance</p>
+<p><strong>14 control domains:</strong>
+1. Information security policies
+2. Organization of information security
+3. Human resource security
+4. Asset management
+5. Access control
+6. Cryptography
+7. Physical and environmental security
+8. Operations security
+9. Communications security
+10. System acquisition, development, maintenance
+11. Supplier relationships
+12. Incident management
+13. Business continuity
+14. Compliance</p>
+<h3 id="soc-2-system-and-organization-controls">SOC 2 (System and Organization Controls)</h3>
+<p><strong>Trust Services Criteria:</strong>
+- <strong>Security</strong> (required for all)
+- Availability
+- Processing integrity
+- Confidentiality
+- Privacy</p>
+<p><strong>Two types:</strong>
+- <strong>Type I:</strong> Design of controls at point in time
+- <strong>Type II:</strong> Operating effectiveness over period (6-12 months)</p>
+<p><strong>Used for:</strong> SaaS vendors, cloud providers, service organizations</p>
+<h2 id="compliance-in-practice">Compliance in Practice</h2>
+<h3 id="risk-assessments">Risk Assessments</h3>
+<p><strong>Required by many regulations</strong></p>
+<p><strong>Steps:</strong>
+1. Identify assets
+2. Identify threats
+3. Identify vulnerabilities
+4. Determine likelihood
+5. Determine impact
+6. Calculate risk
+7. Prioritize
+8. Implement controls
+9. Monitor and review</p>
+<h3 id="policies-and-procedures">Policies and Procedures</h3>
+<p><strong>Required documents:</strong>
+- Information security policy
+- Acceptable use policy
+- Incident response plan
+- Business continuity plan
+- Disaster recovery plan
+- Data retention policy
+- Vendor management policy
+- Change management procedures</p>
+<p><strong>Policy structure:</strong></p>
+<pre><code>1. Purpose
+2. Scope
+3. Definitions
+4. Policy statements
+5. Responsibilities
+6. Enforcement
+7. Review and updates
+</code></pre>
+<h3 id="training-and-awareness">Training and Awareness</h3>
+<p><strong>Required by most regulations</strong></p>
+<p><strong>Topics:</strong>
+- Security basics
+- Phishing awareness
+- Password security
+- Data handling
+- Incident reporting
+- Compliance requirements</p>
+<p><strong>Frequency:</strong>
+- Annual training minimum
+- New hire training
+- Role-specific training
+- Ad-hoc training for threats</p>
+<h3 id="audit-and-assessment">Audit and Assessment</h3>
+<p><strong>Internal audits:</strong>
+- Regular self-assessments
+- Verify controls are working
+- Identify gaps</p>
+<p><strong>External audits:</strong>
+- Independent verification
+- Required for some regulations
+- Provides assurance to stakeholders</p>
+<p><strong>Penetration testing:</strong>
+- Test security controls
+- Identify vulnerabilities
+- Often required annually</p>
+<h3 id="incident-response-and-reporting">Incident Response and Reporting</h3>
+<p><strong>Notification requirements vary:</strong></p>
+<p><strong>GDPR:</strong> 72 hours to authority
+<strong>HIPAA:</strong> 60 days to individuals
+<strong>PCI DSS:</strong> Immediately to acquiring bank
+<strong>State breach laws:</strong> Varies (typically 30-90 days)</p>
+<p><strong>What to report:</strong>
+- Nature of breach
+- Data involved
+- Number of affected individuals
+- Remediation steps
+- Contact information</p>
+<h3 id="documentation">Documentation</h3>
+<p><strong>Critical for compliance:</strong>
+- Policies and procedures
+- Risk assessments
+- Training records
+- Audit logs
+- Incident reports
+- Vendor assessments
+- Business associate agreements
+- Data processing agreements</p>
+<p><strong>Retention requirements vary:</strong>
+- HIPAA: 6 years
+- SOX: 7 years
+- GDPR: As long as necessary
+- PCI DSS: 1 year minimum</p>
+<h2 id="consequences-of-non-compliance">Consequences of Non-Compliance</h2>
+<h3 id="regulatory-fines">Regulatory Fines</h3>
+<p><strong>Can be massive:</strong>
+- British Airways: £20 million (GDPR)
+- Marriott: £18.4 million (GDPR)
+- Equifax: $575 million (FTC settlement)
+- Capital One: $80 million (OCC fine)</p>
+<h3 id="lawsuits">Lawsuits</h3>
+<p><strong>Private right of action:</strong>
+- Data breach class actions
+- Can be costly even if settled
+- Reputation damage</p>
+<h3 id="business-impact">Business Impact</h3>
+<p><strong>Beyond fines:</strong>
+- Loss of customers
+- Reputation damage
+- Inability to process payments (PCI)
+- Loss of contracts
+- Stock price impact
+- Executive turnover</p>
+<h3 id="criminal-charges">Criminal Charges</h3>
+<p><strong>Possible for:</strong>
+- Willful violations
+- Obstruction
+- False statements
+- Executives can be personally liable</p>
+<h2 id="staying-compliant">Staying Compliant</h2>
+<h3 id="continuous-monitoring">Continuous Monitoring</h3>
+<p><strong>Don't wait for audits:</strong>
+- Regular vulnerability scans
+- Log monitoring
+- Access reviews
+- Configuration reviews
+- Vendor assessments</p>
+<h3 id="change-management">Change Management</h3>
+<p><strong>Updates can break compliance:</strong>
+- Document changes
+- Assess impact on security
+- Test before deploying
+- Update documentation</p>
+<h3 id="vendor-management">Vendor Management</h3>
+<p><strong>Third parties are your responsibility:</strong>
+- Due diligence before selection
+- Contractual requirements
+- Regular assessments
+- Incident response coordination
+- Right to audit</p>
+<h3 id="keep-current">Keep Current</h3>
+<p><strong>Laws and regulations change:</strong>
+- Subscribe to updates
+- Attend conferences
+- Professional associations
+- Legal counsel
+- Compliance consultants</p>
+<h2 id="practical-compliance-checklist">Practical Compliance Checklist</h2>
+<p><strong>GDPR Compliance:</strong>
+- [ ] Data inventory completed
+- [ ] Lawful basis identified for processing
+- [ ] Privacy notices updated
+- [ ] Data subject request procedures
+- [ ] Breach notification procedures
+- [ ] DPO appointed (if required)
+- [ ] Data protection impact assessments
+- [ ] Vendor agreements updated
+- [ ] Staff training completed
+- [ ] Technical and organizational measures</p>
+<p><strong>HIPAA Compliance:</strong>
+- [ ] Risk assessment completed
+- [ ] Policies and procedures documented
+- [ ] Business associate agreements
+- [ ] Encryption implemented
+- [ ] Access controls
+- [ ] Audit logging
+- [ ] Training completed
+- [ ] Incident response plan
+- [ ] Breach notification procedures
+- [ ] Physical security measures</p>
+<p><strong>PCI DSS Compliance:</strong>
+- [ ] Cardholder data inventory
+- [ ] Network segmentation
+- [ ] Firewall configuration
+- [ ] No default passwords
+- [ ] Data encryption
+- [ ] Malware protection
+- [ ] Secure systems and applications
+- [ ] Access control
+- [ ] Unique IDs
+- [ ] Physical access restrictions
+- [ ] Logging and monitoring
+- [ ] Security testing
+- [ ] Information security policy</p>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<p><strong>Legal landscape:</strong>
+- Criminal laws punish unauthorized access
+- Privacy laws protect personal data
+- Sector regulations add requirements
+- International laws create complexity
+- Compliance frameworks provide structure</p>
+<p><strong>Your responsibilities:</strong>
+- Know the laws that apply
+- Implement required controls
+- Document everything
+- Train users
+- Monitor continuously
+- Report incidents properly</p>
+<p><strong>Compliance is not security:</strong>
+- Meeting minimum requirements ≠ secure
+- Security should exceed compliance
+- But compliance is mandatory baseline</p>
+<p><strong>Remember:</strong>
+- Ignorance is not a defense
+- Personal liability is possible
+- Non-compliance is expensive
+- Compliance is ongoing, not one-time
+- Get legal advice when uncertain</p>
+<p>Understanding legal requirements is essential for security professionals. You need to protect your organization legally as well as technically. This knowledge helps you make informed decisions and avoid costly violations.</p>
         
 
         <!-- Lesson Navigation (only show on non-homepage pages) -->
         
         <div class="lesson-nav">
             
-            <a href="../lesson1-6/" class="lesson-nav-button">
+            <a href="../lesson8-1/" class="lesson-nav-button">
                 <span class="arrow">←</span>
-                <span>Previous: Lesson 1.6</span>
+                <span>Previous: Lesson 8.1</span>
             </a>
             
 
             <div class="lesson-nav-info">
                 <div class="current-lesson">Current Lesson</div>
-                <div class="lesson-title">Linux Installation Process</div>
+                <div class="lesson-title">Lesson 8.2</div>
             </div>
 
             
-            <a href="../../unit2/lesson2-1/" class="lesson-nav-button">
-                <span>Next: Lesson 2.1</span>
+            <a href="../lesson8-3/" class="lesson-nav-button">
+                <span>Next: Lesson 8.3</span>
                 <span class="arrow">→</span>
             </a>
             
@@ -1158,43 +1498,43 @@
                                 
                                 {
                                     title: "Lesson 1.1",
-                                    url: '../lesson1-1/',
+                                    url: '../../unit1/lesson1-1/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.2",
-                                    url: '../lesson1-2/',
+                                    url: '../../unit1/lesson1-2/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.3",
-                                    url: '../lesson1-3/',
+                                    url: '../../unit1/lesson1-3/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.4",
-                                    url: '../lesson1-4/',
+                                    url: '../../unit1/lesson1-4/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.5",
-                                    url: '../lesson1-5/',
+                                    url: '../../unit1/lesson1-5/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.6",
-                                    url: '../lesson1-6/',
+                                    url: '../../unit1/lesson1-6/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Linux Installation Process",
-                                    url: './',
+                                    url: '../../unit1/installation-process/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
@@ -1330,19 +1670,19 @@
                                 
                                 {
                                     title: "Lesson 8.1",
-                                    url: '../../unit8/lesson8-1/',
+                                    url: '../lesson8-1/',
                                     path: 'Curriculum > Unit 8'
                                 },
                                 
                                 {
                                     title: "Lesson 8.2",
-                                    url: '../../unit8/lesson8-2/',
+                                    url: './',
                                     path: 'Curriculum > Unit 8'
                                 },
                                 
                                 {
                                     title: "Lesson 8.3",
-                                    url: '../../unit8/lesson8-3/',
+                                    url: '../lesson8-3/',
                                     path: 'Curriculum > Unit 8'
                                 },
                                 

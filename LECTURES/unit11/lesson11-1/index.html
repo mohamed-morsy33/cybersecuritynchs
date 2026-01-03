@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linux Installation Process - NCHS Cybersecurity</title>
+    <title>Lesson 11.1 - NCHS Cybersecurity</title>
     
     
     <link rel="icon" href="../../../img/logo.png">
@@ -698,31 +698,31 @@
                                         <ul class="unit-lessons">
                                             
                                             <li>
-                                                <a href="../lesson1-1/">Lesson 1.1</a>
+                                                <a href="../../unit1/lesson1-1/">Lesson 1.1</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-2/">Lesson 1.2</a>
+                                                <a href="../../unit1/lesson1-2/">Lesson 1.2</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-3/">Lesson 1.3</a>
+                                                <a href="../../unit1/lesson1-3/">Lesson 1.3</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-4/">Lesson 1.4</a>
+                                                <a href="../../unit1/lesson1-4/">Lesson 1.4</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-5/">Lesson 1.5</a>
+                                                <a href="../../unit1/lesson1-5/">Lesson 1.5</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../lesson1-6/">Lesson 1.6</a>
+                                                <a href="../../unit1/lesson1-6/">Lesson 1.6</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="./">Linux Installation Process</a>
+                                                <a href="../../unit1/installation-process/">Linux Installation Process</a>
                                             </li>
                                             
                                         </ul>
@@ -920,15 +920,15 @@
                                         <ul class="unit-lessons">
                                             
                                             <li>
-                                                <a href="../../unit11/lesson11-1/">Lesson 11.1</a>
+                                                <a href="./">Lesson 11.1</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../../unit11/lesson11-2/">Lesson 11.2</a>
+                                                <a href="../lesson11-2/">Lesson 11.2</a>
                                             </li>
                                             
                                             <li>
-                                                <a href="../../unit11/lesson11-3/">Lesson 11.3</a>
+                                                <a href="../lesson11-3/">Lesson 11.3</a>
                                             </li>
                                             
                                         </ul>
@@ -964,142 +964,643 @@
 
     <div class="container">
         
-        <h2 id="what-is-it"><em>What</em> is it?</h2>
-<p>Kali is an operating system that was made <strong><em>specially</em></strong> for cybersecurity work (and hacking as well). It has a large toolkit of useful programs that we're going to learn about, including Hydra, Nmap, Wireshark, Tcpdump, MacChanger, Chisel, Aircrack-ng, etc.</p>
-<h2 id="some-vocab">Some Vocab:</h2>
-<p>As much as we know vocabulary might not be that interesting, it's important to know for the future, since there's a LOT of acronyms and words in cybersecurity that you're going to be hearing and using, so it's best to get used to it.</p>
+        <h1 id="encryption-systems">Encryption Systems</h1>
+<p>We've covered cryptographic concepts earlier, but now let's dive deeper into how encryption systems work in practice. This lesson examines real-world encryption implementations, protocols, and technologies that protect data in modern computing.</p>
+<h2 id="understanding-encryption-systems">Understanding Encryption Systems</h2>
+<p>An <strong>encryption system</strong> is the complete infrastructure for securing data, including:
+- Encryption algorithms
+- Key management
+- Protocols
+- Implementation
+- Policies and procedures</p>
+<p>It's not just about the math—it's about the entire ecosystem.</p>
+<h2 id="transport-layer-security-tls">Transport Layer Security (TLS)</h2>
+<p><strong>TLS</strong> (formerly SSL) is the foundation of secure internet communication. Every HTTPS website uses TLS.</p>
+<h3 id="tls-handshake-process">TLS Handshake Process</h3>
+<p>When you visit https://example.com, here's what happens:</p>
+<p><strong>1. Client Hello</strong>
+- Client sends: TLS version, supported cipher suites, random number
+- Example cipher suite: <code>TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384</code></p>
+<p><strong>2. Server Hello</strong>
+- Server responds: Chosen cipher suite, random number
+- Server sends certificate (public key + identity)</p>
+<p><strong>3. Certificate Verification</strong>
+- Client validates certificate chain
+- Checks: CA signature, expiration, revocation status, domain name</p>
+<p><strong>4. Key Exchange</strong>
+Using chosen method (e.g., ECDHE - Elliptic Curve Diffie-Hellman Ephemeral):
+- Client and server compute shared secret
+- This becomes the symmetric key</p>
+<p><strong>5. Finished Messages</strong>
+- Both sides send encrypted confirmation
+- Handshake complete</p>
+<p><strong>6. Application Data</strong>
+- All subsequent traffic encrypted with AES (or chosen symmetric cipher)
+- Fast symmetric encryption for bulk data
+- Keys unique to this session</p>
+<h3 id="tls-versions">TLS Versions</h3>
+<p><strong>SSL 2.0 / 3.0</strong>: <strong>DEPRECATED</strong> - broken, do not use
+<strong>TLS 1.0 / 1.1</strong>: <strong>DEPRECATED</strong> - vulnerable, being phased out
+<strong>TLS 1.2</strong>: Current standard, widely supported
+<strong>TLS 1.3</strong>: Latest version, faster and more secure</p>
+<p>TLS 1.3 improvements:
+- Fewer cipher suites (removed weak options)
+- Faster handshake (0-RTT mode)
+- Forward secrecy by default
+- Simplified protocol</p>
+<h3 id="certificate-authorities-and-pki">Certificate Authorities and PKI</h3>
+<p><strong>Certificate</strong>: Digital document binding public key to identity</p>
+<p><strong>Contents:</strong>
+- Subject (domain name, organization)
+- Issuer (CA that signed it)
+- Validity period
+- Public key
+- Signature (CA's private key)</p>
+<p><strong>Certificate chain:</strong></p>
+<pre><code>Root CA (in browser trust store)
+    ↓
+Intermediate CA
+    ↓
+End-entity certificate (example.com)
+</code></pre>
+<p><strong>Validation process:</strong>
+1. Browser receives certificate
+2. Checks signature from Intermediate CA
+3. Checks Intermediate CA signed by Root CA
+4. Root CA in browser's trust store? → Valid!</p>
+<p><strong>Certificate types:</strong>
+- <strong>DV (Domain Validated)</strong>: Proves domain ownership only
+- <strong>OV (Organization Validated)</strong>: Verifies organization identity
+- <strong>EV (Extended Validation)</strong>: Strictest verification (shows green bar)</p>
+<p><strong>Certificate revocation:</strong>
+- <strong>CRL (Certificate Revocation List)</strong>: Published list of revoked certificates
+- <strong>OCSP (Online Certificate Status Protocol)</strong>: Real-time status check
+- <strong>OCSP Stapling</strong>: Server provides OCSP response, reduces latency</p>
+<h3 id="perfect-forward-secrecy-pfs">Perfect Forward Secrecy (PFS)</h3>
+<p><strong>Problem</strong>: If server's private key is compromised, attacker can decrypt past traffic.</p>
+<p><strong>Solution</strong>: Ephemeral key exchange (DHE, ECDHE)
+- Session keys derived from temporary keys
+- Temporary keys discarded after session
+- Compromise of server key doesn't compromise past sessions</p>
+<p><strong>Cipher suites with PFS:</strong>
+- <code>TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384</code> ✓
+- <code>TLS_RSA_WITH_AES_256_GCM_SHA384</code> ✗ (no PFS)</p>
+<h3 id="tls-best-practices">TLS Best Practices</h3>
+<p><strong>Configuration:</strong></p>
+<pre><code># Disable old versions
+ssl_protocols TLSv1.2 TLSv1.3;
+
+# Strong cipher suites only
+ssl_ciphers 'ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384';
+
+# Prefer server cipher suite order
+ssl_prefer_server_ciphers on;
+
+# HSTS (force HTTPS)
+add_header Strict-Transport-Security &quot;max-age=31536000; includeSubDomains&quot; always;
+
+# OCSP stapling
+ssl_stapling on;
+ssl_stapling_verify on;
+</code></pre>
+<p><strong>Testing:</strong>
+- SSL Labs Server Test (ssllabs.com/ssltest)
+- Check cipher suite support
+- Verify certificate chain
+- Test for vulnerabilities</p>
+<h2 id="vpn-technologies">VPN Technologies</h2>
+<p><strong>Virtual Private Networks</strong> create encrypted tunnels over untrusted networks.</p>
+<h3 id="ipsec">IPsec</h3>
+<p><strong>IPsec</strong> (Internet Protocol Security) secures IP communications.</p>
+<p><strong>Modes:</strong>
+- <strong>Transport mode</strong>: Encrypts payload only, original IP header intact
+- <strong>Tunnel mode</strong>: Encrypts entire packet, new IP header added</p>
+<p><strong>Protocols:</strong>
+- <strong>AH (Authentication Header)</strong>: Authentication and integrity, no encryption
+- <strong>ESP (Encapsulating Security Payload)</strong>: Authentication, integrity, and encryption</p>
+<p><strong>Key exchange:</strong>
+- <strong>IKE (Internet Key Exchange)</strong>: Establishes security associations (SAs)
+  - Phase 1: Establish secure channel
+  - Phase 2: Negotiate IPsec parameters</p>
+<p><strong>Use cases:</strong>
+- Site-to-site VPNs (connecting branch offices)
+- Remote access VPNs
+- Securing cloud connections</p>
+<h3 id="openvpn">OpenVPN</h3>
+<p>Open-source VPN using SSL/TLS.</p>
+<p><strong>Advantages:</strong>
+- Highly configurable
+- Works over TCP or UDP
+- Bypasses most firewalls
+- Strong encryption (AES-256)
+- Cross-platform</p>
+<p><strong>Configuration example:</strong></p>
+<pre><code># Server config
+port 1194
+proto udp
+dev tun
+ca ca.crt
+cert server.crt
+key server.key
+dh dh2048.pem
+server 10.8.0.0 255.255.255.0
+cipher AES-256-CBC
+auth SHA256
+</code></pre>
+<h3 id="wireguard">WireGuard</h3>
+<p>Modern VPN protocol, simpler and faster than OpenVPN or IPsec.</p>
+<p><strong>Features:</strong>
+- Minimal codebase (~4,000 lines vs. OpenVPN's ~100,000)
+- Modern cryptography (Curve25519, ChaCha20, Poly1305)
+- Fast performance
+- Built into Linux kernel</p>
+<p><strong>Configuration:</strong></p>
+<pre><code>[Interface]
+PrivateKey = &lt;private_key&gt;
+Address = 10.0.0.1/24
+ListenPort = 51820
+
+[Peer]
+PublicKey = &lt;peer_public_key&gt;
+AllowedIPs = 10.0.0.2/32
+</code></pre>
+<p><strong>Use cases:</strong>
+- Point-to-point VPNs
+- Simple site-to-site connections
+- Mobile VPN clients</p>
+<h3 id="vpn-protocols-comparison">VPN Protocols Comparison</h3>
+<table>
+<thead>
+<tr>
+<th>Protocol</th>
+<th>Speed</th>
+<th>Security</th>
+<th>Complexity</th>
+<th>Best For</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IPsec</td>
+<td>Medium</td>
+<td>High</td>
+<td>High</td>
+<td>Site-to-site</td>
+</tr>
+<tr>
+<td>OpenVPN</td>
+<td>Medium</td>
+<td>High</td>
+<td>Medium</td>
+<td>General purpose</td>
+</tr>
+<tr>
+<td>WireGuard</td>
+<td>Fast</td>
+<td>High</td>
+<td>Low</td>
+<td>Modern implementations</td>
+</tr>
+<tr>
+<td>L2TP/IPsec</td>
+<td>Slow</td>
+<td>Medium</td>
+<td>Medium</td>
+<td>Legacy compatibility</td>
+</tr>
+<tr>
+<td>PPTP</td>
+<td>Fast</td>
+<td><strong>Low</strong></td>
+<td>Low</td>
+<td><strong>Don't use</strong></td>
+</tr>
+</tbody>
+</table>
+<h2 id="disk-encryption">Disk Encryption</h2>
+<p>Protecting data at rest.</p>
+<h3 id="full-disk-encryption-fde">Full Disk Encryption (FDE)</h3>
+<p>Encrypts entire disk, transparent to user after boot.</p>
+<p><strong>BitLocker (Windows):</strong></p>
+<pre><code class="language-powershell"># Enable BitLocker
+Enable-BitLocker -MountPoint &quot;C:&quot; -EncryptionMethod Aes256 -UsedSpaceOnly
+
+# Backup recovery key
+Backup-BitLockerKeyProtector -MountPoint &quot;C:&quot; -KeyProtectorId $KeyProtectorId
+</code></pre>
+<p><strong>FileVault (macOS):</strong>
+- System Preferences → Security &amp; Privacy → FileVault
+- Recovery key backed up to iCloud or stored locally</p>
+<p><strong>LUKS (Linux):</strong></p>
+<pre><code class="language-bash"># Create encrypted partition
+cryptsetup luksFormat /dev/sdb1
+
+# Open encrypted partition
+cryptsetup luksOpen /dev/sdb1 encrypted_volume
+
+# Format and mount
+mkfs.ext4 /dev/mapper/encrypted_volume
+mount /dev/mapper/encrypted_volume /mnt/encrypted
+</code></pre>
+<h3 id="self-encrypting-drives-seds">Self-Encrypting Drives (SEDs)</h3>
+<p>Hardware-based encryption in the drive itself.</p>
+<p><strong>Advantages:</strong>
+- No performance impact
+- Encryption always on
+- Instant secure erase (destroy key)
+- OS-independent</p>
+<p><strong>Standards:</strong>
+- TCG Opal
+- eDrive (Microsoft)</p>
+<p><strong>Considerations:</strong>
+- Trust the manufacturer
+- Firmware vulnerabilities possible
+- Key stored on drive</p>
+<h3 id="filefolder-encryption">File/Folder Encryption</h3>
+<p>Encrypt specific files or folders.</p>
+<p><strong>Tools:</strong>
+- <strong>GPG</strong>: Command-line encryption</p>
+<pre><code class="language-bash"># Encrypt file
+gpg --encrypt --recipient user@example.com file.txt
+
+# Decrypt file
+gpg --decrypt file.txt.gpg &gt; file.txt
+</code></pre>
 <ul>
-<li><strong>Operating System (OS)</strong>: The main software that runs your computer, like Windows, macOS, iOS, GNU/Linux, etc.</li>
-<li><strong>Virtual Machine (VM)</strong>: It's basically a computer <em>inside</em> another computer. You can run your regular OS, like Windows, and still have Kali Linux inside of it</li>
-<li><strong>ISO File (International Organization for Standardization File)</strong>: Sounds fancy, but really it's just a full copy of an OS within one tiny file</li>
-<li><strong>Hypervisor</strong>: Software that creates and manages VMs. Examples are VirtualBox and VMWare Workstation. There's also QEMU, but mostly Linux users use that, and you're likely running on Windows or mac</li>
-<li><strong>Bootable USB</strong>: Just a USB drive (which you hopefully already know about) that can start up a computer and install an OS (we don't need this yet)</li>
-<li><strong>Partitioning</strong>: A more advanced topic, but it's dividing up your drive into sections called <em>partitions</em>, which are like walls for a room. We don't need this yet, but it is good to know</li>
+<li><strong>VeraCrypt</strong>: Encrypted containers and partitions</li>
+<li><strong>7-Zip</strong>: Encrypted archives</li>
+<li><strong>AxCrypt</strong>: User-friendly file encryption</li>
 </ul>
-<p>Now, let's get into the nitty-gritty:</p>
-<h2 id="method-1-easy-way">Method 1: Easy way :)</h2>
-<h3 id="minimum-requirements">Minimum Requirements*:</h3>
+<h2 id="email-encryption">Email Encryption</h2>
+<p>Email is inherently insecure (travels through multiple servers, stored unencrypted).</p>
+<h3 id="smime">S/MIME</h3>
+<p><strong>S/MIME</strong> (Secure/Multipurpose Internet Mail Extensions) uses certificates.</p>
+<p><strong>How it works:</strong>
+1. Obtain S/MIME certificate from CA
+2. Install in email client
+3. Send digitally signed emails (proves sender)
+4. Encrypt emails with recipient's public key</p>
+<p><strong>Advantages:</strong>
+- Built into most email clients
+- Centralized certificate management
+- Corporate PKI integration</p>
+<p><strong>Disadvantages:</strong>
+- Requires certificate from CA (cost)
+- Recipients need certificates too</p>
+<h3 id="pgpgpg">PGP/GPG</h3>
+<p><strong>PGP</strong> (Pretty Good Privacy) / <strong>GPG</strong> (GNU Privacy Guard) use web of trust model.</p>
+<p><strong>How it works:</strong>
+1. Generate key pair</p>
+<pre><code class="language-bash">gpg --gen-key
+</code></pre>
 <ol>
-<li><code>8 GB</code> of RAM</li>
-<li><code>20-30 GB</code> of free hard drive space</li>
-<li>A decently fast CPU (you probably have this)</li>
+<li>Share public key</li>
 </ol>
-<p>*But, how do I know if I meet them? Well, you can press <em><code>Ctrl+Shift+Esc</code></em> on Windows and click on <strong>"Performance"</strong> inside of Task Manager, and it'll give you a spec (specifications) sheet. On mac, you can click on <strong>"About"</strong> in the top menu bar of your computer. On Linux, you can type <strong><code>uname -a</code></strong>, or use a custom program like <code>fastfetch</code></p>
-<h2 id="big-disclaimer-for-windows-users">BIG DISCLAIMER FOR WINDOWS USERS:</h2>
-<ul>
-<li>You NEED to DISABLE something called Hyper-V. If you don't know what that is, for Windows users, Hyper-V will conflict with Virtualbox, making it run poorly and crash often</li>
-<li>To check if you hve Hyper-V, press <code>Win+R</code>, and type <code>optionalfeatures</code>, then press <code>Enter</code></li>
-<li>Look for a "Hyper-V" in the list of shown items. If it's checked, then it's enabled. Uncheck it.<ul>
-<li>Alternative method: go to cmd (Command Prompt), and right click and "Run as Administrator". Then use the following command: <code>bcdedit /set hypervisorlaunchtype off</code></li>
-</ul>
-</li>
-<li>Finally, restart your computer</li>
-</ul>
-<h2 id="big-disclaimer-for-macos-users">BIG DISCLAIMER FOR MACOS USERS:</h2>
-<ul>
-<li>You need to check if you're using an Intel-based Mac or Apple Silicon machine. If your device is M1, M2, M*, then it's <strong>Apple Silicon</strong></li>
-<li>If this is the case, you will need to use a different software for virtualization. You have some options, like <a href="https://getutm.app">UTM</a> or <a href="https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion">VMware Fusion</a>. </li>
-<li>Also, you will have to install Kali Linux using the 
-<em><strong>ARM64 version! Not x86-64!</strong></em></li>
-</ul>
-<hr />
-<p>Now, go to <a href="https://virtualbox.org">virtualbox.org</a></p>
-<p>Click on the download for your OS, and install the program by following the instruction wizard.</p>
-<p><img alt="Virtual Box" src="../../../img/virtual_box.png" /></p>
-<ul>
-<li>Now, go to the <a href="https://kali.org/get-kali">Kali Linux website</a>.</li>
-<li>Download the "Installer" ISO file (<code>~ 4 GB</code> in size)</li>
-<li>Then choose the 64-bit version for modern computers.</li>
-<li>If your computer is old, it could be 32-bit. If so, you may need to check your system specifications as explained above. However, it probably isn't.</li>
-</ul>
-<p><img alt="Kali Installation" src="../../../img/kali_img.png" /></p>
-<blockquote>
-<p>Remember, Apple Silicon machines will install the ARM64 version of Kali Linux instead!</p>
-</blockquote>
-<ul>
-<li>Finally, make your Virtual Machine. Open up VirtualBox and click "New"</li>
-<li>Name it whatever, I'd call it "Kali Linux", or "Kali Machine".</li>
-<li>Type: Linux, Version: Debian (64-bit)</li>
-<li>Allocate at least <code>4 GB</code> of RAM, AKA <code>4096 MB</code>, by dragging the slider or typing in the number in the RAM text box</li>
-<li>Create a Virtual Hrd Disk (allocate <code>25-30 GB</code> minimum)<ul>
-<li>Choose VDI (VirtualBox Disk Image)</li>
-<li>Also select "dynamically allocated" to save space, and allows the VM to grow dynamically in storage size as you begin to add more things</li>
-</ul>
-</li>
-<li>After clicking done, tell it to create, but do NOT tell it to also start yet</li>
-<li>Click on your virtual machine, and then go to settings</li>
-<li>Then go to Storage, and click the empty disk icon</li>
-<li>This is where we "choose a disk file", and select the downloaded Kali ISO</li>
-<li>Then under System, enable PAE/NX if available to you. PAE is Physical Address Extension, and NX is No Execute. These allow for &gt; <code>4 GB</code> of RAM access and prevents non-executable code from being executed in memory segments. If you don't know what that means, just ignore this</li>
-<li>Under Display, increase video memory to <code>128 MB</code></li>
-<li>Finally, save and exit Settings, and click on Start to boot your VM</li>
-<li>Select "Graphical Install" (press Enter, navigate using arrow keys)</li>
-<li>Choose your language, location, keyboard (these can later be changed, doesn't really matter)</li>
-<li>You can set a hostname, or keep the default (kali)</li>
-</ul>
-<h3 id="important-username-is-kali-and-password-is-kali-by-default"><strong>IMPORTANT</strong>: username is <em>kali</em> and password is <em>kali</em> by default!</h3>
-<ul>
-<li>Choose "Guided - use entire disk" for your partitioning</li>
-<li>Then select "All files in one partition"</li>
-<li>Confirm and wait a while. Take a walk outside, take a short nap, whatever you want. Just wait 10-20 minutes and it'll be done</li>
-<li>Restart when prompted</li>
-<li>On first login, enter the username and password</li>
-<li>Then, click the <code>SUPER</code> key (<code>Win</code> key or <code>Cmd</code> key on mac) and type "terminal" or "console" into the search, and open the app</li>
-<li>In the terminal, you can type <code>sudo apt update &amp;&amp; sudo apt upgrade -y</code><ul>
-<li>This command just updates your system</li>
-<li>When prompted with a password, type in your password</li>
-</ul>
-</li>
-<li>Happy Linux!</li>
-</ul>
-<h2 id="method-2-hard-way-bare-metal-installation">Method 2: Hard way (bare metal installation)</h2>
-<p>Alright. You're ready for the real deal. No problem. </p>
-<p><code>WARNING! ⚠️⚠️</code>: This version of installation WILL take space on your disk! This means it will be physically installed, and it will NOT be installed as a VM! Just like Windows or macOS, it will be physically on your device. If you do this incorrectly, it may <strong>wipe your device completely</strong>. I'm not liable for if you mistakenly wipe your drive, it's up to you. Also, I personally do <strong>not recommend you install Kali Linux on a physical drive</strong>. If you want to use Linux for extra practice, install a distribution like <a href="https://www.debian.org/">Debian</a> or <a href="https://linuxmint.com/">Linux Mint</a>. You are risking data loss if done incorrectly, so proceed at your own risk.</p>
-<p>Important things to note are:</p>
-<ul>
-<li>If you install on bare metal, AKA on your physical device, your device may have incompatibility issues. I would recommend doing your own research before doing so</li>
-<li>You may want to install Linux on a secondary drive, since if you use your main one, you will have to create a special partition for Linux to use exclusively, which is more difficult</li>
-<li>You'll need a USB drive with preferably <code>8 GB</code> or more of storage</li>
-<li>You may need to adjust your BIOS (manufacturer specific, meaning it depends on what company made your computer and maybe even where you bought it from) to allow for other bootable devices, which can include removing Secure Boot</li>
-<li>There's some specifics for ARM64 machines like Apple Silicon that will be different!</li>
-<li>Overall, you are likely going to have to do your OWN research to make sure you don't mess anything up.</li>
-</ul>
-<p>Without further ado, these are some general instructions (not perfect):</p>
+<pre><code class="language-bash">gpg --export --armor user@example.com &gt; public_key.asc
+</code></pre>
 <ol>
-<li>Create a bootable USB drive using an app like Balena Etcher or Rufus</li>
-<li>Make space on your hard drive by creating a disk partition of ~<code>30 GB</code> or more, or install on a secondary hard drive</li>
-<li>Boot from the USB drive from BIOS after restarting your computer and smashing the BIOS key as it boots up (typically <code>Esc</code>, <code>F11</code>, <code>F12</code>, or <code>Del</code> depending on the manufacturer)</li>
-<li>Follow the installation process, but make sure you select the right drive and if it's on the same disk as Windows or Mac, you install "alongside" it, not replace </li>
-<li>After going through the setup, you may re-enter the BIOS to change the boot order. What this means is move Linux above Windows so that on first boot you boot into Linux (optional)</li>
+<li>Encrypt email</li>
 </ol>
-<p>Some important extras:</p>
+<pre><code class="language-bash">gpg --encrypt --recipient recipient@example.com message.txt
+</code></pre>
+<p><strong>Web of Trust:</strong>
+- No central authority
+- Users sign each other's keys
+- Trust based on signatures</p>
+<p><strong>Advantages:</strong>
+- Free and open source
+- No dependence on CAs
+- Strong community</p>
+<p><strong>Disadvantages:</strong>
+- Complex for non-technical users
+- Key management challenges
+- Not widely adopted</p>
+<h2 id="end-to-end-encryption-e2ee">End-to-End Encryption (E2EE)</h2>
+<p>Messages encrypted on sender's device, decrypted only on recipient's device. Service provider can't read them.</p>
+<h3 id="signal-protocol">Signal Protocol</h3>
+<p>Used by Signal, WhatsApp, Facebook Messenger (secret conversations).</p>
+<p><strong>Features:</strong>
+- <strong>Double Ratchet Algorithm</strong>: Keys constantly change
+- <strong>Forward secrecy</strong>: Past messages safe if keys compromised
+- <strong>Future secrecy</strong>: Future messages safe too
+- <strong>Deniability</strong>: Can't prove who sent message</p>
+<p><strong>How it works:</strong>
+1. Initial key exchange (using identity keys)
+2. Each message uses ephemeral keys
+3. Keys "ratchet" forward after each message
+4. Old keys destroyed</p>
+<p><strong>Security properties:</strong>
+- End-to-end encryption
+- Authentication (know who you're talking to)
+- Forward secrecy
+- Break-in recovery (compromise is temporary)</p>
+<h3 id="other-e2ee-systems">Other E2EE Systems</h3>
+<p><strong>Matrix/Element:</strong>
+- Decentralized messaging
+- End-to-end encryption
+- Open protocol</p>
+<p><strong>Telegram (Secret Chats):</strong>
+- MTProto protocol
+- Optional E2EE (not default)
+- Device-specific (no cloud sync)</p>
+<p><strong>iMessage:</strong>
+- Apple's E2EE messaging
+- Seamless user experience
+- Closed-source</p>
+<h2 id="blockchain-and-cryptocurrency">Blockchain and Cryptocurrency</h2>
+<p>Cryptography enables decentralized trustless systems.</p>
+<h3 id="bitcoin-fundamentals">Bitcoin Fundamentals</h3>
+<p><strong>Public/Private Keys:</strong>
+- Private key: Random 256-bit number (keep secret!)
+- Public key: Derived from private key (elliptic curve cryptography)
+- Address: Hash of public key (what you share)</p>
+<p><strong>Transaction signing:</strong></p>
+<pre><code>1. Create transaction (sending Bitcoin)
+2. Hash transaction data
+3. Sign hash with private key (ECDSA)
+4. Broadcast transaction + signature
+5. Network verifies signature with public key
+</code></pre>
+<p><strong>Blockchain:</strong>
+- Chain of blocks
+- Each block contains:
+  - Transactions
+  - Timestamp
+  - Hash of previous block
+  - Nonce (for mining)</p>
+<p><strong>Mining (Proof of Work):</strong></p>
+<pre><code>Hash(Block Data + Nonce) must be &lt; Target
+</code></pre>
 <ul>
-<li>Make sure you regularly update your system at least weekly</li>
-<li>Make decent credentials or use a <a href="https://www.yubico.com/">physical key</a></li>
-<li>Never just copy/paste a command without understanding it, look it up at least (even from me!)</li>
-<li>Install packages wisely and preferably from trusted sources</li>
+<li>Miners try different nonces</li>
+<li>First to find valid hash wins block reward</li>
+<li>Difficulty adjusts to maintain ~10 min block time</li>
 </ul>
-<p>Happy Linux! :)</p>
+<p><strong>Security:</strong>
+- Immutability (changing past blocks requires recalculating all subsequent blocks)
+- Consensus (longest chain is truth)
+- 51% attack would require more computing power than rest of network</p>
+<h3 id="ethereum-and-smart-contracts">Ethereum and Smart Contracts</h3>
+<p><strong>Smart contracts</strong>: Programs on blockchain</p>
+<p><strong>Example simple contract:</strong></p>
+<pre><code class="language-solidity">contract SimpleStorage {
+    uint storedData;
+
+    function set(uint x) public {
+        storedData = x;
+    }
+
+    function get() public view returns (uint) {
+        return storedData;
+    }
+}
+</code></pre>
+<p><strong>Cryptographic elements:</strong>
+- Same public/private key cryptography as Bitcoin
+- Transactions signed with private key
+- Contract code executed by all nodes
+- State changes recorded on blockchain</p>
+<h2 id="quantum-resistant-cryptography">Quantum-Resistant Cryptography</h2>
+<p>Quantum computers threaten current cryptography:</p>
+<h3 id="whats-at-risk">What's at Risk?</h3>
+<p><strong>RSA and ECC</strong>: Shor's algorithm can break these on quantum computers</p>
+<p><strong>Symmetric encryption</strong>: Grover's algorithm speeds up brute force, but doubling key size mitigates risk
+- AES-128 → AES-256 remains secure</p>
+<h3 id="post-quantum-algorithms">Post-Quantum Algorithms</h3>
+<p>NIST is standardizing new algorithms:</p>
+<p><strong>Lattice-based:</strong>
+- CRYSTALS-Kyber (key exchange)
+- CRYSTALS-Dilithium (digital signatures)</p>
+<p><strong>Hash-based:</strong>
+- SPHINCS+ (digital signatures)</p>
+<p><strong>Code-based:</strong>
+- Classic McEliece (key exchange)</p>
+<p><strong>Migration timeline:</strong>
+- Standards published: 2024
+- Implementation: 2025-2030
+- Full migration: 2030s</p>
+<p><strong>Preparation:</strong>
+- Use crypto-agility (easy to swap algorithms)
+- Monitor quantum computing progress
+- Plan migration strategy</p>
+<h2 id="hardware-security-modules-hsms">Hardware Security Modules (HSMs)</h2>
+<p>Physical devices that safeguard cryptographic keys.</p>
+<p><strong>Features:</strong>
+- Tamper-resistant hardware
+- Key generation in secure environment
+- Keys never leave device
+- FIPS 140-2/140-3 certified</p>
+<p><strong>Use cases:</strong>
+- Certificate authorities
+- Payment processing
+- Code signing
+- Database encryption keys
+- Cryptocurrency exchanges</p>
+<p><strong>Types:</strong>
+- <strong>General-purpose HSMs</strong>: Thales, Utimaco
+- <strong>Cloud HSMs</strong>: AWS CloudHSM, Azure Dedicated HSM
+- <strong>Payment HSMs</strong>: Specialized for financial transactions</p>
+<h2 id="trusted-platform-module-tpm">Trusted Platform Module (TPM)</h2>
+<p>Microchip on motherboard providing hardware-based security.</p>
+<p><strong>Functions:</strong>
+- Secure key storage
+- Random number generation
+- Platform integrity measurement
+- Attestation (prove system state)</p>
+<p><strong>Uses:</strong>
+- BitLocker encryption
+- Secure boot
+- Device authentication
+- Protection of encryption keys</p>
+<p><strong>TPM 2.0:</strong>
+- Current standard
+- Algorithm agility
+- Better performance
+- Required for Windows 11</p>
+<h2 id="secure-enclaves">Secure Enclaves</h2>
+<p>Isolated execution environments within CPUs.</p>
+<p><strong>Intel SGX (Software Guard Extensions):</strong>
+- Encrypted memory regions (enclaves)
+- Code and data protected from OS and hypervisor
+- Remote attestation</p>
+<p><strong>ARM TrustZone:</strong>
+- Separate secure world
+- Used in mobile devices
+- Fingerprint data, secure payments</p>
+<p><strong>Apple Secure Enclave:</strong>
+- Dedicated processor
+- Stores biometric data
+- Manages encryption keys</p>
+<h2 id="key-management-best-practices">Key Management Best Practices</h2>
+<h3 id="key-lifecycle">Key Lifecycle</h3>
+<p><strong>1. Generation:</strong>
+- Use cryptographically secure random number generators
+- Generate keys in secure environment
+- Adequate key length</p>
+<p><strong>2. Storage:</strong>
+- Encrypt keys (key encryption keys)
+- Use HSMs for critical keys
+- Access control
+- Audit logging</p>
+<p><strong>3. Distribution:</strong>
+- Secure key exchange protocols
+- Out-of-band verification
+- Split knowledge (no single person has full key)</p>
+<p><strong>4. Usage:</strong>
+- Limit key lifetime
+- Usage restrictions (what can key be used for)
+- Rate limiting</p>
+<p><strong>5. Rotation:</strong>
+- Regular key rotation
+- Re-encrypt data with new keys
+- Overlap period (old and new keys both valid)</p>
+<p><strong>6. Destruction:</strong>
+- Secure deletion (overwrite)
+- Destroy all copies
+- Document destruction</p>
+<h3 id="key-escrow-and-recovery">Key Escrow and Recovery</h3>
+<p><strong>Problem</strong>: What if keys are lost?</p>
+<p><strong>Solutions:</strong></p>
+<p><strong>Key Escrow:</strong>
+- Trusted third party holds key copy
+- Strict controls on access
+- Used in some enterprise settings</p>
+<p><strong>M-of-N:</strong>
+- Key split into N parts
+- M parts needed to reconstruct
+- Example: 3-of-5 (any 3 of 5 people can recover)</p>
+<p><strong>Secret Sharing (Shamir):</strong>
+- Mathematical scheme for splitting secrets
+- Threshold scheme (need minimum shares)</p>
+<p><strong>Considerations:</strong>
+- Recovery vs. security trade-off
+- Compliance requirements
+- User trust</p>
+<h2 id="cryptographic-protocols-in-practice">Cryptographic Protocols in Practice</h2>
+<h3 id="ssh-secure-shell">SSH (Secure Shell)</h3>
+<p>Remote access with strong authentication and encryption.</p>
+<p><strong>Key-based authentication:</strong></p>
+<pre><code class="language-bash"># Generate key pair
+ssh-keygen -t ed25519
+
+# Copy public key to server
+ssh-copy-id user@server
+
+# Connect (no password needed)
+ssh user@server
+</code></pre>
+<p><strong>SSH tunneling:</strong></p>
+<pre><code class="language-bash"># Local port forwarding
+ssh -L 8080:localhost:80 user@server
+
+# Dynamic port forwarding (SOCKS proxy)
+ssh -D 1080 user@server
+</code></pre>
+<p><strong>Best practices:</strong>
+- Disable password authentication
+- Use strong key types (ed25519, rsa 4096)
+- Regularly rotate keys
+- Monitor authorized_keys files</p>
+<h3 id="tor-the-onion-router">Tor (The Onion Router)</h3>
+<p>Anonymous communication using layered encryption.</p>
+<p><strong>How it works:</strong></p>
+<pre><code>User → Entry Node → Middle Node → Exit Node → Destination
+
+Each layer encrypted separately:
+- Exit node sees traffic to destination (no source)
+- Entry node sees source (no destination)
+- Middle node sees neither
+</code></pre>
+<p><strong>Uses:</strong>
+- Anonymous browsing
+- Censorship circumvention
+- Whistleblowing
+- Privacy protection</p>
+<p><strong>Limitations:</strong>
+- Slow (multiple hops)
+- Exit node can see unencrypted traffic
+- Timing attacks possible
+- Not foolproof anonymity</p>
+<h2 id="implementation-pitfalls">Implementation Pitfalls</h2>
+<p>Common mistakes that weaken encryption systems:</p>
+<h3 id="1-weak-random-number-generation">1. Weak Random Number Generation</h3>
+<pre><code class="language-python"># BAD
+import random
+key = random.randint(0, 2**256)
+
+# GOOD
+import secrets
+key = secrets.randbelow(2**256)
+</code></pre>
+<h3 id="2-improper-key-storage">2. Improper Key Storage</h3>
+<pre><code class="language-python"># BAD
+API_KEY = &quot;secret123&quot;  # Hardcoded in source
+
+# BETTER
+API_KEY = os.environ.get('API_KEY')  # Environment variable
+
+# BEST
+# Use key management service (AWS KMS, Azure Key Vault, HashiCorp Vault)
+</code></pre>
+<h3 id="3-ecb-mode">3. ECB Mode</h3>
+<pre><code class="language-python"># BAD - patterns visible in ciphertext
+cipher = AES.new(key, AES.MODE_ECB)
+
+# GOOD - use authenticated encryption
+cipher = AES.new(key, AES.MODE_GCM, nonce=nonce)
+</code></pre>
+<h3 id="4-not-verifying-certificates">4. Not Verifying Certificates</h3>
+<pre><code class="language-python"># BAD - disables certificate verification
+requests.get('https://example.com', verify=False)
+
+# GOOD - verify by default
+requests.get('https://example.com')
+</code></pre>
+<h3 id="5-custom-cryptography">5. Custom Cryptography</h3>
+<ul>
+<li><strong>Never roll your own crypto</strong></li>
+<li>Use established libraries: OpenSSL, libsodium, cryptography.io</li>
+<li>Implement standard algorithms correctly</li>
+<li>Get expert review for custom protocols</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>Encryption systems are complex but essential:</p>
+<p><strong>Key principles:</strong>
+1. <strong>Use standard algorithms</strong>: Don't create your own
+2. <strong>Key management is critical</strong>: Keys are more valuable than data
+3. <strong>Defense in depth</strong>: Encryption is one layer
+4. <strong>Implementation matters</strong>: Correct use of cryptography is crucial
+5. <strong>Stay current</strong>: Threats evolve, so must defenses</p>
+<p><strong>Practical takeaways:</strong>
+- Use TLS 1.3 for web traffic
+- Enable full disk encryption
+- Use E2EE messaging (Signal protocol)
+- Implement proper key management
+- Plan for post-quantum migration</p>
+<p><strong>Remember</strong>: Cryptography is a tool. Strong cryptography used incorrectly provides false security. Proper implementation, key management, and security architecture are equally important.</p>
+<p>The goal isn't just to encrypt—it's to protect confidentiality, integrity, and authenticity in a way that's practical, maintainable, and resilient against evolving threats.</p>
+<p>You've now completed the cybersecurity curriculum. You understand systems from the ground up—from CPU rings to encryption protocols. You know how attackers think and how defenders respond. Most importantly, you understand the ethical responsibilities that come with this knowledge.</p>
+<p>The field of cybersecurity is constantly evolving. Continue learning, practicing, and contributing to a more secure digital world.</p>
         
 
         <!-- Lesson Navigation (only show on non-homepage pages) -->
         
         <div class="lesson-nav">
             
-            <a href="../lesson1-6/" class="lesson-nav-button">
+            <a href="../../unit10/lesson10-3/" class="lesson-nav-button">
                 <span class="arrow">←</span>
-                <span>Previous: Lesson 1.6</span>
+                <span>Previous: Lesson 10.3</span>
             </a>
             
 
             <div class="lesson-nav-info">
                 <div class="current-lesson">Current Lesson</div>
-                <div class="lesson-title">Linux Installation Process</div>
+                <div class="lesson-title">Lesson 11.1</div>
             </div>
 
             
-            <a href="../../unit2/lesson2-1/" class="lesson-nav-button">
-                <span>Next: Lesson 2.1</span>
+            <a href="../lesson11-2/" class="lesson-nav-button">
+                <span>Next: Lesson 11.2</span>
                 <span class="arrow">→</span>
             </a>
             
@@ -1158,43 +1659,43 @@
                                 
                                 {
                                     title: "Lesson 1.1",
-                                    url: '../lesson1-1/',
+                                    url: '../../unit1/lesson1-1/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.2",
-                                    url: '../lesson1-2/',
+                                    url: '../../unit1/lesson1-2/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.3",
-                                    url: '../lesson1-3/',
+                                    url: '../../unit1/lesson1-3/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.4",
-                                    url: '../lesson1-4/',
+                                    url: '../../unit1/lesson1-4/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.5",
-                                    url: '../lesson1-5/',
+                                    url: '../../unit1/lesson1-5/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Lesson 1.6",
-                                    url: '../lesson1-6/',
+                                    url: '../../unit1/lesson1-6/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
                                 {
                                     title: "Linux Installation Process",
-                                    url: './',
+                                    url: '../../unit1/installation-process/',
                                     path: 'Curriculum > Unit 1'
                                 },
                                 
@@ -1396,19 +1897,19 @@
                                 
                                 {
                                     title: "Lesson 11.1",
-                                    url: '../../unit11/lesson11-1/',
+                                    url: './',
                                     path: 'Curriculum > Unit 11'
                                 },
                                 
                                 {
                                     title: "Lesson 11.2",
-                                    url: '../../unit11/lesson11-2/',
+                                    url: '../lesson11-2/',
                                     path: 'Curriculum > Unit 11'
                                 },
                                 
                                 {
                                     title: "Lesson 11.3",
-                                    url: '../../unit11/lesson11-3/',
+                                    url: '../lesson11-3/',
                                     path: 'Curriculum > Unit 11'
                                 },
                                 
