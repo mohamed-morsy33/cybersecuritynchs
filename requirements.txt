@@ -1,2 +1,2 @@
 # MkDocs core
-mkdocs>=1.5.0
+mkdocs>=1.6.1
